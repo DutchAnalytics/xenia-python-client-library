@@ -33,23 +33,54 @@ class RoleList(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'name': 'str'
+        'id': 'str',
+        'name': 'str',
+        'default': 'str'
     }
 
     attribute_map = {
-        'name': 'name'
+        'id': 'id',
+        'name': 'name',
+        'default': 'default'
     }
 
-    def __init__(self, name=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, id=None, name=None, default=None, local_vars_configuration=None):  # noqa: E501
         """RoleList - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
         self.local_vars_configuration = local_vars_configuration
 
+        self._id = None
         self._name = None
+        self._default = None
         self.discriminator = None
 
+        if id is not None:
+            self.id = id
         self.name = name
+        if default is not None:
+            self.default = default
+
+    @property
+    def id(self):
+        """Gets the id of this RoleList.  # noqa: E501
+
+
+        :return: The id of this RoleList.  # noqa: E501
+        :rtype: str
+        """
+        return self._id
+
+    @id.setter
+    def id(self, id):
+        """Sets the id of this RoleList.
+
+
+        :param id: The id of this RoleList.  # noqa: E501
+        :type: str
+        """
+
+        self._id = id
 
     @property
     def name(self):
@@ -79,6 +110,27 @@ class RoleList(object):
             raise ValueError("Invalid value for `name`, length must be greater than or equal to `1`")  # noqa: E501
 
         self._name = name
+
+    @property
+    def default(self):
+        """Gets the default of this RoleList.  # noqa: E501
+
+
+        :return: The default of this RoleList.  # noqa: E501
+        :rtype: str
+        """
+        return self._default
+
+    @default.setter
+    def default(self, default):
+        """Sets the default of this RoleList.
+
+
+        :param default: The default of this RoleList.  # noqa: E501
+        :type: str
+        """
+
+        self._default = default
 
     def to_dict(self):
         """Returns the model properties as a dict"""
