@@ -33,7 +33,7 @@ class Metrics(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'value': 'int',
+        'value': 'float',
         'start_time': 'datetime',
         'end_time': 'datetime'
     }
@@ -68,7 +68,7 @@ class Metrics(object):
 
 
         :return: The value of this Metrics.  # noqa: E501
-        :rtype: int
+        :rtype: float
         """
         return self._value
 
@@ -78,7 +78,7 @@ class Metrics(object):
 
 
         :param value: The value of this Metrics.  # noqa: E501
-        :type: int
+        :type: float
         """
 
         self._value = value

@@ -59,8 +59,10 @@ class ConnectorUpdate(object):
         self.discriminator = None
 
         self.name = name
-        self.credentials = credentials
-        self.configuration = configuration
+        if credentials is not None:
+            self.credentials = credentials
+        if configuration is not None:
+            self.configuration = configuration
         if input_fields is not None:
             self.input_fields = input_fields
 
@@ -111,8 +113,6 @@ class ConnectorUpdate(object):
         :param credentials: The credentials of this ConnectorUpdate.  # noqa: E501
         :type: str
         """
-        if self.local_vars_configuration.client_side_validation and credentials is None:  # noqa: E501
-            raise ValueError("Invalid value for `credentials`, must not be `None`")  # noqa: E501
         if (self.local_vars_configuration.client_side_validation and
                 credentials is not None and len(credentials) < 1):
             raise ValueError("Invalid value for `credentials`, length must be greater than or equal to `1`")  # noqa: E501
@@ -137,8 +137,6 @@ class ConnectorUpdate(object):
         :param configuration: The configuration of this ConnectorUpdate.  # noqa: E501
         :type: dict(str, str)
         """
-        if self.local_vars_configuration.client_side_validation and configuration is None:  # noqa: E501
-            raise ValueError("Invalid value for `configuration`, must not be `None`")  # noqa: E501
 
         self._configuration = configuration
 

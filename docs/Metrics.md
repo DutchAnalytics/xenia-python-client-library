@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**value** | **int** |  | [optional] 
+**value** | **float** |  | [optional] 
 **start_time** | **datetime** |  | [optional] 
 **end_time** | **datetime** |  | [optional] 
 

@@ -53,7 +53,8 @@ class CredentialsUpdate(object):
         self.discriminator = None
 
         self.name = name
-        self.configuration = configuration
+        if configuration is not None:
+            self.configuration = configuration
 
     @property
     def name(self):
@@ -102,8 +103,6 @@ class CredentialsUpdate(object):
         :param configuration: The configuration of this CredentialsUpdate.  # noqa: E501
         :type: dict(str, str)
         """
-        if self.local_vars_configuration.client_side_validation and configuration is None:  # noqa: E501
-            raise ValueError("Invalid value for `configuration`, must not be `None`")  # noqa: E501
 
         self._configuration = configuration
 
