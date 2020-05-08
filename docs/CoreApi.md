@@ -44,6 +44,9 @@ Method | HTTP request | Description
 [**models_get**](CoreApi.md#models_get) | **GET** /projects/{project_name}/models/{model_name} | Get details of model
 [**models_list**](CoreApi.md#models_list) | **GET** /projects/{project_name}/models | List models in project
 [**models_update**](CoreApi.md#models_update) | **PATCH** /projects/{project_name}/models/{model_name} | Update a model
+[**organization_invites_delete**](CoreApi.md#organization_invites_delete) | **DELETE** /organizations/{organization_name}/invites/{invite_id} | Delete an organization invitation of a user
+[**organization_invites_get**](CoreApi.md#organization_invites_get) | **GET** /organizations/{organization_name}/invites/{invite_id} | Get details of an organization invitation of a user
+[**organization_invites_list**](CoreApi.md#organization_invites_list) | **GET** /organizations/{organization_name}/invites | List the users invited to an organization
 [**organization_users_create**](CoreApi.md#organization_users_create) | **POST** /organizations/{organization_name}/users | Add a user to an organization
 [**organization_users_delete**](CoreApi.md#organization_users_delete) | **DELETE** /organizations/{organization_name}/users/{user_id} | Delete a user from an organization
 [**organization_users_get**](CoreApi.md#organization_users_get) | **GET** /organizations/{organization_name}/users/{user_id} | Get details of a user in an organization
@@ -86,8 +89,7 @@ Method | HTTP request | Description
 [**projects_get**](CoreApi.md#projects_get) | **GET** /projects/{project_name} | Get details of a project
 [**projects_list**](CoreApi.md#projects_list) | **GET** /projects | List projects
 [**projects_log_list**](CoreApi.md#projects_log_list) | **POST** /projects/{project_name}/logs | List logs for a project
-[**request_reset_password**](CoreApi.md#request_reset_password) | **POST** /user/reset-password | Request a password reset
-[**reset_password**](CoreApi.md#reset_password) | **POST** /user/reset-password/{token} | Create a new password after resetting
+[**projects_user_list**](CoreApi.md#projects_user_list) | **GET** /projects/{project_name}/users | List the users in the organization of a project
 [**role_assignments_create**](CoreApi.md#role_assignments_create) | **POST** /projects/{project_name}/role-assignments | Assign a role to a user in a project
 [**role_assignments_delete**](CoreApi.md#role_assignments_delete) | **DELETE** /projects/{project_name}/role-assignments/{id} | Delete a role from a user with the given role assignment id
 [**role_assignments_get**](CoreApi.md#role_assignments_get) | **GET** /projects/{project_name}/role-assignments/{id} | Get details of a role assignment
@@ -96,7 +98,15 @@ Method | HTTP request | Description
 [**roles_delete**](CoreApi.md#roles_delete) | **DELETE** /projects/{project_name}/roles/{role_name} | Delete a role from a project
 [**roles_get**](CoreApi.md#roles_get) | **GET** /projects/{project_name}/roles/{role_name} | Get details of a role
 [**roles_list**](CoreApi.md#roles_list) | **GET** /projects/{project_name}/roles | List the available roles in a project
+[**roles_update**](CoreApi.md#roles_update) | **PATCH** /projects/{project_name}/roles/{role_name} | Update a role in a project
 [**service_status**](CoreApi.md#service_status) | **GET** /status | Service status
+[**service_users_create**](CoreApi.md#service_users_create) | **POST** /projects/{project_name}/service-users | Create a new service user
+[**service_users_delete**](CoreApi.md#service_users_delete) | **DELETE** /projects/{project_name}/service-users/{service_user_id} | Delete service user
+[**service_users_get**](CoreApi.md#service_users_get) | **GET** /projects/{project_name}/service-users/{service_user_id} | Retrieve details of a service user
+[**service_users_list**](CoreApi.md#service_users_list) | **GET** /projects/{project_name}/service-users | List service users
+[**service_users_token**](CoreApi.md#service_users_token) | **PUT** /projects/{project_name}/service-users/{service_user_id}/token | Reset the token of a service user
+[**service_users_update**](CoreApi.md#service_users_update) | **PATCH** /projects/{project_name}/service-users/{service_user_id} | Update service user details
+[**subscriptions_list**](CoreApi.md#subscriptions_list) | **GET** /subscriptions | List subscriptions
 [**user_create**](CoreApi.md#user_create) | **POST** /user | Create a new user
 [**user_delete**](CoreApi.md#user_delete) | **DELETE** /user | Delete user
 [**user_get**](CoreApi.md#user_get) | **GET** /user | Get user details
@@ -2050,7 +2060,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **model_requests_create_bulk**
-> ModelRequestList model_requests_create_bulk(project_name, model_name, version, data)
+> list[ModelRequestList] model_requests_create_bulk(project_name, model_name, version, data)
 
 Create bulk model requests
 
@@ -2131,7 +2141,7 @@ api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.A
 project_name = 'project_name_example' # str | 
 model_name = 'model_name_example' # str | 
 version = 'version_example' # str | 
-data = xenia_python_client_library.ModelRequestCreate() # ModelRequestCreate | 
+data = [xenia_python_client_library.ModelRequestCreate()] # list[ModelRequestCreate] | 
 
 try:
     # Create bulk model requests
@@ -2148,11 +2158,11 @@ Name | Type | Description  | Notes
  **project_name** | **str**|  | 
  **model_name** | **str**|  | 
  **version** | **str**|  | 
- **data** | [**ModelRequestCreate**](ModelRequestCreate.md)|  | 
+ **data** | [**list[ModelRequestCreate]**](ModelRequestCreate.md)|  | 
 
 ### Return type
 
-[**ModelRequestList**](ModelRequestList.md)
+[**list[ModelRequestList]**](ModelRequestList.md)
 
 ### Authorization
 
@@ -2292,7 +2302,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **model_requests_get_bulk**
-> ModelRequestResultList model_requests_get_bulk(project_name, model_name, version, data)
+> list[ModelRequestResultList] model_requests_get_bulk(project_name, model_name, version, data)
 
 Get model request results bulk
 
@@ -2377,7 +2387,7 @@ api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.A
 project_name = 'project_name_example' # str | 
 model_name = 'model_name_example' # str | 
 version = 'version_example' # str | 
-data = xenia_python_client_library.ModelRequestResultCreate() # ModelRequestResultCreate | 
+data = [xenia_python_client_library.ModelRequestResultCreate()] # list[ModelRequestResultCreate] | 
 
 try:
     # Get model request results bulk
@@ -2394,11 +2404,11 @@ Name | Type | Description  | Notes
  **project_name** | **str**|  | 
  **model_name** | **str**|  | 
  **version** | **str**|  | 
- **data** | [**ModelRequestResultCreate**](ModelRequestResultCreate.md)|  | 
+ **data** | [**list[ModelRequestResultCreate]**](ModelRequestResultCreate.md)|  | 
 
 ### Return type
 
-[**ModelRequestResultList**](ModelRequestResultList.md)
+[**list[ModelRequestResultList]**](ModelRequestResultList.md)
 
 ### Authorization
 
@@ -4359,14 +4369,263 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **organization_invites_delete**
+> organization_invites_delete(invite_id, organization_name)
+
+Delete an organization invitation of a user
+
+
+### Description 
+Delete the organization invitation of a user. The user making the request must be admin of the organization.
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
+configuration.host = "https://api.dutchanalytics.net/v1.1"
+# Create an instance of the API class
+api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
+invite_id = 'invite_id_example' # str | 
+organization_name = 'organization_name_example' # str | 
+
+try:
+    # Delete an organization invitation of a user
+    api_instance.organization_invites_delete(invite_id, organization_name)
+except ApiException as e:
+    print("Exception when calling CoreApi->organization_invites_delete: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **invite_id** | **str**|  | 
+ **organization_name** | **str**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **organization_invites_get**
+> OrganizationUserInviteList organization_invites_get(invite_id, organization_name)
+
+Get details of an organization invitation of a user
+
+
+### Description 
+Get the details of an organization invitation of a user in an organization. The user making the request must be admin of the organization.
+
+### Response Structure 
+Details of the invited user
+ - `id`: Unique identifier for the user invitation (UUID) 
+
+ - `email`: Email of the invited user 
+
+- `admin`: Boolean value indicating whether the user is added as an admin of the organization or not 
+
+ - `invitation_creation_time`: Date when the user is invited to the organization 
+
+
+#### Response Examples 
+```
+{
+  "id": "42879106-fb95-42d5-931a-8b94c85ba41e",
+  "email": "user@example.com",
+  "admin": false
+  "invitation_creation_time": "2020-04-15 12:04:34.213309+02"
+}
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
+configuration.host = "https://api.dutchanalytics.net/v1.1"
+# Create an instance of the API class
+api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
+invite_id = 'invite_id_example' # str | 
+organization_name = 'organization_name_example' # str | 
+
+try:
+    # Get details of an organization invitation of a user
+    api_response = api_instance.organization_invites_get(invite_id, organization_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreApi->organization_invites_get: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **invite_id** | **str**|  | 
+ **organization_name** | **str**|  | 
+
+### Return type
+
+[**OrganizationUserInviteList**](OrganizationUserInviteList.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **organization_invites_list**
+> list[OrganizationUserInviteList] organization_invites_list(organization_name)
+
+List the users invited to an organization
+
+
+### Description 
+List pending user invitations for an organization. The user making the request must be admin of the organization.
+
+### Response Structure 
+List of details of invited users
+ - `id`: Unique identifier for the user invitation (UUID) 
+
+ - `email`: Email of the invited user 
+
+ - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not 
+
+ - `invitation_creation_time`: Date when the user is invited to the organization 
+
+
+#### Response Examples
+```
+[
+  {
+    "id": "42879106-fb95-42d5-931a-8b94c85ba41e",
+    "email": "user@example.com",
+    "admin": true,
+    "invitation_creation_time": "2020-04-15 12:04:34.213309+02"
+  },
+  {
+    "id": "90f09c91-789b-4dda-a0c2-18954ac49fcf",
+    "email": "user@example.com",
+    "admin": false
+    "invitation_creation_time": "2020-04-15 12:04:34.213309+02"
+  }
+]
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
+configuration.host = "https://api.dutchanalytics.net/v1.1"
+# Create an instance of the API class
+api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
+organization_name = 'organization_name_example' # str | 
+
+try:
+    # List the users invited to an organization
+    api_response = api_instance.organization_invites_list(organization_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreApi->organization_invites_list: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **organization_name** | **str**|  | 
+
+### Return type
+
+[**list[OrganizationUserInviteList]**](OrganizationUserInviteList.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **organization_users_create**
-> OrganizationUserList organization_users_create(organization_name, data)
+> OrganizationUserDetail organization_users_create(organization_name, data)
 
 Add a user to an organization
 
 
 ### Description
 Add a user to an organization as admin or normal user. The user making the request must be admin of the organization.
+The user can later be assigned roles in the projects defined in the scope the organization, such as project-admin, project-viewer etc.
 
 ### Required Parameters
 - `email`: Email of the user 
@@ -4377,7 +4636,7 @@ Add a user to an organization as admin or normal user. The user making the reque
 #### Request Examples 
 ```
 {
-  "user_id": "test@example.com",
+  "email": "test@example.com",
   "admin": false
 }
 ```
@@ -4446,7 +4705,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OrganizationUserList**](OrganizationUserList.md)
+[**OrganizationUserDetail**](OrganizationUserDetail.md)
 
 ### Authorization
 
@@ -4472,8 +4731,9 @@ Delete a user from an organization
 
 ### Description 
 Delete a user from an organization. The user making the request must be admin of the organization.
-Deleting the last admin from an organization is not possible.
-**When a user is deleted from an organization, all his permissions from all projects are also deleted.**
+It is not possible to delete the last admin of an organization.
+
+**When a user is deleted from an organization, all his roles from all projects defined in the scope of the organization are also deleted.**
 
 
 ### Example
@@ -4542,7 +4802,7 @@ Get details of a user in an organization
 Get the details of a user in an organization. The user making the request must be admin of the organization.
 
 ### Response Structure 
-Details of the added user
+Details of the user
  - `id`: Unique identifier for the user (UUID) 
 
  - `email`: Email of the user 
@@ -4624,16 +4884,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **organization_users_list**
-> list[OrganizationUserList] organization_users_list(organization_name)
+> list[OrganizationUserDetail] organization_users_list(organization_name)
 
 List the users in an organization
 
 
 ### Description 
-List all users and their details in an organization.
-
-### Required Parameters 
-- None
+List users and their details in an organization. The user making the request must be admin of the organization.
 
 ### Response Structure 
 List of details of users
@@ -4706,7 +4963,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**list[OrganizationUserList]**](OrganizationUserList.md)
+[**list[OrganizationUserDetail]**](OrganizationUserDetail.md)
 
 ### Authorization
 
@@ -4732,7 +4989,7 @@ Update details of a user in an organization
 
 ### Description 
 Update the admin status of a user in an organization. The user making the request must be admin of the organization.
-Changing the last admin from an organization to a regular user is not possible.
+It is not possible to change the last admin of an organization to a regular user.
 
 ### Required Parameters
 - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not 
@@ -4745,8 +5002,8 @@ Changing the last admin from an organization to a regular user is not possible.
 }
 ```
 
-### Response Structure 
-Details of the added user
+### Response Structure
+Details of the user
  - `id`: Unique identifier for the user (UUID) 
 
  - `email`: Email of the user 
@@ -4838,19 +5095,25 @@ Create organizations
 ### Description 
 Create a new organization with the provided name.
 Any authenticated user can create a new organization and this user will automatically become organization admin.
-Upon creating an organization, a `subscription` needs to be given. A license for this subscription should be purchased via dutchanalytics.com. 
-A 'free_trial' subscription grants permission to one user and allows for a maximum of 2 projects to be created. A 'starter' subscription grants permission to 5 users and allows for a maximum of 10 projects to be created. A 'professional' subscription grants permission to an unlimited number of users and allows unlimited projects.
+Upon creating an organization, a **subscription** needs to be given. A license for this subscription should be purchased via dutchanalytics.com. 
+- A **free_trial** subscription grants permission to one user and allows for a maximum of 2 projects to be created. 
+- A **starter** subscription grants permission to 5 users and allows for a maximum of 10 projects to be created. 
+- A **professional** subscription grants permission to an unlimited number of users and allows unlimited projects.
+
+It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to create an organization.
 
 ### Required Parameters 
  - `name`: Name of the organization. The name is globally unique. It can only consist of lowercase letters, numbers and dashes (-), and must start with a lowercase letter. 
 
  - `subscription`: Name of the subscription: 'free_trial', 'starter' or 'professional'.
+ - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted
  
 #### Request Examples 
 ```
 {
   "name": "test-organization",
-  "subscription": "professional"
+  "subscription": "professional",
+  "subscription_agreed": true
 }
 ```
 
@@ -5012,6 +5275,10 @@ Details of a organization
 
  - `subscription`: Type of subscription 
 
+ - `subscription_agreement_date`: Time the subscription agreement was accepted 
+
+ - `subscription_agreement_user`: User who accepted the subscription agreement 
+
 
 #### Response Examples 
 ```
@@ -5019,7 +5286,9 @@ Details of a organization
   "id": "abe2e406-fae5-4bcf-a3bc-956d756e4ecb",
   "name": "test-organization",
   "creation_date": "2020-03-25T15:43:46.101877Z",
-  "subscription": "professional"
+  "subscription": "professional",
+  "subscription_agreement_date": "2020-03-25T15:43:46.101877Z",
+  "subscription_agreement_user": "test-user@test.com"
 }
 ```
 
@@ -5168,15 +5437,18 @@ Update details of an organization
 
 ### Description 
 Update an organization. The user making the request must have appropriate permissions.
-It is only possible to update the subscription. To upgrade your subscription, contact dutchanalytics.com.
+
+It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to upgrade the subscription of an organization.
 
 ### Optional Parameters 
  - `subscription`: New subscription
+ - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted upon upgrading the subscriptions
 
 #### Request Examples
 ```
 {
-  "subscription": "professional"
+  "subscription": "professional",
+  "subscription_agreed": true
 }
 ```
 
@@ -5190,6 +5462,10 @@ Details of a organization
 
  - `subscription`: Type of subscription 
 
+ - `subscription_agreement_date`: Time the subscription agreement was accepted 
+
+ - `subscription_agreement_user`: User who accepted the subscription agreement 
+
 
 #### Response Examples
 ```
@@ -5197,7 +5473,9 @@ Details of a organization
   "id": "abe2e406-fae5-4bcf-a3bc-956d756e4ecb",
   "name": "test-organization",
   "creation_date": "2020-03-25T15:43:46.101877Z",
-  "subscription": "professional"
+  "subscription": "professional",
+  "subscription_agreement_date": "2020-04-25T12:26:18.976481Z",
+  "subscription_agreement_user": "test-user-2@test.com"
 }
 ```
 
@@ -8337,7 +8615,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **projects_log_list**
-> list[object] projects_log_list(project_name, data)
+> list[Logs] projects_log_list(project_name, data)
 
 List logs for a project
 
@@ -8502,7 +8780,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**list[object]**
+[**list[Logs]**](Logs.md)
 
 ### Authorization
 
@@ -8520,36 +8798,43 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **request_reset_password**
-> Success request_reset_password(data)
+# **projects_user_list**
+> list[OrganizationUserList] projects_user_list(project_name)
 
-Request a password reset
+List the users in the organization of a project
 
 
 ### Description 
-Request a reset of password via e-mail. The token is valid for 60 minutes.
-
-### Required Parameters
-- `email`: Email of the user. This is a unique field. 
-
-
-#### Request Examples 
-```
-{
-  "email": "teste@example.com",
-}
-```
+List users in an organization. The reason that this method is available is that users with **roles.create** permission should be able to get the ids of the users to be able to assign roles to them.
+Therefore, only users who have roles.create permission are allowed to make this request.
 
 ### Response Structure 
-Details of the request
- - `success`: Boolean value indicating success/failure 
+List of details of users
+ - `id`: Unique identifier for the user (UUID) 
+
+ - `email`: Email of the user 
+
+ - `name`: Name of the user 
+
+ - `surname`: Surname of the user 
 
 
-#### Response Examples 
+#### Response Examples
 ```
-{
-  "success": True
-}
+[
+  {
+    "id": "54977bc3-2c3b-4d8f-97c7-aff89a95bf21",
+    "email": "user@example.com",
+    "name": "user",
+    "surname": "name"
+  },
+  {
+    "id": "abe2e406-fae5-4bcf-a3bc-956d756e4ecb",
+    "email": "user2@example.com",
+    "name": "user",
+    "surname": "name"
+  }
+]
 ```
 
 
@@ -8572,25 +8857,25 @@ configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 configuration.host = "https://api.dutchanalytics.net/v1.1"
 # Create an instance of the API class
 api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
-data = xenia_python_client_library.UserRequestPassword() # UserRequestPassword | 
+project_name = 'project_name_example' # str | 
 
 try:
-    # Request a password reset
-    api_response = api_instance.request_reset_password(data)
+    # List the users in the organization of a project
+    api_response = api_instance.projects_user_list(project_name)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling CoreApi->request_reset_password: %s\n" % e)
+    print("Exception when calling CoreApi->projects_user_list: %s\n" % e)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**UserRequestPassword**](UserRequestPassword.md)|  | 
+ **project_name** | **str**|  | 
 
 ### Return type
 
-[**Success**](Success.md)
+[**list[OrganizationUserList]**](OrganizationUserList.md)
 
 ### Authorization
 
@@ -8598,111 +8883,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **reset_password**
-> Success reset_password(token, data)
-
-Create a new password after resetting
-
-
-### Description 
-Create a new password after validation of the token that was send in the e-mail
-
-### Required Parameters
-- `new_password`: The new password 
-
-
-#### Request Examples 
-```
-{
-  "new_password": "new_secure_password",
-}
-```
-
-### Response Structure 
-Details of the request
- - `success`: Boolean value indicating success/failure 
-
-
-#### Response Examples 
-Success response
-```
-{
-  "success": True
-}
-```
-
-Invalid token response
-```
-{
-  "error": "Invalid token"
-}
-```
-
-
-### Example
-
-* Api Key Authentication (api_key):
-```python
-from __future__ import print_function
-import time
-import xenia_python_client_library
-from xenia_python_client_library.rest import ApiException
-from pprint import pprint
-configuration = xenia_python_client_library.Configuration()
-# Configure API key authorization: api_key
-configuration.api_key['Authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['Authorization'] = 'Bearer'
-
-# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
-configuration.host = "https://api.dutchanalytics.net/v1.1"
-# Create an instance of the API class
-api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
-token = 'token_example' # str | 
-data = xenia_python_client_library.UserCreatePassword() # UserCreatePassword | 
-
-try:
-    # Create a new password after resetting
-    api_response = api_instance.reset_password(token, data)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreApi->reset_password: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **token** | **str**|  | 
- **data** | [**UserCreatePassword**](UserCreatePassword.md)|  | 
-
-### Return type
-
-[**Success**](Success.md)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**201** |  |  -  |
+**200** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -8734,7 +8921,7 @@ Setting the role model-admin on project level for user with id 02b77d8f-b312-47e
 ```
 {
   "user_id": "02b77d8f-b312-47ef-990f-4685a7ab9363",
-  "role_name": "model-admin"
+  "role": "model-admin"
 }
 ```
 
@@ -8742,7 +8929,7 @@ Setting the role model-viewer on model-1 for user with id 02b77d8f-b312-47ef-990
 ```
 {
   "user_id": "02b77d8f-b312-47ef-990f-4685a7ab9363",
-  "role_name": "model-viewer",
+  "role": "model-viewer",
   "object_name": "model-1",
   "object_type": "model"
 }
@@ -8766,7 +8953,7 @@ Details of the created role assignment
 {
   "id": "e988ddc0-3ef1-42d2-ab30-9f810a5e7063",
   "user_id": "02b77d8f-b312-47ef-990f-4685a7ab9363",
-  "role_name": "model-admin",
+  "role": "model-admin",
   "object_name": "project-1",
   "object_type": "project"
 }
@@ -8776,7 +8963,7 @@ Details of the created role assignment
 {
   "id": "e988ddc0-3ef1-42d2-ab30-9f810a5e7063",
   "user_id": "02b77d8f-b312-47ef-990f-4685a7ab9363",
-  "role_name": "model-viewer",
+  "role": "model-viewer",
   "object_name": "model-1",
   "object_type": "model"
 }
@@ -8933,7 +9120,7 @@ Details of the role assignment
 {
   "id": "e988ddc0-3ef1-42d2-ab30-9f810a5e7063",
   "user_id": "02b77d8f-b312-47ef-990f-4685a7ab9363",
-  "role_name": "model-viewer",
+  "role": "model-viewer",
   "object_name": "model-1",
   "object_type": "model"
 }
@@ -9434,6 +9621,115 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **roles_update**
+> RoleDetailList roles_update(project_name, role_name, data)
+
+Update a role in a project
+
+
+### Description 
+Update a role in a project. The user making the request must have appropriate permissions.
+**Default roles cannot be updated.**
+
+### Optional Parameters 
+ - `name`: New name for the role. It can only consist of lowercase letters, numbers and dashes (-), and must start with a lowercase letter. 
+
+ - `permissions`: A new list of permission names which the role will have. The previous permissions will be replaced with the given ones. The list of available permissions can be obtained with */permissions* endpoint. 
+
+
+#### Request Examples
+```
+{
+  "name": "new-model-editor-role"
+}
+```
+
+```
+{
+  "permissions": [
+    "models.list",
+    "models.get"
+  ]
+}
+```
+
+### Response Structure 
+Details of the created role
+ - `name`: Name of the updated role 
+
+ - `permissions`: A list of permission names which the role has
+
+#### Response Examples
+```
+{
+  "name": "new-model-editor-role",
+  "permissions": [
+    "models.list",
+    "models.get"
+  ]
+}
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
+configuration.host = "https://api.dutchanalytics.net/v1.1"
+# Create an instance of the API class
+api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
+project_name = 'project_name_example' # str | 
+role_name = 'role_name_example' # str | 
+data = xenia_python_client_library.RoleUpdate() # RoleUpdate | 
+
+try:
+    # Update a role in a project
+    api_response = api_instance.roles_update(project_name, role_name, data)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreApi->roles_update: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **project_name** | **str**|  | 
+ **role_name** | **str**|  | 
+ **data** | [**RoleUpdate**](RoleUpdate.md)|  | 
+
+### Return type
+
+[**RoleDetailList**](RoleDetailList.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **service_status**
 > Status service_status()
 
@@ -9505,63 +9801,48 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **user_create**
-> UserDetail user_create(data)
+# **service_users_create**
+> ServiceUserDetail service_users_create(project_name, data)
 
-Create a new user
+Create a new service user
 
 
 ### Description 
-Create a new user with the given details - email, password, name and surname.
+Create a new service user. A unique email is generated for the service user. Additionally, a token for this service user is generated. This token can be used to authorize requests sent to our API. 
 
-### Required Parameters
-- `email`: Email of the user. This is a unique field. 
-
-- `password`: Password of the user 
-
+The token is **ONLY** returned on creation and will not be accessible afterwards.
 
 ### Optional Parameters
-- `name`: Name of the user 
+- `name`: Name of the service user 
 
-- `surname`: Surname of the user
 
 #### Request Examples 
 ```
 {
-  "email": "test@example.com",
-  "password": "secret-password",
-  "name": "User name",
-  "surname": "User surname"
-}
-```
-
-```
-{
-  "email": "test@example.com",
-  "password": "secret-password"
+  "name": "service-user-1"
 }
 ```
 
 ### Response Structure 
-Details of the created user
- - `id`: Unique identifier for the user (UUID) 
+Details of the created service user
+ - `id`: Unique identifier for the service user (UUID) 
 
- - `email`: Email of the user 
+ - `email`: Email of the service user  
 
- - `name`: Name of the user 
+ - `token`: The API token for the created service user  
 
- - `surname`: Surname of the user 
+ - `name`: Name of the service user 
 
- - `registration_date`: Date when the user was registered
+ - `creation_date`: Date when the service user was created
 
 #### Response Examples 
 ```
 {
-  "id": "4740a13a-70ae-4b7a-a461-8231eb2c0594",
-  "email": "test@example.com",
-  "name": "User name",
-  "surname": "User surname",
-  "registration_date": "2020-01-10 10:06:25.632392+01"
+  "id": "13a9ba27-6888-4528-826e-8e1002eab13d",
+  "email": "13a9ba27-6888-4528-826e-8e1002eab13d.project1@serviceuser.xenia.dutchanalytics.net",
+  "token": "e962d9190348af7fa8d233d75cff7385b4335f81",
+  "name": "service-user-1",
+  "creation_date": "2020-03-24T09:16:27.504+00:00"
 }
 ```
 
@@ -9585,7 +9866,627 @@ configuration.api_key['Authorization'] = 'YOUR_API_KEY'
 configuration.host = "https://api.dutchanalytics.net/v1.1"
 # Create an instance of the API class
 api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
-data = xenia_python_client_library.UserCreate() # UserCreate | 
+project_name = 'project_name_example' # str | 
+data = xenia_python_client_library.ServiceUserCreate() # ServiceUserCreate | 
+
+try:
+    # Create a new service user
+    api_response = api_instance.service_users_create(project_name, data)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreApi->service_users_create: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **project_name** | **str**|  | 
+ **data** | [**ServiceUserCreate**](ServiceUserCreate.md)|  | 
+
+### Return type
+
+[**ServiceUserDetail**](ServiceUserDetail.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **service_users_delete**
+> service_users_delete(project_name, service_user_id)
+
+Delete service user
+
+
+### Description 
+Delete a service user from a project
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
+configuration.host = "https://api.dutchanalytics.net/v1.1"
+# Create an instance of the API class
+api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
+project_name = 'project_name_example' # str | 
+service_user_id = 'service_user_id_example' # str | 
+
+try:
+    # Delete service user
+    api_instance.service_users_delete(project_name, service_user_id)
+except ApiException as e:
+    print("Exception when calling CoreApi->service_users_delete: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **project_name** | **str**|  | 
+ **service_user_id** | **str**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **service_users_get**
+> ServiceUserList service_users_get(project_name, service_user_id)
+
+Retrieve details of a service user
+
+
+### Description 
+Retrieve details of a service user
+
+### Response Structure 
+Details of the service user
+ - `id`: Unique identifier for the service user (UUID) 
+
+ - `email`: Email of the service user  
+
+ - `name`: Name of the service user 
+
+ - `creation_date`: Date when the service user was created
+
+#### Response Examples 
+```
+{
+  "id": "13a9ba27-6888-4528-826e-8e1002eab13d",
+  "email": "13a9ba27-6888-4528-826e-8e1002eab13d.project1@serviceuser.xenia.dutchanalytics.net",
+  "name": "new-service-user-name",
+  "creation_date": "2020-03-26T12:18:43.123+00:00"
+}
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
+configuration.host = "https://api.dutchanalytics.net/v1.1"
+# Create an instance of the API class
+api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
+project_name = 'project_name_example' # str | 
+service_user_id = 'service_user_id_example' # str | 
+
+try:
+    # Retrieve details of a service user
+    api_response = api_instance.service_users_get(project_name, service_user_id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreApi->service_users_get: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **project_name** | **str**|  | 
+ **service_user_id** | **str**|  | 
+
+### Return type
+
+[**ServiceUserList**](ServiceUserList.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **service_users_list**
+> list[ServiceUserList] service_users_list(project_name)
+
+List service users
+
+
+### Description 
+List service users defined in a project
+
+### Response Structure 
+List of details of the service users:
+ - `id`: Unique identifier for the service user (UUID) 
+
+ - `email`: Email of the service user 
+
+ - `name`: Name of the service user 
+
+ - `creation_date`: Date when the service user was created
+
+#### Response Examples 
+```
+[
+  {
+    "id": "537bca64-5ab6-43eb-a7ef-1638bc30b6ed",
+    "email": "537bca64-5ab6-43eb-a7ef-1638bc30b6ed.project1@serviceuser.xenia.dutchanalytics.net",
+    "name": "service-user-1",
+    "creation_date": "2020-03-24T09:16:27.504+00:00"
+  },
+  {
+    "id": "13a9ba27-6888-4528-826e-8e1002eab13d",
+    "email": "13a9ba27-6888-4528-826e-8e1002eab13d.project1@serviceuser.xenia.dutchanalytics.net",
+    "name": "service-user-2",
+    "creation_date": "2020-03-26T12:18:43.123+00:00"
+  }
+]
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
+configuration.host = "https://api.dutchanalytics.net/v1.1"
+# Create an instance of the API class
+api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
+project_name = 'project_name_example' # str | 
+
+try:
+    # List service users
+    api_response = api_instance.service_users_list(project_name)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreApi->service_users_list: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **project_name** | **str**|  | 
+
+### Return type
+
+[**list[ServiceUserList]**](ServiceUserList.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **service_users_token**
+> object service_users_token(project_name, service_user_id, data)
+
+Reset the token of a service user
+
+
+### Description 
+Reset the token of a service user. The old token will be deleted and a new one will be created for the service user.
+
+### Response Structure 
+Details of the new token for the service user
+ - `token`: The new API token for the service user
+
+#### Response Examples
+```
+{
+  "token": "e962d9190348af7fa8d233d75cff7385b4335f81"
+}
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
+configuration.host = "https://api.dutchanalytics.net/v1.1"
+# Create an instance of the API class
+api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
+project_name = 'project_name_example' # str | 
+service_user_id = 'service_user_id_example' # str | 
+data = None # object | 
+
+try:
+    # Reset the token of a service user
+    api_response = api_instance.service_users_token(project_name, service_user_id, data)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreApi->service_users_token: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **project_name** | **str**|  | 
+ **service_user_id** | **str**|  | 
+ **data** | **object**|  | 
+
+### Return type
+
+**object**
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **service_users_update**
+> ServiceUserList service_users_update(project_name, service_user_id, data)
+
+Update service user details
+
+ 
+### Description
+Update the name of a service user
+
+### Optional Parameters
+- `name`: Name of the service user 
+
+
+#### Request Examples 
+
+```
+{
+  "name": "new-service-user-name",
+}
+```
+
+### Response Structure 
+Details of the updated service user
+ - `id`: Unique identifier for the service user (UUID) 
+
+ - `email`: Email of the service user  
+
+ - `name`: Name of the service user 
+
+ - `creation_date`: Date when the service user was created
+
+#### Response Examples 
+```
+{
+  "id": "13a9ba27-6888-4528-826e-8e1002eab13d",
+  "email": "13a9ba27-6888-4528-826e-8e1002eab13d.project1@serviceuser.xenia.dutchanalytics.net",
+  "name": "new-service-user-name",
+  "creation_date": "2020-03-26T12:18:43.123+00:00"
+}
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
+configuration.host = "https://api.dutchanalytics.net/v1.1"
+# Create an instance of the API class
+api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
+project_name = 'project_name_example' # str | 
+service_user_id = 'service_user_id_example' # str | 
+data = xenia_python_client_library.ServiceUserCreate() # ServiceUserCreate | 
+
+try:
+    # Update service user details
+    api_response = api_instance.service_users_update(project_name, service_user_id, data)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreApi->service_users_update: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **project_name** | **str**|  | 
+ **service_user_id** | **str**|  | 
+ **data** | [**ServiceUserCreate**](ServiceUserCreate.md)|  | 
+
+### Return type
+
+[**ServiceUserList**](ServiceUserList.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **subscriptions_list**
+> list[SubscriptionList] subscriptions_list()
+
+List subscriptions
+
+
+### Description 
+List all available subscriptions which are available for organizations
+
+### Response Structure
+A list of details of the subscriptions
+ - `id`: Unique identifier for the subscription (UUID) 
+
+ - `name`: Name of the subscription 
+
+ - `max_projects`: The number of maximum projects allowed to be created with this type of subscription 
+
+ - `max_users`: The number of maximum users allowed to be created with this type of subscription 
+
+ - `agreement`: Link to the Xenia Free SaaS Services Agreement document 
+
+ - `terms_conditions`: Link to the the Xenia SaaS Terms & Conditions document 
+
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
+configuration.host = "https://api.dutchanalytics.net/v1.1"
+# Create an instance of the API class
+api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
+
+try:
+    # List subscriptions
+    api_response = api_instance.subscriptions_list()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreApi->subscriptions_list: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**list[SubscriptionList]**](SubscriptionList.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **user_create**
+> UserPendingDetail user_create(data)
+
+Create a new user
+
+
+### Description 
+Create a new user with the given details - email, password, name and surname. After creation, an email is send to the email address to activate the acount.
+A user is required to accept the terms and conditions.
+
+### Required Parameters
+- `email`: Email of the user. This is a unique field. 
+
+- `password`: Password of the user 
+
+- `terms_conditions`: Boolean field. Pass True to accept terms and conditions. 
+
+
+### Optional Parameters
+- `name`: Name of the user 
+
+- `surname`: Surname of the user
+
+#### Request Examples 
+```
+{
+  "email": "test@example.com",
+  "password": "secret-password",
+  "name": "User name",
+  "surname": "User surname",
+  "terms_conditions": true
+}
+```
+
+```
+{
+  "email": "test@example.com",
+  "password": "secret-password",
+  "terms_conditions": true
+}
+```
+
+### Response Structure 
+Details of the created user
+ - `email`: Email of the user 
+
+ - `name`: Name of the user 
+
+ - `surname`: Surname of the user 
+
+#### Response Examples 
+```
+{
+  "email": "test@example.com",
+  "name": "User name",
+  "surname": "User surname"
+}
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
+configuration.host = "https://api.dutchanalytics.net/v1.1"
+# Create an instance of the API class
+api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
+data = xenia_python_client_library.UserPendingCreate() # UserPendingCreate | 
 
 try:
     # Create a new user
@@ -9599,11 +10500,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**UserCreate**](UserCreate.md)|  | 
+ **data** | [**UserPendingCreate**](UserPendingCreate.md)|  | 
 
 ### Return type
 
-[**UserDetail**](UserDetail.md)
+[**UserPendingDetail**](UserPendingDetail.md)
 
 ### Authorization
 
@@ -9709,7 +10610,7 @@ Details of the user:
   "email": "test@example.com",
   "name": "User name",
   "surname": "User surname",
-  "registration_date": "2020-01-10 10:06:25.632392+01"
+  "registration_date": "2020-01-10 10:06:25.632+00:00"
 }
 ```
 
@@ -9828,7 +10729,7 @@ Details of the created user
   "type": "user",
   "name": "New user name",
   "surname": "New user surname",
-  "registration_date": "2020-01-10 10:06:25.632392+01"
+  "registration_date": "2020-01-10 10:06:25.632+00:00"
 }
 ```
 

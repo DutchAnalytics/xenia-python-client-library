@@ -2361,7 +2361,7 @@ class CoreApi(object):
         :param str project_name: (required)
         :param str model_name: (required)
         :param str version: (required)
-        :param ModelRequestCreate data: (required)
+        :param list[ModelRequestCreate] data: (required)
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -2369,7 +2369,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: ModelRequestList
+        :return: list[ModelRequestList]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -2389,7 +2389,7 @@ class CoreApi(object):
         :param str project_name: (required)
         :param str model_name: (required)
         :param str version: (required)
-        :param ModelRequestCreate data: (required)
+        :param list[ModelRequestCreate] data: (required)
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -2399,7 +2399,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(ModelRequestList, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(list[ModelRequestList], status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -2476,7 +2476,7 @@ class CoreApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ModelRequestList',  # noqa: E501
+            response_type='list[ModelRequestList]',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -2629,7 +2629,7 @@ class CoreApi(object):
         :param str project_name: (required)
         :param str model_name: (required)
         :param str version: (required)
-        :param ModelRequestResultCreate data: (required)
+        :param list[ModelRequestResultCreate] data: (required)
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -2637,7 +2637,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: ModelRequestResultList
+        :return: list[ModelRequestResultList]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -2657,7 +2657,7 @@ class CoreApi(object):
         :param str project_name: (required)
         :param str model_name: (required)
         :param str version: (required)
-        :param ModelRequestResultCreate data: (required)
+        :param list[ModelRequestResultCreate] data: (required)
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -2667,7 +2667,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(ModelRequestResultList, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(list[ModelRequestResultList], status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -2744,7 +2744,7 @@ class CoreApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ModelRequestResultList',  # noqa: E501
+            response_type='list[ModelRequestResultList]',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -5008,10 +5008,346 @@ class CoreApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def organization_invites_delete(self, invite_id, organization_name, **kwargs):  # noqa: E501
+        """Delete an organization invitation of a user  # noqa: E501
+
+         ### Description  Delete the organization invitation of a user. The user making the request must be admin of the organization.   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organization_invites_delete(invite_id, organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str invite_id: (required)
+        :param str organization_name: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.organization_invites_delete_with_http_info(invite_id, organization_name, **kwargs)  # noqa: E501
+
+    def organization_invites_delete_with_http_info(self, invite_id, organization_name, **kwargs):  # noqa: E501
+        """Delete an organization invitation of a user  # noqa: E501
+
+         ### Description  Delete the organization invitation of a user. The user making the request must be admin of the organization.   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organization_invites_delete_with_http_info(invite_id, organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str invite_id: (required)
+        :param str organization_name: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['invite_id', 'organization_name']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method organization_invites_delete" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'invite_id' is set
+        if self.api_client.client_side_validation and ('invite_id' not in local_var_params or  # noqa: E501
+                                                        local_var_params['invite_id'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `invite_id` when calling `organization_invites_delete`")  # noqa: E501
+        # verify the required parameter 'organization_name' is set
+        if self.api_client.client_side_validation and ('organization_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['organization_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `organization_name` when calling `organization_invites_delete`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'invite_id' in local_var_params:
+            path_params['invite_id'] = local_var_params['invite_id']  # noqa: E501
+        if 'organization_name' in local_var_params:
+            path_params['organization_name'] = local_var_params['organization_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/organizations/{organization_name}/invites/{invite_id}', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def organization_invites_get(self, invite_id, organization_name, **kwargs):  # noqa: E501
+        """Get details of an organization invitation of a user  # noqa: E501
+
+         ### Description  Get the details of an organization invitation of a user in an organization. The user making the request must be admin of the organization.  ### Response Structure  Details of the invited user  - `id`: Unique identifier for the user invitation (UUID)    - `email`: Email of the invited user   - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not    - `invitation_creation_time`: Date when the user is invited to the organization    #### Response Examples  ``` {   \"id\": \"42879106-fb95-42d5-931a-8b94c85ba41e\",   \"email\": \"user@example.com\",   \"admin\": false   \"invitation_creation_time\": \"2020-04-15 12:04:34.213309+02\" } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organization_invites_get(invite_id, organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str invite_id: (required)
+        :param str organization_name: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: OrganizationUserInviteList
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.organization_invites_get_with_http_info(invite_id, organization_name, **kwargs)  # noqa: E501
+
+    def organization_invites_get_with_http_info(self, invite_id, organization_name, **kwargs):  # noqa: E501
+        """Get details of an organization invitation of a user  # noqa: E501
+
+         ### Description  Get the details of an organization invitation of a user in an organization. The user making the request must be admin of the organization.  ### Response Structure  Details of the invited user  - `id`: Unique identifier for the user invitation (UUID)    - `email`: Email of the invited user   - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not    - `invitation_creation_time`: Date when the user is invited to the organization    #### Response Examples  ``` {   \"id\": \"42879106-fb95-42d5-931a-8b94c85ba41e\",   \"email\": \"user@example.com\",   \"admin\": false   \"invitation_creation_time\": \"2020-04-15 12:04:34.213309+02\" } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organization_invites_get_with_http_info(invite_id, organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str invite_id: (required)
+        :param str organization_name: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(OrganizationUserInviteList, status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['invite_id', 'organization_name']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method organization_invites_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'invite_id' is set
+        if self.api_client.client_side_validation and ('invite_id' not in local_var_params or  # noqa: E501
+                                                        local_var_params['invite_id'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `invite_id` when calling `organization_invites_get`")  # noqa: E501
+        # verify the required parameter 'organization_name' is set
+        if self.api_client.client_side_validation and ('organization_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['organization_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `organization_name` when calling `organization_invites_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'invite_id' in local_var_params:
+            path_params['invite_id'] = local_var_params['invite_id']  # noqa: E501
+        if 'organization_name' in local_var_params:
+            path_params['organization_name'] = local_var_params['organization_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/organizations/{organization_name}/invites/{invite_id}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='OrganizationUserInviteList',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def organization_invites_list(self, organization_name, **kwargs):  # noqa: E501
+        """List the users invited to an organization  # noqa: E501
+
+         ### Description  List pending user invitations for an organization. The user making the request must be admin of the organization.  ### Response Structure  List of details of invited users  - `id`: Unique identifier for the user invitation (UUID)    - `email`: Email of the invited user    - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not    - `invitation_creation_time`: Date when the user is invited to the organization    #### Response Examples ``` [   {     \"id\": \"42879106-fb95-42d5-931a-8b94c85ba41e\",     \"email\": \"user@example.com\",     \"admin\": true,     \"invitation_creation_time\": \"2020-04-15 12:04:34.213309+02\"   },   {     \"id\": \"90f09c91-789b-4dda-a0c2-18954ac49fcf\",     \"email\": \"user@example.com\",     \"admin\": false     \"invitation_creation_time\": \"2020-04-15 12:04:34.213309+02\"   } ] ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organization_invites_list(organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str organization_name: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: list[OrganizationUserInviteList]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.organization_invites_list_with_http_info(organization_name, **kwargs)  # noqa: E501
+
+    def organization_invites_list_with_http_info(self, organization_name, **kwargs):  # noqa: E501
+        """List the users invited to an organization  # noqa: E501
+
+         ### Description  List pending user invitations for an organization. The user making the request must be admin of the organization.  ### Response Structure  List of details of invited users  - `id`: Unique identifier for the user invitation (UUID)    - `email`: Email of the invited user    - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not    - `invitation_creation_time`: Date when the user is invited to the organization    #### Response Examples ``` [   {     \"id\": \"42879106-fb95-42d5-931a-8b94c85ba41e\",     \"email\": \"user@example.com\",     \"admin\": true,     \"invitation_creation_time\": \"2020-04-15 12:04:34.213309+02\"   },   {     \"id\": \"90f09c91-789b-4dda-a0c2-18954ac49fcf\",     \"email\": \"user@example.com\",     \"admin\": false     \"invitation_creation_time\": \"2020-04-15 12:04:34.213309+02\"   } ] ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organization_invites_list_with_http_info(organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str organization_name: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(list[OrganizationUserInviteList], status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['organization_name']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method organization_invites_list" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'organization_name' is set
+        if self.api_client.client_side_validation and ('organization_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['organization_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `organization_name` when calling `organization_invites_list`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'organization_name' in local_var_params:
+            path_params['organization_name'] = local_var_params['organization_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/organizations/{organization_name}/invites', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[OrganizationUserInviteList]',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def organization_users_create(self, organization_name, data, **kwargs):  # noqa: E501
         """Add a user to an organization  # noqa: E501
 
-         ### Description Add a user to an organization as admin or normal user. The user making the request must be admin of the organization.  ### Required Parameters - `email`: Email of the user   - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not    #### Request Examples  ``` {   \"user_id\": \"test@example.com\",   \"admin\": false } ```  ### Response Structure  Details of the added user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples  ``` {   \"id\": \"332d7432-2742-4177-99a9-139e91e0110c\",   \"email\": \"test@example.com\",   \"name\": \"user\",   \"surname\": \"name\",   \"admin\": false } ```   # noqa: E501
+         ### Description Add a user to an organization as admin or normal user. The user making the request must be admin of the organization. The user can later be assigned roles in the projects defined in the scope the organization, such as project-admin, project-viewer etc.  ### Required Parameters - `email`: Email of the user   - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not    #### Request Examples  ``` {   \"email\": \"test@example.com\",   \"admin\": false } ```  ### Response Structure  Details of the added user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples  ``` {   \"id\": \"332d7432-2742-4177-99a9-139e91e0110c\",   \"email\": \"test@example.com\",   \"name\": \"user\",   \"surname\": \"name\",   \"admin\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organization_users_create(organization_name, data, async_req=True)
@@ -5027,7 +5363,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: OrganizationUserList
+        :return: OrganizationUserDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -5037,7 +5373,7 @@ class CoreApi(object):
     def organization_users_create_with_http_info(self, organization_name, data, **kwargs):  # noqa: E501
         """Add a user to an organization  # noqa: E501
 
-         ### Description Add a user to an organization as admin or normal user. The user making the request must be admin of the organization.  ### Required Parameters - `email`: Email of the user   - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not    #### Request Examples  ``` {   \"user_id\": \"test@example.com\",   \"admin\": false } ```  ### Response Structure  Details of the added user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples  ``` {   \"id\": \"332d7432-2742-4177-99a9-139e91e0110c\",   \"email\": \"test@example.com\",   \"name\": \"user\",   \"surname\": \"name\",   \"admin\": false } ```   # noqa: E501
+         ### Description Add a user to an organization as admin or normal user. The user making the request must be admin of the organization. The user can later be assigned roles in the projects defined in the scope the organization, such as project-admin, project-viewer etc.  ### Required Parameters - `email`: Email of the user   - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not    #### Request Examples  ``` {   \"email\": \"test@example.com\",   \"admin\": false } ```  ### Response Structure  Details of the added user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples  ``` {   \"id\": \"332d7432-2742-4177-99a9-139e91e0110c\",   \"email\": \"test@example.com\",   \"name\": \"user\",   \"surname\": \"name\",   \"admin\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organization_users_create_with_http_info(organization_name, data, async_req=True)
@@ -5055,7 +5391,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(OrganizationUserList, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(OrganizationUserDetail, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -5120,7 +5456,7 @@ class CoreApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='OrganizationUserList',  # noqa: E501
+            response_type='OrganizationUserDetail',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -5131,7 +5467,7 @@ class CoreApi(object):
     def organization_users_delete(self, organization_name, user_id, **kwargs):  # noqa: E501
         """Delete a user from an organization  # noqa: E501
 
-         ### Description  Delete a user from an organization. The user making the request must be admin of the organization. Deleting the last admin from an organization is not possible. **When a user is deleted from an organization, all his permissions from all projects are also deleted.**   # noqa: E501
+         ### Description  Delete a user from an organization. The user making the request must be admin of the organization. It is not possible to delete the last admin of an organization.  **When a user is deleted from an organization, all his roles from all projects defined in the scope of the organization are also deleted.**   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organization_users_delete(organization_name, user_id, async_req=True)
@@ -5157,7 +5493,7 @@ class CoreApi(object):
     def organization_users_delete_with_http_info(self, organization_name, user_id, **kwargs):  # noqa: E501
         """Delete a user from an organization  # noqa: E501
 
-         ### Description  Delete a user from an organization. The user making the request must be admin of the organization. Deleting the last admin from an organization is not possible. **When a user is deleted from an organization, all his permissions from all projects are also deleted.**   # noqa: E501
+         ### Description  Delete a user from an organization. The user making the request must be admin of the organization. It is not possible to delete the last admin of an organization.  **When a user is deleted from an organization, all his roles from all projects defined in the scope of the organization are also deleted.**   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organization_users_delete_with_http_info(organization_name, user_id, async_req=True)
@@ -5243,7 +5579,7 @@ class CoreApi(object):
     def organization_users_get(self, organization_name, user_id, **kwargs):  # noqa: E501
         """Get details of a user in an organization  # noqa: E501
 
-         ### Description  Get the details of a user in an organization. The user making the request must be admin of the organization.  ### Response Structure  Details of the added user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples  ``` {   \"id\": \"332d7432-2742-4177-99a9-139e91e0110c\",   \"email\": \"test@example.com\",   \"name\": \"user\",   \"surname\": \"name\",   \"admin\": false } ```   # noqa: E501
+         ### Description  Get the details of a user in an organization. The user making the request must be admin of the organization.  ### Response Structure  Details of the user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples  ``` {   \"id\": \"332d7432-2742-4177-99a9-139e91e0110c\",   \"email\": \"test@example.com\",   \"name\": \"user\",   \"surname\": \"name\",   \"admin\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organization_users_get(organization_name, user_id, async_req=True)
@@ -5269,7 +5605,7 @@ class CoreApi(object):
     def organization_users_get_with_http_info(self, organization_name, user_id, **kwargs):  # noqa: E501
         """Get details of a user in an organization  # noqa: E501
 
-         ### Description  Get the details of a user in an organization. The user making the request must be admin of the organization.  ### Response Structure  Details of the added user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples  ``` {   \"id\": \"332d7432-2742-4177-99a9-139e91e0110c\",   \"email\": \"test@example.com\",   \"name\": \"user\",   \"surname\": \"name\",   \"admin\": false } ```   # noqa: E501
+         ### Description  Get the details of a user in an organization. The user making the request must be admin of the organization.  ### Response Structure  Details of the user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples  ``` {   \"id\": \"332d7432-2742-4177-99a9-139e91e0110c\",   \"email\": \"test@example.com\",   \"name\": \"user\",   \"surname\": \"name\",   \"admin\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organization_users_get_with_http_info(organization_name, user_id, async_req=True)
@@ -5359,7 +5695,7 @@ class CoreApi(object):
     def organization_users_list(self, organization_name, **kwargs):  # noqa: E501
         """List the users in an organization  # noqa: E501
 
-         ### Description  List all users and their details in an organization.  ### Required Parameters  - None  ### Response Structure  List of details of users  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples ``` [   {     \"id\": \"54977bc3-2c3b-4d8f-97c7-aff89a95bf21\",     \"email\": \"user@example.com\",     \"name\": \"user\",     \"surname\": \"name\",     \"admin\": true   },   {     \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",     \"email\": \"user2@example.com\",     \"name\": \"user\",     \"surname\": \"name\",     \"admin\": false   } ] ```   # noqa: E501
+         ### Description  List users and their details in an organization. The user making the request must be admin of the organization.  ### Response Structure  List of details of users  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples ``` [   {     \"id\": \"54977bc3-2c3b-4d8f-97c7-aff89a95bf21\",     \"email\": \"user@example.com\",     \"name\": \"user\",     \"surname\": \"name\",     \"admin\": true   },   {     \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",     \"email\": \"user2@example.com\",     \"name\": \"user\",     \"surname\": \"name\",     \"admin\": false   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organization_users_list(organization_name, async_req=True)
@@ -5374,7 +5710,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: list[OrganizationUserList]
+        :return: list[OrganizationUserDetail]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -5384,7 +5720,7 @@ class CoreApi(object):
     def organization_users_list_with_http_info(self, organization_name, **kwargs):  # noqa: E501
         """List the users in an organization  # noqa: E501
 
-         ### Description  List all users and their details in an organization.  ### Required Parameters  - None  ### Response Structure  List of details of users  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples ``` [   {     \"id\": \"54977bc3-2c3b-4d8f-97c7-aff89a95bf21\",     \"email\": \"user@example.com\",     \"name\": \"user\",     \"surname\": \"name\",     \"admin\": true   },   {     \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",     \"email\": \"user2@example.com\",     \"name\": \"user\",     \"surname\": \"name\",     \"admin\": false   } ] ```   # noqa: E501
+         ### Description  List users and their details in an organization. The user making the request must be admin of the organization.  ### Response Structure  List of details of users  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples ``` [   {     \"id\": \"54977bc3-2c3b-4d8f-97c7-aff89a95bf21\",     \"email\": \"user@example.com\",     \"name\": \"user\",     \"surname\": \"name\",     \"admin\": true   },   {     \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",     \"email\": \"user2@example.com\",     \"name\": \"user\",     \"surname\": \"name\",     \"admin\": false   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organization_users_list_with_http_info(organization_name, async_req=True)
@@ -5401,7 +5737,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(list[OrganizationUserList], status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(list[OrganizationUserDetail], status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -5456,7 +5792,7 @@ class CoreApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='list[OrganizationUserList]',  # noqa: E501
+            response_type='list[OrganizationUserDetail]',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -5467,7 +5803,7 @@ class CoreApi(object):
     def organization_users_update(self, organization_name, user_id, data, **kwargs):  # noqa: E501
         """Update details of a user in an organization  # noqa: E501
 
-         ### Description  Update the admin status of a user in an organization. The user making the request must be admin of the organization. Changing the last admin from an organization to a regular user is not possible.  ### Required Parameters - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not    #### Request Examples  ``` {   \"admin\": true } ```  ### Response Structure  Details of the added user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples  ``` {   \"id\": \"332d7432-2742-4177-99a9-139e91e0110c\",   \"email\": \"test@example.com\",   \"name\": \"user\",   \"surname\": \"name\",   \"admin\": true } ```   # noqa: E501
+         ### Description  Update the admin status of a user in an organization. The user making the request must be admin of the organization. It is not possible to change the last admin of an organization to a regular user.  ### Required Parameters - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not    #### Request Examples  ``` {   \"admin\": true } ```  ### Response Structure Details of the user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples  ``` {   \"id\": \"332d7432-2742-4177-99a9-139e91e0110c\",   \"email\": \"test@example.com\",   \"name\": \"user\",   \"surname\": \"name\",   \"admin\": true } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organization_users_update(organization_name, user_id, data, async_req=True)
@@ -5494,7 +5830,7 @@ class CoreApi(object):
     def organization_users_update_with_http_info(self, organization_name, user_id, data, **kwargs):  # noqa: E501
         """Update details of a user in an organization  # noqa: E501
 
-         ### Description  Update the admin status of a user in an organization. The user making the request must be admin of the organization. Changing the last admin from an organization to a regular user is not possible.  ### Required Parameters - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not    #### Request Examples  ``` {   \"admin\": true } ```  ### Response Structure  Details of the added user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples  ``` {   \"id\": \"332d7432-2742-4177-99a9-139e91e0110c\",   \"email\": \"test@example.com\",   \"name\": \"user\",   \"surname\": \"name\",   \"admin\": true } ```   # noqa: E501
+         ### Description  Update the admin status of a user in an organization. The user making the request must be admin of the organization. It is not possible to change the last admin of an organization to a regular user.  ### Required Parameters - `admin`: Boolean value indicating whether the user is added as an admin of the organization or not    #### Request Examples  ``` {   \"admin\": true } ```  ### Response Structure Details of the user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `admin`: Boolean value indicating whether the user is an admin of the organization or not    #### Response Examples  ``` {   \"id\": \"332d7432-2742-4177-99a9-139e91e0110c\",   \"email\": \"test@example.com\",   \"name\": \"user\",   \"surname\": \"name\",   \"admin\": true } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organization_users_update_with_http_info(organization_name, user_id, data, async_req=True)
@@ -5595,7 +5931,7 @@ class CoreApi(object):
     def organizations_create(self, data, **kwargs):  # noqa: E501
         """Create organizations  # noqa: E501
 
-         ### Description  Create a new organization with the provided name. Any authenticated user can create a new organization and this user will automatically become organization admin. Upon creating an organization, a `subscription` needs to be given. A license for this subscription should be purchased via dutchanalytics.com.  A 'free_trial' subscription grants permission to one user and allows for a maximum of 2 projects to be created. A 'starter' subscription grants permission to 5 users and allows for a maximum of 10 projects to be created. A 'professional' subscription grants permission to an unlimited number of users and allows unlimited projects.  ### Required Parameters   - `name`: Name of the organization. The name is globally unique. It can only consist of lowercase letters, numbers and dashes (-), and must start with a lowercase letter.    - `subscription`: Name of the subscription: 'free_trial', 'starter' or 'professional'.   #### Request Examples  ``` {   \"name\": \"test-organization\",   \"subscription\": \"professional\" } ```  ### Response Structure  Details of the created organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Date and time the organization was created    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\" } ```   # noqa: E501
+         ### Description  Create a new organization with the provided name. Any authenticated user can create a new organization and this user will automatically become organization admin. Upon creating an organization, a **subscription** needs to be given. A license for this subscription should be purchased via dutchanalytics.com.  - A **free_trial** subscription grants permission to one user and allows for a maximum of 2 projects to be created.  - A **starter** subscription grants permission to 5 users and allows for a maximum of 10 projects to be created.  - A **professional** subscription grants permission to an unlimited number of users and allows unlimited projects.  It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to create an organization.  ### Required Parameters   - `name`: Name of the organization. The name is globally unique. It can only consist of lowercase letters, numbers and dashes (-), and must start with a lowercase letter.    - `subscription`: Name of the subscription: 'free_trial', 'starter' or 'professional'.  - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted   #### Request Examples  ``` {   \"name\": \"test-organization\",   \"subscription\": \"professional\",   \"subscription_agreed\": true } ```  ### Response Structure  Details of the created organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Date and time the organization was created    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_create(data, async_req=True)
@@ -5620,7 +5956,7 @@ class CoreApi(object):
     def organizations_create_with_http_info(self, data, **kwargs):  # noqa: E501
         """Create organizations  # noqa: E501
 
-         ### Description  Create a new organization with the provided name. Any authenticated user can create a new organization and this user will automatically become organization admin. Upon creating an organization, a `subscription` needs to be given. A license for this subscription should be purchased via dutchanalytics.com.  A 'free_trial' subscription grants permission to one user and allows for a maximum of 2 projects to be created. A 'starter' subscription grants permission to 5 users and allows for a maximum of 10 projects to be created. A 'professional' subscription grants permission to an unlimited number of users and allows unlimited projects.  ### Required Parameters   - `name`: Name of the organization. The name is globally unique. It can only consist of lowercase letters, numbers and dashes (-), and must start with a lowercase letter.    - `subscription`: Name of the subscription: 'free_trial', 'starter' or 'professional'.   #### Request Examples  ``` {   \"name\": \"test-organization\",   \"subscription\": \"professional\" } ```  ### Response Structure  Details of the created organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Date and time the organization was created    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\" } ```   # noqa: E501
+         ### Description  Create a new organization with the provided name. Any authenticated user can create a new organization and this user will automatically become organization admin. Upon creating an organization, a **subscription** needs to be given. A license for this subscription should be purchased via dutchanalytics.com.  - A **free_trial** subscription grants permission to one user and allows for a maximum of 2 projects to be created.  - A **starter** subscription grants permission to 5 users and allows for a maximum of 10 projects to be created.  - A **professional** subscription grants permission to an unlimited number of users and allows unlimited projects.  It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to create an organization.  ### Required Parameters   - `name`: Name of the organization. The name is globally unique. It can only consist of lowercase letters, numbers and dashes (-), and must start with a lowercase letter.    - `subscription`: Name of the subscription: 'free_trial', 'starter' or 'professional'.  - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted   #### Request Examples  ``` {   \"name\": \"test-organization\",   \"subscription\": \"professional\",   \"subscription_agreed\": true } ```  ### Response Structure  Details of the created organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Date and time the organization was created    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_create_with_http_info(data, async_req=True)
@@ -5811,7 +6147,7 @@ class CoreApi(object):
     def organizations_get(self, organization_name, **kwargs):  # noqa: E501
         """Get details of an organization  # noqa: E501
 
-         ### Description  Get the details of an organization. The user making the request must be admin of the organization.  ### Response Structure  Details of a organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Time the organization was created    - `subscription`: Type of subscription    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\" } ```   # noqa: E501
+         ### Description  Get the details of an organization. The user making the request must be admin of the organization.  ### Response Structure  Details of a organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Time the organization was created    - `subscription`: Type of subscription    - `subscription_agreement_date`: Time the subscription agreement was accepted    - `subscription_agreement_user`: User who accepted the subscription agreement    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\",   \"subscription_agreement_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription_agreement_user\": \"test-user@test.com\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_get(organization_name, async_req=True)
@@ -5836,7 +6172,7 @@ class CoreApi(object):
     def organizations_get_with_http_info(self, organization_name, **kwargs):  # noqa: E501
         """Get details of an organization  # noqa: E501
 
-         ### Description  Get the details of an organization. The user making the request must be admin of the organization.  ### Response Structure  Details of a organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Time the organization was created    - `subscription`: Type of subscription    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\" } ```   # noqa: E501
+         ### Description  Get the details of an organization. The user making the request must be admin of the organization.  ### Response Structure  Details of a organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Time the organization was created    - `subscription`: Type of subscription    - `subscription_agreement_date`: Time the subscription agreement was accepted    - `subscription_agreement_user`: User who accepted the subscription agreement    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\",   \"subscription_agreement_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription_agreement_user\": \"test-user@test.com\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_get_with_http_info(organization_name, async_req=True)
@@ -6019,7 +6355,7 @@ class CoreApi(object):
     def organizations_update(self, organization_name, data, **kwargs):  # noqa: E501
         """Update details of an organization  # noqa: E501
 
-         ### Description  Update an organization. The user making the request must have appropriate permissions. It is only possible to update the subscription. To upgrade your subscription, contact dutchanalytics.com.  ### Optional Parameters   - `subscription`: New subscription  #### Request Examples ``` {   \"subscription\": \"professional\" } ```  ### Response Structure  Details of a organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Time the organization was created    - `subscription`: Type of subscription    #### Response Examples ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\" } ```   # noqa: E501
+         ### Description  Update an organization. The user making the request must have appropriate permissions.  It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to upgrade the subscription of an organization.  ### Optional Parameters   - `subscription`: New subscription  - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted upon upgrading the subscriptions  #### Request Examples ``` {   \"subscription\": \"professional\",   \"subscription_agreed\": true } ```  ### Response Structure  Details of a organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Time the organization was created    - `subscription`: Type of subscription    - `subscription_agreement_date`: Time the subscription agreement was accepted    - `subscription_agreement_user`: User who accepted the subscription agreement    #### Response Examples ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\",   \"subscription_agreement_date\": \"2020-04-25T12:26:18.976481Z\",   \"subscription_agreement_user\": \"test-user-2@test.com\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_update(organization_name, data, async_req=True)
@@ -6045,7 +6381,7 @@ class CoreApi(object):
     def organizations_update_with_http_info(self, organization_name, data, **kwargs):  # noqa: E501
         """Update details of an organization  # noqa: E501
 
-         ### Description  Update an organization. The user making the request must have appropriate permissions. It is only possible to update the subscription. To upgrade your subscription, contact dutchanalytics.com.  ### Optional Parameters   - `subscription`: New subscription  #### Request Examples ``` {   \"subscription\": \"professional\" } ```  ### Response Structure  Details of a organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Time the organization was created    - `subscription`: Type of subscription    #### Response Examples ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\" } ```   # noqa: E501
+         ### Description  Update an organization. The user making the request must have appropriate permissions.  It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to upgrade the subscription of an organization.  ### Optional Parameters   - `subscription`: New subscription  - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted upon upgrading the subscriptions  #### Request Examples ``` {   \"subscription\": \"professional\",   \"subscription_agreed\": true } ```  ### Response Structure  Details of a organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Time the organization was created    - `subscription`: Type of subscription    - `subscription_agreement_date`: Time the subscription agreement was accepted    - `subscription_agreement_user`: User who accepted the subscription agreement    #### Response Examples ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\",   \"subscription_agreement_date\": \"2020-04-25T12:26:18.976481Z\",   \"subscription_agreement_user\": \"test-user-2@test.com\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_update_with_http_info(organization_name, data, async_req=True)
@@ -9847,7 +10183,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: list[object]
+        :return: list[Logs]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -9875,7 +10211,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(list[object], status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(list[Logs], status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -9940,7 +10276,7 @@ class CoreApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='list[object]',  # noqa: E501
+            response_type='list[Logs]',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -9948,17 +10284,17 @@ class CoreApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def request_reset_password(self, data, **kwargs):  # noqa: E501
-        """Request a password reset  # noqa: E501
+    def projects_user_list(self, project_name, **kwargs):  # noqa: E501
+        """List the users in the organization of a project  # noqa: E501
 
-         ### Description  Request a reset of password via e-mail. The token is valid for 60 minutes.  ### Required Parameters - `email`: Email of the user. This is a unique field.    #### Request Examples  ``` {   \"email\": \"teste@example.com\", } ```  ### Response Structure  Details of the request  - `success`: Boolean value indicating success/failure    #### Response Examples  ``` {   \"success\": True } ```   # noqa: E501
+         ### Description  List users in an organization. The reason that this method is available is that users with **roles.create** permission should be able to get the ids of the users to be able to assign roles to them. Therefore, only users who have roles.create permission are allowed to make this request.  ### Response Structure  List of details of users  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    #### Response Examples ``` [   {     \"id\": \"54977bc3-2c3b-4d8f-97c7-aff89a95bf21\",     \"email\": \"user@example.com\",     \"name\": \"user\",     \"surname\": \"name\"   },   {     \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",     \"email\": \"user2@example.com\",     \"name\": \"user\",     \"surname\": \"name\"   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.request_reset_password(data, async_req=True)
+        >>> thread = api.projects_user_list(project_name, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param UserRequestPassword data: (required)
+        :param str project_name: (required)
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -9966,24 +10302,24 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: Success
+        :return: list[OrganizationUserList]
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        return self.request_reset_password_with_http_info(data, **kwargs)  # noqa: E501
+        return self.projects_user_list_with_http_info(project_name, **kwargs)  # noqa: E501
 
-    def request_reset_password_with_http_info(self, data, **kwargs):  # noqa: E501
-        """Request a password reset  # noqa: E501
+    def projects_user_list_with_http_info(self, project_name, **kwargs):  # noqa: E501
+        """List the users in the organization of a project  # noqa: E501
 
-         ### Description  Request a reset of password via e-mail. The token is valid for 60 minutes.  ### Required Parameters - `email`: Email of the user. This is a unique field.    #### Request Examples  ``` {   \"email\": \"teste@example.com\", } ```  ### Response Structure  Details of the request  - `success`: Boolean value indicating success/failure    #### Response Examples  ``` {   \"success\": True } ```   # noqa: E501
+         ### Description  List users in an organization. The reason that this method is available is that users with **roles.create** permission should be able to get the ids of the users to be able to assign roles to them. Therefore, only users who have roles.create permission are allowed to make this request.  ### Response Structure  List of details of users  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    #### Response Examples ``` [   {     \"id\": \"54977bc3-2c3b-4d8f-97c7-aff89a95bf21\",     \"email\": \"user@example.com\",     \"name\": \"user\",     \"surname\": \"name\"   },   {     \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",     \"email\": \"user2@example.com\",     \"name\": \"user\",     \"surname\": \"name\"   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.request_reset_password_with_http_info(data, async_req=True)
+        >>> thread = api.projects_user_list_with_http_info(project_name, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param UserRequestPassword data: (required)
+        :param str project_name: (required)
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -9993,14 +10329,14 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(Success, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(list[OrganizationUserList], status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
         local_var_params = locals()
 
-        all_params = ['data']  # noqa: E501
+        all_params = ['project_name']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -10010,18 +10346,20 @@ class CoreApi(object):
             if key not in all_params:
                 raise ApiTypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method request_reset_password" % key
+                    " to method projects_user_list" % key
                 )
             local_var_params[key] = val
         del local_var_params['kwargs']
-        # verify the required parameter 'data' is set
-        if self.api_client.client_side_validation and ('data' not in local_var_params or  # noqa: E501
-                                                        local_var_params['data'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `data` when calling `request_reset_password`")  # noqa: E501
+        # verify the required parameter 'project_name' is set
+        if self.api_client.client_side_validation and ('project_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['project_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `project_name` when calling `projects_user_list`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
+        if 'project_name' in local_var_params:
+            path_params['project_name'] = local_var_params['project_name']  # noqa: E501
 
         query_params = []
 
@@ -10031,148 +10369,22 @@ class CoreApi(object):
         local_var_files = {}
 
         body_params = None
-        if 'data' in local_var_params:
-            body_params = local_var_params['data']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json'])  # noqa: E501
 
         # Authentication setting
         auth_settings = ['api_key']  # noqa: E501
 
         return self.api_client.call_api(
-            '/user/reset-password', 'POST',
+            '/projects/{project_name}/users', 'GET',
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='Success',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def reset_password(self, token, data, **kwargs):  # noqa: E501
-        """Create a new password after resetting  # noqa: E501
-
-         ### Description  Create a new password after validation of the token that was send in the e-mail  ### Required Parameters - `new_password`: The new password    #### Request Examples  ``` {   \"new_password\": \"new_secure_password\", } ```  ### Response Structure  Details of the request  - `success`: Boolean value indicating success/failure    #### Response Examples  Success response ``` {   \"success\": True } ```  Invalid token response ``` {   \"error\": \"Invalid token\" } ```   # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.reset_password(token, data, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str token: (required)
-        :param UserCreatePassword data: (required)
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: Success
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.reset_password_with_http_info(token, data, **kwargs)  # noqa: E501
-
-    def reset_password_with_http_info(self, token, data, **kwargs):  # noqa: E501
-        """Create a new password after resetting  # noqa: E501
-
-         ### Description  Create a new password after validation of the token that was send in the e-mail  ### Required Parameters - `new_password`: The new password    #### Request Examples  ``` {   \"new_password\": \"new_secure_password\", } ```  ### Response Structure  Details of the request  - `success`: Boolean value indicating success/failure    #### Response Examples  Success response ``` {   \"success\": True } ```  Invalid token response ``` {   \"error\": \"Invalid token\" } ```   # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.reset_password_with_http_info(token, data, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str token: (required)
-        :param UserCreatePassword data: (required)
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(Success, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = ['token', 'data']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method reset_password" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'token' is set
-        if self.api_client.client_side_validation and ('token' not in local_var_params or  # noqa: E501
-                                                        local_var_params['token'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `token` when calling `reset_password`")  # noqa: E501
-        # verify the required parameter 'data' is set
-        if self.api_client.client_side_validation and ('data' not in local_var_params or  # noqa: E501
-                                                        local_var_params['data'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `data` when calling `reset_password`")  # noqa: E501
-
-        collection_formats = {}
-
-        path_params = {}
-        if 'token' in local_var_params:
-            path_params['token'] = local_var_params['token']  # noqa: E501
-
-        query_params = []
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        if 'data' in local_var_params:
-            body_params = local_var_params['data']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['api_key']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/user/reset-password/{token}', 'POST',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='Success',  # noqa: E501
+            response_type='list[OrganizationUserList]',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -10183,7 +10395,7 @@ class CoreApi(object):
     def role_assignments_create(self, project_name, data, **kwargs):  # noqa: E501
         """Assign a role to a user in a project  # noqa: E501
 
-         ### Description  Assign a role to a user in the scope of a project. This role can be assigned on either project level or on object level, which can be a model, credentials, connector or pipeline. The user making the request must have appropriate permissions.  ### Required Parameters   - `user_id`: Unique identifier for the user (UUID)    - `role`: Name of the role to be assigned to the user    ### Optional Parameters  - `object_name`: Name of the object for which the role will be assigned    - `object_type`: Type of the object for which the role will be assigned. It can be project, model, credentials, connector or pipeline.  **object_name and object_type must be provided together. If neither of them is provided, the role is set on project level.**  #### Request Examples Setting the role model-admin on project level for user with id 02b77d8f-b312-47ef-990f-4685a7ab9363 ``` {   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role_name\": \"model-admin\" } ```  Setting the role model-viewer on model-1 for user with id 02b77d8f-b312-47ef-990f-4685a7ab9363 ``` {   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role_name\": \"model-viewer\",   \"object_name\": \"model-1\",   \"object_type\": \"model\" } ```  ### Response Structure  Details of the created role assignment  - `id`: Unique identifier for the role assignment (UUID)    - `user_id`: Unique identifier for the user (UUID)    - `role`: Name of the role assigned to the user    - `object_name`: Name of the object for which the role is assigned    - `object_type`: Type of the object for which the role is assigned. It can be project, model, credentials, connector or pipeline.   #### Response Examples ``` {   \"id\": \"e988ddc0-3ef1-42d2-ab30-9f810a5e7063\",   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role_name\": \"model-admin\",   \"object_name\": \"project-1\",   \"object_type\": \"project\" } ```  ``` {   \"id\": \"e988ddc0-3ef1-42d2-ab30-9f810a5e7063\",   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role_name\": \"model-viewer\",   \"object_name\": \"model-1\",   \"object_type\": \"model\" } ```   # noqa: E501
+         ### Description  Assign a role to a user in the scope of a project. This role can be assigned on either project level or on object level, which can be a model, credentials, connector or pipeline. The user making the request must have appropriate permissions.  ### Required Parameters   - `user_id`: Unique identifier for the user (UUID)    - `role`: Name of the role to be assigned to the user    ### Optional Parameters  - `object_name`: Name of the object for which the role will be assigned    - `object_type`: Type of the object for which the role will be assigned. It can be project, model, credentials, connector or pipeline.  **object_name and object_type must be provided together. If neither of them is provided, the role is set on project level.**  #### Request Examples Setting the role model-admin on project level for user with id 02b77d8f-b312-47ef-990f-4685a7ab9363 ``` {   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role\": \"model-admin\" } ```  Setting the role model-viewer on model-1 for user with id 02b77d8f-b312-47ef-990f-4685a7ab9363 ``` {   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role\": \"model-viewer\",   \"object_name\": \"model-1\",   \"object_type\": \"model\" } ```  ### Response Structure  Details of the created role assignment  - `id`: Unique identifier for the role assignment (UUID)    - `user_id`: Unique identifier for the user (UUID)    - `role`: Name of the role assigned to the user    - `object_name`: Name of the object for which the role is assigned    - `object_type`: Type of the object for which the role is assigned. It can be project, model, credentials, connector or pipeline.   #### Response Examples ``` {   \"id\": \"e988ddc0-3ef1-42d2-ab30-9f810a5e7063\",   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role\": \"model-admin\",   \"object_name\": \"project-1\",   \"object_type\": \"project\" } ```  ``` {   \"id\": \"e988ddc0-3ef1-42d2-ab30-9f810a5e7063\",   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role\": \"model-viewer\",   \"object_name\": \"model-1\",   \"object_type\": \"model\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.role_assignments_create(project_name, data, async_req=True)
@@ -10209,7 +10421,7 @@ class CoreApi(object):
     def role_assignments_create_with_http_info(self, project_name, data, **kwargs):  # noqa: E501
         """Assign a role to a user in a project  # noqa: E501
 
-         ### Description  Assign a role to a user in the scope of a project. This role can be assigned on either project level or on object level, which can be a model, credentials, connector or pipeline. The user making the request must have appropriate permissions.  ### Required Parameters   - `user_id`: Unique identifier for the user (UUID)    - `role`: Name of the role to be assigned to the user    ### Optional Parameters  - `object_name`: Name of the object for which the role will be assigned    - `object_type`: Type of the object for which the role will be assigned. It can be project, model, credentials, connector or pipeline.  **object_name and object_type must be provided together. If neither of them is provided, the role is set on project level.**  #### Request Examples Setting the role model-admin on project level for user with id 02b77d8f-b312-47ef-990f-4685a7ab9363 ``` {   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role_name\": \"model-admin\" } ```  Setting the role model-viewer on model-1 for user with id 02b77d8f-b312-47ef-990f-4685a7ab9363 ``` {   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role_name\": \"model-viewer\",   \"object_name\": \"model-1\",   \"object_type\": \"model\" } ```  ### Response Structure  Details of the created role assignment  - `id`: Unique identifier for the role assignment (UUID)    - `user_id`: Unique identifier for the user (UUID)    - `role`: Name of the role assigned to the user    - `object_name`: Name of the object for which the role is assigned    - `object_type`: Type of the object for which the role is assigned. It can be project, model, credentials, connector or pipeline.   #### Response Examples ``` {   \"id\": \"e988ddc0-3ef1-42d2-ab30-9f810a5e7063\",   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role_name\": \"model-admin\",   \"object_name\": \"project-1\",   \"object_type\": \"project\" } ```  ``` {   \"id\": \"e988ddc0-3ef1-42d2-ab30-9f810a5e7063\",   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role_name\": \"model-viewer\",   \"object_name\": \"model-1\",   \"object_type\": \"model\" } ```   # noqa: E501
+         ### Description  Assign a role to a user in the scope of a project. This role can be assigned on either project level or on object level, which can be a model, credentials, connector or pipeline. The user making the request must have appropriate permissions.  ### Required Parameters   - `user_id`: Unique identifier for the user (UUID)    - `role`: Name of the role to be assigned to the user    ### Optional Parameters  - `object_name`: Name of the object for which the role will be assigned    - `object_type`: Type of the object for which the role will be assigned. It can be project, model, credentials, connector or pipeline.  **object_name and object_type must be provided together. If neither of them is provided, the role is set on project level.**  #### Request Examples Setting the role model-admin on project level for user with id 02b77d8f-b312-47ef-990f-4685a7ab9363 ``` {   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role\": \"model-admin\" } ```  Setting the role model-viewer on model-1 for user with id 02b77d8f-b312-47ef-990f-4685a7ab9363 ``` {   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role\": \"model-viewer\",   \"object_name\": \"model-1\",   \"object_type\": \"model\" } ```  ### Response Structure  Details of the created role assignment  - `id`: Unique identifier for the role assignment (UUID)    - `user_id`: Unique identifier for the user (UUID)    - `role`: Name of the role assigned to the user    - `object_name`: Name of the object for which the role is assigned    - `object_type`: Type of the object for which the role is assigned. It can be project, model, credentials, connector or pipeline.   #### Response Examples ``` {   \"id\": \"e988ddc0-3ef1-42d2-ab30-9f810a5e7063\",   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role\": \"model-admin\",   \"object_name\": \"project-1\",   \"object_type\": \"project\" } ```  ``` {   \"id\": \"e988ddc0-3ef1-42d2-ab30-9f810a5e7063\",   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role\": \"model-viewer\",   \"object_name\": \"model-1\",   \"object_type\": \"model\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.role_assignments_create_with_http_info(project_name, data, async_req=True)
@@ -10415,7 +10627,7 @@ class CoreApi(object):
     def role_assignments_get(self, project_name, id, **kwargs):  # noqa: E501
         """Get details of a role assignment  # noqa: E501
 
-         ### Description  Get the details of a role assignment of a user. The user making the request must have appropriate permissions.  ### Response Structure  Details of the role assignment  - `id`: Unique identifier for the role assignment (UUID)    - `user_id`: Unique identifier for the user (UUID)    - `role`: Name of the role assigned to the user    - `object_name`: Name of the object for which the role is assigned    - `object_type`: Type of the object for which the role is assigned. It can be project, model, credentials, connector or pipeline.  #### Response Examples  ``` {   \"id\": \"e988ddc0-3ef1-42d2-ab30-9f810a5e7063\",   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role_name\": \"model-viewer\",   \"object_name\": \"model-1\",   \"object_type\": \"model\" } ```   # noqa: E501
+         ### Description  Get the details of a role assignment of a user. The user making the request must have appropriate permissions.  ### Response Structure  Details of the role assignment  - `id`: Unique identifier for the role assignment (UUID)    - `user_id`: Unique identifier for the user (UUID)    - `role`: Name of the role assigned to the user    - `object_name`: Name of the object for which the role is assigned    - `object_type`: Type of the object for which the role is assigned. It can be project, model, credentials, connector or pipeline.  #### Response Examples  ``` {   \"id\": \"e988ddc0-3ef1-42d2-ab30-9f810a5e7063\",   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role\": \"model-viewer\",   \"object_name\": \"model-1\",   \"object_type\": \"model\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.role_assignments_get(project_name, id, async_req=True)
@@ -10441,7 +10653,7 @@ class CoreApi(object):
     def role_assignments_get_with_http_info(self, project_name, id, **kwargs):  # noqa: E501
         """Get details of a role assignment  # noqa: E501
 
-         ### Description  Get the details of a role assignment of a user. The user making the request must have appropriate permissions.  ### Response Structure  Details of the role assignment  - `id`: Unique identifier for the role assignment (UUID)    - `user_id`: Unique identifier for the user (UUID)    - `role`: Name of the role assigned to the user    - `object_name`: Name of the object for which the role is assigned    - `object_type`: Type of the object for which the role is assigned. It can be project, model, credentials, connector or pipeline.  #### Response Examples  ``` {   \"id\": \"e988ddc0-3ef1-42d2-ab30-9f810a5e7063\",   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role_name\": \"model-viewer\",   \"object_name\": \"model-1\",   \"object_type\": \"model\" } ```   # noqa: E501
+         ### Description  Get the details of a role assignment of a user. The user making the request must have appropriate permissions.  ### Response Structure  Details of the role assignment  - `id`: Unique identifier for the role assignment (UUID)    - `user_id`: Unique identifier for the user (UUID)    - `role`: Name of the role assigned to the user    - `object_name`: Name of the object for which the role is assigned    - `object_type`: Type of the object for which the role is assigned. It can be project, model, credentials, connector or pipeline.  #### Response Examples  ``` {   \"id\": \"e988ddc0-3ef1-42d2-ab30-9f810a5e7063\",   \"user_id\": \"02b77d8f-b312-47ef-990f-4685a7ab9363\",   \"role\": \"model-viewer\",   \"object_name\": \"model-1\",   \"object_type\": \"model\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.role_assignments_get_with_http_info(project_name, id, async_req=True)
@@ -11100,6 +11312,134 @@ class CoreApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def roles_update(self, project_name, role_name, data, **kwargs):  # noqa: E501
+        """Update a role in a project  # noqa: E501
+
+         ### Description  Update a role in a project. The user making the request must have appropriate permissions. **Default roles cannot be updated.**  ### Optional Parameters   - `name`: New name for the role. It can only consist of lowercase letters, numbers and dashes (-), and must start with a lowercase letter.    - `permissions`: A new list of permission names which the role will have. The previous permissions will be replaced with the given ones. The list of available permissions can be obtained with */permissions* endpoint.    #### Request Examples ``` {   \"name\": \"new-model-editor-role\" } ```  ``` {   \"permissions\": [     \"models.list\",     \"models.get\"   ] } ```  ### Response Structure  Details of the created role  - `name`: Name of the updated role    - `permissions`: A list of permission names which the role has  #### Response Examples ``` {   \"name\": \"new-model-editor-role\",   \"permissions\": [     \"models.list\",     \"models.get\"   ] } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.roles_update(project_name, role_name, data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param str role_name: (required)
+        :param RoleUpdate data: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: RoleDetailList
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.roles_update_with_http_info(project_name, role_name, data, **kwargs)  # noqa: E501
+
+    def roles_update_with_http_info(self, project_name, role_name, data, **kwargs):  # noqa: E501
+        """Update a role in a project  # noqa: E501
+
+         ### Description  Update a role in a project. The user making the request must have appropriate permissions. **Default roles cannot be updated.**  ### Optional Parameters   - `name`: New name for the role. It can only consist of lowercase letters, numbers and dashes (-), and must start with a lowercase letter.    - `permissions`: A new list of permission names which the role will have. The previous permissions will be replaced with the given ones. The list of available permissions can be obtained with */permissions* endpoint.    #### Request Examples ``` {   \"name\": \"new-model-editor-role\" } ```  ``` {   \"permissions\": [     \"models.list\",     \"models.get\"   ] } ```  ### Response Structure  Details of the created role  - `name`: Name of the updated role    - `permissions`: A list of permission names which the role has  #### Response Examples ``` {   \"name\": \"new-model-editor-role\",   \"permissions\": [     \"models.list\",     \"models.get\"   ] } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.roles_update_with_http_info(project_name, role_name, data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param str role_name: (required)
+        :param RoleUpdate data: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(RoleDetailList, status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['project_name', 'role_name', 'data']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method roles_update" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'project_name' is set
+        if self.api_client.client_side_validation and ('project_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['project_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `project_name` when calling `roles_update`")  # noqa: E501
+        # verify the required parameter 'role_name' is set
+        if self.api_client.client_side_validation and ('role_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['role_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `role_name` when calling `roles_update`")  # noqa: E501
+        # verify the required parameter 'data' is set
+        if self.api_client.client_side_validation and ('data' not in local_var_params or  # noqa: E501
+                                                        local_var_params['data'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `data` when calling `roles_update`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'project_name' in local_var_params:
+            path_params['project_name'] = local_var_params['project_name']  # noqa: E501
+        if 'role_name' in local_var_params:
+            path_params['role_name'] = local_var_params['role_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'data' in local_var_params:
+            body_params = local_var_params['data']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/projects/{project_name}/roles/{role_name}', 'PATCH',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='RoleDetailList',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def service_status(self, **kwargs):  # noqa: E501
         """Service status  # noqa: E501
 
@@ -11200,17 +11540,18 @@ class CoreApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def user_create(self, data, **kwargs):  # noqa: E501
-        """Create a new user  # noqa: E501
+    def service_users_create(self, project_name, data, **kwargs):  # noqa: E501
+        """Create a new service user  # noqa: E501
 
-         ### Description  Create a new user with the given details - email, password, name and surname.  ### Required Parameters - `email`: Email of the user. This is a unique field.   - `password`: Password of the user    ### Optional Parameters - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"name\": \"User name\",   \"surname\": \"User surname\" } ```  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\" } ```  ### Response Structure  Details of the created user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `registration_date`: Date when the user was registered  #### Response Examples  ``` {   \"id\": \"4740a13a-70ae-4b7a-a461-8231eb2c0594\",   \"email\": \"test@example.com\",   \"name\": \"User name\",   \"surname\": \"User surname\",   \"registration_date\": \"2020-01-10 10:06:25.632392+01\" } ```   # noqa: E501
+         ### Description  Create a new service user. A unique email is generated for the service user. Additionally, a token for this service user is generated. This token can be used to authorize requests sent to our API.   The token is **ONLY** returned on creation and will not be accessible afterwards.  ### Optional Parameters - `name`: Name of the service user    #### Request Examples  ``` {   \"name\": \"service-user-1\" } ```  ### Response Structure  Details of the created service user  - `id`: Unique identifier for the service user (UUID)    - `email`: Email of the service user     - `token`: The API token for the created service user     - `name`: Name of the service user    - `creation_date`: Date when the service user was created  #### Response Examples  ``` {   \"id\": \"13a9ba27-6888-4528-826e-8e1002eab13d\",   \"email\": \"13a9ba27-6888-4528-826e-8e1002eab13d.project1@serviceuser.xenia.dutchanalytics.net\",   \"token\": \"e962d9190348af7fa8d233d75cff7385b4335f81\",   \"name\": \"service-user-1\",   \"creation_date\": \"2020-03-24T09:16:27.504+00:00\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.user_create(data, async_req=True)
+        >>> thread = api.service_users_create(project_name, data, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param UserCreate data: (required)
+        :param str project_name: (required)
+        :param ServiceUserCreate data: (required)
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -11218,24 +11559,25 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: UserDetail
+        :return: ServiceUserDetail
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
-        return self.user_create_with_http_info(data, **kwargs)  # noqa: E501
+        return self.service_users_create_with_http_info(project_name, data, **kwargs)  # noqa: E501
 
-    def user_create_with_http_info(self, data, **kwargs):  # noqa: E501
-        """Create a new user  # noqa: E501
+    def service_users_create_with_http_info(self, project_name, data, **kwargs):  # noqa: E501
+        """Create a new service user  # noqa: E501
 
-         ### Description  Create a new user with the given details - email, password, name and surname.  ### Required Parameters - `email`: Email of the user. This is a unique field.   - `password`: Password of the user    ### Optional Parameters - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"name\": \"User name\",   \"surname\": \"User surname\" } ```  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\" } ```  ### Response Structure  Details of the created user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `registration_date`: Date when the user was registered  #### Response Examples  ``` {   \"id\": \"4740a13a-70ae-4b7a-a461-8231eb2c0594\",   \"email\": \"test@example.com\",   \"name\": \"User name\",   \"surname\": \"User surname\",   \"registration_date\": \"2020-01-10 10:06:25.632392+01\" } ```   # noqa: E501
+         ### Description  Create a new service user. A unique email is generated for the service user. Additionally, a token for this service user is generated. This token can be used to authorize requests sent to our API.   The token is **ONLY** returned on creation and will not be accessible afterwards.  ### Optional Parameters - `name`: Name of the service user    #### Request Examples  ``` {   \"name\": \"service-user-1\" } ```  ### Response Structure  Details of the created service user  - `id`: Unique identifier for the service user (UUID)    - `email`: Email of the service user     - `token`: The API token for the created service user     - `name`: Name of the service user    - `creation_date`: Date when the service user was created  #### Response Examples  ``` {   \"id\": \"13a9ba27-6888-4528-826e-8e1002eab13d\",   \"email\": \"13a9ba27-6888-4528-826e-8e1002eab13d.project1@serviceuser.xenia.dutchanalytics.net\",   \"token\": \"e962d9190348af7fa8d233d75cff7385b4335f81\",   \"name\": \"service-user-1\",   \"creation_date\": \"2020-03-24T09:16:27.504+00:00\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.user_create_with_http_info(data, async_req=True)
+        >>> thread = api.service_users_create_with_http_info(project_name, data, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool: execute request asynchronously
-        :param UserCreate data: (required)
+        :param str project_name: (required)
+        :param ServiceUserCreate data: (required)
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -11245,7 +11587,817 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(UserDetail, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(ServiceUserDetail, status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['project_name', 'data']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method service_users_create" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'project_name' is set
+        if self.api_client.client_side_validation and ('project_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['project_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `project_name` when calling `service_users_create`")  # noqa: E501
+        # verify the required parameter 'data' is set
+        if self.api_client.client_side_validation and ('data' not in local_var_params or  # noqa: E501
+                                                        local_var_params['data'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `data` when calling `service_users_create`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'project_name' in local_var_params:
+            path_params['project_name'] = local_var_params['project_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'data' in local_var_params:
+            body_params = local_var_params['data']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/projects/{project_name}/service-users', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ServiceUserDetail',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def service_users_delete(self, project_name, service_user_id, **kwargs):  # noqa: E501
+        """Delete service user  # noqa: E501
+
+         ### Description  Delete a service user from a project   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.service_users_delete(project_name, service_user_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param str service_user_id: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.service_users_delete_with_http_info(project_name, service_user_id, **kwargs)  # noqa: E501
+
+    def service_users_delete_with_http_info(self, project_name, service_user_id, **kwargs):  # noqa: E501
+        """Delete service user  # noqa: E501
+
+         ### Description  Delete a service user from a project   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.service_users_delete_with_http_info(project_name, service_user_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param str service_user_id: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['project_name', 'service_user_id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method service_users_delete" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'project_name' is set
+        if self.api_client.client_side_validation and ('project_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['project_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `project_name` when calling `service_users_delete`")  # noqa: E501
+        # verify the required parameter 'service_user_id' is set
+        if self.api_client.client_side_validation and ('service_user_id' not in local_var_params or  # noqa: E501
+                                                        local_var_params['service_user_id'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `service_user_id` when calling `service_users_delete`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'project_name' in local_var_params:
+            path_params['project_name'] = local_var_params['project_name']  # noqa: E501
+        if 'service_user_id' in local_var_params:
+            path_params['service_user_id'] = local_var_params['service_user_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/projects/{project_name}/service-users/{service_user_id}', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def service_users_get(self, project_name, service_user_id, **kwargs):  # noqa: E501
+        """Retrieve details of a service user  # noqa: E501
+
+         ### Description  Retrieve details of a service user  ### Response Structure  Details of the service user  - `id`: Unique identifier for the service user (UUID)    - `email`: Email of the service user     - `name`: Name of the service user    - `creation_date`: Date when the service user was created  #### Response Examples  ``` {   \"id\": \"13a9ba27-6888-4528-826e-8e1002eab13d\",   \"email\": \"13a9ba27-6888-4528-826e-8e1002eab13d.project1@serviceuser.xenia.dutchanalytics.net\",   \"name\": \"new-service-user-name\",   \"creation_date\": \"2020-03-26T12:18:43.123+00:00\" } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.service_users_get(project_name, service_user_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param str service_user_id: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: ServiceUserList
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.service_users_get_with_http_info(project_name, service_user_id, **kwargs)  # noqa: E501
+
+    def service_users_get_with_http_info(self, project_name, service_user_id, **kwargs):  # noqa: E501
+        """Retrieve details of a service user  # noqa: E501
+
+         ### Description  Retrieve details of a service user  ### Response Structure  Details of the service user  - `id`: Unique identifier for the service user (UUID)    - `email`: Email of the service user     - `name`: Name of the service user    - `creation_date`: Date when the service user was created  #### Response Examples  ``` {   \"id\": \"13a9ba27-6888-4528-826e-8e1002eab13d\",   \"email\": \"13a9ba27-6888-4528-826e-8e1002eab13d.project1@serviceuser.xenia.dutchanalytics.net\",   \"name\": \"new-service-user-name\",   \"creation_date\": \"2020-03-26T12:18:43.123+00:00\" } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.service_users_get_with_http_info(project_name, service_user_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param str service_user_id: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(ServiceUserList, status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['project_name', 'service_user_id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method service_users_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'project_name' is set
+        if self.api_client.client_side_validation and ('project_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['project_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `project_name` when calling `service_users_get`")  # noqa: E501
+        # verify the required parameter 'service_user_id' is set
+        if self.api_client.client_side_validation and ('service_user_id' not in local_var_params or  # noqa: E501
+                                                        local_var_params['service_user_id'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `service_user_id` when calling `service_users_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'project_name' in local_var_params:
+            path_params['project_name'] = local_var_params['project_name']  # noqa: E501
+        if 'service_user_id' in local_var_params:
+            path_params['service_user_id'] = local_var_params['service_user_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/projects/{project_name}/service-users/{service_user_id}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ServiceUserList',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def service_users_list(self, project_name, **kwargs):  # noqa: E501
+        """List service users  # noqa: E501
+
+         ### Description  List service users defined in a project  ### Response Structure  List of details of the service users:  - `id`: Unique identifier for the service user (UUID)    - `email`: Email of the service user    - `name`: Name of the service user    - `creation_date`: Date when the service user was created  #### Response Examples  ``` [   {     \"id\": \"537bca64-5ab6-43eb-a7ef-1638bc30b6ed\",     \"email\": \"537bca64-5ab6-43eb-a7ef-1638bc30b6ed.project1@serviceuser.xenia.dutchanalytics.net\",     \"name\": \"service-user-1\",     \"creation_date\": \"2020-03-24T09:16:27.504+00:00\"   },   {     \"id\": \"13a9ba27-6888-4528-826e-8e1002eab13d\",     \"email\": \"13a9ba27-6888-4528-826e-8e1002eab13d.project1@serviceuser.xenia.dutchanalytics.net\",     \"name\": \"service-user-2\",     \"creation_date\": \"2020-03-26T12:18:43.123+00:00\"   } ] ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.service_users_list(project_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: list[ServiceUserList]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.service_users_list_with_http_info(project_name, **kwargs)  # noqa: E501
+
+    def service_users_list_with_http_info(self, project_name, **kwargs):  # noqa: E501
+        """List service users  # noqa: E501
+
+         ### Description  List service users defined in a project  ### Response Structure  List of details of the service users:  - `id`: Unique identifier for the service user (UUID)    - `email`: Email of the service user    - `name`: Name of the service user    - `creation_date`: Date when the service user was created  #### Response Examples  ``` [   {     \"id\": \"537bca64-5ab6-43eb-a7ef-1638bc30b6ed\",     \"email\": \"537bca64-5ab6-43eb-a7ef-1638bc30b6ed.project1@serviceuser.xenia.dutchanalytics.net\",     \"name\": \"service-user-1\",     \"creation_date\": \"2020-03-24T09:16:27.504+00:00\"   },   {     \"id\": \"13a9ba27-6888-4528-826e-8e1002eab13d\",     \"email\": \"13a9ba27-6888-4528-826e-8e1002eab13d.project1@serviceuser.xenia.dutchanalytics.net\",     \"name\": \"service-user-2\",     \"creation_date\": \"2020-03-26T12:18:43.123+00:00\"   } ] ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.service_users_list_with_http_info(project_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(list[ServiceUserList], status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['project_name']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method service_users_list" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'project_name' is set
+        if self.api_client.client_side_validation and ('project_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['project_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `project_name` when calling `service_users_list`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'project_name' in local_var_params:
+            path_params['project_name'] = local_var_params['project_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/projects/{project_name}/service-users', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[ServiceUserList]',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def service_users_token(self, project_name, service_user_id, data, **kwargs):  # noqa: E501
+        """Reset the token of a service user  # noqa: E501
+
+         ### Description  Reset the token of a service user. The old token will be deleted and a new one will be created for the service user.  ### Response Structure  Details of the new token for the service user  - `token`: The new API token for the service user  #### Response Examples ``` {   \"token\": \"e962d9190348af7fa8d233d75cff7385b4335f81\" } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.service_users_token(project_name, service_user_id, data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param str service_user_id: (required)
+        :param object data: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: object
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.service_users_token_with_http_info(project_name, service_user_id, data, **kwargs)  # noqa: E501
+
+    def service_users_token_with_http_info(self, project_name, service_user_id, data, **kwargs):  # noqa: E501
+        """Reset the token of a service user  # noqa: E501
+
+         ### Description  Reset the token of a service user. The old token will be deleted and a new one will be created for the service user.  ### Response Structure  Details of the new token for the service user  - `token`: The new API token for the service user  #### Response Examples ``` {   \"token\": \"e962d9190348af7fa8d233d75cff7385b4335f81\" } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.service_users_token_with_http_info(project_name, service_user_id, data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param str service_user_id: (required)
+        :param object data: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(object, status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['project_name', 'service_user_id', 'data']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method service_users_token" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'project_name' is set
+        if self.api_client.client_side_validation and ('project_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['project_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `project_name` when calling `service_users_token`")  # noqa: E501
+        # verify the required parameter 'service_user_id' is set
+        if self.api_client.client_side_validation and ('service_user_id' not in local_var_params or  # noqa: E501
+                                                        local_var_params['service_user_id'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `service_user_id` when calling `service_users_token`")  # noqa: E501
+        # verify the required parameter 'data' is set
+        if self.api_client.client_side_validation and ('data' not in local_var_params or  # noqa: E501
+                                                        local_var_params['data'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `data` when calling `service_users_token`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'project_name' in local_var_params:
+            path_params['project_name'] = local_var_params['project_name']  # noqa: E501
+        if 'service_user_id' in local_var_params:
+            path_params['service_user_id'] = local_var_params['service_user_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'data' in local_var_params:
+            body_params = local_var_params['data']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/projects/{project_name}/service-users/{service_user_id}/token', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='object',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def service_users_update(self, project_name, service_user_id, data, **kwargs):  # noqa: E501
+        """Update service user details  # noqa: E501
+
+          ### Description Update the name of a service user  ### Optional Parameters - `name`: Name of the service user    #### Request Examples   ``` {   \"name\": \"new-service-user-name\", } ```  ### Response Structure  Details of the updated service user  - `id`: Unique identifier for the service user (UUID)    - `email`: Email of the service user     - `name`: Name of the service user    - `creation_date`: Date when the service user was created  #### Response Examples  ``` {   \"id\": \"13a9ba27-6888-4528-826e-8e1002eab13d\",   \"email\": \"13a9ba27-6888-4528-826e-8e1002eab13d.project1@serviceuser.xenia.dutchanalytics.net\",   \"name\": \"new-service-user-name\",   \"creation_date\": \"2020-03-26T12:18:43.123+00:00\" } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.service_users_update(project_name, service_user_id, data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param str service_user_id: (required)
+        :param ServiceUserCreate data: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: ServiceUserList
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.service_users_update_with_http_info(project_name, service_user_id, data, **kwargs)  # noqa: E501
+
+    def service_users_update_with_http_info(self, project_name, service_user_id, data, **kwargs):  # noqa: E501
+        """Update service user details  # noqa: E501
+
+          ### Description Update the name of a service user  ### Optional Parameters - `name`: Name of the service user    #### Request Examples   ``` {   \"name\": \"new-service-user-name\", } ```  ### Response Structure  Details of the updated service user  - `id`: Unique identifier for the service user (UUID)    - `email`: Email of the service user     - `name`: Name of the service user    - `creation_date`: Date when the service user was created  #### Response Examples  ``` {   \"id\": \"13a9ba27-6888-4528-826e-8e1002eab13d\",   \"email\": \"13a9ba27-6888-4528-826e-8e1002eab13d.project1@serviceuser.xenia.dutchanalytics.net\",   \"name\": \"new-service-user-name\",   \"creation_date\": \"2020-03-26T12:18:43.123+00:00\" } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.service_users_update_with_http_info(project_name, service_user_id, data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param str service_user_id: (required)
+        :param ServiceUserCreate data: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(ServiceUserList, status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['project_name', 'service_user_id', 'data']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method service_users_update" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'project_name' is set
+        if self.api_client.client_side_validation and ('project_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['project_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `project_name` when calling `service_users_update`")  # noqa: E501
+        # verify the required parameter 'service_user_id' is set
+        if self.api_client.client_side_validation and ('service_user_id' not in local_var_params or  # noqa: E501
+                                                        local_var_params['service_user_id'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `service_user_id` when calling `service_users_update`")  # noqa: E501
+        # verify the required parameter 'data' is set
+        if self.api_client.client_side_validation and ('data' not in local_var_params or  # noqa: E501
+                                                        local_var_params['data'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `data` when calling `service_users_update`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'project_name' in local_var_params:
+            path_params['project_name'] = local_var_params['project_name']  # noqa: E501
+        if 'service_user_id' in local_var_params:
+            path_params['service_user_id'] = local_var_params['service_user_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'data' in local_var_params:
+            body_params = local_var_params['data']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/projects/{project_name}/service-users/{service_user_id}', 'PATCH',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ServiceUserList',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def subscriptions_list(self, **kwargs):  # noqa: E501
+        """List subscriptions  # noqa: E501
+
+         ### Description  List all available subscriptions which are available for organizations  ### Response Structure A list of details of the subscriptions  - `id`: Unique identifier for the subscription (UUID)    - `name`: Name of the subscription    - `max_projects`: The number of maximum projects allowed to be created with this type of subscription    - `max_users`: The number of maximum users allowed to be created with this type of subscription    - `agreement`: Link to the Xenia Free SaaS Services Agreement document    - `terms_conditions`: Link to the the Xenia SaaS Terms & Conditions document     # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.subscriptions_list(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: list[SubscriptionList]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.subscriptions_list_with_http_info(**kwargs)  # noqa: E501
+
+    def subscriptions_list_with_http_info(self, **kwargs):  # noqa: E501
+        """List subscriptions  # noqa: E501
+
+         ### Description  List all available subscriptions which are available for organizations  ### Response Structure A list of details of the subscriptions  - `id`: Unique identifier for the subscription (UUID)    - `name`: Name of the subscription    - `max_projects`: The number of maximum projects allowed to be created with this type of subscription    - `max_users`: The number of maximum users allowed to be created with this type of subscription    - `agreement`: Link to the Xenia Free SaaS Services Agreement document    - `terms_conditions`: Link to the the Xenia SaaS Terms & Conditions document     # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.subscriptions_list_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(list[SubscriptionList], status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = []  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method subscriptions_list" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/subscriptions', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[SubscriptionList]',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def user_create(self, data, **kwargs):  # noqa: E501
+        """Create a new user  # noqa: E501
+
+         ### Description  Create a new user with the given details - email, password, name and surname. After creation, an email is send to the email address to activate the acount. A user is required to accept the terms and conditions.  ### Required Parameters - `email`: Email of the user. This is a unique field.   - `password`: Password of the user   - `terms_conditions`: Boolean field. Pass True to accept terms and conditions.    ### Optional Parameters - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"name\": \"User name\",   \"surname\": \"User surname\",   \"terms_conditions\": true } ```  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"terms_conditions\": true } ```  ### Response Structure  Details of the created user  - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user   #### Response Examples  ``` {   \"email\": \"test@example.com\",   \"name\": \"User name\",   \"surname\": \"User surname\" } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.user_create(data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param UserPendingCreate data: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: UserPendingDetail
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.user_create_with_http_info(data, **kwargs)  # noqa: E501
+
+    def user_create_with_http_info(self, data, **kwargs):  # noqa: E501
+        """Create a new user  # noqa: E501
+
+         ### Description  Create a new user with the given details - email, password, name and surname. After creation, an email is send to the email address to activate the acount. A user is required to accept the terms and conditions.  ### Required Parameters - `email`: Email of the user. This is a unique field.   - `password`: Password of the user   - `terms_conditions`: Boolean field. Pass True to accept terms and conditions.    ### Optional Parameters - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"name\": \"User name\",   \"surname\": \"User surname\",   \"terms_conditions\": true } ```  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"terms_conditions\": true } ```  ### Response Structure  Details of the created user  - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user   #### Response Examples  ``` {   \"email\": \"test@example.com\",   \"name\": \"User name\",   \"surname\": \"User surname\" } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.user_create_with_http_info(data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param UserPendingCreate data: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(UserPendingDetail, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -11304,7 +12456,7 @@ class CoreApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='UserDetail',  # noqa: E501
+            response_type='UserPendingDetail',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -11411,7 +12563,7 @@ class CoreApi(object):
     def user_get(self, **kwargs):  # noqa: E501
         """Get user details  # noqa: E501
 
-         ### Description  Get the details of the user that makes the request  ### Response Structure  Details of the user:  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `registration_date`: Date when the user was registered  #### Response Examples  ``` {   \"id\": \"4740a13a-70ae-4b7a-a461-8231eb2c0594\",   \"email\": \"test@example.com\",   \"name\": \"User name\",   \"surname\": \"User surname\",   \"registration_date\": \"2020-01-10 10:06:25.632392+01\" } ```   # noqa: E501
+         ### Description  Get the details of the user that makes the request  ### Response Structure  Details of the user:  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `registration_date`: Date when the user was registered  #### Response Examples  ``` {   \"id\": \"4740a13a-70ae-4b7a-a461-8231eb2c0594\",   \"email\": \"test@example.com\",   \"name\": \"User name\",   \"surname\": \"User surname\",   \"registration_date\": \"2020-01-10 10:06:25.632+00:00\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.user_get(async_req=True)
@@ -11435,7 +12587,7 @@ class CoreApi(object):
     def user_get_with_http_info(self, **kwargs):  # noqa: E501
         """Get user details  # noqa: E501
 
-         ### Description  Get the details of the user that makes the request  ### Response Structure  Details of the user:  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `registration_date`: Date when the user was registered  #### Response Examples  ``` {   \"id\": \"4740a13a-70ae-4b7a-a461-8231eb2c0594\",   \"email\": \"test@example.com\",   \"name\": \"User name\",   \"surname\": \"User surname\",   \"registration_date\": \"2020-01-10 10:06:25.632392+01\" } ```   # noqa: E501
+         ### Description  Get the details of the user that makes the request  ### Response Structure  Details of the user:  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `registration_date`: Date when the user was registered  #### Response Examples  ``` {   \"id\": \"4740a13a-70ae-4b7a-a461-8231eb2c0594\",   \"email\": \"test@example.com\",   \"name\": \"User name\",   \"surname\": \"User surname\",   \"registration_date\": \"2020-01-10 10:06:25.632+00:00\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.user_get_with_http_info(async_req=True)
@@ -11511,7 +12663,7 @@ class CoreApi(object):
     def user_update(self, data, **kwargs):  # noqa: E501
         """Update user details  # noqa: E501
 
-          ### Description Update the details of the user making the request - name, surname, email and password.  When updating the password, the parameter `previous_password` with the value of the previous password is also required.  ### Optional Parameters - `email`: Email of the user   - `password`: Password of the user       - `previous_password`: Previous password of the user (This field is only required when updating the password)   - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"new_test@example.com\" } ```  ``` {   \"password\": \"new-secret-password\",   \"previous_password\": \"previous-secret-password\" } ```  ``` {   \"name\": \"New user name\",   \"surname\": \"New user surname\" } ```  ### Response Structure  Details of the created user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `registration_date`: Date when the user was registered  #### Response Examples  ``` {   \"id\": \"4740a13a-70ae-4b7a-a461-8231eb2c0594\",   \"email\": \"new_test@example.com\",   \"type\": \"user\",   \"name\": \"New user name\",   \"surname\": \"New user surname\",   \"registration_date\": \"2020-01-10 10:06:25.632392+01\" } ```   # noqa: E501
+          ### Description Update the details of the user making the request - name, surname, email and password.  When updating the password, the parameter `previous_password` with the value of the previous password is also required.  ### Optional Parameters - `email`: Email of the user   - `password`: Password of the user       - `previous_password`: Previous password of the user (This field is only required when updating the password)   - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"new_test@example.com\" } ```  ``` {   \"password\": \"new-secret-password\",   \"previous_password\": \"previous-secret-password\" } ```  ``` {   \"name\": \"New user name\",   \"surname\": \"New user surname\" } ```  ### Response Structure  Details of the created user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `registration_date`: Date when the user was registered  #### Response Examples  ``` {   \"id\": \"4740a13a-70ae-4b7a-a461-8231eb2c0594\",   \"email\": \"new_test@example.com\",   \"type\": \"user\",   \"name\": \"New user name\",   \"surname\": \"New user surname\",   \"registration_date\": \"2020-01-10 10:06:25.632+00:00\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.user_update(data, async_req=True)
@@ -11536,7 +12688,7 @@ class CoreApi(object):
     def user_update_with_http_info(self, data, **kwargs):  # noqa: E501
         """Update user details  # noqa: E501
 
-          ### Description Update the details of the user making the request - name, surname, email and password.  When updating the password, the parameter `previous_password` with the value of the previous password is also required.  ### Optional Parameters - `email`: Email of the user   - `password`: Password of the user       - `previous_password`: Previous password of the user (This field is only required when updating the password)   - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"new_test@example.com\" } ```  ``` {   \"password\": \"new-secret-password\",   \"previous_password\": \"previous-secret-password\" } ```  ``` {   \"name\": \"New user name\",   \"surname\": \"New user surname\" } ```  ### Response Structure  Details of the created user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `registration_date`: Date when the user was registered  #### Response Examples  ``` {   \"id\": \"4740a13a-70ae-4b7a-a461-8231eb2c0594\",   \"email\": \"new_test@example.com\",   \"type\": \"user\",   \"name\": \"New user name\",   \"surname\": \"New user surname\",   \"registration_date\": \"2020-01-10 10:06:25.632392+01\" } ```   # noqa: E501
+          ### Description Update the details of the user making the request - name, surname, email and password.  When updating the password, the parameter `previous_password` with the value of the previous password is also required.  ### Optional Parameters - `email`: Email of the user   - `password`: Password of the user       - `previous_password`: Previous password of the user (This field is only required when updating the password)   - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"new_test@example.com\" } ```  ``` {   \"password\": \"new-secret-password\",   \"previous_password\": \"previous-secret-password\" } ```  ``` {   \"name\": \"New user name\",   \"surname\": \"New user surname\" } ```  ### Response Structure  Details of the created user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `registration_date`: Date when the user was registered  #### Response Examples  ``` {   \"id\": \"4740a13a-70ae-4b7a-a461-8231eb2c0594\",   \"email\": \"new_test@example.com\",   \"type\": \"user\",   \"name\": \"New user name\",   \"surname\": \"New user surname\",   \"registration_date\": \"2020-01-10 10:06:25.632+00:00\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.user_update_with_http_info(data, async_req=True)
