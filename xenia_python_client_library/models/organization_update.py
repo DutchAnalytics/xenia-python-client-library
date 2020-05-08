@@ -33,24 +33,27 @@ class OrganizationUpdate(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'subscription': 'str'
+        'subscription': 'str',
+        'subscription_agreed': 'bool'
     }
 
     attribute_map = {
-        'subscription': 'subscription'
+        'subscription': 'subscription',
+        'subscription_agreed': 'subscription_agreed'
     }
 
-    def __init__(self, subscription=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, subscription=None, subscription_agreed=None, local_vars_configuration=None):  # noqa: E501
         """OrganizationUpdate - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
         self.local_vars_configuration = local_vars_configuration
 
         self._subscription = None
+        self._subscription_agreed = None
         self.discriminator = None
 
-        if subscription is not None:
-            self.subscription = subscription
+        self.subscription = subscription
+        self.subscription_agreed = subscription_agreed
 
     @property
     def subscription(self):
@@ -70,11 +73,36 @@ class OrganizationUpdate(object):
         :param subscription: The subscription of this OrganizationUpdate.  # noqa: E501
         :type: str
         """
+        if self.local_vars_configuration.client_side_validation and subscription is None:  # noqa: E501
+            raise ValueError("Invalid value for `subscription`, must not be `None`")  # noqa: E501
         if (self.local_vars_configuration.client_side_validation and
                 subscription is not None and len(subscription) < 1):
             raise ValueError("Invalid value for `subscription`, length must be greater than or equal to `1`")  # noqa: E501
 
         self._subscription = subscription
+
+    @property
+    def subscription_agreed(self):
+        """Gets the subscription_agreed of this OrganizationUpdate.  # noqa: E501
+
+
+        :return: The subscription_agreed of this OrganizationUpdate.  # noqa: E501
+        :rtype: bool
+        """
+        return self._subscription_agreed
+
+    @subscription_agreed.setter
+    def subscription_agreed(self, subscription_agreed):
+        """Sets the subscription_agreed of this OrganizationUpdate.
+
+
+        :param subscription_agreed: The subscription_agreed of this OrganizationUpdate.  # noqa: E501
+        :type: bool
+        """
+        if self.local_vars_configuration.client_side_validation and subscription_agreed is None:  # noqa: E501
+            raise ValueError("Invalid value for `subscription_agreed`, must not be `None`")  # noqa: E501
+
+        self._subscription_agreed = subscription_agreed
 
     def to_dict(self):
         """Returns the model properties as a dict"""

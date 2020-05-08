@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **creation_date** | **datetime** |  | [optional] [readonly] 
 **subscription** | **str** |  | [optional] [readonly] 
+**subscription_agreement_date** | **datetime** |  | [optional] [readonly] 
+**subscription_agreement_user** | **str** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
