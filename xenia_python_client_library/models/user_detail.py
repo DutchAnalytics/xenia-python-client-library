@@ -37,7 +37,7 @@ class UserDetail(object):
         'email': 'str',
         'name': 'str',
         'surname': 'str',
-        'registration_date': 'datetime'
+        'registration_date': 'str'
     }
 
     attribute_map = {
@@ -175,7 +175,7 @@ class UserDetail(object):
 
 
         :return: The registration_date of this UserDetail.  # noqa: E501
-        :rtype: datetime
+        :rtype: str
         """
         return self._registration_date
 
@@ -185,7 +185,7 @@ class UserDetail(object):
 
 
         :param registration_date: The registration_date of this UserDetail.  # noqa: E501
-        :type: datetime
+        :type: str
         """
 
         self._registration_date = registration_date
