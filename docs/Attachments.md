@@ -1,13 +1,12 @@
-# UserUpdate
+# Attachments
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email** | **str** |  | 
-**password** | **str** |  | 
-**previous_password** | **str** |  | [optional] 
-**name** | **str** |  | [optional] 
-**surname** | **str** |  | [optional] 
+**id** | **str** |  | 
+**source_name** | **str** |  | 
+**destination_name** | **str** |  | 
+**mapping** | [**list[AttachmentFields]**](AttachmentFields.md) |  | [optional] [readonly] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

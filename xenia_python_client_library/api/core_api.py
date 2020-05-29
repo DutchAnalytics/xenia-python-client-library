@@ -139,7 +139,7 @@ class CoreApi(object):
     def connectors_create(self, project_name, data, **kwargs):  # noqa: E501
         """Create a connector  # noqa: E501
 
-         ### Description Create a connector by defining its necessary configuration parameters. Connectors use a reference to credentials which will be used in authentication.  The type of a connector can be either a blob or structured. This type is inferred from the given type field. For example, an s3 connector is of type blob while a postgresql connector is structured.  ### Required Parameters - `name`: Name of the credentials. It is unique within a project. - `type`: Type of the connector. It should be one of the supported connectors such as s3, postgresql and gcs. - `credentials`: The name of referenced credentials - `configuration`: A dictionary which should contain the fields necessary for the given type  ### Optional Parameters - `input_fields`: A list of connector fields with name and data_type. For example, for postgresql type of connector, these fields correspond to the columns in a table. In case of blob connectors, the input_fields should be omitted or given as an empty list. For structured connectors, they must be provided.  #### Request Examples A postgresql connector ``` {   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"crendentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```  ### Response Structure Details of the created connector  - `id`:Unique identifier for the connector (UUID) - `name`:Name of the connector - `type`:Type of the connector - `input_type`:Type of the connector according to type field. It can be either structured or blob. - `project`:Project name in which the connector is created - `credentials`:The name of referenced credentials - `configuration`:The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`:A list of connector fields with name and data_type  #### Response Examples ``` {   \"id\": \"e0342249-853c-4879-bd08-5cd1af572d7e\",   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"input_type\": \"structured\",   \"project\": \"project-1\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   # noqa: E501
+         ### Description Create a connector by defining its necessary configuration parameters. Connectors use a reference to credentials which will be used in authentication.  The type of a connector can be either a blob or structured. This type is inferred from the given type field. For example, an s3 connector is of type blob while a postgresql connector is structured.  ### Required Parameters - `name`: Name of the credentials. It is unique within a project. - `type`: Type of the connector. It should be one of the supported connectors such as s3, postgresql and gcs. - `credentials`: The name of referenced credentials - `configuration`: A dictionary which should contain the fields necessary for the given type  ### Optional Parameters - `input_fields`: A list of connector fields with name and data_type. For example, for postgresql type of connector, these fields correspond to the columns in a table. In case of blob connectors, the input_fields should be omitted or given as an empty list. For structured connectors, they must be provided.  #### Request Examples A postgresql connector ``` {   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```  ### Response Structure Details of the created connector  - `id`:Unique identifier for the connector (UUID) - `name`:Name of the connector - `type`:Type of the connector - `input_type`:Type of the connector according to type field. It can be either structured or blob. - `project`:Project name in which the connector is created - `credentials`:The name of referenced credentials - `configuration`:The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`:A list of connector fields with name and data_type  #### Response Examples ``` {   \"id\": \"e0342249-853c-4879-bd08-5cd1af572d7e\",   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"input_type\": \"structured\",   \"project\": \"project-1\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.connectors_create(project_name, data, async_req=True)
@@ -165,7 +165,7 @@ class CoreApi(object):
     def connectors_create_with_http_info(self, project_name, data, **kwargs):  # noqa: E501
         """Create a connector  # noqa: E501
 
-         ### Description Create a connector by defining its necessary configuration parameters. Connectors use a reference to credentials which will be used in authentication.  The type of a connector can be either a blob or structured. This type is inferred from the given type field. For example, an s3 connector is of type blob while a postgresql connector is structured.  ### Required Parameters - `name`: Name of the credentials. It is unique within a project. - `type`: Type of the connector. It should be one of the supported connectors such as s3, postgresql and gcs. - `credentials`: The name of referenced credentials - `configuration`: A dictionary which should contain the fields necessary for the given type  ### Optional Parameters - `input_fields`: A list of connector fields with name and data_type. For example, for postgresql type of connector, these fields correspond to the columns in a table. In case of blob connectors, the input_fields should be omitted or given as an empty list. For structured connectors, they must be provided.  #### Request Examples A postgresql connector ``` {   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"crendentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```  ### Response Structure Details of the created connector  - `id`:Unique identifier for the connector (UUID) - `name`:Name of the connector - `type`:Type of the connector - `input_type`:Type of the connector according to type field. It can be either structured or blob. - `project`:Project name in which the connector is created - `credentials`:The name of referenced credentials - `configuration`:The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`:A list of connector fields with name and data_type  #### Response Examples ``` {   \"id\": \"e0342249-853c-4879-bd08-5cd1af572d7e\",   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"input_type\": \"structured\",   \"project\": \"project-1\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   # noqa: E501
+         ### Description Create a connector by defining its necessary configuration parameters. Connectors use a reference to credentials which will be used in authentication.  The type of a connector can be either a blob or structured. This type is inferred from the given type field. For example, an s3 connector is of type blob while a postgresql connector is structured.  ### Required Parameters - `name`: Name of the credentials. It is unique within a project. - `type`: Type of the connector. It should be one of the supported connectors such as s3, postgresql and gcs. - `credentials`: The name of referenced credentials - `configuration`: A dictionary which should contain the fields necessary for the given type  ### Optional Parameters - `input_fields`: A list of connector fields with name and data_type. For example, for postgresql type of connector, these fields correspond to the columns in a table. In case of blob connectors, the input_fields should be omitted or given as an empty list. For structured connectors, they must be provided.  #### Request Examples A postgresql connector ``` {   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```  ### Response Structure Details of the created connector  - `id`:Unique identifier for the connector (UUID) - `name`:Name of the connector - `type`:Type of the connector - `input_type`:Type of the connector according to type field. It can be either structured or blob. - `project`:Project name in which the connector is created - `credentials`:The name of referenced credentials - `configuration`:The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`:A list of connector fields with name and data_type  #### Response Examples ``` {   \"id\": \"e0342249-853c-4879-bd08-5cd1af572d7e\",   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"input_type\": \"structured\",   \"project\": \"project-1\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.connectors_create_with_http_info(project_name, data, async_req=True)
@@ -1452,10 +1452,142 @@ class CoreApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def model_blob_requests_get(self, project_name, model_name, request_id, version, **kwargs):  # noqa: E501
+        """Get blob model request results  # noqa: E501
+
+         ### Description  Retrieve the result of a blob model request using the request_id. All users with permission to the project are able to collect the request result, not only the user that created the request. If the model request is still 'pending' or 'failed', the response will be a JSON dict. If the model request has ended with 'success', the blob is attached.    ### Response Structure  A successful blob model request - `file`: The blob that was outputted by the model  A pending/failed blob model request  - `time_created`: Server time that the request was made (current time)  - `time_last_updated`: Server time that the request was last updated (current time)  - `status`: Status of the request. May be pending or failed.  - `request_id`: Unique identifier for the model request, to be used when collecting the result  - `result`: Model request result value. NULL if not (yet) available or if the request failed.  - `error_message`: An error message explaining why the request has failed. NULL if the request was successful.  - `prediction_duration`: The time it took for the model request to complete in seconds.  #### Response Examples  A successful model request ``` The blob file ```  A failed model request ``` {   \"request_id\": \"5b65e27e-25ea-4be0-86c7-54e94f22dab0\",   \"time_created\": \"2019-02-22T09:19:51.919276Z\",   \"time_last_updated\": \"2019-02-22T09:19:52.532876Z\",   \"status\": \"failed\",   \"result\": null,   \"error_message\": \"Asset ID not supported\",   \"prediction_duration\": 0 } ```  A pending model request ``` {   \"request_id\": \"5b65e27e-25ea-4be0-86c7-54e94f22dab0\",   \"time_created\": \"2019-02-22T09:19:51.919276Z\",   \"time_last_updated\": \"2019-02-22T09:19:51.919276Z\",   \"status\": \"pending\",   \"result\": null,   \"error_message\": null,   \"prediction_duration\": 0 } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.model_blob_requests_get(project_name, model_name, request_id, version, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param str model_name: (required)
+        :param str request_id: (required)
+        :param str version: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is False.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: ModelRequestResultList
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.model_blob_requests_get_with_http_info(project_name, model_name, request_id, version, **kwargs)  # noqa: E501
+
+    def model_blob_requests_get_with_http_info(self, project_name, model_name, request_id, version, **kwargs):  # noqa: E501
+        """Get blob model request results  # noqa: E501
+
+         ### Description  Retrieve the result of a blob model request using the request_id. All users with permission to the project are able to collect the request result, not only the user that created the request. If the model request is still 'pending' or 'failed', the response will be a JSON dict. If the model request has ended with 'success', the blob is attached.    ### Response Structure  A successful blob model request - `file`: The blob that was outputted by the model  A pending/failed blob model request  - `time_created`: Server time that the request was made (current time)  - `time_last_updated`: Server time that the request was last updated (current time)  - `status`: Status of the request. May be pending or failed.  - `request_id`: Unique identifier for the model request, to be used when collecting the result  - `result`: Model request result value. NULL if not (yet) available or if the request failed.  - `error_message`: An error message explaining why the request has failed. NULL if the request was successful.  - `prediction_duration`: The time it took for the model request to complete in seconds.  #### Response Examples  A successful model request ``` The blob file ```  A failed model request ``` {   \"request_id\": \"5b65e27e-25ea-4be0-86c7-54e94f22dab0\",   \"time_created\": \"2019-02-22T09:19:51.919276Z\",   \"time_last_updated\": \"2019-02-22T09:19:52.532876Z\",   \"status\": \"failed\",   \"result\": null,   \"error_message\": \"Asset ID not supported\",   \"prediction_duration\": 0 } ```  A pending model request ``` {   \"request_id\": \"5b65e27e-25ea-4be0-86c7-54e94f22dab0\",   \"time_created\": \"2019-02-22T09:19:51.919276Z\",   \"time_last_updated\": \"2019-02-22T09:19:51.919276Z\",   \"status\": \"pending\",   \"result\": null,   \"error_message\": null,   \"prediction_duration\": 0 } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.model_blob_requests_get_with_http_info(project_name, model_name, request_id, version, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param str model_name: (required)
+        :param str request_id: (required)
+        :param str version: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is False.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(ModelRequestResultList, status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['project_name', 'model_name', 'request_id', 'version']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method model_blob_requests_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'project_name' is set
+        if self.api_client.client_side_validation and ('project_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['project_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `project_name` when calling `model_blob_requests_get`")  # noqa: E501
+        # verify the required parameter 'model_name' is set
+        if self.api_client.client_side_validation and ('model_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['model_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `model_name` when calling `model_blob_requests_get`")  # noqa: E501
+        # verify the required parameter 'request_id' is set
+        if self.api_client.client_side_validation and ('request_id' not in local_var_params or  # noqa: E501
+                                                        local_var_params['request_id'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `request_id` when calling `model_blob_requests_get`")  # noqa: E501
+        # verify the required parameter 'version' is set
+        if self.api_client.client_side_validation and ('version' not in local_var_params or  # noqa: E501
+                                                        local_var_params['version'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `version` when calling `model_blob_requests_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'project_name' in local_var_params:
+            path_params['project_name'] = local_var_params['project_name']  # noqa: E501
+        if 'model_name' in local_var_params:
+            path_params['model_name'] = local_var_params['model_name']  # noqa: E501
+        if 'request_id' in local_var_params:
+            path_params['request_id'] = local_var_params['request_id']  # noqa: E501
+        if 'version' in local_var_params:
+            path_params['version'] = local_var_params['version']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/projects/{project_name}/models/{model_name}/versions/{version}/requests-blob/{request_id}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ModelRequestResultList',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', False),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def model_environment_variables_create(self, project_name, model_name, data, **kwargs):  # noqa: E501
         """Create model environment variable  # noqa: E501
 
-         ### Description Create an environment variable for the model. This variable will be inherited by all versions of this model. Variables inherited from the project can be shadowed by creating a variable with the same name.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.  #### Request Examples ``` {   \"name\": \"model_variable_a\",   \"value\": \"some_value\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"7c28a2be-507e-4fae-981d-54e94f22dab0\", \"name\": \"model_variable_a\", \"value\": \"some_value\", \"secret\": false } ```   # noqa: E501
+         ### Description Create an environment variable for the model. This variable will be inherited by all versions of this model. Variables inherited from the project can be shadowed by creating a variable with the same name.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string. It may be an empty string (\"\").  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.  #### Request Examples ``` {   \"name\": \"model_variable_a\",   \"value\": \"some_value\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"7c28a2be-507e-4fae-981d-54e94f22dab0\", \"name\": \"model_variable_a\", \"value\": \"some_value\", \"secret\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_environment_variables_create(project_name, model_name, data, async_req=True)
@@ -1482,7 +1614,7 @@ class CoreApi(object):
     def model_environment_variables_create_with_http_info(self, project_name, model_name, data, **kwargs):  # noqa: E501
         """Create model environment variable  # noqa: E501
 
-         ### Description Create an environment variable for the model. This variable will be inherited by all versions of this model. Variables inherited from the project can be shadowed by creating a variable with the same name.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.  #### Request Examples ``` {   \"name\": \"model_variable_a\",   \"value\": \"some_value\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"7c28a2be-507e-4fae-981d-54e94f22dab0\", \"name\": \"model_variable_a\", \"value\": \"some_value\", \"secret\": false } ```   # noqa: E501
+         ### Description Create an environment variable for the model. This variable will be inherited by all versions of this model. Variables inherited from the project can be shadowed by creating a variable with the same name.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string. It may be an empty string (\"\").  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.  #### Request Examples ``` {   \"name\": \"model_variable_a\",   \"value\": \"some_value\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"7c28a2be-507e-4fae-981d-54e94f22dab0\", \"name\": \"model_variable_a\", \"value\": \"some_value\", \"secret\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_environment_variables_create_with_http_info(project_name, model_name, data, async_req=True)
@@ -1943,7 +2075,7 @@ class CoreApi(object):
     def model_environment_variables_update(self, project_name, id, model_name, data, **kwargs):  # noqa: E501
         """Update model environment variable  # noqa: E501
 
-         ### Description Update an environment variable for the model. This cannot be used to update inherited variables; to change an inherited variable for a specific model you can create a variable with the same name for the model.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).  #### Request Examples ``` {   \"name\": \"model_variable_a\",   \"value\": \"some new value\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"7c28a2be-507e-4fae-981d-54e94f22dab0\", \"name\": \"model_variable_a\", \"value\": \"some new value\", \"secret\": false } ```   # noqa: E501
+         ### Description Update an environment variable for the model. This cannot be used to update inherited variables; to change an inherited variable for a specific model you can create a variable with the same name for the model.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string. It may be an empty string (\"\").  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).  #### Request Examples ``` {   \"name\": \"model_variable_a\",   \"value\": \"some new value\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"7c28a2be-507e-4fae-981d-54e94f22dab0\", \"name\": \"model_variable_a\", \"value\": \"some new value\", \"secret\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_environment_variables_update(project_name, id, model_name, data, async_req=True)
@@ -1971,7 +2103,7 @@ class CoreApi(object):
     def model_environment_variables_update_with_http_info(self, project_name, id, model_name, data, **kwargs):  # noqa: E501
         """Update model environment variable  # noqa: E501
 
-         ### Description Update an environment variable for the model. This cannot be used to update inherited variables; to change an inherited variable for a specific model you can create a variable with the same name for the model.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).  #### Request Examples ``` {   \"name\": \"model_variable_a\",   \"value\": \"some new value\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"7c28a2be-507e-4fae-981d-54e94f22dab0\", \"name\": \"model_variable_a\", \"value\": \"some new value\", \"secret\": false } ```   # noqa: E501
+         ### Description Update an environment variable for the model. This cannot be used to update inherited variables; to change an inherited variable for a specific model you can create a variable with the same name for the model.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string. It may be an empty string (\"\").  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).  #### Request Examples ``` {   \"name\": \"model_variable_a\",   \"value\": \"some new value\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"7c28a2be-507e-4fae-981d-54e94f22dab0\", \"name\": \"model_variable_a\", \"value\": \"some new value\", \"secret\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_environment_variables_update_with_http_info(project_name, id, model_name, data, async_req=True)
@@ -2879,7 +3011,7 @@ class CoreApi(object):
     def model_version_environment_variables_create(self, project_name, model_name, version, data, **kwargs):  # noqa: E501
         """Create model version environment variable  # noqa: E501
 
-         ### Description Create an environment variable for the model version. Variables inherited from the project or model can be shadowed by creating a variable with the same name.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.  #### Request Examples ``` {   \"name\": \"version_variable\",   \"value\": \"another one\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"54e94fbe-507e-4fae-981d-227c28a2dab0\", \"name\": \"version_variable\", \"value\": \"another one\", \"secret\": false } ```   # noqa: E501
+         ### Description Create an environment variable for the model version. Variables inherited from the project or model can be shadowed by creating a variable with the same name.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string. It may be an empty string (\"\").  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.  #### Request Examples ``` {   \"name\": \"version_variable\",   \"value\": \"another one\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"54e94fbe-507e-4fae-981d-227c28a2dab0\", \"name\": \"version_variable\", \"value\": \"another one\", \"secret\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_version_environment_variables_create(project_name, model_name, version, data, async_req=True)
@@ -2907,7 +3039,7 @@ class CoreApi(object):
     def model_version_environment_variables_create_with_http_info(self, project_name, model_name, version, data, **kwargs):  # noqa: E501
         """Create model version environment variable  # noqa: E501
 
-         ### Description Create an environment variable for the model version. Variables inherited from the project or model can be shadowed by creating a variable with the same name.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.  #### Request Examples ``` {   \"name\": \"version_variable\",   \"value\": \"another one\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"54e94fbe-507e-4fae-981d-227c28a2dab0\", \"name\": \"version_variable\", \"value\": \"another one\", \"secret\": false } ```   # noqa: E501
+         ### Description Create an environment variable for the model version. Variables inherited from the project or model can be shadowed by creating a variable with the same name.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string. It may be an empty string (\"\").  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.  #### Request Examples ``` {   \"name\": \"version_variable\",   \"value\": \"another one\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"54e94fbe-507e-4fae-981d-227c28a2dab0\", \"name\": \"version_variable\", \"value\": \"another one\", \"secret\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_version_environment_variables_create_with_http_info(project_name, model_name, version, data, async_req=True)
@@ -3399,7 +3531,7 @@ class CoreApi(object):
     def model_version_environment_variables_update(self, project_name, id, model_name, version, data, **kwargs):  # noqa: E501
         """Update model version environment variable  # noqa: E501
 
-         ### Description Update an environment variable for the model version. This cannot be used to update inherited variables; to change an inherited variable for a specific version you can create a variable with the same name for the version.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).  #### Request Examples ``` {   \"name\": \"version_variable\",   \"value\": \"yet another one\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"54e94fbe-507e-4fae-981d-227c28a2dab0\", \"name\": \"version_variable\", \"value\": \"yet another one\", \"secret\": false } ```   # noqa: E501
+         ### Description Update an environment variable for the model version. This cannot be used to update inherited variables; to change an inherited variable for a specific version you can create a variable with the same name for the version.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string. It may be an empty string (\"\").  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).  #### Request Examples ``` {   \"name\": \"version_variable\",   \"value\": \"yet another one\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"54e94fbe-507e-4fae-981d-227c28a2dab0\", \"name\": \"version_variable\", \"value\": \"yet another one\", \"secret\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_version_environment_variables_update(project_name, id, model_name, version, data, async_req=True)
@@ -3428,7 +3560,7 @@ class CoreApi(object):
     def model_version_environment_variables_update_with_http_info(self, project_name, id, model_name, version, data, **kwargs):  # noqa: E501
         """Update model version environment variable  # noqa: E501
 
-         ### Description Update an environment variable for the model version. This cannot be used to update inherited variables; to change an inherited variable for a specific version you can create a variable with the same name for the version.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).  #### Request Examples ``` {   \"name\": \"version_variable\",   \"value\": \"yet another one\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"54e94fbe-507e-4fae-981d-227c28a2dab0\", \"name\": \"version_variable\", \"value\": \"yet another one\", \"secret\": false } ```   # noqa: E501
+         ### Description Update an environment variable for the model version. This cannot be used to update inherited variables; to change an inherited variable for a specific version you can create a variable with the same name for the version.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string. It may be an empty string (\"\").  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).  #### Request Examples ``` {   \"name\": \"version_variable\",   \"value\": \"yet another one\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"54e94fbe-507e-4fae-981d-227c28a2dab0\", \"name\": \"version_variable\", \"value\": \"yet another one\", \"secret\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_version_environment_variables_update_with_http_info(project_name, id, model_name, version, data, async_req=True)
@@ -3788,7 +3920,7 @@ class CoreApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def model_versions_file_download(self, project_name, model_name, version, _preload_content = False, **kwargs):  # noqa: E501
+    def model_versions_file_download(self, project_name, model_name, version, **kwargs):  # noqa: E501
         """Download model files  # noqa: E501
 
          ### Description  Download a model file for a specific version of a model  ### Response Structure   - `file`: Model file of the version   # noqa: E501
@@ -3803,7 +3935,7 @@ class CoreApi(object):
         :param str version: (required)
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
-                                 data. Default is True.
+                                 data. Default is False.
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3815,7 +3947,7 @@ class CoreApi(object):
         kwargs['_return_http_data_only'] = True
         return self.model_versions_file_download_with_http_info(project_name, model_name, version, **kwargs)  # noqa: E501
 
-    def model_versions_file_download_with_http_info(self, project_name, model_name, version, _preload_content = False, **kwargs):  # noqa: E501
+    def model_versions_file_download_with_http_info(self, project_name, model_name, version, **kwargs):  # noqa: E501
         """Download model files  # noqa: E501
 
          ### Description  Download a model file for a specific version of a model  ### Response Structure   - `file`: Model file of the version   # noqa: E501
@@ -3832,7 +3964,7 @@ class CoreApi(object):
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
-                                 data. Default is True.
+                                 data. Default is False.
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3908,7 +4040,7 @@ class CoreApi(object):
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
+            _preload_content=local_var_params.get('_preload_content', False),
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
@@ -6040,110 +6172,6 @@ class CoreApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def organizations_delete(self, organization_name, **kwargs):  # noqa: E501
-        """Delete an organization  # noqa: E501
-
-         ### Description  Delete an organization. The user making the request must have appropriate permissions. **When an organization is deleted, all the users and projects which are part of that organization are also deleted.**   # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.organizations_delete(organization_name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str organization_name: (required)
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.organizations_delete_with_http_info(organization_name, **kwargs)  # noqa: E501
-
-    def organizations_delete_with_http_info(self, organization_name, **kwargs):  # noqa: E501
-        """Delete an organization  # noqa: E501
-
-         ### Description  Delete an organization. The user making the request must have appropriate permissions. **When an organization is deleted, all the users and projects which are part of that organization are also deleted.**   # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.organizations_delete_with_http_info(organization_name, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param str organization_name: (required)
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = ['organization_name']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method organizations_delete" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'organization_name' is set
-        if self.api_client.client_side_validation and ('organization_name' not in local_var_params or  # noqa: E501
-                                                        local_var_params['organization_name'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `organization_name` when calling `organizations_delete`")  # noqa: E501
-
-        collection_formats = {}
-
-        path_params = {}
-        if 'organization_name' in local_var_params:
-            path_params['organization_name'] = local_var_params['organization_name']  # noqa: E501
-
-        query_params = []
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # Authentication setting
-        auth_settings = ['api_key']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/organizations/{organization_name}', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type=None,  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
     def organizations_get(self, organization_name, **kwargs):  # noqa: E501
         """Get details of an organization  # noqa: E501
 
@@ -6355,7 +6383,7 @@ class CoreApi(object):
     def organizations_update(self, organization_name, data, **kwargs):  # noqa: E501
         """Update details of an organization  # noqa: E501
 
-         ### Description  Update an organization. The user making the request must have appropriate permissions.  It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to upgrade the subscription of an organization.  ### Optional Parameters   - `subscription`: New subscription  - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted upon upgrading the subscriptions  #### Request Examples ``` {   \"subscription\": \"professional\",   \"subscription_agreed\": true } ```  ### Response Structure  Details of a organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Time the organization was created    - `subscription`: Type of subscription    - `subscription_agreement_date`: Time the subscription agreement was accepted    - `subscription_agreement_user`: User who accepted the subscription agreement    #### Response Examples ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\",   \"subscription_agreement_date\": \"2020-04-25T12:26:18.976481Z\",   \"subscription_agreement_user\": \"test-user-2@test.com\" } ```   # noqa: E501
+         ### Description  Update an organization. The user making the request must be admin of the organization.  It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to upgrade the subscription of an organization.  ### Optional Parameters   - `subscription`: New subscription  - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted upon upgrading the subscriptions  #### Request Examples ``` {   \"subscription\": \"professional\",   \"subscription_agreed\": true } ```  ### Response Structure  Details of a organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Time the organization was created    - `subscription`: Type of subscription    - `subscription_agreement_date`: Time the subscription agreement was accepted    - `subscription_agreement_user`: User who accepted the subscription agreement    #### Response Examples ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\",   \"subscription_agreement_date\": \"2020-04-25T12:26:18.976481Z\",   \"subscription_agreement_user\": \"test-user-2@test.com\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_update(organization_name, data, async_req=True)
@@ -6381,7 +6409,7 @@ class CoreApi(object):
     def organizations_update_with_http_info(self, organization_name, data, **kwargs):  # noqa: E501
         """Update details of an organization  # noqa: E501
 
-         ### Description  Update an organization. The user making the request must have appropriate permissions.  It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to upgrade the subscription of an organization.  ### Optional Parameters   - `subscription`: New subscription  - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted upon upgrading the subscriptions  #### Request Examples ``` {   \"subscription\": \"professional\",   \"subscription_agreed\": true } ```  ### Response Structure  Details of a organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Time the organization was created    - `subscription`: Type of subscription    - `subscription_agreement_date`: Time the subscription agreement was accepted    - `subscription_agreement_user`: User who accepted the subscription agreement    #### Response Examples ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\",   \"subscription_agreement_date\": \"2020-04-25T12:26:18.976481Z\",   \"subscription_agreement_user\": \"test-user-2@test.com\" } ```   # noqa: E501
+         ### Description  Update an organization. The user making the request must be admin of the organization.  It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to upgrade the subscription of an organization.  ### Optional Parameters   - `subscription`: New subscription  - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted upon upgrading the subscriptions  #### Request Examples ``` {   \"subscription\": \"professional\",   \"subscription_agreed\": true } ```  ### Response Structure  Details of a organization  - `id`: Unique identifier for the organization (UUID)    - `name`: Name of the organization    - `creation_date`: Time the organization was created    - `subscription`: Type of subscription    - `subscription_agreement_date`: Time the subscription agreement was accepted    - `subscription_agreement_user`: User who accepted the subscription agreement    #### Response Examples ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\",   \"subscription_agreement_date\": \"2020-04-25T12:26:18.976481Z\",   \"subscription_agreement_user\": \"test-user-2@test.com\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_update_with_http_info(organization_name, data, async_req=True)
@@ -6832,7 +6860,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: AttachmentsList
+        :return: Attachments
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -6861,7 +6889,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(AttachmentsList, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(Attachments, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -6932,7 +6960,7 @@ class CoreApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='AttachmentsList',  # noqa: E501
+            response_type='Attachments',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -8191,7 +8219,7 @@ class CoreApi(object):
     def pipelines_create(self, project_name, data, **kwargs):  # noqa: E501
         """Create pipelines  # noqa: E501
 
-              ### Description  Create a pipeline in a project. The input_fields represent the fields that the input data should contain. When an object is attached to the pipeline, it means that the input data will be forwarded to these objects.  ### Required Parameters  - `name`: Name of the pipeline. It is unique within a project. - `input_type`: Type of the connector. It can be either structured or blob. - `input_fields`: A list of fields with name and data_type. In case of blob pipelines, the input_fields should be omitted or given as an empty list. For structured pipelines, they must be provided.  #### Request Examples  A structured pipeline  ``` {   \"name\": \"pipeline-1\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```    A blob pipeline  ``` {   \"name\": \"pipeline-2\",   \"input_type\": \"blob\" } ```  ``` {   \"name\": \"pipeline-2\",   \"input_type\": \"blob\",   \"input_fields\": [] } ```  ### Response Structure  Details of the created pipeline  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `project`: Project name in which the pipeline is created  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",   \"name\": \"pipeline-1\",   \"project\": \"project-1\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"input_type\": \"blob\",   \"input_fields\": [] } ```   # noqa: E501
+              ### Description  Create a pipeline in a project. The input_fields represent the fields that the input data should contain. When an object is attached to the pipeline, it means that the input data will be forwarded to these objects.  ### Required Parameters  - `name`: Name of the pipeline. It is unique within a project. - `input_type`: Type of the connector. It can be either structured or blob. - `input_fields`: A list of fields with name and data_type. In case of blob pipelines, the input_fields should be omitted or given as an empty list. For structured pipelines, they must be provided.  ### Optional Parameters - `description`: Description of the pipeline  #### Request Examples  A structured pipeline  ``` {   \"name\": \"pipeline-1\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```    A blob pipeline  ``` {   \"name\": \"pipeline-2\",   \"input_type\": \"blob\",   \"description\": \"my description\" } ```  ``` {   \"name\": \"pipeline-2\",   \"input_type\": \"blob\",   \"input_fields\": [] } ```  ### Response Structure  Details of the created pipeline  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `description`: Description of the pipeline  - `project`: Project name in which the pipeline is created  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",   \"name\": \"pipeline-1\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"blob\",   \"input_fields\": [] } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_create(project_name, data, async_req=True)
@@ -8217,7 +8245,7 @@ class CoreApi(object):
     def pipelines_create_with_http_info(self, project_name, data, **kwargs):  # noqa: E501
         """Create pipelines  # noqa: E501
 
-              ### Description  Create a pipeline in a project. The input_fields represent the fields that the input data should contain. When an object is attached to the pipeline, it means that the input data will be forwarded to these objects.  ### Required Parameters  - `name`: Name of the pipeline. It is unique within a project. - `input_type`: Type of the connector. It can be either structured or blob. - `input_fields`: A list of fields with name and data_type. In case of blob pipelines, the input_fields should be omitted or given as an empty list. For structured pipelines, they must be provided.  #### Request Examples  A structured pipeline  ``` {   \"name\": \"pipeline-1\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```    A blob pipeline  ``` {   \"name\": \"pipeline-2\",   \"input_type\": \"blob\" } ```  ``` {   \"name\": \"pipeline-2\",   \"input_type\": \"blob\",   \"input_fields\": [] } ```  ### Response Structure  Details of the created pipeline  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `project`: Project name in which the pipeline is created  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",   \"name\": \"pipeline-1\",   \"project\": \"project-1\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"input_type\": \"blob\",   \"input_fields\": [] } ```   # noqa: E501
+              ### Description  Create a pipeline in a project. The input_fields represent the fields that the input data should contain. When an object is attached to the pipeline, it means that the input data will be forwarded to these objects.  ### Required Parameters  - `name`: Name of the pipeline. It is unique within a project. - `input_type`: Type of the connector. It can be either structured or blob. - `input_fields`: A list of fields with name and data_type. In case of blob pipelines, the input_fields should be omitted or given as an empty list. For structured pipelines, they must be provided.  ### Optional Parameters - `description`: Description of the pipeline  #### Request Examples  A structured pipeline  ``` {   \"name\": \"pipeline-1\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```    A blob pipeline  ``` {   \"name\": \"pipeline-2\",   \"input_type\": \"blob\",   \"description\": \"my description\" } ```  ``` {   \"name\": \"pipeline-2\",   \"input_type\": \"blob\",   \"input_fields\": [] } ```  ### Response Structure  Details of the created pipeline  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `description`: Description of the pipeline  - `project`: Project name in which the pipeline is created  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",   \"name\": \"pipeline-1\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"blob\",   \"input_fields\": [] } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_create_with_http_info(project_name, data, async_req=True)
@@ -8311,7 +8339,7 @@ class CoreApi(object):
     def pipelines_delete(self, project_name, pipeline_name, **kwargs):  # noqa: E501
         """Delete pipeline  # noqa: E501
 
-         ### Description  Delete a pipeline. This will also delete all objects and attachments contained in the pipeline.  ### Required Parameters  - None   # noqa: E501
+         ### Description  Delete a pipeline. This will also delete all objects and attachments contained in the pipeline.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_delete(project_name, pipeline_name, async_req=True)
@@ -8337,7 +8365,7 @@ class CoreApi(object):
     def pipelines_delete_with_http_info(self, project_name, pipeline_name, **kwargs):  # noqa: E501
         """Delete pipeline  # noqa: E501
 
-         ### Description  Delete a pipeline. This will also delete all objects and attachments contained in the pipeline.  ### Required Parameters  - None   # noqa: E501
+         ### Description  Delete a pipeline. This will also delete all objects and attachments contained in the pipeline.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_delete_with_http_info(project_name, pipeline_name, async_req=True)
@@ -8423,7 +8451,7 @@ class CoreApi(object):
     def pipelines_get(self, project_name, pipeline_name, **kwargs):  # noqa: E501
         """Get pipeline  # noqa: E501
 
-         ### Description  Get the details of a single pipeline  ### Required Parameters  - None  ### Response Structure  Details of the pipeline  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `project`: Project name in which the pipeline is  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"input_type\": \"blob\",   \"input_fields\": [] } ```   # noqa: E501
+         ### Description  Get the details of a single pipeline  ### Response Structure  Details of the pipeline  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `description` Description of the pipeline  - `project`: Project name in which the pipeline is  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"blob\",   \"input_fields\": [] } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_get(project_name, pipeline_name, async_req=True)
@@ -8449,7 +8477,7 @@ class CoreApi(object):
     def pipelines_get_with_http_info(self, project_name, pipeline_name, **kwargs):  # noqa: E501
         """Get pipeline  # noqa: E501
 
-         ### Description  Get the details of a single pipeline  ### Required Parameters  - None  ### Response Structure  Details of the pipeline  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `project`: Project name in which the pipeline is  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"input_type\": \"blob\",   \"input_fields\": [] } ```   # noqa: E501
+         ### Description  Get the details of a single pipeline  ### Response Structure  Details of the pipeline  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `description` Description of the pipeline  - `project`: Project name in which the pipeline is  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"blob\",   \"input_fields\": [] } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_get_with_http_info(project_name, pipeline_name, async_req=True)
@@ -8923,7 +8951,7 @@ class CoreApi(object):
     def pipelines_list(self, project_name, **kwargs):  # noqa: E501
         """List pipelines  # noqa: E501
 
-         ### Description  List all pipelines in a project  ### Required Parameters  - None  ### Response Structure  A list of details of the pipelines in the project  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `project`: Project name in which the pipeline is  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` [   {     \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",     \"name\": \"pipeline-1\",     \"project\": \"project-1\",     \"input_type\": \"structured\",     \"input_fields\": [       {         \"name\": \"field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"field-2\",         \"data_type\": \"double\"       }     ]   },   {     \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",     \"name\": \"pipeline-2\",     \"project\": \"project-1\",     \"input_type\": \"blob\",     \"input_fields\": []   } ] ```   # noqa: E501
+         ### Description  List all pipelines in a project  ### Response Structure  A list of details of the pipelines in the project  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `project`: Project name in which the pipeline is  - `description`: Description of the pipeline  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` [   {     \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",     \"name\": \"pipeline-1\",     \"project\": \"project-1\",     \"description\": \"my description\",     \"input_type\": \"structured\",     \"input_fields\": [       {         \"name\": \"field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"field-2\",         \"data_type\": \"double\"       }     ]   },   {     \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",     \"name\": \"pipeline-2\",     \"project\": \"project-1\",     \"description\": \"my description\",     \"input_type\": \"blob\",     \"input_fields\": []   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_list(project_name, async_req=True)
@@ -8948,7 +8976,7 @@ class CoreApi(object):
     def pipelines_list_with_http_info(self, project_name, **kwargs):  # noqa: E501
         """List pipelines  # noqa: E501
 
-         ### Description  List all pipelines in a project  ### Required Parameters  - None  ### Response Structure  A list of details of the pipelines in the project  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `project`: Project name in which the pipeline is  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` [   {     \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",     \"name\": \"pipeline-1\",     \"project\": \"project-1\",     \"input_type\": \"structured\",     \"input_fields\": [       {         \"name\": \"field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"field-2\",         \"data_type\": \"double\"       }     ]   },   {     \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",     \"name\": \"pipeline-2\",     \"project\": \"project-1\",     \"input_type\": \"blob\",     \"input_fields\": []   } ] ```   # noqa: E501
+         ### Description  List all pipelines in a project  ### Response Structure  A list of details of the pipelines in the project  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `project`: Project name in which the pipeline is  - `description`: Description of the pipeline  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` [   {     \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",     \"name\": \"pipeline-1\",     \"project\": \"project-1\",     \"description\": \"my description\",     \"input_type\": \"structured\",     \"input_fields\": [       {         \"name\": \"field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"field-2\",         \"data_type\": \"double\"       }     ]   },   {     \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",     \"name\": \"pipeline-2\",     \"project\": \"project-1\",     \"description\": \"my description\",     \"input_type\": \"blob\",     \"input_fields\": []   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_list_with_http_info(project_name, async_req=True)
@@ -9031,7 +9059,7 @@ class CoreApi(object):
     def pipelines_update(self, project_name, pipeline_name, data, **kwargs):  # noqa: E501
         """Update pipeline  # noqa: E501
 
-              ### Description  Update a pipeline. All necessary fields are validated again.  ### Optional Parameters   - `name`: New name for the pipeline  - `input_type`: New type for the pipeline. It is possible to change the type from blob to structured and vice versa.  - `input_fields`: New input fields for the pipeline.  If the type of pipeline was blob, the given fields are created for the pipeline. If the type of pipeline was structured, the old fields are replaced with the new ones. If one or more old fields need to be kept, they must be provided again. In case an error occurs while creating the new fields, the pipeline will still have the old fields. If the pipeline is updated to have blob type, input_fields should be provided as en empty list or should not be provided.  #### Request Examples  ``` {   \"name\": \"new-pipeline-name\" } ```   ``` {   \"input_type\": \"blob\" } ```  ``` {   \"input_type\": \"blob\",   \"input_fields\": [] } ```   ``` {   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```  ### Response Structure  Details of the updated pipeline  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `project`: Project name in which the pipeline is  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"new-pipeline-name\",   \"project\": \"project-1\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```   # noqa: E501
+              ### Description  Update a pipeline. All necessary fields are validated again.  ### Optional Parameters   - `name`: New name for the pipeline  - `description`: New description for the pipeline  - `input_type`: New type for the pipeline. It is possible to change the type from blob to structured and vice versa.  - `input_fields`: New input fields for the pipeline.  If the type of pipeline was blob, the given fields are created for the pipeline. If the type of pipeline was structured, the old fields are replaced with the new ones. If one or more old fields need to be kept, they must be provided again. In case an error occurs while creating the new fields, the pipeline will still have the old fields. If the pipeline is updated to have blob type, input_fields should be provided as en empty list or should not be provided.  #### Request Examples  ``` {   \"name\": \"new-pipeline-name\" } ```  ``` {   \"description\": \"New pipeline description\" } ```  ``` {   \"input_type\": \"blob\" } ```  ``` {   \"input_type\": \"blob\",   \"input_fields\": [] } ```   ``` {   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```  ### Response Structure  Details of the updated pipeline  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `project`: Project name in which the pipeline is  - `description`: Description for the pipeline  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"new-pipeline-name\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_update(project_name, pipeline_name, data, async_req=True)
@@ -9058,7 +9086,7 @@ class CoreApi(object):
     def pipelines_update_with_http_info(self, project_name, pipeline_name, data, **kwargs):  # noqa: E501
         """Update pipeline  # noqa: E501
 
-              ### Description  Update a pipeline. All necessary fields are validated again.  ### Optional Parameters   - `name`: New name for the pipeline  - `input_type`: New type for the pipeline. It is possible to change the type from blob to structured and vice versa.  - `input_fields`: New input fields for the pipeline.  If the type of pipeline was blob, the given fields are created for the pipeline. If the type of pipeline was structured, the old fields are replaced with the new ones. If one or more old fields need to be kept, they must be provided again. In case an error occurs while creating the new fields, the pipeline will still have the old fields. If the pipeline is updated to have blob type, input_fields should be provided as en empty list or should not be provided.  #### Request Examples  ``` {   \"name\": \"new-pipeline-name\" } ```   ``` {   \"input_type\": \"blob\" } ```  ``` {   \"input_type\": \"blob\",   \"input_fields\": [] } ```   ``` {   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```  ### Response Structure  Details of the updated pipeline  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `project`: Project name in which the pipeline is  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"new-pipeline-name\",   \"project\": \"project-1\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```   # noqa: E501
+              ### Description  Update a pipeline. All necessary fields are validated again.  ### Optional Parameters   - `name`: New name for the pipeline  - `description`: New description for the pipeline  - `input_type`: New type for the pipeline. It is possible to change the type from blob to structured and vice versa.  - `input_fields`: New input fields for the pipeline.  If the type of pipeline was blob, the given fields are created for the pipeline. If the type of pipeline was structured, the old fields are replaced with the new ones. If one or more old fields need to be kept, they must be provided again. In case an error occurs while creating the new fields, the pipeline will still have the old fields. If the pipeline is updated to have blob type, input_fields should be provided as en empty list or should not be provided.  #### Request Examples  ``` {   \"name\": \"new-pipeline-name\" } ```  ``` {   \"description\": \"New pipeline description\" } ```  ``` {   \"input_type\": \"blob\" } ```  ``` {   \"input_type\": \"blob\",   \"input_fields\": [] } ```   ``` {   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```  ### Response Structure  Details of the updated pipeline  - `id`: Unique identifier for the pipeline (UUID)  - `name`: Name of the pipeline  - `project`: Project name in which the pipeline is  - `description`: Description for the pipeline  - `input_type`: Type of the pipeline  - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"new-pipeline-name\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_update_with_http_info(project_name, pipeline_name, data, async_req=True)
@@ -9159,7 +9187,7 @@ class CoreApi(object):
     def project_environment_variables_create(self, project_name, data, **kwargs):  # noqa: E501
         """Create project environment variable  # noqa: E501
 
-         ### Description Create an environment variable for the project. This variable will be inherited by all models in this project.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.  #### Request Examples ``` {   \"name\": \"database_schema\",   \"value\": \"public\",   \"secret\": false } ``` ``` {   \"name\": \"database_password\",   \"value\": \"password\",   \"secret\": true } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` {   \"id\": \"4c15a27e-25ea-4be0-86c7-f4790389d061\",   \"name\": \"database_schema\",   \"value\": \"public\",   \"secret\": false } ``` ``` {   \"id\": \"06c2c8be-507e-4fae-981d-54e94f22dab0\",   \"name\": \"database_password\",   \"value\": null,   \"secret\": true } ```   # noqa: E501
+         ### Description Create an environment variable for the project. This variable will be inherited by all models in this project.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string. It may be an empty string (\"\").  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.  #### Request Examples ``` {   \"name\": \"database_schema\",   \"value\": \"public\",   \"secret\": false } ``` ``` {   \"name\": \"database_password\",   \"value\": \"password\",   \"secret\": true } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` {   \"id\": \"4c15a27e-25ea-4be0-86c7-f4790389d061\",   \"name\": \"database_schema\",   \"value\": \"public\",   \"secret\": false } ``` ``` {   \"id\": \"06c2c8be-507e-4fae-981d-54e94f22dab0\",   \"name\": \"database_password\",   \"value\": null,   \"secret\": true } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.project_environment_variables_create(project_name, data, async_req=True)
@@ -9185,7 +9213,7 @@ class CoreApi(object):
     def project_environment_variables_create_with_http_info(self, project_name, data, **kwargs):  # noqa: E501
         """Create project environment variable  # noqa: E501
 
-         ### Description Create an environment variable for the project. This variable will be inherited by all models in this project.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.  #### Request Examples ``` {   \"name\": \"database_schema\",   \"value\": \"public\",   \"secret\": false } ``` ``` {   \"name\": \"database_password\",   \"value\": \"password\",   \"secret\": true } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` {   \"id\": \"4c15a27e-25ea-4be0-86c7-f4790389d061\",   \"name\": \"database_schema\",   \"value\": \"public\",   \"secret\": false } ``` ``` {   \"id\": \"06c2c8be-507e-4fae-981d-54e94f22dab0\",   \"name\": \"database_password\",   \"value\": null,   \"secret\": true } ```   # noqa: E501
+         ### Description Create an environment variable for the project. This variable will be inherited by all models in this project.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string. It may be an empty string (\"\").  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.  #### Request Examples ``` {   \"name\": \"database_schema\",   \"value\": \"public\",   \"secret\": false } ``` ``` {   \"name\": \"database_password\",   \"value\": \"password\",   \"secret\": true } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` {   \"id\": \"4c15a27e-25ea-4be0-86c7-f4790389d061\",   \"name\": \"database_schema\",   \"value\": \"public\",   \"secret\": false } ``` ``` {   \"id\": \"06c2c8be-507e-4fae-981d-54e94f22dab0\",   \"name\": \"database_password\",   \"value\": null,   \"secret\": true } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.project_environment_variables_create_with_http_info(project_name, data, async_req=True)
@@ -9615,7 +9643,7 @@ class CoreApi(object):
     def project_environment_variables_update(self, project_name, id, data, **kwargs):  # noqa: E501
         """Update project environment variable  # noqa: E501
 
-         ### Description Update an environment variable for the project.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).  #### Request Examples ``` {   \"name\": \"database_schema\",   \"value\": \"new+schema\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"4c15a27e-25ea-4be0-86c7-f4790389d061\", \"name\": \"database_schema\", \"value\": \"new_schema\", \"secret\": false } ```   # noqa: E501
+         ### Description Update an environment variable for the project.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string. It may be an empty string (\"\").  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).  #### Request Examples ``` {   \"name\": \"database_schema\",   \"value\": \"new+schema\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"4c15a27e-25ea-4be0-86c7-f4790389d061\", \"name\": \"database_schema\", \"value\": \"new_schema\", \"secret\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.project_environment_variables_update(project_name, id, data, async_req=True)
@@ -9642,7 +9670,7 @@ class CoreApi(object):
     def project_environment_variables_update_with_http_info(self, project_name, id, data, **kwargs):  # noqa: E501
         """Update project environment variable  # noqa: E501
 
-         ### Description Update an environment variable for the project.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).  #### Request Examples ``` {   \"name\": \"database_schema\",   \"value\": \"new+schema\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"4c15a27e-25ea-4be0-86c7-f4790389d061\", \"name\": \"database_schema\", \"value\": \"new_schema\", \"secret\": false } ```   # noqa: E501
+         ### Description Update an environment variable for the project.  ### Required Parameters  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.  - `value`: The value of the variable as a string. It may be an empty string (\"\").  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).  #### Request Examples ``` {   \"name\": \"database_schema\",   \"value\": \"new+schema\",   \"secret\": false } ```  ### Response Structure   A list of variables described by the following fields:  - `id`: Unique identifier for the environment variable  - `name`: Variable name  - `value`: Variable value (will be null for secret variables)  - `secret`: Boolean that indicates if this variable contains sensitive information  #### Response Examples  ``` { \"id\": \"4c15a27e-25ea-4be0-86c7-f4790389d061\", \"name\": \"database_schema\", \"value\": \"new_schema\", \"secret\": false } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.project_environment_variables_update_with_http_info(project_name, id, data, async_req=True)
@@ -11999,7 +12027,7 @@ class CoreApi(object):
     def service_users_token(self, project_name, service_user_id, data, **kwargs):  # noqa: E501
         """Reset the token of a service user  # noqa: E501
 
-         ### Description  Reset the token of a service user. The old token will be deleted and a new one will be created for the service user.  ### Response Structure  Details of the new token for the service user  - `token`: The new API token for the service user  #### Response Examples ``` {   \"token\": \"e962d9190348af7fa8d233d75cff7385b4335f81\" } ```   # noqa: E501
+         ### Description  Reset the token of a service user. The old token will be deleted and a new one will be created for the service user. No data should be sent in the body of the request.  ### Response Structure  Details of the new token for the service user  - `token`: The new API token for the service user  #### Response Examples ``` {   \"token\": \"e962d9190348af7fa8d233d75cff7385b4335f81\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.service_users_token(project_name, service_user_id, data, async_req=True)
@@ -12026,7 +12054,7 @@ class CoreApi(object):
     def service_users_token_with_http_info(self, project_name, service_user_id, data, **kwargs):  # noqa: E501
         """Reset the token of a service user  # noqa: E501
 
-         ### Description  Reset the token of a service user. The old token will be deleted and a new one will be created for the service user.  ### Response Structure  Details of the new token for the service user  - `token`: The new API token for the service user  #### Response Examples ``` {   \"token\": \"e962d9190348af7fa8d233d75cff7385b4335f81\" } ```   # noqa: E501
+         ### Description  Reset the token of a service user. The old token will be deleted and a new one will be created for the service user. No data should be sent in the body of the request.  ### Response Structure  Details of the new token for the service user  - `token`: The new API token for the service user  #### Response Examples ``` {   \"token\": \"e962d9190348af7fa8d233d75cff7385b4335f81\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.service_users_token_with_http_info(project_name, service_user_id, data, async_req=True)
@@ -12355,7 +12383,7 @@ class CoreApi(object):
     def user_create(self, data, **kwargs):  # noqa: E501
         """Create a new user  # noqa: E501
 
-         ### Description  Create a new user with the given details - email, password, name and surname. After creation, an email is send to the email address to activate the acount. A user is required to accept the terms and conditions.  ### Required Parameters - `email`: Email of the user. This is a unique field.   - `password`: Password of the user   - `terms_conditions`: Boolean field. Pass True to accept terms and conditions.    ### Optional Parameters - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"name\": \"User name\",   \"surname\": \"User surname\",   \"terms_conditions\": true } ```  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"terms_conditions\": true } ```  ### Response Structure  Details of the created user  - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user   #### Response Examples  ``` {   \"email\": \"test@example.com\",   \"name\": \"User name\",   \"surname\": \"User surname\" } ```   # noqa: E501
+         ### Description  Create a new user with the given details - email, password, name and surname. After creation, an email is send to the email address to activate the acount. A user is required to accept the terms and conditions.  The password needs to meet the following requirements: - At least 8 characters long - At least one capital and one lowercase letter - At least one number - At least one of the following symbols: !#$%&')(*+,./:;\"<=>?[@]^_`{|}~-\"   ### Required Parameters - `email`: Email of the user. This is a unique field.   - `password`: Password of the user   - `terms_conditions`: Boolean field. Pass True to accept terms and conditions.    ### Optional Parameters - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"name\": \"User name\",   \"surname\": \"User surname\",   \"terms_conditions\": true } ```  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"terms_conditions\": true } ```  ### Response Structure  Details of the created user  - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user   #### Response Examples  ``` {   \"email\": \"test@example.com\",   \"name\": \"User name\",   \"surname\": \"User surname\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.user_create(data, async_req=True)
@@ -12380,7 +12408,7 @@ class CoreApi(object):
     def user_create_with_http_info(self, data, **kwargs):  # noqa: E501
         """Create a new user  # noqa: E501
 
-         ### Description  Create a new user with the given details - email, password, name and surname. After creation, an email is send to the email address to activate the acount. A user is required to accept the terms and conditions.  ### Required Parameters - `email`: Email of the user. This is a unique field.   - `password`: Password of the user   - `terms_conditions`: Boolean field. Pass True to accept terms and conditions.    ### Optional Parameters - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"name\": \"User name\",   \"surname\": \"User surname\",   \"terms_conditions\": true } ```  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"terms_conditions\": true } ```  ### Response Structure  Details of the created user  - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user   #### Response Examples  ``` {   \"email\": \"test@example.com\",   \"name\": \"User name\",   \"surname\": \"User surname\" } ```   # noqa: E501
+         ### Description  Create a new user with the given details - email, password, name and surname. After creation, an email is send to the email address to activate the acount. A user is required to accept the terms and conditions.  The password needs to meet the following requirements: - At least 8 characters long - At least one capital and one lowercase letter - At least one number - At least one of the following symbols: !#$%&')(*+,./:;\"<=>?[@]^_`{|}~-\"   ### Required Parameters - `email`: Email of the user. This is a unique field.   - `password`: Password of the user   - `terms_conditions`: Boolean field. Pass True to accept terms and conditions.    ### Optional Parameters - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"name\": \"User name\",   \"surname\": \"User surname\",   \"terms_conditions\": true } ```  ``` {   \"email\": \"test@example.com\",   \"password\": \"secret-password\",   \"terms_conditions\": true } ```  ### Response Structure  Details of the created user  - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user   #### Response Examples  ``` {   \"email\": \"test@example.com\",   \"name\": \"User name\",   \"surname\": \"User surname\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.user_create_with_http_info(data, async_req=True)
@@ -12646,118 +12674,6 @@ class CoreApi(object):
 
         return self.api_client.call_api(
             '/user', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='UserDetail',  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=local_var_params.get('async_req'),
-            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
-            _preload_content=local_var_params.get('_preload_content', True),
-            _request_timeout=local_var_params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def user_update(self, data, **kwargs):  # noqa: E501
-        """Update user details  # noqa: E501
-
-          ### Description Update the details of the user making the request - name, surname, email and password.  When updating the password, the parameter `previous_password` with the value of the previous password is also required.  ### Optional Parameters - `email`: Email of the user   - `password`: Password of the user       - `previous_password`: Previous password of the user (This field is only required when updating the password)   - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"new_test@example.com\" } ```  ``` {   \"password\": \"new-secret-password\",   \"previous_password\": \"previous-secret-password\" } ```  ``` {   \"name\": \"New user name\",   \"surname\": \"New user surname\" } ```  ### Response Structure  Details of the created user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `registration_date`: Date when the user was registered  #### Response Examples  ``` {   \"id\": \"4740a13a-70ae-4b7a-a461-8231eb2c0594\",   \"email\": \"new_test@example.com\",   \"type\": \"user\",   \"name\": \"New user name\",   \"surname\": \"New user surname\",   \"registration_date\": \"2020-01-10 10:06:25.632+00:00\" } ```   # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.user_update(data, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param UserUpdate data: (required)
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: UserDetail
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        return self.user_update_with_http_info(data, **kwargs)  # noqa: E501
-
-    def user_update_with_http_info(self, data, **kwargs):  # noqa: E501
-        """Update user details  # noqa: E501
-
-          ### Description Update the details of the user making the request - name, surname, email and password.  When updating the password, the parameter `previous_password` with the value of the previous password is also required.  ### Optional Parameters - `email`: Email of the user   - `password`: Password of the user       - `previous_password`: Previous password of the user (This field is only required when updating the password)   - `name`: Name of the user   - `surname`: Surname of the user  #### Request Examples  ``` {   \"email\": \"new_test@example.com\" } ```  ``` {   \"password\": \"new-secret-password\",   \"previous_password\": \"previous-secret-password\" } ```  ``` {   \"name\": \"New user name\",   \"surname\": \"New user surname\" } ```  ### Response Structure  Details of the created user  - `id`: Unique identifier for the user (UUID)    - `email`: Email of the user    - `name`: Name of the user    - `surname`: Surname of the user    - `registration_date`: Date when the user was registered  #### Response Examples  ``` {   \"id\": \"4740a13a-70ae-4b7a-a461-8231eb2c0594\",   \"email\": \"new_test@example.com\",   \"type\": \"user\",   \"name\": \"New user name\",   \"surname\": \"New user surname\",   \"registration_date\": \"2020-01-10 10:06:25.632+00:00\" } ```   # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.user_update_with_http_info(data, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool: execute request asynchronously
-        :param UserUpdate data: (required)
-        :param _return_http_data_only: response data without head status code
-                                       and headers
-        :param _preload_content: if False, the urllib3.HTTPResponse object will
-                                 be returned without reading/decoding response
-                                 data. Default is True.
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :return: tuple(UserDetail, status_code(int), headers(HTTPHeaderDict))
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        local_var_params = locals()
-
-        all_params = ['data']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        for key, val in six.iteritems(local_var_params['kwargs']):
-            if key not in all_params:
-                raise ApiTypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method user_update" % key
-                )
-            local_var_params[key] = val
-        del local_var_params['kwargs']
-        # verify the required parameter 'data' is set
-        if self.api_client.client_side_validation and ('data' not in local_var_params or  # noqa: E501
-                                                        local_var_params['data'] is None):  # noqa: E501
-            raise ApiValueError("Missing the required parameter `data` when calling `user_update`")  # noqa: E501
-
-        collection_formats = {}
-
-        path_params = {}
-
-        query_params = []
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        if 'data' in local_var_params:
-            body_params = local_var_params['data']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
-            ['application/json'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['api_key']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/user', 'PATCH',
             path_params,
             query_params,
             header_params,

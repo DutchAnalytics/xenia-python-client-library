@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **id** | **str** |  | [optional] [readonly] 
 **name** | **str** |  | 
 **project** | **str** |  | 
+**description** | **str** |  | [optional] 
 **input_type** | **str** |  | 
 **input_fields** | [**list[PipelineInputFieldList]**](PipelineInputFieldList.md) |  | 
 

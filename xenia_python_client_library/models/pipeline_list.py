@@ -36,6 +36,7 @@ class PipelineList(object):
         'id': 'str',
         'name': 'str',
         'project': 'str',
+        'description': 'str',
         'input_type': 'str',
         'input_fields': 'list[PipelineInputFieldList]'
     }
@@ -44,11 +45,12 @@ class PipelineList(object):
         'id': 'id',
         'name': 'name',
         'project': 'project',
+        'description': 'description',
         'input_type': 'input_type',
         'input_fields': 'input_fields'
     }
 
-    def __init__(self, id=None, name=None, project=None, input_type=None, input_fields=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, id=None, name=None, project=None, description=None, input_type=None, input_fields=None, local_vars_configuration=None):  # noqa: E501
         """PipelineList - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -57,6 +59,7 @@ class PipelineList(object):
         self._id = None
         self._name = None
         self._project = None
+        self._description = None
         self._input_type = None
         self._input_fields = None
         self.discriminator = None
@@ -65,6 +68,8 @@ class PipelineList(object):
             self.id = id
         self.name = name
         self.project = project
+        if description is not None:
+            self.description = description
         self.input_type = input_type
         self.input_fields = input_fields
 
@@ -143,6 +148,30 @@ class PipelineList(object):
             raise ValueError("Invalid value for `project`, length must be greater than or equal to `1`")  # noqa: E501
 
         self._project = project
+
+    @property
+    def description(self):
+        """Gets the description of this PipelineList.  # noqa: E501
+
+
+        :return: The description of this PipelineList.  # noqa: E501
+        :rtype: str
+        """
+        return self._description
+
+    @description.setter
+    def description(self, description):
+        """Sets the description of this PipelineList.
+
+
+        :param description: The description of this PipelineList.  # noqa: E501
+        :type: str
+        """
+        if (self.local_vars_configuration.client_side_validation and
+                description is not None and len(description) > 200):
+            raise ValueError("Invalid value for `description`, length must be less than or equal to `200`")  # noqa: E501
+
+        self._description = description
 
     @property
     def input_type(self):

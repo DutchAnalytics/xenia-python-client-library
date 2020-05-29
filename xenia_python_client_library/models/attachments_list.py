@@ -58,9 +58,12 @@ class AttachmentsList(object):
         self._mapping = None
         self.discriminator = None
 
-        self.id = id
-        self.source_name = source_name
-        self.destination_name = destination_name
+        if id is not None:
+            self.id = id
+        if source_name is not None:
+            self.source_name = source_name
+        if destination_name is not None:
+            self.destination_name = destination_name
         if mapping is not None:
             self.mapping = mapping
 
@@ -82,8 +85,6 @@ class AttachmentsList(object):
         :param id: The id of this AttachmentsList.  # noqa: E501
         :type: str
         """
-        if self.local_vars_configuration.client_side_validation and id is None:  # noqa: E501
-            raise ValueError("Invalid value for `id`, must not be `None`")  # noqa: E501
 
         self._id = id
 
@@ -105,11 +106,6 @@ class AttachmentsList(object):
         :param source_name: The source_name of this AttachmentsList.  # noqa: E501
         :type: str
         """
-        if self.local_vars_configuration.client_side_validation and source_name is None:  # noqa: E501
-            raise ValueError("Invalid value for `source_name`, must not be `None`")  # noqa: E501
-        if (self.local_vars_configuration.client_side_validation and
-                source_name is not None and len(source_name) < 1):
-            raise ValueError("Invalid value for `source_name`, length must be greater than or equal to `1`")  # noqa: E501
 
         self._source_name = source_name
 
@@ -131,11 +127,6 @@ class AttachmentsList(object):
         :param destination_name: The destination_name of this AttachmentsList.  # noqa: E501
         :type: str
         """
-        if self.local_vars_configuration.client_side_validation and destination_name is None:  # noqa: E501
-            raise ValueError("Invalid value for `destination_name`, must not be `None`")  # noqa: E501
-        if (self.local_vars_configuration.client_side_validation and
-                destination_name is not None and len(destination_name) < 1):
-            raise ValueError("Invalid value for `destination_name`, length must be greater than or equal to `1`")  # noqa: E501
 
         self._destination_name = destination_name
 

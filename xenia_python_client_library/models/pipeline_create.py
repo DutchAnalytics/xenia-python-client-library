@@ -34,28 +34,33 @@ class PipelineCreate(object):
     """
     openapi_types = {
         'name': 'str',
+        'description': 'str',
         'input_type': 'str',
         'input_fields': 'list[PipelineInputFieldCreate]'
     }
 
     attribute_map = {
         'name': 'name',
+        'description': 'description',
         'input_type': 'input_type',
         'input_fields': 'input_fields'
     }
 
-    def __init__(self, name=None, input_type=None, input_fields=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, name=None, description=None, input_type=None, input_fields=None, local_vars_configuration=None):  # noqa: E501
         """PipelineCreate - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
         self.local_vars_configuration = local_vars_configuration
 
         self._name = None
+        self._description = None
         self._input_type = None
         self._input_fields = None
         self.discriminator = None
 
         self.name = name
+        if description is not None:
+            self.description = description
         self.input_type = input_type
         if input_fields is not None:
             self.input_fields = input_fields
@@ -88,6 +93,27 @@ class PipelineCreate(object):
             raise ValueError("Invalid value for `name`, length must be greater than or equal to `1`")  # noqa: E501
 
         self._name = name
+
+    @property
+    def description(self):
+        """Gets the description of this PipelineCreate.  # noqa: E501
+
+
+        :return: The description of this PipelineCreate.  # noqa: E501
+        :rtype: str
+        """
+        return self._description
+
+    @description.setter
+    def description(self, description):
+        """Sets the description of this PipelineCreate.
+
+
+        :param description: The description of this PipelineCreate.  # noqa: E501
+        :type: str
+        """
+
+        self._description = description
 
     @property
     def input_type(self):

@@ -144,8 +144,8 @@ class UserPendingCreate(object):
         :type: str
         """
         if (self.local_vars_configuration.client_side_validation and
-                name is not None and len(name) > 30):
-            raise ValueError("Invalid value for `name`, length must be less than or equal to `30`")  # noqa: E501
+                name is not None and len(name) > 256):
+            raise ValueError("Invalid value for `name`, length must be less than or equal to `256`")  # noqa: E501
 
         self._name = name
 
@@ -168,8 +168,8 @@ class UserPendingCreate(object):
         :type: str
         """
         if (self.local_vars_configuration.client_side_validation and
-                surname is not None and len(surname) > 30):
-            raise ValueError("Invalid value for `surname`, length must be less than or equal to `30`")  # noqa: E501
+                surname is not None and len(surname) > 256):
+            raise ValueError("Invalid value for `surname`, length must be less than or equal to `256`")  # noqa: E501
 
         self._surname = surname
 

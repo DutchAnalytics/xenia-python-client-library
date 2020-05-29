@@ -14,7 +14,9 @@
 from __future__ import absolute_import
 
 # import models into model package
+from xenia_python_client_library.models.attachment_fields import AttachmentFields
 from xenia_python_client_library.models.attachment_fields_list import AttachmentFieldsList
+from xenia_python_client_library.models.attachments import Attachments
 from xenia_python_client_library.models.attachments_create import AttachmentsCreate
 from xenia_python_client_library.models.attachments_list import AttachmentsList
 from xenia_python_client_library.models.configuration_list import ConfigurationList
@@ -84,4 +86,3 @@ from xenia_python_client_library.models.success import Success
 from xenia_python_client_library.models.user_detail import UserDetail
 from xenia_python_client_library.models.user_pending_create import UserPendingCreate
 from xenia_python_client_library.models.user_pending_detail import UserPendingDetail
-from xenia_python_client_library.models.user_update import UserUpdate

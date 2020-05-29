@@ -33,29 +33,88 @@ class Logs(object):
                             and the value is json key in definition.
     """
     openapi_types = {
+        'id': 'str',
         'log': 'str',
-        'date': 'datetime'
+        'date': 'datetime',
+        'connector_name': 'str',
+        'model_name': 'str',
+        'model_version': 'str',
+        'pipeline_name': 'str',
+        'pipeline_object_name': 'str',
+        'pipeline_trace_id': 'str'
     }
 
     attribute_map = {
+        'id': 'id',
         'log': 'log',
-        'date': 'date'
+        'date': 'date',
+        'connector_name': 'connector_name',
+        'model_name': 'model_name',
+        'model_version': 'model_version',
+        'pipeline_name': 'pipeline_name',
+        'pipeline_object_name': 'pipeline_object_name',
+        'pipeline_trace_id': 'pipeline_trace_id'
     }
 
-    def __init__(self, log=None, date=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, id=None, log=None, date=None, connector_name=None, model_name=None, model_version=None, pipeline_name=None, pipeline_object_name=None, pipeline_trace_id=None, local_vars_configuration=None):  # noqa: E501
         """Logs - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
         self.local_vars_configuration = local_vars_configuration
 
+        self._id = None
         self._log = None
         self._date = None
+        self._connector_name = None
+        self._model_name = None
+        self._model_version = None
+        self._pipeline_name = None
+        self._pipeline_object_name = None
+        self._pipeline_trace_id = None
         self.discriminator = None
 
+        if id is not None:
+            self.id = id
         if log is not None:
             self.log = log
         if date is not None:
             self.date = date
+        if connector_name is not None:
+            self.connector_name = connector_name
+        if model_name is not None:
+            self.model_name = model_name
+        if model_version is not None:
+            self.model_version = model_version
+        if pipeline_name is not None:
+            self.pipeline_name = pipeline_name
+        if pipeline_object_name is not None:
+            self.pipeline_object_name = pipeline_object_name
+        if pipeline_trace_id is not None:
+            self.pipeline_trace_id = pipeline_trace_id
+
+    @property
+    def id(self):
+        """Gets the id of this Logs.  # noqa: E501
+
+
+        :return: The id of this Logs.  # noqa: E501
+        :rtype: str
+        """
+        return self._id
+
+    @id.setter
+    def id(self, id):
+        """Sets the id of this Logs.
+
+
+        :param id: The id of this Logs.  # noqa: E501
+        :type: str
+        """
+        if (self.local_vars_configuration.client_side_validation and
+                id is not None and len(id) < 1):
+            raise ValueError("Invalid value for `id`, length must be greater than or equal to `1`")  # noqa: E501
+
+        self._id = id
 
     @property
     def log(self):
@@ -101,6 +160,147 @@ class Logs(object):
         """
 
         self._date = date
+
+    @property
+    def connector_name(self):
+        """Gets the connector_name of this Logs.  # noqa: E501
+
+
+        :return: The connector_name of this Logs.  # noqa: E501
+        :rtype: str
+        """
+        return self._connector_name
+
+    @connector_name.setter
+    def connector_name(self, connector_name):
+        """Sets the connector_name of this Logs.
+
+
+        :param connector_name: The connector_name of this Logs.  # noqa: E501
+        :type: str
+        """
+        if (self.local_vars_configuration.client_side_validation and
+                connector_name is not None and len(connector_name) < 1):
+            raise ValueError("Invalid value for `connector_name`, length must be greater than or equal to `1`")  # noqa: E501
+
+        self._connector_name = connector_name
+
+    @property
+    def model_name(self):
+        """Gets the model_name of this Logs.  # noqa: E501
+
+
+        :return: The model_name of this Logs.  # noqa: E501
+        :rtype: str
+        """
+        return self._model_name
+
+    @model_name.setter
+    def model_name(self, model_name):
+        """Sets the model_name of this Logs.
+
+
+        :param model_name: The model_name of this Logs.  # noqa: E501
+        :type: str
+        """
+        if (self.local_vars_configuration.client_side_validation and
+                model_name is not None and len(model_name) < 1):
+            raise ValueError("Invalid value for `model_name`, length must be greater than or equal to `1`")  # noqa: E501
+
+        self._model_name = model_name
+
+    @property
+    def model_version(self):
+        """Gets the model_version of this Logs.  # noqa: E501
+
+
+        :return: The model_version of this Logs.  # noqa: E501
+        :rtype: str
+        """
+        return self._model_version
+
+    @model_version.setter
+    def model_version(self, model_version):
+        """Sets the model_version of this Logs.
+
+
+        :param model_version: The model_version of this Logs.  # noqa: E501
+        :type: str
+        """
+        if (self.local_vars_configuration.client_side_validation and
+                model_version is not None and len(model_version) < 1):
+            raise ValueError("Invalid value for `model_version`, length must be greater than or equal to `1`")  # noqa: E501
+
+        self._model_version = model_version
+
+    @property
+    def pipeline_name(self):
+        """Gets the pipeline_name of this Logs.  # noqa: E501
+
+
+        :return: The pipeline_name of this Logs.  # noqa: E501
+        :rtype: str
+        """
+        return self._pipeline_name
+
+    @pipeline_name.setter
+    def pipeline_name(self, pipeline_name):
+        """Sets the pipeline_name of this Logs.
+
+
+        :param pipeline_name: The pipeline_name of this Logs.  # noqa: E501
+        :type: str
+        """
+        if (self.local_vars_configuration.client_side_validation and
+                pipeline_name is not None and len(pipeline_name) < 1):
+            raise ValueError("Invalid value for `pipeline_name`, length must be greater than or equal to `1`")  # noqa: E501
+
+        self._pipeline_name = pipeline_name
+
+    @property
+    def pipeline_object_name(self):
+        """Gets the pipeline_object_name of this Logs.  # noqa: E501
+
+
+        :return: The pipeline_object_name of this Logs.  # noqa: E501
+        :rtype: str
+        """
+        return self._pipeline_object_name
+
+    @pipeline_object_name.setter
+    def pipeline_object_name(self, pipeline_object_name):
+        """Sets the pipeline_object_name of this Logs.
+
+
+        :param pipeline_object_name: The pipeline_object_name of this Logs.  # noqa: E501
+        :type: str
+        """
+        if (self.local_vars_configuration.client_side_validation and
+                pipeline_object_name is not None and len(pipeline_object_name) < 1):
+            raise ValueError("Invalid value for `pipeline_object_name`, length must be greater than or equal to `1`")  # noqa: E501
+
+        self._pipeline_object_name = pipeline_object_name
+
+    @property
+    def pipeline_trace_id(self):
+        """Gets the pipeline_trace_id of this Logs.  # noqa: E501
+
+
+        :return: The pipeline_trace_id of this Logs.  # noqa: E501
+        :rtype: str
+        """
+        return self._pipeline_trace_id
+
+    @pipeline_trace_id.setter
+    def pipeline_trace_id(self, pipeline_trace_id):
+        """Sets the pipeline_trace_id of this Logs.
+
+
+        :param pipeline_trace_id: The pipeline_trace_id of this Logs.  # noqa: E501
+        :type: str
+        """
+
+        self._pipeline_trace_id = pipeline_trace_id
 
     def to_dict(self):
         """Returns the model properties as a dict"""

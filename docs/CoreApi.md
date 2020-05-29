@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**credentials_list**](CoreApi.md#credentials_list) | **GET** /projects/{project_name}/credentials | List credentials
 [**credentials_update**](CoreApi.md#credentials_update) | **PATCH** /projects/{project_name}/credentials/{credentials_name} | Update credentials
 [**metrics_get**](CoreApi.md#metrics_get) | **GET** /projects/{project_name}/metrics/{metric} | Get metrics
+[**model_blob_requests_get**](CoreApi.md#model_blob_requests_get) | **GET** /projects/{project_name}/models/{model_name}/versions/{version}/requests-blob/{request_id} | Get blob model request results
 [**model_environment_variables_create**](CoreApi.md#model_environment_variables_create) | **POST** /projects/{project_name}/models/{model_name}/environment-variables | Create model environment variable
 [**model_environment_variables_delete**](CoreApi.md#model_environment_variables_delete) | **DELETE** /projects/{project_name}/models/{model_name}/environment-variables/{id} | Delete model environment variable
 [**model_environment_variables_get**](CoreApi.md#model_environment_variables_get) | **GET** /projects/{project_name}/models/{model_name}/environment-variables/{id} | Get model environment variable
@@ -53,7 +54,6 @@ Method | HTTP request | Description
 [**organization_users_list**](CoreApi.md#organization_users_list) | **GET** /organizations/{organization_name}/users | List the users in an organization
 [**organization_users_update**](CoreApi.md#organization_users_update) | **PATCH** /organizations/{organization_name}/users/{user_id} | Update details of a user in an organization
 [**organizations_create**](CoreApi.md#organizations_create) | **POST** /organizations | Create organizations
-[**organizations_delete**](CoreApi.md#organizations_delete) | **DELETE** /organizations/{organization_name} | Delete an organization
 [**organizations_get**](CoreApi.md#organizations_get) | **GET** /organizations/{organization_name} | Get details of an organization
 [**organizations_list**](CoreApi.md#organizations_list) | **GET** /organizations | List organizations
 [**organizations_update**](CoreApi.md#organizations_update) | **PATCH** /organizations/{organization_name} | Update details of an organization
@@ -110,7 +110,6 @@ Method | HTTP request | Description
 [**user_create**](CoreApi.md#user_create) | **POST** /user | Create a new user
 [**user_delete**](CoreApi.md#user_delete) | **DELETE** /user | Delete user
 [**user_get**](CoreApi.md#user_get) | **GET** /user | Get user details
-[**user_update**](CoreApi.md#user_update) | **PATCH** /user | Update user details
 
 
 # **configurations_list**
@@ -224,7 +223,7 @@ A postgresql connector
 {
   "name": "postgresql-connector",
   "type": "postgresql",
-  "crendentials": "postgresql-credentials",
+  "credentials": "postgresql-credentials",
   "configuration": {
     "database": "database-1",
     "schema": "public",
@@ -1409,6 +1408,123 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **model_blob_requests_get**
+> ModelRequestResultList model_blob_requests_get(project_name, model_name, request_id, version)
+
+Get blob model request results
+
+
+### Description 
+Retrieve the result of a blob model request using the request_id. All users with permission to the project are able to collect the request result, not only the user that created the request.
+If the model request is still 'pending' or 'failed', the response will be a JSON dict. If the model request has ended with 'success', the blob is attached.  
+
+### Response Structure 
+A successful blob model request
+- `file`: The blob that was outputted by the model
+
+A pending/failed blob model request
+ - `time_created`: Server time that the request was made (current time)
+ - `time_last_updated`: Server time that the request was last updated (current time)
+ - `status`: Status of the request. May be pending or failed.
+ - `request_id`: Unique identifier for the model request, to be used when collecting the result
+ - `result`: Model request result value. NULL if not (yet) available or if the request failed.
+ - `error_message`: An error message explaining why the request has failed. NULL if the request was successful.
+ - `prediction_duration`: The time it took for the model request to complete in seconds.
+
+#### Response Examples 
+A successful model request
+```
+The blob file
+```
+
+A failed model request
+```
+{
+  "request_id": "5b65e27e-25ea-4be0-86c7-54e94f22dab0",
+  "time_created": "2019-02-22T09:19:51.919276Z",
+  "time_last_updated": "2019-02-22T09:19:52.532876Z",
+  "status": "failed",
+  "result": null,
+  "error_message": "Asset ID not supported",
+  "prediction_duration": 0
+}
+```
+
+A pending model request
+```
+{
+  "request_id": "5b65e27e-25ea-4be0-86c7-54e94f22dab0",
+  "time_created": "2019-02-22T09:19:51.919276Z",
+  "time_last_updated": "2019-02-22T09:19:51.919276Z",
+  "status": "pending",
+  "result": null,
+  "error_message": null,
+  "prediction_duration": 0
+}
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
+configuration.host = "https://api.dutchanalytics.net/v1.1"
+# Create an instance of the API class
+api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
+project_name = 'project_name_example' # str | 
+model_name = 'model_name_example' # str | 
+request_id = 'request_id_example' # str | 
+version = 'version_example' # str | 
+
+try:
+    # Get blob model request results
+    api_response = api_instance.model_blob_requests_get(project_name, model_name, request_id, version)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CoreApi->model_blob_requests_get: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **project_name** | **str**|  | 
+ **model_name** | **str**|  | 
+ **request_id** | **str**|  | 
+ **version** | **str**|  | 
+
+### Return type
+
+[**ModelRequestResultList**](ModelRequestResultList.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **model_environment_variables_create**
 > EnvironmentVariableList model_environment_variables_create(project_name, model_name, data)
 
@@ -1420,7 +1536,7 @@ Create an environment variable for the model. This variable will be inherited by
 
 ### Required Parameters
  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.
- - `value`: The value of the variable as a string
+ - `value`: The value of the variable as a string. It may be an empty string ("").
  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.
 
 #### Request Examples
@@ -1774,7 +1890,7 @@ Update an environment variable for the model. This cannot be used to update inhe
 
 ### Required Parameters
  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.
- - `value`: The value of the variable as a string
+ - `value`: The value of the variable as a string. It may be an empty string ("").
  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).
 
 #### Request Examples
@@ -2541,7 +2657,7 @@ Create an environment variable for the model version. Variables inherited from t
 
 ### Required Parameters
  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.
- - `value`: The value of the variable as a string
+ - `value`: The value of the variable as a string. It may be an empty string ("").
  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.
 
 #### Request Examples
@@ -2911,7 +3027,7 @@ Update an environment variable for the model version. This cannot be used to upd
 
 ### Required Parameters
  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.
- - `value`: The value of the variable as a string
+ - `value`: The value of the variable as a string. It may be an empty string ("").
  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).
 
 #### Request Examples
@@ -5191,71 +5307,6 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **organizations_delete**
-> organizations_delete(organization_name)
-
-Delete an organization
-
-
-### Description 
-Delete an organization. The user making the request must have appropriate permissions.
-**When an organization is deleted, all the users and projects which are part of that organization are also deleted.**
-
-
-### Example
-
-* Api Key Authentication (api_key):
-```python
-from __future__ import print_function
-import time
-import xenia_python_client_library
-from xenia_python_client_library.rest import ApiException
-from pprint import pprint
-configuration = xenia_python_client_library.Configuration()
-# Configure API key authorization: api_key
-configuration.api_key['Authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['Authorization'] = 'Bearer'
-
-# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
-configuration.host = "https://api.dutchanalytics.net/v1.1"
-# Create an instance of the API class
-api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
-organization_name = 'organization_name_example' # str | 
-
-try:
-    # Delete an organization
-    api_instance.organizations_delete(organization_name)
-except ApiException as e:
-    print("Exception when calling CoreApi->organizations_delete: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **organization_name** | **str**|  | 
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**204** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **organizations_get**
 > OrganizationDetail organizations_get(organization_name)
 
@@ -5436,7 +5487,7 @@ Update details of an organization
 
 
 ### Description 
-Update an organization. The user making the request must have appropriate permissions.
+Update an organization. The user making the request must be admin of the organization.
 
 It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to upgrade the subscription of an organization.
 
@@ -5803,7 +5854,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **pipeline_object_attachments_create**
-> AttachmentsList pipeline_object_attachments_create(project_name, pipeline_name, data)
+> Attachments pipeline_object_attachments_create(project_name, pipeline_name, data)
 
 Create object attachments
 
@@ -5941,7 +5992,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AttachmentsList**](AttachmentsList.md)
+[**Attachments**](Attachments.md)
 
 ### Authorization
 
@@ -6976,6 +7027,9 @@ Create a pipeline in a project. The input_fields represent the fields that the i
 - `input_type`: Type of the connector. It can be either structured or blob.
 - `input_fields`: A list of fields with name and data_type. In case of blob pipelines, the input_fields should be omitted or given as an empty list. For structured pipelines, they must be provided.
 
+### Optional Parameters
+- `description`: Description of the pipeline
+
 #### Request Examples 
 A structured pipeline
 
@@ -7001,7 +7055,8 @@ A structured pipeline
 ```
 {
   "name": "pipeline-2",
-  "input_type": "blob"
+  "input_type": "blob",
+  "description": "my description"
 }
 ```
 
@@ -7017,6 +7072,7 @@ A structured pipeline
 Details of the created pipeline
  - `id`: Unique identifier for the pipeline (UUID)
  - `name`: Name of the pipeline
+ - `description`: Description of the pipeline
  - `project`: Project name in which the pipeline is created
  - `input_type`: Type of the pipeline
  - `input_fields`: A list of pipeline fields with name and data_type
@@ -7027,6 +7083,7 @@ Details of the created pipeline
   "id": "6b0cea21-2657-4fa3-a331-de646e3cfdc4",
   "name": "pipeline-1",
   "project": "project-1",
+  "description": "my description",
   "input_type": "structured",
   "input_fields": [
     {
@@ -7046,6 +7103,7 @@ Details of the created pipeline
   "id": "b6f60ebf-48ef-4084-9fbb-9ac0f934093e",
   "name": "pipeline-2",
   "project": "project-1",
+  "description": "my description",
   "input_type": "blob",
   "input_fields": []
 }
@@ -7118,9 +7176,6 @@ Delete pipeline
 ### Description 
 Delete a pipeline. This will also delete all objects and attachments contained in the pipeline.
 
-### Required Parameters 
-- None
-
 
 ### Example
 
@@ -7187,13 +7242,11 @@ Get pipeline
 ### Description 
 Get the details of a single pipeline
 
-### Required Parameters 
-- None
-
 ### Response Structure 
 Details of the pipeline
  - `id`: Unique identifier for the pipeline (UUID)
  - `name`: Name of the pipeline
+ - `description` Description of the pipeline
  - `project`: Project name in which the pipeline is
  - `input_type`: Type of the pipeline
  - `input_fields`: A list of pipeline fields with name and data_type
@@ -7204,6 +7257,7 @@ Details of the pipeline
   "id": "b6f60ebf-48ef-4084-9fbb-9ac0f934093e",
   "name": "pipeline-2",
   "project": "project-1",
+  "description": "my description",
   "input_type": "blob",
   "input_fields": []
 }
@@ -7582,14 +7636,12 @@ List pipelines
 ### Description 
 List all pipelines in a project
 
-### Required Parameters 
-- None
-
 ### Response Structure 
 A list of details of the pipelines in the project
  - `id`: Unique identifier for the pipeline (UUID)
  - `name`: Name of the pipeline
  - `project`: Project name in which the pipeline is
+ - `description`: Description of the pipeline
  - `input_type`: Type of the pipeline
  - `input_fields`: A list of pipeline fields with name and data_type
 
@@ -7600,6 +7652,7 @@ A list of details of the pipelines in the project
     "id": "6b0cea21-2657-4fa3-a331-de646e3cfdc4",
     "name": "pipeline-1",
     "project": "project-1",
+    "description": "my description",
     "input_type": "structured",
     "input_fields": [
       {
@@ -7616,6 +7669,7 @@ A list of details of the pipelines in the project
     "id": "b6f60ebf-48ef-4084-9fbb-9ac0f934093e",
     "name": "pipeline-2",
     "project": "project-1",
+    "description": "my description",
     "input_type": "blob",
     "input_fields": []
   }
@@ -7690,6 +7744,7 @@ Update a pipeline. All necessary fields are validated again.
 
 ### Optional Parameters 
  - `name`: New name for the pipeline
+ - `description`: New description for the pipeline
  - `input_type`: New type for the pipeline. It is possible to change the type from blob to structured and vice versa.
  - `input_fields`: New input fields for the pipeline.
 
@@ -7703,7 +7758,13 @@ If the pipeline is updated to have blob type, input_fields should be provided as
   "name": "new-pipeline-name"
 }
 ```
- 
+
+```
+{
+  "description": "New pipeline description"
+}
+```
+
 ```
 {
   "input_type": "blob"
@@ -7738,6 +7799,7 @@ Details of the updated pipeline
  - `id`: Unique identifier for the pipeline (UUID)
  - `name`: Name of the pipeline
  - `project`: Project name in which the pipeline is
+ - `description`: Description for the pipeline
  - `input_type`: Type of the pipeline
  - `input_fields`: A list of pipeline fields with name and data_type
 
@@ -7747,6 +7809,7 @@ Details of the updated pipeline
   "id": "b6f60ebf-48ef-4084-9fbb-9ac0f934093e",
   "name": "new-pipeline-name",
   "project": "project-1",
+  "description": "my description",
   "input_type": "structured",
   "input_fields": [
     {
@@ -7832,7 +7895,7 @@ Create an environment variable for the project. This variable will be inherited 
 
 ### Required Parameters
  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.
- - `value`: The value of the variable as a string
+ - `value`: The value of the variable as a string. It may be an empty string ("").
  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users.
 
 #### Request Examples
@@ -8187,7 +8250,7 @@ Update an environment variable for the project.
 
 ### Required Parameters
  - `name`: The name of the variable. The variable will have this name when accessed from your model code. The variable name should contain only letters and underscores, and not start or end with an underscore.
- - `value`: The value of the variable as a string
+ - `value`: The value of the variable as a string. It may be an empty string ("").
  - `secret`: If this variable contains sensitive information, set this to true to hide it from other users. Can be updated from false to true, but not from true to false (i.e. secrets will stay secrets).
 
 #### Request Examples
@@ -10157,7 +10220,7 @@ Reset the token of a service user
 
 
 ### Description 
-Reset the token of a service user. The old token will be deleted and a new one will be created for the service user.
+Reset the token of a service user. The old token will be deleted and a new one will be created for the service user. No data should be sent in the body of the request.
 
 ### Response Structure 
 Details of the new token for the service user
@@ -10417,6 +10480,12 @@ Create a new user
 Create a new user with the given details - email, password, name and surname. After creation, an email is send to the email address to activate the acount.
 A user is required to accept the terms and conditions.
 
+The password needs to meet the following requirements:
+- At least 8 characters long
+- At least one capital and one lowercase letter
+- At least one number
+- At least one of the following symbols: !#$%&')(*+,./:;"<=>?[@]^_`{|}~-" 
+
 ### Required Parameters
 - `email`: Email of the user. This is a unique field. 
 
@@ -10657,129 +10726,6 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** |  |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **user_update**
-> UserDetail user_update(data)
-
-Update user details
-
- 
-### Description
-Update the details of the user making the request - name, surname, email and password.
-
-When updating the password, the parameter `previous_password` with the value of the previous password is also required.
-
-### Optional Parameters
-- `email`: Email of the user 
-
-- `password`: Password of the user 
-
-    - `previous_password`: Previous password of the user (This field is only required when updating the password) 
-
-- `name`: Name of the user 
-
-- `surname`: Surname of the user
-
-#### Request Examples 
-```
-{
-  "email": "new_test@example.com"
-}
-```
-
-```
-{
-  "password": "new-secret-password",
-  "previous_password": "previous-secret-password"
-}
-```
-
-```
-{
-  "name": "New user name",
-  "surname": "New user surname"
-}
-```
-
-### Response Structure 
-Details of the created user
- - `id`: Unique identifier for the user (UUID) 
-
- - `email`: Email of the user 
-
- - `name`: Name of the user 
-
- - `surname`: Surname of the user 
-
- - `registration_date`: Date when the user was registered
-
-#### Response Examples 
-```
-{
-  "id": "4740a13a-70ae-4b7a-a461-8231eb2c0594",
-  "email": "new_test@example.com",
-  "type": "user",
-  "name": "New user name",
-  "surname": "New user surname",
-  "registration_date": "2020-01-10 10:06:25.632+00:00"
-}
-```
-
-
-### Example
-
-* Api Key Authentication (api_key):
-```python
-from __future__ import print_function
-import time
-import xenia_python_client_library
-from xenia_python_client_library.rest import ApiException
-from pprint import pprint
-configuration = xenia_python_client_library.Configuration()
-# Configure API key authorization: api_key
-configuration.api_key['Authorization'] = 'YOUR_API_KEY'
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['Authorization'] = 'Bearer'
-
-# Defining host is optional and default to https://api.dutchanalytics.net/v1.1
-configuration.host = "https://api.dutchanalytics.net/v1.1"
-# Create an instance of the API class
-api_instance = xenia_python_client_library.CoreApi(xenia_python_client_library.ApiClient(configuration))
-data = xenia_python_client_library.UserUpdate() # UserUpdate | 
-
-try:
-    # Update user details
-    api_response = api_instance.user_update(data)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling CoreApi->user_update: %s\n" % e)
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **data** | [**UserUpdate**](UserUpdate.md)|  | 
-
-### Return type
-
-[**UserDetail**](UserDetail.md)
-
-### Authorization
-
-[api_key](../README.md#api_key)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details
