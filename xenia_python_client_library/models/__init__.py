@@ -80,6 +80,7 @@ from xenia_python_client_library.models.role_update import RoleUpdate
 from xenia_python_client_library.models.service_user_create import ServiceUserCreate
 from xenia_python_client_library.models.service_user_detail import ServiceUserDetail
 from xenia_python_client_library.models.service_user_list import ServiceUserList
+from xenia_python_client_library.models.service_user_token_list import ServiceUserTokenList
 from xenia_python_client_library.models.status import Status
 from xenia_python_client_library.models.subscription_list import SubscriptionList
 from xenia_python_client_library.models.success import Success

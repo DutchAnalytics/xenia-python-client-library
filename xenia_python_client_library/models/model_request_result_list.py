@@ -212,9 +212,6 @@ class ModelRequestResultList(object):
         :param error_message: The error_message of this ModelRequestResultList.  # noqa: E501
         :type: str
         """
-        if (self.local_vars_configuration.client_side_validation and
-                error_message is not None and len(error_message) < 1):
-            raise ValueError("Invalid value for `error_message`, length must be greater than or equal to `1`")  # noqa: E501
 
         self._error_message = error_message
 

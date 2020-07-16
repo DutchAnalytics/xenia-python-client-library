@@ -3803,7 +3803,7 @@ class CoreApi(object):
     def model_versions_delete(self, project_name, model_name, version, **kwargs):  # noqa: E501
         """Delete model version  # noqa: E501
 
-          ### Description  Delete a version. The state of the version is set to deactivated. If the model version is referenced from a pipeline, it cannot be deleted, it must be removed from the pipeline first.  If the model version has a model file uploaded, it is also deleted from the storage on deletion.  ### Required Parameters  - None   # noqa: E501
+          ### Description  Delete a version. The state of the version is set to deactivated. If the model version is referenced from a pipeline, it cannot be deleted, it must be removed from the pipeline first.  If the model version has a model file uploaded, it is also deleted from the storage on deletion.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_delete(project_name, model_name, version, async_req=True)
@@ -3830,7 +3830,7 @@ class CoreApi(object):
     def model_versions_delete_with_http_info(self, project_name, model_name, version, **kwargs):  # noqa: E501
         """Delete model version  # noqa: E501
 
-          ### Description  Delete a version. The state of the version is set to deactivated. If the model version is referenced from a pipeline, it cannot be deleted, it must be removed from the pipeline first.  If the model version has a model file uploaded, it is also deleted from the storage on deletion.  ### Required Parameters  - None   # noqa: E501
+          ### Description  Delete a version. The state of the version is set to deactivated. If the model version is referenced from a pipeline, it cannot be deleted, it must be removed from the pipeline first.  If the model version has a model file uploaded, it is also deleted from the storage on deletion.   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_delete_with_http_info(project_name, model_name, version, async_req=True)
@@ -3940,7 +3940,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: list[Success]
+        :return: ModelVersionFileUpload
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -3969,7 +3969,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(list[Success], status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(ModelVersionFileUpload, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -4036,7 +4036,7 @@ class CoreApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='list[Success]',  # noqa: E501
+            response_type='ModelVersionFileUpload',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -4065,7 +4065,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: ModelVersionFileUpload
+        :return: Success
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -4095,7 +4095,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(ModelVersionFileUpload, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(Success, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -4172,7 +4172,7 @@ class CoreApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='ModelVersionFileUpload',  # noqa: E501
+            response_type='Success',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -4183,7 +4183,7 @@ class CoreApi(object):
     def model_versions_get(self, project_name, model_name, version, **kwargs):  # noqa: E501
         """Get model version  # noqa: E501
 
-         ### Description  Retrieve details of a model version of a model in a project  ### Required Parameters  - None  ### Response Structure  Details of a version  - `id`: Unique identifier for the model (UUID)  - `model`: Model name to which the version is associated  - `version`: Version name  - `language`: Language in which the model version is provided  - `state`: The state of the version  - `memory_allocation`: The reserved memory for the version in mb   - `maximum_deployments`: Upper bound of number of model pods running in parallel  - `minimum_deployments`: Lower bound of number of model pods running in parallel  - `unused_shutdown_time`: Maximum time in minutes a model pod stays active after a model request  #### Response Examples ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"memory_allocation\": 512,   \"language\": \"python3.7\",   \"state\": \"active\",   \"maximum_deployments\": 4,   \"minimum_deployments\": 1,   \"unused_shutdown_time\": 5, } ```   # noqa: E501
+         ### Description  Retrieve details of a model version of a model in a project  ### Response Structure  Details of a version  - `id`: Unique identifier for the model (UUID)  - `model`: Model name to which the version is associated  - `version`: Version name  - `language`: Language in which the model version is provided  - `state`: The state of the version  - `memory_allocation`: The reserved memory for the version in mb   - `maximum_deployments`: Upper bound of number of model pods running in parallel  - `minimum_deployments`: Lower bound of number of model pods running in parallel  - `unused_shutdown_time`: Maximum time in minutes a model pod stays active after a model request  #### Response Examples ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"memory_allocation\": 512,   \"language\": \"python3.7\",   \"state\": \"active\",   \"maximum_deployments\": 4,   \"minimum_deployments\": 1,   \"unused_shutdown_time\": 5, } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_get(project_name, model_name, version, async_req=True)
@@ -4210,7 +4210,7 @@ class CoreApi(object):
     def model_versions_get_with_http_info(self, project_name, model_name, version, **kwargs):  # noqa: E501
         """Get model version  # noqa: E501
 
-         ### Description  Retrieve details of a model version of a model in a project  ### Required Parameters  - None  ### Response Structure  Details of a version  - `id`: Unique identifier for the model (UUID)  - `model`: Model name to which the version is associated  - `version`: Version name  - `language`: Language in which the model version is provided  - `state`: The state of the version  - `memory_allocation`: The reserved memory for the version in mb   - `maximum_deployments`: Upper bound of number of model pods running in parallel  - `minimum_deployments`: Lower bound of number of model pods running in parallel  - `unused_shutdown_time`: Maximum time in minutes a model pod stays active after a model request  #### Response Examples ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"memory_allocation\": 512,   \"language\": \"python3.7\",   \"state\": \"active\",   \"maximum_deployments\": 4,   \"minimum_deployments\": 1,   \"unused_shutdown_time\": 5, } ```   # noqa: E501
+         ### Description  Retrieve details of a model version of a model in a project  ### Response Structure  Details of a version  - `id`: Unique identifier for the model (UUID)  - `model`: Model name to which the version is associated  - `version`: Version name  - `language`: Language in which the model version is provided  - `state`: The state of the version  - `memory_allocation`: The reserved memory for the version in mb   - `maximum_deployments`: Upper bound of number of model pods running in parallel  - `minimum_deployments`: Lower bound of number of model pods running in parallel  - `unused_shutdown_time`: Maximum time in minutes a model pod stays active after a model request  #### Response Examples ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"memory_allocation\": 512,   \"language\": \"python3.7\",   \"state\": \"active\",   \"maximum_deployments\": 4,   \"minimum_deployments\": 1,   \"unused_shutdown_time\": 5, } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_get_with_http_info(project_name, model_name, version, async_req=True)
@@ -4307,7 +4307,7 @@ class CoreApi(object):
     def model_versions_list(self, project_name, model_name, **kwargs):  # noqa: E501
         """List model versions  # noqa: E501
 
-         ### Description  List all the model versions of a model in a project  ### Required Parameters  - None  ### Response Structure  A list of details of the versions  - `id`: Unique identifier for the model (UUID)  - `model`: Model name to which the version is associated  - `version`: Version name  - `language`: Language in which the model version is provided  - `state`: The state of the version  - `memory_allocation`: The reserved memory usage for the version  - `maximum_deployments`: Upper bound of number of models running in parallel.   - `minimum_deployments`: Lower bound of number of versions running  - `unused_shutdown_time`: Maximum time a version can stay unused before it is stopped in minutes.  #### Response Examples ``` [   {     \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",     \"model\": \"model-1\",     \"version\": \"version-1\",     \"language\": \"python3.5\",     \"state\": \"active\",     \"memory_allocation\": 512,     \"maximum_deployments\": 4,     \"minimum_deployments\": 1,     \"unused_shutdown_time\": 5,   },   {     \"id\": \"24f6b80a-08c3-4d52-ac1a-2ea7e70f16a6\",     \"model\": \"model-1\",     \"version\": \"version-2\",     \"language\": \"python3.6\",     \"state\": \"initialised\",     \"memory_allocation\": 256,     \"maximum_deployments\": 5,     \"minimum_deployments\": 0,     \"unused_shutdown_time\": 5,   } ] ```   # noqa: E501
+         ### Description  List all the model versions of a model in a project  ### Response Structure  A list of details of the versions  - `id`: Unique identifier for the model (UUID)  - `model`: Model name to which the version is associated  - `version`: Version name  - `language`: Language in which the model version is provided  - `state`: The state of the version  - `memory_allocation`: The reserved memory usage for the version  - `maximum_deployments`: Upper bound of number of models running in parallel.   - `minimum_deployments`: Lower bound of number of versions running  - `unused_shutdown_time`: Maximum time a version can stay unused before it is stopped in minutes.  #### Response Examples ``` [   {     \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",     \"model\": \"model-1\",     \"version\": \"version-1\",     \"language\": \"python3.5\",     \"state\": \"active\",     \"memory_allocation\": 512,     \"maximum_deployments\": 4,     \"minimum_deployments\": 1,     \"unused_shutdown_time\": 5,   },   {     \"id\": \"24f6b80a-08c3-4d52-ac1a-2ea7e70f16a6\",     \"model\": \"model-1\",     \"version\": \"version-2\",     \"language\": \"python3.6\",     \"state\": \"initialised\",     \"memory_allocation\": 256,     \"maximum_deployments\": 5,     \"minimum_deployments\": 0,     \"unused_shutdown_time\": 5,   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_list(project_name, model_name, async_req=True)
@@ -4333,7 +4333,7 @@ class CoreApi(object):
     def model_versions_list_with_http_info(self, project_name, model_name, **kwargs):  # noqa: E501
         """List model versions  # noqa: E501
 
-         ### Description  List all the model versions of a model in a project  ### Required Parameters  - None  ### Response Structure  A list of details of the versions  - `id`: Unique identifier for the model (UUID)  - `model`: Model name to which the version is associated  - `version`: Version name  - `language`: Language in which the model version is provided  - `state`: The state of the version  - `memory_allocation`: The reserved memory usage for the version  - `maximum_deployments`: Upper bound of number of models running in parallel.   - `minimum_deployments`: Lower bound of number of versions running  - `unused_shutdown_time`: Maximum time a version can stay unused before it is stopped in minutes.  #### Response Examples ``` [   {     \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",     \"model\": \"model-1\",     \"version\": \"version-1\",     \"language\": \"python3.5\",     \"state\": \"active\",     \"memory_allocation\": 512,     \"maximum_deployments\": 4,     \"minimum_deployments\": 1,     \"unused_shutdown_time\": 5,   },   {     \"id\": \"24f6b80a-08c3-4d52-ac1a-2ea7e70f16a6\",     \"model\": \"model-1\",     \"version\": \"version-2\",     \"language\": \"python3.6\",     \"state\": \"initialised\",     \"memory_allocation\": 256,     \"maximum_deployments\": 5,     \"minimum_deployments\": 0,     \"unused_shutdown_time\": 5,   } ] ```   # noqa: E501
+         ### Description  List all the model versions of a model in a project  ### Response Structure  A list of details of the versions  - `id`: Unique identifier for the model (UUID)  - `model`: Model name to which the version is associated  - `version`: Version name  - `language`: Language in which the model version is provided  - `state`: The state of the version  - `memory_allocation`: The reserved memory usage for the version  - `maximum_deployments`: Upper bound of number of models running in parallel.   - `minimum_deployments`: Lower bound of number of versions running  - `unused_shutdown_time`: Maximum time a version can stay unused before it is stopped in minutes.  #### Response Examples ``` [   {     \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",     \"model\": \"model-1\",     \"version\": \"version-1\",     \"language\": \"python3.5\",     \"state\": \"active\",     \"memory_allocation\": 512,     \"maximum_deployments\": 4,     \"minimum_deployments\": 1,     \"unused_shutdown_time\": 5,   },   {     \"id\": \"24f6b80a-08c3-4d52-ac1a-2ea7e70f16a6\",     \"model\": \"model-1\",     \"version\": \"version-2\",     \"language\": \"python3.6\",     \"state\": \"initialised\",     \"memory_allocation\": 256,     \"maximum_deployments\": 5,     \"minimum_deployments\": 0,     \"unused_shutdown_time\": 5,   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_list_with_http_info(project_name, model_name, async_req=True)
@@ -12044,7 +12044,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: object
+        :return: ServiceUserTokenList
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -12073,7 +12073,7 @@ class CoreApi(object):
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :return: tuple(object, status_code(int), headers(HTTPHeaderDict))
+        :return: tuple(ServiceUserTokenList, status_code(int), headers(HTTPHeaderDict))
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -12144,7 +12144,7 @@ class CoreApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='object',  # noqa: E501
+            response_type='ServiceUserTokenList',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501

@@ -3290,9 +3290,6 @@ Delete a version. The state of the version is set to deactivated. If the model v
 
 If the model version has a model file uploaded, it is also deleted from the storage on deletion.
 
-### Required Parameters 
-- None
-
 
 ### Example
 
@@ -3353,7 +3350,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **model_versions_file_download**
-> list[Success] model_versions_file_download(project_name, model_name, version)
+> ModelVersionFileUpload model_versions_file_download(project_name, model_name, version)
 
 Download model files
 
@@ -3406,7 +3403,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**list[Success]**](Success.md)
+[**ModelVersionFileUpload**](ModelVersionFileUpload.md)
 
 ### Authorization
 
@@ -3425,7 +3422,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **model_versions_file_upload**
-> ModelVersionFileUpload model_versions_file_upload(project_name, model_name, version, file)
+> Success model_versions_file_upload(project_name, model_name, version, file)
 
 Upload model files
 
@@ -3484,7 +3481,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelVersionFileUpload**](ModelVersionFileUpload.md)
+[**Success**](Success.md)
 
 ### Authorization
 
@@ -3510,9 +3507,6 @@ Get model version
 
 ### Description 
 Retrieve details of a model version of a model in a project
-
-### Required Parameters 
-- None
 
 ### Response Structure 
 Details of a version
@@ -3609,9 +3603,6 @@ List model versions
 
 ### Description 
 List all the model versions of a model in a project
-
-### Required Parameters 
-- None
 
 ### Response Structure 
 A list of details of the versions
@@ -10214,7 +10205,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **service_users_token**
-> object service_users_token(project_name, service_user_id, data)
+> ServiceUserTokenList service_users_token(project_name, service_user_id, data)
 
 Reset the token of a service user
 
@@ -10275,7 +10266,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**ServiceUserTokenList**](ServiceUserTokenList.md)
 
 ### Authorization
 
