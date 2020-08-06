@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **status** | **str** |  | 
 **error_message** | **str** |  | [optional] 
 **memory_allocation** | **int** |  | [optional] 
-**maximum_deployments** | **int** |  | [optional] 
-**minimum_deployments** | **int** |  | [optional] 
-**unused_shutdown_time** | **int** |  | [optional] 
+**maximum_instances** | **int** |  | [optional] 
+**minimum_instances** | **int** |  | [optional] 
+**maximum_idle_time** | **int** |  | [optional] 
 **file_last_updated_date** | **datetime** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

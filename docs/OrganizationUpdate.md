@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**name** | **str** |  | [optional] 
 **subscription** | **str** |  | 
 **subscription_agreed** | **bool** |  | 
 
