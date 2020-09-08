@@ -40,6 +40,7 @@ class CredentialsList(object):
         'error_message': 'str',
         'reference_count': 'str',
         'project': 'str',
+        'creation_date': 'datetime',
         'last_modified': 'datetime'
     }
 
@@ -51,10 +52,11 @@ class CredentialsList(object):
         'error_message': 'error_message',
         'reference_count': 'reference_count',
         'project': 'project',
+        'creation_date': 'creation_date',
         'last_modified': 'last_modified'
     }
 
-    def __init__(self, id=None, name=None, type=None, status=None, error_message=None, reference_count=None, project=None, last_modified=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, id=None, name=None, type=None, status=None, error_message=None, reference_count=None, project=None, creation_date=None, last_modified=None, local_vars_configuration=None):  # noqa: E501
         """CredentialsList - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -67,6 +69,7 @@ class CredentialsList(object):
         self._error_message = None
         self._reference_count = None
         self._project = None
+        self._creation_date = None
         self._last_modified = None
         self.discriminator = None
 
@@ -79,6 +82,8 @@ class CredentialsList(object):
         if reference_count is not None:
             self.reference_count = reference_count
         self.project = project
+        if creation_date is not None:
+            self.creation_date = creation_date
         if last_modified is not None:
             self.last_modified = last_modified
 
@@ -257,6 +262,27 @@ class CredentialsList(object):
             raise ValueError("Invalid value for `project`, length must be greater than or equal to `1`")  # noqa: E501
 
         self._project = project
+
+    @property
+    def creation_date(self):
+        """Gets the creation_date of this CredentialsList.  # noqa: E501
+
+
+        :return: The creation_date of this CredentialsList.  # noqa: E501
+        :rtype: datetime
+        """
+        return self._creation_date
+
+    @creation_date.setter
+    def creation_date(self, creation_date):
+        """Sets the creation_date of this CredentialsList.
+
+
+        :param creation_date: The creation_date of this CredentialsList.  # noqa: E501
+        :type: datetime
+        """
+
+        self._creation_date = creation_date
 
     @property
     def last_modified(self):

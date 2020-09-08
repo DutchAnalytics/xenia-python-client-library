@@ -38,7 +38,9 @@ class PipelineList(object):
         'project': 'str',
         'description': 'str',
         'input_type': 'str',
-        'input_fields': 'list[PipelineInputFieldList]'
+        'input_fields': 'list[PipelineInputFieldList]',
+        'creation_date': 'datetime',
+        'last_updated_date': 'datetime'
     }
 
     attribute_map = {
@@ -47,10 +49,12 @@ class PipelineList(object):
         'project': 'project',
         'description': 'description',
         'input_type': 'input_type',
-        'input_fields': 'input_fields'
+        'input_fields': 'input_fields',
+        'creation_date': 'creation_date',
+        'last_updated_date': 'last_updated_date'
     }
 
-    def __init__(self, id=None, name=None, project=None, description=None, input_type=None, input_fields=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, id=None, name=None, project=None, description=None, input_type=None, input_fields=None, creation_date=None, last_updated_date=None, local_vars_configuration=None):  # noqa: E501
         """PipelineList - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -62,6 +66,8 @@ class PipelineList(object):
         self._description = None
         self._input_type = None
         self._input_fields = None
+        self._creation_date = None
+        self._last_updated_date = None
         self.discriminator = None
 
         if id is not None:
@@ -72,6 +78,10 @@ class PipelineList(object):
             self.description = description
         self.input_type = input_type
         self.input_fields = input_fields
+        if creation_date is not None:
+            self.creation_date = creation_date
+        if last_updated_date is not None:
+            self.last_updated_date = last_updated_date
 
     @property
     def id(self):
@@ -221,6 +231,48 @@ class PipelineList(object):
             raise ValueError("Invalid value for `input_fields`, must not be `None`")  # noqa: E501
 
         self._input_fields = input_fields
+
+    @property
+    def creation_date(self):
+        """Gets the creation_date of this PipelineList.  # noqa: E501
+
+
+        :return: The creation_date of this PipelineList.  # noqa: E501
+        :rtype: datetime
+        """
+        return self._creation_date
+
+    @creation_date.setter
+    def creation_date(self, creation_date):
+        """Sets the creation_date of this PipelineList.
+
+
+        :param creation_date: The creation_date of this PipelineList.  # noqa: E501
+        :type: datetime
+        """
+
+        self._creation_date = creation_date
+
+    @property
+    def last_updated_date(self):
+        """Gets the last_updated_date of this PipelineList.  # noqa: E501
+
+
+        :return: The last_updated_date of this PipelineList.  # noqa: E501
+        :rtype: datetime
+        """
+        return self._last_updated_date
+
+    @last_updated_date.setter
+    def last_updated_date(self, last_updated_date):
+        """Sets the last_updated_date of this PipelineList.
+
+
+        :param last_updated_date: The last_updated_date of this PipelineList.  # noqa: E501
+        :type: datetime
+        """
+
+        self._last_updated_date = last_updated_date
 
     def to_dict(self):
         """Returns the model properties as a dict"""

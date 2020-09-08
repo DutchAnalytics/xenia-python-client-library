@@ -13,7 +13,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "xenia-python-client-library"
-VERSION = "2.0.0"
+VERSION = "2.0.1"
 # To install the library, run the following
 #
 # python setup.py install
@@ -33,6 +33,7 @@ setup(
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
+    license="Apache 2.0",
     long_description="""\
     Python Client Library to interact with the Xenia API.  # noqa: E501
     """

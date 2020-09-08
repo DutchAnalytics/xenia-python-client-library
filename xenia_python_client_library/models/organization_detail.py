@@ -36,21 +36,17 @@ class OrganizationDetail(object):
         'id': 'str',
         'name': 'str',
         'creation_date': 'datetime',
-        'subscription': 'str',
-        'subscription_agreement_date': 'datetime',
-        'subscription_agreement_user': 'str'
+        'subscription': 'str'
     }
 
     attribute_map = {
         'id': 'id',
         'name': 'name',
         'creation_date': 'creation_date',
-        'subscription': 'subscription',
-        'subscription_agreement_date': 'subscription_agreement_date',
-        'subscription_agreement_user': 'subscription_agreement_user'
+        'subscription': 'subscription'
     }
 
-    def __init__(self, id=None, name=None, creation_date=None, subscription=None, subscription_agreement_date=None, subscription_agreement_user=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, id=None, name=None, creation_date=None, subscription=None, local_vars_configuration=None):  # noqa: E501
         """OrganizationDetail - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -60,8 +56,6 @@ class OrganizationDetail(object):
         self._name = None
         self._creation_date = None
         self._subscription = None
-        self._subscription_agreement_date = None
-        self._subscription_agreement_user = None
         self.discriminator = None
 
         if id is not None:
@@ -71,9 +65,6 @@ class OrganizationDetail(object):
             self.creation_date = creation_date
         if subscription is not None:
             self.subscription = subscription
-        if subscription_agreement_date is not None:
-            self.subscription_agreement_date = subscription_agreement_date
-        self.subscription_agreement_user = subscription_agreement_user
 
     @property
     def id(self):
@@ -166,56 +157,6 @@ class OrganizationDetail(object):
         """
 
         self._subscription = subscription
-
-    @property
-    def subscription_agreement_date(self):
-        """Gets the subscription_agreement_date of this OrganizationDetail.  # noqa: E501
-
-
-        :return: The subscription_agreement_date of this OrganizationDetail.  # noqa: E501
-        :rtype: datetime
-        """
-        return self._subscription_agreement_date
-
-    @subscription_agreement_date.setter
-    def subscription_agreement_date(self, subscription_agreement_date):
-        """Sets the subscription_agreement_date of this OrganizationDetail.
-
-
-        :param subscription_agreement_date: The subscription_agreement_date of this OrganizationDetail.  # noqa: E501
-        :type: datetime
-        """
-
-        self._subscription_agreement_date = subscription_agreement_date
-
-    @property
-    def subscription_agreement_user(self):
-        """Gets the subscription_agreement_user of this OrganizationDetail.  # noqa: E501
-
-
-        :return: The subscription_agreement_user of this OrganizationDetail.  # noqa: E501
-        :rtype: str
-        """
-        return self._subscription_agreement_user
-
-    @subscription_agreement_user.setter
-    def subscription_agreement_user(self, subscription_agreement_user):
-        """Sets the subscription_agreement_user of this OrganizationDetail.
-
-
-        :param subscription_agreement_user: The subscription_agreement_user of this OrganizationDetail.  # noqa: E501
-        :type: str
-        """
-        if self.local_vars_configuration.client_side_validation and subscription_agreement_user is None:  # noqa: E501
-            raise ValueError("Invalid value for `subscription_agreement_user`, must not be `None`")  # noqa: E501
-        if (self.local_vars_configuration.client_side_validation and
-                subscription_agreement_user is not None and len(subscription_agreement_user) > 128):
-            raise ValueError("Invalid value for `subscription_agreement_user`, length must be less than or equal to `128`")  # noqa: E501
-        if (self.local_vars_configuration.client_side_validation and
-                subscription_agreement_user is not None and len(subscription_agreement_user) < 1):
-            raise ValueError("Invalid value for `subscription_agreement_user`, length must be greater than or equal to `1`")  # noqa: E501
-
-        self._subscription_agreement_user = subscription_agreement_user
 
     def to_dict(self):
         """Returns the model properties as a dict"""

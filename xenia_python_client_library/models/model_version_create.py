@@ -38,7 +38,8 @@ class ModelVersionCreate(object):
         'memory_allocation': 'int',
         'maximum_instances': 'int',
         'minimum_instances': 'int',
-        'maximum_idle_time': 'int'
+        'maximum_idle_time': 'int',
+        'description': 'str'
     }
 
     attribute_map = {
@@ -47,10 +48,11 @@ class ModelVersionCreate(object):
         'memory_allocation': 'memory_allocation',
         'maximum_instances': 'maximum_instances',
         'minimum_instances': 'minimum_instances',
-        'maximum_idle_time': 'maximum_idle_time'
+        'maximum_idle_time': 'maximum_idle_time',
+        'description': 'description'
     }
 
-    def __init__(self, version=None, language='python3.7', memory_allocation=None, maximum_instances=None, minimum_instances=None, maximum_idle_time=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, version=None, language='python3.7', memory_allocation=None, maximum_instances=None, minimum_instances=None, maximum_idle_time=None, description=None, local_vars_configuration=None):  # noqa: E501
         """ModelVersionCreate - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -62,6 +64,7 @@ class ModelVersionCreate(object):
         self._maximum_instances = None
         self._minimum_instances = None
         self._maximum_idle_time = None
+        self._description = None
         self.discriminator = None
 
         self.version = version
@@ -75,6 +78,8 @@ class ModelVersionCreate(object):
             self.minimum_instances = minimum_instances
         if maximum_idle_time is not None:
             self.maximum_idle_time = maximum_idle_time
+        if description is not None:
+            self.description = description
 
     @property
     def version(self):
@@ -236,6 +241,27 @@ class ModelVersionCreate(object):
             raise ValueError("Invalid value for `maximum_idle_time`, must be a value greater than or equal to `-2147483648`")  # noqa: E501
 
         self._maximum_idle_time = maximum_idle_time
+
+    @property
+    def description(self):
+        """Gets the description of this ModelVersionCreate.  # noqa: E501
+
+
+        :return: The description of this ModelVersionCreate.  # noqa: E501
+        :rtype: str
+        """
+        return self._description
+
+    @description.setter
+    def description(self, description):
+        """Sets the description of this ModelVersionCreate.
+
+
+        :param description: The description of this ModelVersionCreate.  # noqa: E501
+        :type: str
+        """
+
+        self._description = description
 
     def to_dict(self):
         """Returns the model properties as a dict"""

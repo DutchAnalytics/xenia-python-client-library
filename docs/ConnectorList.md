@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **credentials** | **str** |  | 
 **configuration** | **str** |  | [optional] [readonly] 
 **input_fields** | [**list[ConnectorFieldList]**](ConnectorFieldList.md) |  | [optional] [readonly] 
+**creation_date** | **datetime** |  | [optional] 
 **last_modified** | **datetime** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

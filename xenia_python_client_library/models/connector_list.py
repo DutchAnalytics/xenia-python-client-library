@@ -43,6 +43,7 @@ class ConnectorList(object):
         'credentials': 'str',
         'configuration': 'str',
         'input_fields': 'list[ConnectorFieldList]',
+        'creation_date': 'datetime',
         'last_modified': 'datetime'
     }
 
@@ -57,10 +58,11 @@ class ConnectorList(object):
         'credentials': 'credentials',
         'configuration': 'configuration',
         'input_fields': 'input_fields',
+        'creation_date': 'creation_date',
         'last_modified': 'last_modified'
     }
 
-    def __init__(self, id=None, name=None, type=None, status=None, error_message=None, input_type=None, project=None, credentials=None, configuration=None, input_fields=None, last_modified=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, id=None, name=None, type=None, status=None, error_message=None, input_type=None, project=None, credentials=None, configuration=None, input_fields=None, creation_date=None, last_modified=None, local_vars_configuration=None):  # noqa: E501
         """ConnectorList - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -76,6 +78,7 @@ class ConnectorList(object):
         self._credentials = None
         self._configuration = None
         self._input_fields = None
+        self._creation_date = None
         self._last_modified = None
         self.discriminator = None
 
@@ -95,6 +98,8 @@ class ConnectorList(object):
             self.configuration = configuration
         if input_fields is not None:
             self.input_fields = input_fields
+        if creation_date is not None:
+            self.creation_date = creation_date
         if last_modified is not None:
             self.last_modified = last_modified
 
@@ -336,6 +341,27 @@ class ConnectorList(object):
         """
 
         self._input_fields = input_fields
+
+    @property
+    def creation_date(self):
+        """Gets the creation_date of this ConnectorList.  # noqa: E501
+
+
+        :return: The creation_date of this ConnectorList.  # noqa: E501
+        :rtype: datetime
+        """
+        return self._creation_date
+
+    @creation_date.setter
+    def creation_date(self, creation_date):
+        """Sets the creation_date of this ConnectorList.
+
+
+        :param creation_date: The creation_date of this ConnectorList.  # noqa: E501
+        :type: datetime
+        """
+
+        self._creation_date = creation_date
 
     @property
     def last_modified(self):

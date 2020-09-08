@@ -2179,7 +2179,7 @@ class CoreApi(object):
     def connectors_create(self, project_name, data, **kwargs):  # noqa: E501
         """Create a connector  # noqa: E501
 
-         ### Description Create a connector by defining its necessary configuration parameters. Connectors use a reference to credentials which will be used in authentication.  The type of a connector can be either a blob or structured. This input type is inferred from the given *type* field. For example, an aws_s3 connector is of type blob while a postgresql connector is structured. For the **blob** type connectors, a default field is created with the name *blob* and data type *blob*. When blob connectors are attached in a pipeline, this field must be used in the mapping. It is not possible to define other fields for blob connectors.  ### Required Parameters - `name`: Name of the connector. It is unique within a project. - `type`: Type of the connector. It should be one of the supported connectors such as aws_s3, postgresql and gcp_cloud_storage. The full list of supported connectors can be obtained from */config/connectors* endpoint. - `credentials`: Name of referenced credentials - `configuration`: A dictionary which should contain the fields necessary for the given type  ### Optional Parameters - `input_fields`: A list of connector fields with name and data_type. For example, for postgresql type of connector, these fields correspond to the columns of a table. In case of blob connectors, the input_fields should be omitted or given as an empty list. For structured connectors, they must be provided.  #### Request Examples A postgresql connector ``` {   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```  ### Response Structure  Details of the created connector  - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to the type field. It can be either structured or blob. - `project`: Project name in which the connector is created - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type  #### Response Examples ``` {   \"id\": \"e0342249-853c-4879-bd08-5cd1af572d7e\",   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"input_type\": \"structured\",   \"project\": \"project-1\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   # noqa: E501
+         ### Description Create a connector by defining its necessary configuration parameters. Connectors use a reference to credentials which will be used in authentication.  The type of a connector can be either a blob or structured. This input type is inferred from the given *type* field. For example, an aws_s3 connector is of type blob while a postgresql connector is structured. For the **blob** type connectors, a default field is created with the name *blob* and data type *blob*. When blob connectors are attached in a pipeline, this field must be used in the mapping. It is not possible to define other fields for blob connectors.  ### Required Parameters - `name`: Name of the connector. It is unique within a project. - `type`: Type of the connector. It should be one of the supported connectors such as aws_s3, postgresql and gcp_cloud_storage. The full list of supported connectors can be obtained from */config/connectors* endpoint. - `credentials`: Name of referenced credentials - `configuration`: A dictionary which should contain the fields necessary for the given type  ### Optional Parameters - `input_fields`: A list of connector fields with name and data_type. For example, for postgresql type of connector, these fields correspond to the columns of a table. In case of blob connectors, the input_fields should be omitted or given as an empty list. For structured connectors, they must be provided.  #### Request Examples A postgresql connector ``` {   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```  ### Response Structure  Details of the created connector  - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to the type field. It can be either structured or blob. - `project`: Project name in which the connector is created - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type - `status`: The state of the connector. It is initialized as pending_verification. - `error_message`: The error message which explains why the connector has failed verification. It is empty if the connector is available. - `creation_date`: The date when the connector was created - `last_modified`: The date when the connector was last updated  #### Response Examples ``` {   \"id\": \"e0342249-853c-4879-bd08-5cd1af572d7e\",   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"input_type\": \"structured\",   \"status\": \"pending_verification\",   \"error_message\": \"\",   \"project\": \"project-1\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ],   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_modified\": \"2020-05-12T16:23:15.456812Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.connectors_create(project_name, data, async_req=True)
@@ -2205,7 +2205,7 @@ class CoreApi(object):
     def connectors_create_with_http_info(self, project_name, data, **kwargs):  # noqa: E501
         """Create a connector  # noqa: E501
 
-         ### Description Create a connector by defining its necessary configuration parameters. Connectors use a reference to credentials which will be used in authentication.  The type of a connector can be either a blob or structured. This input type is inferred from the given *type* field. For example, an aws_s3 connector is of type blob while a postgresql connector is structured. For the **blob** type connectors, a default field is created with the name *blob* and data type *blob*. When blob connectors are attached in a pipeline, this field must be used in the mapping. It is not possible to define other fields for blob connectors.  ### Required Parameters - `name`: Name of the connector. It is unique within a project. - `type`: Type of the connector. It should be one of the supported connectors such as aws_s3, postgresql and gcp_cloud_storage. The full list of supported connectors can be obtained from */config/connectors* endpoint. - `credentials`: Name of referenced credentials - `configuration`: A dictionary which should contain the fields necessary for the given type  ### Optional Parameters - `input_fields`: A list of connector fields with name and data_type. For example, for postgresql type of connector, these fields correspond to the columns of a table. In case of blob connectors, the input_fields should be omitted or given as an empty list. For structured connectors, they must be provided.  #### Request Examples A postgresql connector ``` {   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```  ### Response Structure  Details of the created connector  - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to the type field. It can be either structured or blob. - `project`: Project name in which the connector is created - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type  #### Response Examples ``` {   \"id\": \"e0342249-853c-4879-bd08-5cd1af572d7e\",   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"input_type\": \"structured\",   \"project\": \"project-1\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   # noqa: E501
+         ### Description Create a connector by defining its necessary configuration parameters. Connectors use a reference to credentials which will be used in authentication.  The type of a connector can be either a blob or structured. This input type is inferred from the given *type* field. For example, an aws_s3 connector is of type blob while a postgresql connector is structured. For the **blob** type connectors, a default field is created with the name *blob* and data type *blob*. When blob connectors are attached in a pipeline, this field must be used in the mapping. It is not possible to define other fields for blob connectors.  ### Required Parameters - `name`: Name of the connector. It is unique within a project. - `type`: Type of the connector. It should be one of the supported connectors such as aws_s3, postgresql and gcp_cloud_storage. The full list of supported connectors can be obtained from */config/connectors* endpoint. - `credentials`: Name of referenced credentials - `configuration`: A dictionary which should contain the fields necessary for the given type  ### Optional Parameters - `input_fields`: A list of connector fields with name and data_type. For example, for postgresql type of connector, these fields correspond to the columns of a table. In case of blob connectors, the input_fields should be omitted or given as an empty list. For structured connectors, they must be provided.  #### Request Examples A postgresql connector ``` {   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```  ### Response Structure  Details of the created connector  - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to the type field. It can be either structured or blob. - `project`: Project name in which the connector is created - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type - `status`: The state of the connector. It is initialized as pending_verification. - `error_message`: The error message which explains why the connector has failed verification. It is empty if the connector is available. - `creation_date`: The date when the connector was created - `last_modified`: The date when the connector was last updated  #### Response Examples ``` {   \"id\": \"e0342249-853c-4879-bd08-5cd1af572d7e\",   \"name\": \"postgresql-connector\",   \"type\": \"postgresql\",   \"input_type\": \"structured\",   \"status\": \"pending_verification\",   \"error_message\": \"\",   \"project\": \"project-1\",   \"credentials\": \"postgresql-credentials\",   \"configuration\": {     \"database\": \"database-1\",     \"schema\": \"public\",     \"table\": \"table-1\"   },   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },      {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ],   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_modified\": \"2020-05-12T16:23:15.456812Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.connectors_create_with_http_info(project_name, data, async_req=True)
@@ -2411,7 +2411,7 @@ class CoreApi(object):
     def connectors_get(self, project_name, connector_name, **kwargs):  # noqa: E501
         """Get connectors  # noqa: E501
 
-         ### Description Get the details of a single connector  ### Response Structure Details of the connector - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to the type field. It can be either structured or blob. - `project`: Project name in which the connector is defined - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type  #### Response Examples  ``` {   \"id\": \"662c326c-a560-4322-8ed3-1229224257c43\",   \"name\": \"s3-connector\",   \"type\": \"aws_s3\",   \"input_type\": \"blob\",   \"project\": \"project-1\",   \"credentials\": \"s3-credentials\",   \"configuration\": {     \"bucket\": \"bucket-name\",     \"path_prefix\": \"blob\"   } } ```   # noqa: E501
+         ### Description Get the details of a single connector  ### Response Structure Details of the connector - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to the type field. It can be either structured or blob. - `project`: Project name in which the connector is defined - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type - `status`: The state of the connector. It can be pending_verification, failed_verification or available. - `error_message`: The error message which explains why the connector has failed verification. It is empty if the connector is available. - `creation_date`: The date when the connector was created - `last_modified`: The date when the connector was last updated  #### Response Examples  ``` {   \"id\": \"662c326c-a560-4322-8ed3-1229224257c43\",   \"name\": \"s3-connector\",   \"type\": \"aws_s3\",   \"input_type\": \"blob\",   \"status\": \"available\",   \"error_message\": \"\",   \"project\": \"project-1\",   \"credentials\": \"s3-credentials\",   \"configuration\": {     \"bucket\": \"bucket-name\",     \"path_prefix\": \"blob\"   },   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_modified\": \"2020-06-22T18:04:76.123754Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.connectors_get(project_name, connector_name, async_req=True)
@@ -2437,7 +2437,7 @@ class CoreApi(object):
     def connectors_get_with_http_info(self, project_name, connector_name, **kwargs):  # noqa: E501
         """Get connectors  # noqa: E501
 
-         ### Description Get the details of a single connector  ### Response Structure Details of the connector - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to the type field. It can be either structured or blob. - `project`: Project name in which the connector is defined - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type  #### Response Examples  ``` {   \"id\": \"662c326c-a560-4322-8ed3-1229224257c43\",   \"name\": \"s3-connector\",   \"type\": \"aws_s3\",   \"input_type\": \"blob\",   \"project\": \"project-1\",   \"credentials\": \"s3-credentials\",   \"configuration\": {     \"bucket\": \"bucket-name\",     \"path_prefix\": \"blob\"   } } ```   # noqa: E501
+         ### Description Get the details of a single connector  ### Response Structure Details of the connector - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to the type field. It can be either structured or blob. - `project`: Project name in which the connector is defined - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type - `status`: The state of the connector. It can be pending_verification, failed_verification or available. - `error_message`: The error message which explains why the connector has failed verification. It is empty if the connector is available. - `creation_date`: The date when the connector was created - `last_modified`: The date when the connector was last updated  #### Response Examples  ``` {   \"id\": \"662c326c-a560-4322-8ed3-1229224257c43\",   \"name\": \"s3-connector\",   \"type\": \"aws_s3\",   \"input_type\": \"blob\",   \"status\": \"available\",   \"error_message\": \"\",   \"project\": \"project-1\",   \"credentials\": \"s3-credentials\",   \"configuration\": {     \"bucket\": \"bucket-name\",     \"path_prefix\": \"blob\"   },   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_modified\": \"2020-06-22T18:04:76.123754Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.connectors_get_with_http_info(project_name, connector_name, async_req=True)
@@ -2527,7 +2527,7 @@ class CoreApi(object):
     def connectors_list(self, project_name, **kwargs):  # noqa: E501
         """List connectors  # noqa: E501
 
-         ### Description List the connectors in a project  ### Response Structure A list of details of the connectors in the project - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to type field. It can be either structured or blob. - `project`: Project name in which the connector is defined - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type  #### Response Examples ``` [   {     \"id\": \"662c326c-a560-4322-8ed3-1229224257c43\",     \"name\": \"s3-connector\",     \"type\": \"aws_s3\",     \"input_type\": \"blob\",     \"project\": \"project-1\",     \"credentials\": \"s3-credentials\",     \"configuration\": {       \"bucket\": \"bucket-name\",       \"path_prefix\": \"blob\"     }   },   {     \"id\": \"e0342249-853c-4879-bd08-5cd1af572d7e\",     \"name\": \"postgresql-connector\",     \"type\": \"postgresql\",     \"input_type\": \"structured\",     \"project\": \"project-1\",     \"credentials\": \"postgresql-credentials\",     \"configuration\": {       \"database\": \"database-1\",       \"schema\": \"public\",       \"table\": \"table-1\"     },     \"input_fields\": [       {         \"name\": \"field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"field-2\",         \"data_type\": \"double\"       }     ]   } ] ```   # noqa: E501
+         ### Description List the connectors in a project  ### Response Structure A list of details of the connectors in the project - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to type field. It can be either structured or blob. - `project`: Project name in which the connector is defined - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type - `status`: The state of the connector. It can be pending_verification, failed_verification or available. - `error_message`: The error message which explains why the connector has failed verification. It is empty if the connector is available. - `creation_date`: The date when the connector was created - `last_modified`: The date when the connector was last updated  #### Response Examples ``` [   {     \"id\": \"662c326c-a560-4322-8ed3-1229224257c43\",     \"name\": \"s3-connector\",     \"type\": \"aws_s3\",     \"input_type\": \"blob\",     \"status\": \"available\",     \"error_message\": \"\",     \"project\": \"project-1\",     \"credentials\": \"s3-credentials\",     \"configuration\": {       \"bucket\": \"bucket-name\",       \"path_prefix\": \"blob\"     },     \"creation_date\": \"2020-03-24T09:43:51.791253Z\",     \"last_modified\": \"2020-05-19T11:52:21.163270Z\"   },   {     \"id\": \"e0342249-853c-4879-bd08-5cd1af572d7e\",     \"name\": \"postgresql-connector\",     \"type\": \"postgresql\",     \"input_type\": \"structured\",     \"status\": \"available\",     \"error_message\": \"\",     \"project\": \"project-1\",     \"credentials\": \"postgresql-credentials\",     \"configuration\": {       \"database\": \"database-1\",       \"schema\": \"public\",       \"table\": \"table-1\"     },     \"input_fields\": [       {         \"name\": \"field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"field-2\",         \"data_type\": \"double\"       }     ],     \"creation_date\": \"2020-05-12T16:23:15.456812Z\",     \"last_modified\": \"2020-06-22T18:04:76.123754Z\"   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.connectors_list(project_name, async_req=True)
@@ -2552,7 +2552,7 @@ class CoreApi(object):
     def connectors_list_with_http_info(self, project_name, **kwargs):  # noqa: E501
         """List connectors  # noqa: E501
 
-         ### Description List the connectors in a project  ### Response Structure A list of details of the connectors in the project - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to type field. It can be either structured or blob. - `project`: Project name in which the connector is defined - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type  #### Response Examples ``` [   {     \"id\": \"662c326c-a560-4322-8ed3-1229224257c43\",     \"name\": \"s3-connector\",     \"type\": \"aws_s3\",     \"input_type\": \"blob\",     \"project\": \"project-1\",     \"credentials\": \"s3-credentials\",     \"configuration\": {       \"bucket\": \"bucket-name\",       \"path_prefix\": \"blob\"     }   },   {     \"id\": \"e0342249-853c-4879-bd08-5cd1af572d7e\",     \"name\": \"postgresql-connector\",     \"type\": \"postgresql\",     \"input_type\": \"structured\",     \"project\": \"project-1\",     \"credentials\": \"postgresql-credentials\",     \"configuration\": {       \"database\": \"database-1\",       \"schema\": \"public\",       \"table\": \"table-1\"     },     \"input_fields\": [       {         \"name\": \"field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"field-2\",         \"data_type\": \"double\"       }     ]   } ] ```   # noqa: E501
+         ### Description List the connectors in a project  ### Response Structure A list of details of the connectors in the project - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to type field. It can be either structured or blob. - `project`: Project name in which the connector is defined - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type - `status`: The state of the connector. It can be pending_verification, failed_verification or available. - `error_message`: The error message which explains why the connector has failed verification. It is empty if the connector is available. - `creation_date`: The date when the connector was created - `last_modified`: The date when the connector was last updated  #### Response Examples ``` [   {     \"id\": \"662c326c-a560-4322-8ed3-1229224257c43\",     \"name\": \"s3-connector\",     \"type\": \"aws_s3\",     \"input_type\": \"blob\",     \"status\": \"available\",     \"error_message\": \"\",     \"project\": \"project-1\",     \"credentials\": \"s3-credentials\",     \"configuration\": {       \"bucket\": \"bucket-name\",       \"path_prefix\": \"blob\"     },     \"creation_date\": \"2020-03-24T09:43:51.791253Z\",     \"last_modified\": \"2020-05-19T11:52:21.163270Z\"   },   {     \"id\": \"e0342249-853c-4879-bd08-5cd1af572d7e\",     \"name\": \"postgresql-connector\",     \"type\": \"postgresql\",     \"input_type\": \"structured\",     \"status\": \"available\",     \"error_message\": \"\",     \"project\": \"project-1\",     \"credentials\": \"postgresql-credentials\",     \"configuration\": {       \"database\": \"database-1\",       \"schema\": \"public\",       \"table\": \"table-1\"     },     \"input_fields\": [       {         \"name\": \"field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"field-2\",         \"data_type\": \"double\"       }     ],     \"creation_date\": \"2020-05-12T16:23:15.456812Z\",     \"last_modified\": \"2020-06-22T18:04:76.123754Z\"   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.connectors_list_with_http_info(project_name, async_req=True)
@@ -2635,7 +2635,7 @@ class CoreApi(object):
     def connectors_update(self, project_name, connector_name, data, **kwargs):  # noqa: E501
         """Update connectors  # noqa: E501
 
-         ### Description Update a connector in a project. When updating, all necessary fields are validated again. It is not possible to update the **type** of a connector.  ### Optional Parameters - `name`: New name for the connector - `credentials`: A new credentials name to be referenced - `configuration`: A new dictionary with new values for credentials configuration. This dictionary may contain a subset of the necessary parameters for the credentials type. Only the given parameters are updated and the rest is kept at their old values. - `input_fields`: The old fields are changed with the new ones. If one or more old fields wanted to be kept for the connector, they must be provided again.  #### Request Examples ```  {   \"name\": \"new-connector-name\" } ```  ``` {   \"configuration\": {     \"bucket\": \"new-bucket-name\",     \"path_prefix\": \"new-blob\"   } } ```  ``` {   \"credentials\": \"new-credentials-name\" } ```  ``` {   \"input_fields\": [     {       \"name\": \"new-connector-field-1\",       \"data_type\": \"double\"     },     {       \"name\": \"new-connector-field-2\",       \"data_type\": \"array_int\"     }   ] } ```  ### Response Structure Details of the updated connector - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to the type field. It can be either structured or blob. - `project`: Project name in which the connector is defined - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type  #### Response Examples ```  {   \"id\": \"662c326c-a560-4322-8ed3-1229224257c43\",   \"name\": \"new-s3-connector\",   \"type\": \"aws_s3\",   \"input_type\": \"blob\",   \"project\": \"project-1\",   \"credentials\": \"s3-credentials\",   \"configuration\": {     \"bucket\": \"new-bucket-name\",     \"path_prefix\": \"blob\"   } } ```   # noqa: E501
+         ### Description Update a connector in a project. When updating, all necessary fields are validated again. It is not possible to update the **type** of a connector.  ### Optional Parameters - `name`: New name for the connector - `credentials`: A new credentials name to be referenced - `configuration`: A new dictionary with new values for credentials configuration. This dictionary may contain a subset of the necessary parameters for the credentials type. Only the given parameters are updated and the rest is kept at their old values. - `input_fields`: The old fields are changed with the new ones. If one or more old fields wanted to be kept for the connector, they must be provided again.  #### Request Examples ```  {   \"name\": \"new-connector-name\" } ```  ``` {   \"configuration\": {     \"bucket\": \"new-bucket-name\",     \"path_prefix\": \"new-blob\"   } } ```  ``` {   \"credentials\": \"new-credentials-name\" } ```  ``` {   \"input_fields\": [     {       \"name\": \"new-connector-field-1\",       \"data_type\": \"double\"     },     {       \"name\": \"new-connector-field-2\",       \"data_type\": \"array_int\"     }   ] } ```  ### Response Structure Details of the updated connector - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to the type field. It can be either structured or blob. - `project`: Project name in which the connector is defined - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type - `status`: The state of the connector. If the configuration parameters are updated, the connector is verified again. - `error_message`: The error message which explains why the connector has failed verification. It is empty if the connector is available. - `creation_date`: The date when the connector was created - `last_modified`: The date when the connector was last updated  #### Response Examples ```  {   \"id\": \"662c326c-a560-4322-8ed3-1229224257c43\",   \"name\": \"new-s3-connector\",   \"type\": \"aws_s3\",   \"input_type\": \"blob\",   \"status\": \"available\",   \"error_message\": \"\",   \"project\": \"project-1\",   \"credentials\": \"s3-credentials\",   \"configuration\": {     \"bucket\": \"new-bucket-name\",     \"path_prefix\": \"blob\"   },   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_modified\": \"2020-06-22T18:04:76.123754Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.connectors_update(project_name, connector_name, data, async_req=True)
@@ -2662,7 +2662,7 @@ class CoreApi(object):
     def connectors_update_with_http_info(self, project_name, connector_name, data, **kwargs):  # noqa: E501
         """Update connectors  # noqa: E501
 
-         ### Description Update a connector in a project. When updating, all necessary fields are validated again. It is not possible to update the **type** of a connector.  ### Optional Parameters - `name`: New name for the connector - `credentials`: A new credentials name to be referenced - `configuration`: A new dictionary with new values for credentials configuration. This dictionary may contain a subset of the necessary parameters for the credentials type. Only the given parameters are updated and the rest is kept at their old values. - `input_fields`: The old fields are changed with the new ones. If one or more old fields wanted to be kept for the connector, they must be provided again.  #### Request Examples ```  {   \"name\": \"new-connector-name\" } ```  ``` {   \"configuration\": {     \"bucket\": \"new-bucket-name\",     \"path_prefix\": \"new-blob\"   } } ```  ``` {   \"credentials\": \"new-credentials-name\" } ```  ``` {   \"input_fields\": [     {       \"name\": \"new-connector-field-1\",       \"data_type\": \"double\"     },     {       \"name\": \"new-connector-field-2\",       \"data_type\": \"array_int\"     }   ] } ```  ### Response Structure Details of the updated connector - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to the type field. It can be either structured or blob. - `project`: Project name in which the connector is defined - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type  #### Response Examples ```  {   \"id\": \"662c326c-a560-4322-8ed3-1229224257c43\",   \"name\": \"new-s3-connector\",   \"type\": \"aws_s3\",   \"input_type\": \"blob\",   \"project\": \"project-1\",   \"credentials\": \"s3-credentials\",   \"configuration\": {     \"bucket\": \"new-bucket-name\",     \"path_prefix\": \"blob\"   } } ```   # noqa: E501
+         ### Description Update a connector in a project. When updating, all necessary fields are validated again. It is not possible to update the **type** of a connector.  ### Optional Parameters - `name`: New name for the connector - `credentials`: A new credentials name to be referenced - `configuration`: A new dictionary with new values for credentials configuration. This dictionary may contain a subset of the necessary parameters for the credentials type. Only the given parameters are updated and the rest is kept at their old values. - `input_fields`: The old fields are changed with the new ones. If one or more old fields wanted to be kept for the connector, they must be provided again.  #### Request Examples ```  {   \"name\": \"new-connector-name\" } ```  ``` {   \"configuration\": {     \"bucket\": \"new-bucket-name\",     \"path_prefix\": \"new-blob\"   } } ```  ``` {   \"credentials\": \"new-credentials-name\" } ```  ``` {   \"input_fields\": [     {       \"name\": \"new-connector-field-1\",       \"data_type\": \"double\"     },     {       \"name\": \"new-connector-field-2\",       \"data_type\": \"array_int\"     }   ] } ```  ### Response Structure Details of the updated connector - `id`: Unique identifier for the connector (UUID) - `name`: Name of the connector - `type`: Type of the connector - `input_type`: Type of the connector according to the type field. It can be either structured or blob. - `project`: Project name in which the connector is defined - `credentials`: Name of referenced credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `input_fields`: A list of connector fields with name and data_type - `status`: The state of the connector. If the configuration parameters are updated, the connector is verified again. - `error_message`: The error message which explains why the connector has failed verification. It is empty if the connector is available. - `creation_date`: The date when the connector was created - `last_modified`: The date when the connector was last updated  #### Response Examples ```  {   \"id\": \"662c326c-a560-4322-8ed3-1229224257c43\",   \"name\": \"new-s3-connector\",   \"type\": \"aws_s3\",   \"input_type\": \"blob\",   \"status\": \"available\",   \"error_message\": \"\",   \"project\": \"project-1\",   \"credentials\": \"s3-credentials\",   \"configuration\": {     \"bucket\": \"new-bucket-name\",     \"path_prefix\": \"blob\"   },   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_modified\": \"2020-06-22T18:04:76.123754Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.connectors_update_with_http_info(project_name, connector_name, data, async_req=True)
@@ -2763,7 +2763,7 @@ class CoreApi(object):
     def credentials_create(self, project_name, data, **kwargs):  # noqa: E501
         """Create credentials  # noqa: E501
 
-         ### Description  Create a new credentials by defining its necessary configuration parameterss  ### Required Parameters  - `name`: Name of the credentials. It is unique within a project. - `type`: Type of the credentials. It should be one of the supported connectors such as aws_s3, postgresql and gcp_cloud_storage. - `configuration`: A dictionary which should contain the fields necessary for the given type  #### Request Examples  ``` {   \"name\": \"s3-credentials\",   \"type\": \"aws_s3\",   \"configuration\": {     \"access_key\": \"access_key\",     \"secret_key\": \"secret_key\",     \"region\": \"eu-central-1\"   } } ```  ### Response Structure  Details of the created credentials  - `id`: Unique identifier for the credentials (UUID)  - `name`: Name of the credentials  - `project`: Project name in which the credentials is created  - `type`: Type of the credentials  - `reference_count`: The number of connectors using this credentials. It is initialised as 0 when it is created.  - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.  #### Response Examples  ``` {   \"id\": \"da4da757-373c-4cab-948e-90ff4ab2e9c3\",   \"name\": \"s3-credentials\",   \"project\": \"project-1\",   \"type\": \"aws_s3\",   \"reference_count\": 0,   \"configuration\": {     \"access_key\": null,     \"secret_key\": null,     \"region\": \"eu-central-1\"   } } ```   # noqa: E501
+         ### Description  Create a new credentials by defining its necessary configuration parameterss  ### Required Parameters  - `name`: Name of the credentials. It is unique within a project. - `type`: Type of the credentials. It should be one of the supported connectors such as aws_s3, postgresql and gcp_cloud_storage. - `configuration`: A dictionary which should contain the fields necessary for the given type  #### Request Examples  ``` {   \"name\": \"s3-credentials\",   \"type\": \"aws_s3\",   \"configuration\": {     \"access_key\": \"access_key\",     \"secret_key\": \"secret_key\",     \"region\": \"eu-central-1\"   } } ```  ### Response Structure  Details of the created credentials  - `id`: Unique identifier for the credentials (UUID)  - `name`: Name of the credentials  - `project`: Project name in which the credentials is created  - `type`: Type of the credentials  - `reference_count`: The number of connectors using this credentials. It is initialised as 0 when it is created.  - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.  - `status`: The state of the credentials. It is initialized as pending_verification.  - `error_message`: The error message which explains why the credentials has failed verification. It is empty if the credentials is available.  - `creation_date`: The date when the credentials was created  - `last_modified`: The date when the credentials was last updated  #### Response Examples  ``` {   \"id\": \"da4da757-373c-4cab-948e-90ff4ab2e9c3\",   \"name\": \"s3-credentials\",   \"project\": \"project-1\",   \"type\": \"aws_s3\",   \"status\": \"pending_verification\",   \"error_message\": \"\",   \"reference_count\": 0,   \"configuration\": {     \"access_key\": null,     \"secret_key\": null,     \"region\": \"eu-central-1\"   },   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_modified\": \"2020-05-12T16:23:15.456812Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.credentials_create(project_name, data, async_req=True)
@@ -2789,7 +2789,7 @@ class CoreApi(object):
     def credentials_create_with_http_info(self, project_name, data, **kwargs):  # noqa: E501
         """Create credentials  # noqa: E501
 
-         ### Description  Create a new credentials by defining its necessary configuration parameterss  ### Required Parameters  - `name`: Name of the credentials. It is unique within a project. - `type`: Type of the credentials. It should be one of the supported connectors such as aws_s3, postgresql and gcp_cloud_storage. - `configuration`: A dictionary which should contain the fields necessary for the given type  #### Request Examples  ``` {   \"name\": \"s3-credentials\",   \"type\": \"aws_s3\",   \"configuration\": {     \"access_key\": \"access_key\",     \"secret_key\": \"secret_key\",     \"region\": \"eu-central-1\"   } } ```  ### Response Structure  Details of the created credentials  - `id`: Unique identifier for the credentials (UUID)  - `name`: Name of the credentials  - `project`: Project name in which the credentials is created  - `type`: Type of the credentials  - `reference_count`: The number of connectors using this credentials. It is initialised as 0 when it is created.  - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.  #### Response Examples  ``` {   \"id\": \"da4da757-373c-4cab-948e-90ff4ab2e9c3\",   \"name\": \"s3-credentials\",   \"project\": \"project-1\",   \"type\": \"aws_s3\",   \"reference_count\": 0,   \"configuration\": {     \"access_key\": null,     \"secret_key\": null,     \"region\": \"eu-central-1\"   } } ```   # noqa: E501
+         ### Description  Create a new credentials by defining its necessary configuration parameterss  ### Required Parameters  - `name`: Name of the credentials. It is unique within a project. - `type`: Type of the credentials. It should be one of the supported connectors such as aws_s3, postgresql and gcp_cloud_storage. - `configuration`: A dictionary which should contain the fields necessary for the given type  #### Request Examples  ``` {   \"name\": \"s3-credentials\",   \"type\": \"aws_s3\",   \"configuration\": {     \"access_key\": \"access_key\",     \"secret_key\": \"secret_key\",     \"region\": \"eu-central-1\"   } } ```  ### Response Structure  Details of the created credentials  - `id`: Unique identifier for the credentials (UUID)  - `name`: Name of the credentials  - `project`: Project name in which the credentials is created  - `type`: Type of the credentials  - `reference_count`: The number of connectors using this credentials. It is initialised as 0 when it is created.  - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.  - `status`: The state of the credentials. It is initialized as pending_verification.  - `error_message`: The error message which explains why the credentials has failed verification. It is empty if the credentials is available.  - `creation_date`: The date when the credentials was created  - `last_modified`: The date when the credentials was last updated  #### Response Examples  ``` {   \"id\": \"da4da757-373c-4cab-948e-90ff4ab2e9c3\",   \"name\": \"s3-credentials\",   \"project\": \"project-1\",   \"type\": \"aws_s3\",   \"status\": \"pending_verification\",   \"error_message\": \"\",   \"reference_count\": 0,   \"configuration\": {     \"access_key\": null,     \"secret_key\": null,     \"region\": \"eu-central-1\"   },   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_modified\": \"2020-05-12T16:23:15.456812Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.credentials_create_with_http_info(project_name, data, async_req=True)
@@ -2995,7 +2995,7 @@ class CoreApi(object):
     def credentials_get(self, project_name, credentials_name, **kwargs):  # noqa: E501
         """Get credentials  # noqa: E501
 
-         ### Description  Get the details of a single credentials  ### Response Structure  Details of the credentials - `id`: Unique identifier for the credentials (UUID) - `name`: Name of the credentials - `project`: Project name in which the credentials is defineds - `type`: Type of the credentials - `reference_count`: The number of connectors using the credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.  #### Response Examples  ``` {    \"id\": \"e07b3715-71c9-4a49-a8e5-179cf4778086\",   \"name\": \"postgresql-credentials\",   \"project\": \"project-1\",   \"type\": \"postgresql\",   \"reference_count\": 2,   \"configuration\": {     \"username\": \"user\",     \"password\": null,     \"host\": \"host\",     \"port\": \"1234\"   } } ```   # noqa: E501
+         ### Description  Get the details of a single credentials  ### Response Structure  Details of the credentials - `id`: Unique identifier for the credentials (UUID) - `name`: Name of the credentials - `project`: Project name in which the credentials is defineds - `type`: Type of the credentials - `reference_count`: The number of connectors using the credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `status`: The state of the credentials. It can be pending_verification, failed_verification or available. - `error_message`: The error message which explains why the credentials has failed verification. It is empty if the credentials is available. - `creation_date`: The date when the credentials was created - `last_modified`: The date when the credentials was last updated  #### Response Examples  ``` {    \"id\": \"e07b3715-71c9-4a49-a8e5-179cf4778086\",   \"name\": \"postgresql-credentials\",   \"project\": \"project-1\",   \"type\": \"postgresql\",   \"status\": \"available\",   \"error_message\": \"\",   \"reference_count\": 2,   \"configuration\": {     \"username\": \"user\",     \"password\": null,     \"host\": \"host\",     \"port\": \"1234\"   },   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_modified\": \"2020-06-22T18:04:76.123754Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.credentials_get(project_name, credentials_name, async_req=True)
@@ -3021,7 +3021,7 @@ class CoreApi(object):
     def credentials_get_with_http_info(self, project_name, credentials_name, **kwargs):  # noqa: E501
         """Get credentials  # noqa: E501
 
-         ### Description  Get the details of a single credentials  ### Response Structure  Details of the credentials - `id`: Unique identifier for the credentials (UUID) - `name`: Name of the credentials - `project`: Project name in which the credentials is defineds - `type`: Type of the credentials - `reference_count`: The number of connectors using the credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.  #### Response Examples  ``` {    \"id\": \"e07b3715-71c9-4a49-a8e5-179cf4778086\",   \"name\": \"postgresql-credentials\",   \"project\": \"project-1\",   \"type\": \"postgresql\",   \"reference_count\": 2,   \"configuration\": {     \"username\": \"user\",     \"password\": null,     \"host\": \"host\",     \"port\": \"1234\"   } } ```   # noqa: E501
+         ### Description  Get the details of a single credentials  ### Response Structure  Details of the credentials - `id`: Unique identifier for the credentials (UUID) - `name`: Name of the credentials - `project`: Project name in which the credentials is defineds - `type`: Type of the credentials - `reference_count`: The number of connectors using the credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `status`: The state of the credentials. It can be pending_verification, failed_verification or available. - `error_message`: The error message which explains why the credentials has failed verification. It is empty if the credentials is available. - `creation_date`: The date when the credentials was created - `last_modified`: The date when the credentials was last updated  #### Response Examples  ``` {    \"id\": \"e07b3715-71c9-4a49-a8e5-179cf4778086\",   \"name\": \"postgresql-credentials\",   \"project\": \"project-1\",   \"type\": \"postgresql\",   \"status\": \"available\",   \"error_message\": \"\",   \"reference_count\": 2,   \"configuration\": {     \"username\": \"user\",     \"password\": null,     \"host\": \"host\",     \"port\": \"1234\"   },   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_modified\": \"2020-06-22T18:04:76.123754Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.credentials_get_with_http_info(project_name, credentials_name, async_req=True)
@@ -3111,7 +3111,7 @@ class CoreApi(object):
     def credentials_list(self, project_name, **kwargs):  # noqa: E501
         """List credentials  # noqa: E501
 
-          ### Description List all the sets of credentials in a project  ### Response Structure  A list of details of the credentials in the project - `id`: Unique identifier for the credentials (UUID) - `name`: Name of the credentials - `project`: Project name in which the credentials is defined - `type`: Type of the credentials - `reference_count`: The number of connectors using the credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.  #### Response Examples  ``` [   {     \"id\": \"da4da757-373c-4cab-948e-90ff4ab2e9c3\",     \"name\": \"s3-credentials\",     \"project\": \"project-1\",     \"type\": \"aws_s3\",     \"reference_count\": 1,     \"configuration\": {       \"access_key\": null,       \"secret_key\": null,       \"region\": \"eu-central-1\"     }   },   {     \"id\": \"e07b3715-71c9-4a49-a8e5-179cf4778086\",     \"name\": \"postgresql-credentials\",     \"project\": \"project-1\",     \"type\": \"postgresql\",     \"reference_count\": 2,     \"configuration\": {       \"username\": \"user\",       \"password\": null,       \"host\": \"host\",       \"port\": \"1234\"     }   } ] ```   # noqa: E501
+          ### Description List all the sets of credentials in a project  ### Response Structure  A list of details of the credentials in the project - `id`: Unique identifier for the credentials (UUID) - `name`: Name of the credentials - `project`: Project name in which the credentials is defined - `type`: Type of the credentials - `reference_count`: The number of connectors using the credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `status`: The state of the credentials. It can be pending_verification, failed_verification or available. - `error_message`: The error message which explains why the credentials has failed verification. It is empty if the credentials is available. - `creation_date`: The date when the credentials was created - `last_modified`: The date when the credentials was last updated  #### Response Examples  ``` [   {     \"id\": \"da4da757-373c-4cab-948e-90ff4ab2e9c3\",     \"name\": \"s3-credentials\",     \"project\": \"project-1\",     \"type\": \"aws_s3\",     \"status\": \"available\",     \"error_message\": \"\",     \"reference_count\": 1,     \"configuration\": {       \"access_key\": null,       \"secret_key\": null,       \"region\": \"eu-central-1\"     },     \"creation_date\": \"2020-03-24T09:43:51.791253Z\",     \"last_modified\": \"2020-05-19T11:52:21.163270Z\"   },   {     \"id\": \"e07b3715-71c9-4a49-a8e5-179cf4778086\",     \"name\": \"postgresql-credentials\",     \"project\": \"project-1\",     \"type\": \"postgresql\",     \"status\": \"available\",     \"error_message\": \"\",     \"reference_count\": 2,     \"configuration\": {       \"username\": \"user\",       \"password\": null,       \"host\": \"host\",       \"port\": \"1234\"     },     \"creation_date\": \"2020-05-12T16:23:15.456812Z\",     \"last_modified\": \"2020-06-22T18:04:76.123754Z\"   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.credentials_list(project_name, async_req=True)
@@ -3136,7 +3136,7 @@ class CoreApi(object):
     def credentials_list_with_http_info(self, project_name, **kwargs):  # noqa: E501
         """List credentials  # noqa: E501
 
-          ### Description List all the sets of credentials in a project  ### Response Structure  A list of details of the credentials in the project - `id`: Unique identifier for the credentials (UUID) - `name`: Name of the credentials - `project`: Project name in which the credentials is defined - `type`: Type of the credentials - `reference_count`: The number of connectors using the credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.  #### Response Examples  ``` [   {     \"id\": \"da4da757-373c-4cab-948e-90ff4ab2e9c3\",     \"name\": \"s3-credentials\",     \"project\": \"project-1\",     \"type\": \"aws_s3\",     \"reference_count\": 1,     \"configuration\": {       \"access_key\": null,       \"secret_key\": null,       \"region\": \"eu-central-1\"     }   },   {     \"id\": \"e07b3715-71c9-4a49-a8e5-179cf4778086\",     \"name\": \"postgresql-credentials\",     \"project\": \"project-1\",     \"type\": \"postgresql\",     \"reference_count\": 2,     \"configuration\": {       \"username\": \"user\",       \"password\": null,       \"host\": \"host\",       \"port\": \"1234\"     }   } ] ```   # noqa: E501
+          ### Description List all the sets of credentials in a project  ### Response Structure  A list of details of the credentials in the project - `id`: Unique identifier for the credentials (UUID) - `name`: Name of the credentials - `project`: Project name in which the credentials is defined - `type`: Type of the credentials - `reference_count`: The number of connectors using the credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `status`: The state of the credentials. It can be pending_verification, failed_verification or available. - `error_message`: The error message which explains why the credentials has failed verification. It is empty if the credentials is available. - `creation_date`: The date when the credentials was created - `last_modified`: The date when the credentials was last updated  #### Response Examples  ``` [   {     \"id\": \"da4da757-373c-4cab-948e-90ff4ab2e9c3\",     \"name\": \"s3-credentials\",     \"project\": \"project-1\",     \"type\": \"aws_s3\",     \"status\": \"available\",     \"error_message\": \"\",     \"reference_count\": 1,     \"configuration\": {       \"access_key\": null,       \"secret_key\": null,       \"region\": \"eu-central-1\"     },     \"creation_date\": \"2020-03-24T09:43:51.791253Z\",     \"last_modified\": \"2020-05-19T11:52:21.163270Z\"   },   {     \"id\": \"e07b3715-71c9-4a49-a8e5-179cf4778086\",     \"name\": \"postgresql-credentials\",     \"project\": \"project-1\",     \"type\": \"postgresql\",     \"status\": \"available\",     \"error_message\": \"\",     \"reference_count\": 2,     \"configuration\": {       \"username\": \"user\",       \"password\": null,       \"host\": \"host\",       \"port\": \"1234\"     },     \"creation_date\": \"2020-05-12T16:23:15.456812Z\",     \"last_modified\": \"2020-06-22T18:04:76.123754Z\"   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.credentials_list_with_http_info(project_name, async_req=True)
@@ -3219,7 +3219,7 @@ class CoreApi(object):
     def credentials_update(self, project_name, credentials_name, data, **kwargs):  # noqa: E501
         """Update credentials  # noqa: E501
 
-          ### Description Update a credentials. It is not possible to update the type of a credentials. All necessary fields are validated again.  ### Optional Parameters  - `name`: New name for the credentials - `configuration`: A new dictionary with new values for credentials configuration. This dictionary may contain a subset of the necessary parameters for the credentials type. Only the given parameters are updated and the rest is kept at their old values.  #### Request Examples  ``` {   \"name\": \"new-credentials-name\" } ```  ``` {   \"configuration\": {     \"username\": \"new_user\",     \"password\": \"new_secret_password\",     \"host\": \"new_host\",     \"port\": \"1234\"   } } ```  ### Response Structure  Details of the updated credentials - `id`: Unique identifier for the credentials (UUID) - `name`: Name of the credentials - `project`: Project name in which the credentials is defined - `type`: Type of the credentials - `reference_count`: The number of connectors using the credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.  #### Response Examples  ``` {    \"id\": \"e07b3715-71c9-4a49-a8e5-179cf4778086\",   \"name\": \"postgresql-credentials\",   \"project\": \"project-1\",   \"type\": \"postgresql\",   \"reference_count\": 2,   \"configuration\": {     \"username\": \"new_user\",     \"password\": null,     \"host\": \"new_host\",     \"port\": \"1234\"   } } ```   # noqa: E501
+          ### Description Update a credentials. It is not possible to update the type of a credentials. All necessary fields are validated again.  ### Optional Parameters  - `name`: New name for the credentials - `configuration`: A new dictionary with new values for credentials configuration. This dictionary may contain a subset of the necessary parameters for the credentials type. Only the given parameters are updated and the rest is kept at their old values.  #### Request Examples  ``` {   \"name\": \"new-credentials-name\" } ```  ``` {   \"configuration\": {     \"username\": \"new_user\",     \"password\": \"new_secret_password\",     \"host\": \"new_host\",     \"port\": \"1234\"   } } ```  ### Response Structure  Details of the updated credentials - `id`: Unique identifier for the credentials (UUID) - `name`: Name of the credentials - `project`: Project name in which the credentials is defined - `type`: Type of the credentials - `reference_count`: The number of connectors using the credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `status`: The state of the credentials. If the configuration parameters are updated, the connector is verified again. If there is a connector referencing this credentials, it is also verified again with the updated configuration. - `error_message`: The error message which explains why the credentials has failed verification. It is empty if the credentials is available. - `creation_date`: The date when the credentials was created - `last_modified`: The date when the credentials was last updated  #### Response Examples  ``` {    \"id\": \"e07b3715-71c9-4a49-a8e5-179cf4778086\",   \"name\": \"postgresql-credentials\",   \"project\": \"project-1\",   \"type\": \"postgresql\",   \"status\": \"pending_verification\",   \"error_message\": \"\",   \"reference_count\": 2,   \"configuration\": {     \"username\": \"new_user\",     \"password\": null,     \"host\": \"new_host\",     \"port\": \"1234\"   },   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_modified\": \"2020-06-22T18:04:76.123754Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.credentials_update(project_name, credentials_name, data, async_req=True)
@@ -3246,7 +3246,7 @@ class CoreApi(object):
     def credentials_update_with_http_info(self, project_name, credentials_name, data, **kwargs):  # noqa: E501
         """Update credentials  # noqa: E501
 
-          ### Description Update a credentials. It is not possible to update the type of a credentials. All necessary fields are validated again.  ### Optional Parameters  - `name`: New name for the credentials - `configuration`: A new dictionary with new values for credentials configuration. This dictionary may contain a subset of the necessary parameters for the credentials type. Only the given parameters are updated and the rest is kept at their old values.  #### Request Examples  ``` {   \"name\": \"new-credentials-name\" } ```  ``` {   \"configuration\": {     \"username\": \"new_user\",     \"password\": \"new_secret_password\",     \"host\": \"new_host\",     \"port\": \"1234\"   } } ```  ### Response Structure  Details of the updated credentials - `id`: Unique identifier for the credentials (UUID) - `name`: Name of the credentials - `project`: Project name in which the credentials is defined - `type`: Type of the credentials - `reference_count`: The number of connectors using the credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.  #### Response Examples  ``` {    \"id\": \"e07b3715-71c9-4a49-a8e5-179cf4778086\",   \"name\": \"postgresql-credentials\",   \"project\": \"project-1\",   \"type\": \"postgresql\",   \"reference_count\": 2,   \"configuration\": {     \"username\": \"new_user\",     \"password\": null,     \"host\": \"new_host\",     \"port\": \"1234\"   } } ```   # noqa: E501
+          ### Description Update a credentials. It is not possible to update the type of a credentials. All necessary fields are validated again.  ### Optional Parameters  - `name`: New name for the credentials - `configuration`: A new dictionary with new values for credentials configuration. This dictionary may contain a subset of the necessary parameters for the credentials type. Only the given parameters are updated and the rest is kept at their old values.  #### Request Examples  ``` {   \"name\": \"new-credentials-name\" } ```  ``` {   \"configuration\": {     \"username\": \"new_user\",     \"password\": \"new_secret_password\",     \"host\": \"new_host\",     \"port\": \"1234\"   } } ```  ### Response Structure  Details of the updated credentials - `id`: Unique identifier for the credentials (UUID) - `name`: Name of the credentials - `project`: Project name in which the credentials is defined - `type`: Type of the credentials - `reference_count`: The number of connectors using the credentials - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True. - `status`: The state of the credentials. If the configuration parameters are updated, the connector is verified again. If there is a connector referencing this credentials, it is also verified again with the updated configuration. - `error_message`: The error message which explains why the credentials has failed verification. It is empty if the credentials is available. - `creation_date`: The date when the credentials was created - `last_modified`: The date when the credentials was last updated  #### Response Examples  ``` {    \"id\": \"e07b3715-71c9-4a49-a8e5-179cf4778086\",   \"name\": \"postgresql-credentials\",   \"project\": \"project-1\",   \"type\": \"postgresql\",   \"status\": \"pending_verification\",   \"error_message\": \"\",   \"reference_count\": 2,   \"configuration\": {     \"username\": \"new_user\",     \"password\": null,     \"host\": \"new_host\",     \"port\": \"1234\"   },   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_modified\": \"2020-06-22T18:04:76.123754Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.credentials_update_with_http_info(project_name, credentials_name, data, async_req=True)
@@ -4923,7 +4923,7 @@ class CoreApi(object):
     def model_versions_create(self, project_name, model_name, data, **kwargs):  # noqa: E501
         """Create model versions  # noqa: E501
 
-         ### Description  Create a version for a model  ### Required Parameters  - `version`: Name of the version of the model  ### Optional Parameters  - `language`: Language in which the model version is provided. It can be python3.5, python3.6, python3.7 or python3.8. The default value is python3.7 - `memory_allocation`: Reserved memory for the version in MB. This value determines the memory allocated to the model version: it should to be enough to encompass the model file and all requirements that need to be installed. The default value is 2048. The minimum and maximum values are 256 and 32768 respectively. - `maximum_instances`: Upper bound of number of model versions running. The default value is 5, the maximum value is 20. *Indicator of resource capacity:* if many model requests need to be handled in a short time, this number can be set higher to avoid long waiting times. - `minimum_instances`: Lower bound of number of model versions running. The default value is 0. Set this value greater than 0 to always have a always running model version. - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped. The default value is 300, the minimum value is 10 and the maximum value is 3600. A high value means that the model version stays active longer. Sending requests to a running model version means that it will be already initialized and thus take a shorter timer.    If the time that a request takes does not matter, keep the default values.  #### Request Examples  ``` {   \"version\": \"version-1\",   \"language\": \"python3.6\" } ```   ``` {   \"version\": \"version-1\",   \"language\": \"python3.5\",   \"memory_allocation\": 512 } ```   ``` {   \"version\": \"version-1\",   \"maximum_instances\": 4,   \"minimum_instances\": 1 } ```  ### Response Structure  Details of the created version - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `state`: The state of the version. It is set to *initialised* state on creation. - `memory_allocation`: Reserved memory for the version in MB   - `maximum_instances`: Upper bound of number of model versions running - `minimum_instances`: Lower bound of number of model versions running - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped   #### Response Examples  ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"language\": \"python3.5\",   \"state\": \"initialised\",   \"memory_allocation\": 512,   \"maximum_instances\": 5,   \"minimum_instances\": 0,   \"maximum_idle_time\": 10, } ```   # noqa: E501
+         ### Description  Create a version for a model  ### Required Parameters  - `version`: Name of the version of the model  ### Optional Parameters  - `language`: Language in which the model version is provided. It can be python3.5, python3.6, python3.7 or python3.8. The default value is python3.7 - `memory_allocation`: Reserved memory for the version in MB. This value determines the memory allocated to the model version: it should to be enough to encompass the model file and all requirements that need to be installed. The default value is 2048. The minimum and maximum values are 256 and 32768 respectively. - `maximum_instances`: Upper bound of number of model versions running. The default value is 5, the maximum value is 20. *Indicator of resource capacity:* if many model requests need to be handled in a short time, this number can be set higher to avoid long waiting times. - `minimum_instances`: Lower bound of number of model versions running. The default value is 0. Set this value greater than 0 to always have a always running model version. - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped. The default value is 300, the minimum value is 10 and the maximum value is 3600. A high value means that the model version stays active longer. Sending requests to a running model version means that it will be already initialized and thus take a shorter timer.   - `description`: Description for the model version  If the time that a request takes does not matter, keep the default values.  #### Request Examples  ``` {   \"version\": \"version-1\",   \"language\": \"python3.6\" } ```   ``` {   \"version\": \"version-1\",   \"language\": \"python3.5\",   \"memory_allocation\": 512 } ```   ``` {   \"version\": \"version-1\",   \"maximum_instances\": 4,   \"minimum_instances\": 1 } ```  ### Response Structure  Details of the created version - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `memory_allocation`: Reserved memory for the version in MB   - `maximum_instances`: Upper bound of number of model versions running - `minimum_instances`: Lower bound of number of model versions running - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped - `description`: Description of the model version - `status`: The state of the model version. It is set to *initialised* state on creation. - `error_message`: The error message which explains why the model version has failed building or deployment. It is empty if the model version is available. - `creation_date`: The date when the model version was created - `last_updated_date`: The date when the model version was last updated - `file_last_updated_date`: The date when a model file was last uploaded  #### Response Examples  ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"language\": \"python3.5\",   \"description\": \"\",   \"status\": \"initialised\",   \"error_message\": \"\",   \"memory_allocation\": 512,   \"maximum_instances\": 5,   \"minimum_instances\": 0,   \"maximum_idle_time\": 10,   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_updated_date\": \"2020-05-12T16:23:15.456812Z\",   \"file_last_updated_date\": \"2020-05-12T16:23:15.456812Z\", } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_create(project_name, model_name, data, async_req=True)
@@ -4950,7 +4950,7 @@ class CoreApi(object):
     def model_versions_create_with_http_info(self, project_name, model_name, data, **kwargs):  # noqa: E501
         """Create model versions  # noqa: E501
 
-         ### Description  Create a version for a model  ### Required Parameters  - `version`: Name of the version of the model  ### Optional Parameters  - `language`: Language in which the model version is provided. It can be python3.5, python3.6, python3.7 or python3.8. The default value is python3.7 - `memory_allocation`: Reserved memory for the version in MB. This value determines the memory allocated to the model version: it should to be enough to encompass the model file and all requirements that need to be installed. The default value is 2048. The minimum and maximum values are 256 and 32768 respectively. - `maximum_instances`: Upper bound of number of model versions running. The default value is 5, the maximum value is 20. *Indicator of resource capacity:* if many model requests need to be handled in a short time, this number can be set higher to avoid long waiting times. - `minimum_instances`: Lower bound of number of model versions running. The default value is 0. Set this value greater than 0 to always have a always running model version. - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped. The default value is 300, the minimum value is 10 and the maximum value is 3600. A high value means that the model version stays active longer. Sending requests to a running model version means that it will be already initialized and thus take a shorter timer.    If the time that a request takes does not matter, keep the default values.  #### Request Examples  ``` {   \"version\": \"version-1\",   \"language\": \"python3.6\" } ```   ``` {   \"version\": \"version-1\",   \"language\": \"python3.5\",   \"memory_allocation\": 512 } ```   ``` {   \"version\": \"version-1\",   \"maximum_instances\": 4,   \"minimum_instances\": 1 } ```  ### Response Structure  Details of the created version - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `state`: The state of the version. It is set to *initialised* state on creation. - `memory_allocation`: Reserved memory for the version in MB   - `maximum_instances`: Upper bound of number of model versions running - `minimum_instances`: Lower bound of number of model versions running - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped   #### Response Examples  ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"language\": \"python3.5\",   \"state\": \"initialised\",   \"memory_allocation\": 512,   \"maximum_instances\": 5,   \"minimum_instances\": 0,   \"maximum_idle_time\": 10, } ```   # noqa: E501
+         ### Description  Create a version for a model  ### Required Parameters  - `version`: Name of the version of the model  ### Optional Parameters  - `language`: Language in which the model version is provided. It can be python3.5, python3.6, python3.7 or python3.8. The default value is python3.7 - `memory_allocation`: Reserved memory for the version in MB. This value determines the memory allocated to the model version: it should to be enough to encompass the model file and all requirements that need to be installed. The default value is 2048. The minimum and maximum values are 256 and 32768 respectively. - `maximum_instances`: Upper bound of number of model versions running. The default value is 5, the maximum value is 20. *Indicator of resource capacity:* if many model requests need to be handled in a short time, this number can be set higher to avoid long waiting times. - `minimum_instances`: Lower bound of number of model versions running. The default value is 0. Set this value greater than 0 to always have a always running model version. - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped. The default value is 300, the minimum value is 10 and the maximum value is 3600. A high value means that the model version stays active longer. Sending requests to a running model version means that it will be already initialized and thus take a shorter timer.   - `description`: Description for the model version  If the time that a request takes does not matter, keep the default values.  #### Request Examples  ``` {   \"version\": \"version-1\",   \"language\": \"python3.6\" } ```   ``` {   \"version\": \"version-1\",   \"language\": \"python3.5\",   \"memory_allocation\": 512 } ```   ``` {   \"version\": \"version-1\",   \"maximum_instances\": 4,   \"minimum_instances\": 1 } ```  ### Response Structure  Details of the created version - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `memory_allocation`: Reserved memory for the version in MB   - `maximum_instances`: Upper bound of number of model versions running - `minimum_instances`: Lower bound of number of model versions running - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped - `description`: Description of the model version - `status`: The state of the model version. It is set to *initialised* state on creation. - `error_message`: The error message which explains why the model version has failed building or deployment. It is empty if the model version is available. - `creation_date`: The date when the model version was created - `last_updated_date`: The date when the model version was last updated - `file_last_updated_date`: The date when a model file was last uploaded  #### Response Examples  ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"language\": \"python3.5\",   \"description\": \"\",   \"status\": \"initialised\",   \"error_message\": \"\",   \"memory_allocation\": 512,   \"maximum_instances\": 5,   \"minimum_instances\": 0,   \"maximum_idle_time\": 10,   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_updated_date\": \"2020-05-12T16:23:15.456812Z\",   \"file_last_updated_date\": \"2020-05-12T16:23:15.456812Z\", } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_create_with_http_info(project_name, model_name, data, async_req=True)
@@ -5431,7 +5431,7 @@ class CoreApi(object):
     def model_versions_get(self, project_name, model_name, version, **kwargs):  # noqa: E501
         """Get model version  # noqa: E501
 
-         ### Description  Retrieve details of a model version of a model in a project  ### Response Structure  Details of a version - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `state`: The state of the version - `memory_allocation`: Reserved memory for the version in MB  - `maximum_instances`: Upper bound of number of model pods running in parallel - `minimum_instances`: Lower bound of number of model pods running in parallel - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped  #### Response Examples ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"memory_allocation\": 512,   \"language\": \"python3.7\",   \"state\": \"active\",   \"maximum_instances\": 4,   \"minimum_instances\": 1,   \"maximum_idle_time\": 10, } ```   # noqa: E501
+         ### Description  Retrieve details of a model version of a model in a project  ### Response Structure  Details of a version - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `memory_allocation`: Reserved memory for the version in MB  - `maximum_instances`: Upper bound of number of model pods running in parallel - `minimum_instances`: Lower bound of number of model pods running in parallel - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped - `description`: Description of the model version - `status`: The state of the model version - `error_message`: The error message which explains why the model version has failed building or deployment. It is empty if the model version is available. - `creation_date`: The date when the model version was created - `last_updated_date`: The date when the model version was last updated - `file_last_updated_date`: The date when a model file was last uploaded  #### Response Examples ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"memory_allocation\": 512,   \"language\": \"python3.7\",   \"description\": \"\",   \"status\": \"active\",   \"error_message\": \"\",   \"maximum_instances\": 4,   \"minimum_instances\": 1,   \"maximum_idle_time\": 10,   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_updated_date\": \"2020-06-22T18:04:76.123754Z\",   \"file_last_updated_date\": \"2020-06-23T11:17:28.128652Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_get(project_name, model_name, version, async_req=True)
@@ -5458,7 +5458,7 @@ class CoreApi(object):
     def model_versions_get_with_http_info(self, project_name, model_name, version, **kwargs):  # noqa: E501
         """Get model version  # noqa: E501
 
-         ### Description  Retrieve details of a model version of a model in a project  ### Response Structure  Details of a version - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `state`: The state of the version - `memory_allocation`: Reserved memory for the version in MB  - `maximum_instances`: Upper bound of number of model pods running in parallel - `minimum_instances`: Lower bound of number of model pods running in parallel - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped  #### Response Examples ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"memory_allocation\": 512,   \"language\": \"python3.7\",   \"state\": \"active\",   \"maximum_instances\": 4,   \"minimum_instances\": 1,   \"maximum_idle_time\": 10, } ```   # noqa: E501
+         ### Description  Retrieve details of a model version of a model in a project  ### Response Structure  Details of a version - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `memory_allocation`: Reserved memory for the version in MB  - `maximum_instances`: Upper bound of number of model pods running in parallel - `minimum_instances`: Lower bound of number of model pods running in parallel - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped - `description`: Description of the model version - `status`: The state of the model version - `error_message`: The error message which explains why the model version has failed building or deployment. It is empty if the model version is available. - `creation_date`: The date when the model version was created - `last_updated_date`: The date when the model version was last updated - `file_last_updated_date`: The date when a model file was last uploaded  #### Response Examples ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"memory_allocation\": 512,   \"language\": \"python3.7\",   \"description\": \"\",   \"status\": \"active\",   \"error_message\": \"\",   \"maximum_instances\": 4,   \"minimum_instances\": 1,   \"maximum_idle_time\": 10,   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_updated_date\": \"2020-06-22T18:04:76.123754Z\",   \"file_last_updated_date\": \"2020-06-23T11:17:28.128652Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_get_with_http_info(project_name, model_name, version, async_req=True)
@@ -5555,7 +5555,7 @@ class CoreApi(object):
     def model_versions_list(self, project_name, model_name, **kwargs):  # noqa: E501
         """List model versions  # noqa: E501
 
-         ### Description  List all the versions of a model in a project  ### Response Structure  A list of details of the versions - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `state`: The state of the version - `memory_allocation`: Reserved memory usage for the version in MB - `maximum_instances`: Upper bound of number of model versions running - `minimum_instances`: Lower bound of number of model versions running - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped  #### Response Examples ``` [   {     \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",     \"model\": \"model-1\",     \"version\": \"version-1\",     \"language\": \"python3.5\",     \"state\": \"active\",     \"memory_allocation\": 512,     \"maximum_instances\": 4,     \"minimum_instances\": 1,     \"maximum_idle_time\": 10,   },   {     \"id\": \"24f6b80a-08c3-4d52-ac1a-2ea7e70f16a6\",     \"model\": \"model-1\",     \"version\": \"version-2\",     \"language\": \"python3.6\",     \"state\": \"initialised\",     \"memory_allocation\": 256,     \"maximum_instances\": 5,     \"minimum_instances\": 0,     \"maximum_idle_time\": 10,   } ] ```   # noqa: E501
+         ### Description  List all the versions of a model in a project  ### Response Structure  A list of details of the versions - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `memory_allocation`: Reserved memory usage for the version in MB - `maximum_instances`: Upper bound of number of model versions running - `minimum_instances`: Lower bound of number of model versions running - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped - `description`: Description of the model version - `status`: The state of the model version - `error_message`: The error message which explains why the model version has failed building or deployment. It is empty if the model version is available. - `creation_date`: The date when the model version was created - `last_updated_date`: The date when the model version was last updated - `file_last_updated_date`: The date when a model file was last uploaded  #### Response Examples ``` [   {     \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",     \"model\": \"model-1\",     \"version\": \"version-1\",     \"language\": \"python3.5\",     \"description\": \"\",     \"status\": \"active\",     \"error_message\": \"\",     \"memory_allocation\": 512,     \"maximum_instances\": 4,     \"minimum_instances\": 1,     \"maximum_idle_time\": 10,     \"creation_date\": \"2020-06-18T08:32:14.876451Z\",     \"last_updated_date\": \"2020-06-19T10:52:23.124784Z\",     \"file_last_updated_date\": \"2020-06-19T10:52:23.124784Z\"   },   {     \"id\": \"24f6b80a-08c3-4d52-ac1a-2ea7e70f16a6\",     \"model\": \"model-1\",     \"version\": \"version-2\",     \"language\": \"python3.6\",     \"description\": \"\",     \"status\": \"active\",     \"error_message\": \"\",     \"memory_allocation\": 256,     \"maximum_instances\": 5,     \"minimum_instances\": 0,     \"maximum_idle_time\": 10,     \"creation_date\": \"2020-05-12T16:23:15.456812Z\",     \"last_updated_date\": \"2020-06-22T18:04:76.123754Z\",     \"file_last_updated_date\": \"2020-06-23T11:17:28.128652Z\"   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_list(project_name, model_name, async_req=True)
@@ -5581,7 +5581,7 @@ class CoreApi(object):
     def model_versions_list_with_http_info(self, project_name, model_name, **kwargs):  # noqa: E501
         """List model versions  # noqa: E501
 
-         ### Description  List all the versions of a model in a project  ### Response Structure  A list of details of the versions - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `state`: The state of the version - `memory_allocation`: Reserved memory usage for the version in MB - `maximum_instances`: Upper bound of number of model versions running - `minimum_instances`: Lower bound of number of model versions running - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped  #### Response Examples ``` [   {     \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",     \"model\": \"model-1\",     \"version\": \"version-1\",     \"language\": \"python3.5\",     \"state\": \"active\",     \"memory_allocation\": 512,     \"maximum_instances\": 4,     \"minimum_instances\": 1,     \"maximum_idle_time\": 10,   },   {     \"id\": \"24f6b80a-08c3-4d52-ac1a-2ea7e70f16a6\",     \"model\": \"model-1\",     \"version\": \"version-2\",     \"language\": \"python3.6\",     \"state\": \"initialised\",     \"memory_allocation\": 256,     \"maximum_instances\": 5,     \"minimum_instances\": 0,     \"maximum_idle_time\": 10,   } ] ```   # noqa: E501
+         ### Description  List all the versions of a model in a project  ### Response Structure  A list of details of the versions - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `memory_allocation`: Reserved memory usage for the version in MB - `maximum_instances`: Upper bound of number of model versions running - `minimum_instances`: Lower bound of number of model versions running - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped - `description`: Description of the model version - `status`: The state of the model version - `error_message`: The error message which explains why the model version has failed building or deployment. It is empty if the model version is available. - `creation_date`: The date when the model version was created - `last_updated_date`: The date when the model version was last updated - `file_last_updated_date`: The date when a model file was last uploaded  #### Response Examples ``` [   {     \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",     \"model\": \"model-1\",     \"version\": \"version-1\",     \"language\": \"python3.5\",     \"description\": \"\",     \"status\": \"active\",     \"error_message\": \"\",     \"memory_allocation\": 512,     \"maximum_instances\": 4,     \"minimum_instances\": 1,     \"maximum_idle_time\": 10,     \"creation_date\": \"2020-06-18T08:32:14.876451Z\",     \"last_updated_date\": \"2020-06-19T10:52:23.124784Z\",     \"file_last_updated_date\": \"2020-06-19T10:52:23.124784Z\"   },   {     \"id\": \"24f6b80a-08c3-4d52-ac1a-2ea7e70f16a6\",     \"model\": \"model-1\",     \"version\": \"version-2\",     \"language\": \"python3.6\",     \"description\": \"\",     \"status\": \"active\",     \"error_message\": \"\",     \"memory_allocation\": 256,     \"maximum_instances\": 5,     \"minimum_instances\": 0,     \"maximum_idle_time\": 10,     \"creation_date\": \"2020-05-12T16:23:15.456812Z\",     \"last_updated_date\": \"2020-06-22T18:04:76.123754Z\",     \"file_last_updated_date\": \"2020-06-23T11:17:28.128652Z\"   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_list_with_http_info(project_name, model_name, async_req=True)
@@ -5671,7 +5671,7 @@ class CoreApi(object):
     def model_versions_update(self, project_name, model_name, version, data, **kwargs):  # noqa: E501
         """Update model version  # noqa: E501
 
-         ### Description  Update a model version of a model in a project. Updating the language field will cause the model to be build again. All necessary fields are validated again.  ### Optional Parameters  - `version`: New name for the version - `language`: New language for the version - `memory_allocation`: New reserved memory for the version in MB - `maximum_instances`: New upper bound of number of model versions running - `minimum_instances`: New lower bound of number of model versions running - `maximum_idle_time`: New maximum time in seconds a model version stays idle before it is stopped  #### Request Examples  ``` {   \"version\": \"new-version\" } ```   ``` {   \"memory_allocation\": 512,   \"maximum_instances\": 4,   \"minimum_instances\": 1 } ```  ### Response Structure  Details of the updated version - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `state`: The state of the version - `memory_allocation`: Reserved memory for the version in MB - `maximum_instances`: Upper bound of number of model versions running - `minimum_instances`: Lower bound of number of model versions running - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped  #### Response Examples  ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"language\": \"python3.5\",   \"state\": \"initialised\",   \"memory_allocation\": 512,   \"maximum_instances\": 4,   \"minimum_instances\": 1,   \"maximum_idle_time\": 10, } ```   # noqa: E501
+         ### Description  Update a model version of a model in a project. Updating the language field will cause the model to be build again. All necessary fields are validated again.  ### Optional Parameters  - `version`: New name for the version - `language`: New language for the version - `memory_allocation`: New reserved memory for the version in MB - `maximum_instances`: New upper bound of number of model versions running - `minimum_instances`: New lower bound of number of model versions running - `maximum_idle_time`: New maximum time in seconds a model version stays idle before it is stopped - `description`: New description for the version  #### Request Examples  ``` {   \"version\": \"new-version\" } ```   ``` {   \"memory_allocation\": 512,   \"maximum_instances\": 4,   \"minimum_instances\": 1 } ```  ### Response Structure  Details of the updated version - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `memory_allocation`: Reserved memory for the version in MB - `maximum_instances`: Upper bound of number of model versions running - `minimum_instances`: Lower bound of number of model versions running - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped - `description`: Description of the model version - `status`: The state of the model version - `error_message`: The error message which explains why the model version has failed building or deployment. It is empty if the model version is available. - `creation_date`: The date when the model version was created - `last_updated_date`: The date when the model version was last updated - `file_last_updated_date`: The date when a model file was last uploaded  #### Response Examples  ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"language\": \"python3.5\",   \"description\": \"\",   \"status\": \"active\",   \"error_message\": \"\",   \"memory_allocation\": 512,   \"maximum_instances\": 4,   \"minimum_instances\": 1,   \"maximum_idle_time\": 10,   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_updated_date\": \"2020-06-23T18:04:76.123754Z\",   \"file_last_updated_date\": \"2020-06-23T11:17:28.128652Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_update(project_name, model_name, version, data, async_req=True)
@@ -5699,7 +5699,7 @@ class CoreApi(object):
     def model_versions_update_with_http_info(self, project_name, model_name, version, data, **kwargs):  # noqa: E501
         """Update model version  # noqa: E501
 
-         ### Description  Update a model version of a model in a project. Updating the language field will cause the model to be build again. All necessary fields are validated again.  ### Optional Parameters  - `version`: New name for the version - `language`: New language for the version - `memory_allocation`: New reserved memory for the version in MB - `maximum_instances`: New upper bound of number of model versions running - `minimum_instances`: New lower bound of number of model versions running - `maximum_idle_time`: New maximum time in seconds a model version stays idle before it is stopped  #### Request Examples  ``` {   \"version\": \"new-version\" } ```   ``` {   \"memory_allocation\": 512,   \"maximum_instances\": 4,   \"minimum_instances\": 1 } ```  ### Response Structure  Details of the updated version - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `state`: The state of the version - `memory_allocation`: Reserved memory for the version in MB - `maximum_instances`: Upper bound of number of model versions running - `minimum_instances`: Lower bound of number of model versions running - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped  #### Response Examples  ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"language\": \"python3.5\",   \"state\": \"initialised\",   \"memory_allocation\": 512,   \"maximum_instances\": 4,   \"minimum_instances\": 1,   \"maximum_idle_time\": 10, } ```   # noqa: E501
+         ### Description  Update a model version of a model in a project. Updating the language field will cause the model to be build again. All necessary fields are validated again.  ### Optional Parameters  - `version`: New name for the version - `language`: New language for the version - `memory_allocation`: New reserved memory for the version in MB - `maximum_instances`: New upper bound of number of model versions running - `minimum_instances`: New lower bound of number of model versions running - `maximum_idle_time`: New maximum time in seconds a model version stays idle before it is stopped - `description`: New description for the version  #### Request Examples  ``` {   \"version\": \"new-version\" } ```   ``` {   \"memory_allocation\": 512,   \"maximum_instances\": 4,   \"minimum_instances\": 1 } ```  ### Response Structure  Details of the updated version - `id`: Unique identifier for the model (UUID) - `model`: Model name to which the version is associated - `version`: Version name - `language`: Language in which the model version is provided - `memory_allocation`: Reserved memory for the version in MB - `maximum_instances`: Upper bound of number of model versions running - `minimum_instances`: Lower bound of number of model versions running - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped - `description`: Description of the model version - `status`: The state of the model version - `error_message`: The error message which explains why the model version has failed building or deployment. It is empty if the model version is available. - `creation_date`: The date when the model version was created - `last_updated_date`: The date when the model version was last updated - `file_last_updated_date`: The date when a model file was last uploaded  #### Response Examples  ``` {   \"id\": \"4ae7d14b-4803-4e16-b96d-3b18caa4b605\",   \"model\": \"model-1\",   \"version\": \"version-1\",   \"language\": \"python3.5\",   \"description\": \"\",   \"status\": \"active\",   \"error_message\": \"\",   \"memory_allocation\": 512,   \"maximum_instances\": 4,   \"minimum_instances\": 1,   \"maximum_idle_time\": 10,   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_updated_date\": \"2020-06-23T18:04:76.123754Z\",   \"file_last_updated_date\": \"2020-06-23T11:17:28.128652Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.model_versions_update_with_http_info(project_name, model_name, version, data, async_req=True)
@@ -5807,7 +5807,7 @@ class CoreApi(object):
     def models_create(self, project_name, data, **kwargs):  # noqa: E501
         """Create a model  # noqa: E501
 
-         ### Description  Create a model by defining the input/output type and input/output fields. In case of **plain** type of input or output, input and output fields should not be given or passed as an empty list.  Possible data types for the input and output fields are: - **int**: integer - **string**: string - **double**: double precision floating point - **bool**: boolean value (False/True) - **timestamp**: timestamp - **array_int**: an array of integers - **array_double**: an array of double precision floating points - **array_string**: an array of strings - **blob**: a blob field. This type of field can be used to pass blobs to the model. In model and pipeline requests, the uuid of a previously uploaded blob must be provided for this field.  ### Required Parameters  - `name`: Name of the model. It is unique within a project. - `input_type`: Type of the input of the model. It can be either structured or plain. - `output_type`: Type of the output of the model. It can be either structured or plain. - `input_fields`: The list of required model input fields. It must contain the fields: name and data_type. The name of an input field is unique for a model. - `output_fields`: The list of required model output fields. It must contain the fields: name and data_type. The name of an output field is unique for a model.  #### Request Examples A model with structured input and output type ``` {   \"name\": \"model-1\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   A model with plain input type ``` {   \"name\": \"model-1\",   \"input_type\": \"plain\",   \"output_type\": \"structured\",   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   A model with plain input and output type ``` {   \"name\": \"model-1\",   \"input_type\": \"plain\",   \"output_type\": \"plain\" } ```  ### Response Structure  Details of the created model - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is created - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type - `output_fields`: The list of model output fields containing name and data_type  #### Response Examples  ``` {   \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",   \"name\": \"model-1\",   \"project\": \"project-1\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   # noqa: E501
+         ### Description  Create a model by defining the input/output type and input/output fields. In case of **plain** type of input or output, input and output fields should not be given or passed as an empty list.  Possible data types for the input and output fields are: - **int**: integer - **string**: string - **double**: double precision floating point - **bool**: boolean value (False/True) - **timestamp**: timestamp - **array_int**: an array of integers - **array_double**: an array of double precision floating points - **array_string**: an array of strings - **blob**: a blob field. This type of field can be used to pass blobs to the model. In model and pipeline requests, the uuid of a previously uploaded blob must be provided for this field.  ### Required Parameters  - `name`: Name of the model. It is unique within a project. - `input_type`: Type of the input of the model. It can be either structured or plain. - `output_type`: Type of the output of the model. It can be either structured or plain. - `input_fields`: The list of required model input fields. It must contain the fields: name and data_type. The name of an input field is unique for a model. - `output_fields`: The list of required model output fields. It must contain the fields: name and data_type. The name of an output field is unique for a model.  ### Optional Parameters - `description`: Description of the model  #### Request Examples A model with structured input and output type ``` {   \"name\": \"model-1\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   A model with plain input type ``` {   \"name\": \"model-1\",   \"description\": \"Model one\"   \"input_type\": \"plain\",   \"output_type\": \"structured\",   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   A model with plain input and output type ``` {   \"name\": \"model-1\",   \"input_type\": \"plain\",   \"output_type\": \"plain\" } ```  ### Response Structure  Details of the created model - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is created - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type - `output_fields`: The list of model output fields containing name and data_type - `description`: Description of the model - `creation_date`: The date when the model was created - `last_updated_date`: The date when the model was last updated - `number_of_versions`: Number of versions that this model has  #### Response Examples  ``` {   \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",   \"name\": \"model-1\",   \"project\": \"project-1\",   \"description\": \"\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ],   \"creation_date\": \"2020-06-18T08:32:14.876451Z\",   \"last_updated_date\": \"2020-06-18T08:32:14.876451Z\",   \"number_of_versions\": 0 } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.models_create(project_name, data, async_req=True)
@@ -5833,7 +5833,7 @@ class CoreApi(object):
     def models_create_with_http_info(self, project_name, data, **kwargs):  # noqa: E501
         """Create a model  # noqa: E501
 
-         ### Description  Create a model by defining the input/output type and input/output fields. In case of **plain** type of input or output, input and output fields should not be given or passed as an empty list.  Possible data types for the input and output fields are: - **int**: integer - **string**: string - **double**: double precision floating point - **bool**: boolean value (False/True) - **timestamp**: timestamp - **array_int**: an array of integers - **array_double**: an array of double precision floating points - **array_string**: an array of strings - **blob**: a blob field. This type of field can be used to pass blobs to the model. In model and pipeline requests, the uuid of a previously uploaded blob must be provided for this field.  ### Required Parameters  - `name`: Name of the model. It is unique within a project. - `input_type`: Type of the input of the model. It can be either structured or plain. - `output_type`: Type of the output of the model. It can be either structured or plain. - `input_fields`: The list of required model input fields. It must contain the fields: name and data_type. The name of an input field is unique for a model. - `output_fields`: The list of required model output fields. It must contain the fields: name and data_type. The name of an output field is unique for a model.  #### Request Examples A model with structured input and output type ``` {   \"name\": \"model-1\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   A model with plain input type ``` {   \"name\": \"model-1\",   \"input_type\": \"plain\",   \"output_type\": \"structured\",   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   A model with plain input and output type ``` {   \"name\": \"model-1\",   \"input_type\": \"plain\",   \"output_type\": \"plain\" } ```  ### Response Structure  Details of the created model - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is created - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type - `output_fields`: The list of model output fields containing name and data_type  #### Response Examples  ``` {   \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",   \"name\": \"model-1\",   \"project\": \"project-1\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   # noqa: E501
+         ### Description  Create a model by defining the input/output type and input/output fields. In case of **plain** type of input or output, input and output fields should not be given or passed as an empty list.  Possible data types for the input and output fields are: - **int**: integer - **string**: string - **double**: double precision floating point - **bool**: boolean value (False/True) - **timestamp**: timestamp - **array_int**: an array of integers - **array_double**: an array of double precision floating points - **array_string**: an array of strings - **blob**: a blob field. This type of field can be used to pass blobs to the model. In model and pipeline requests, the uuid of a previously uploaded blob must be provided for this field.  ### Required Parameters  - `name`: Name of the model. It is unique within a project. - `input_type`: Type of the input of the model. It can be either structured or plain. - `output_type`: Type of the output of the model. It can be either structured or plain. - `input_fields`: The list of required model input fields. It must contain the fields: name and data_type. The name of an input field is unique for a model. - `output_fields`: The list of required model output fields. It must contain the fields: name and data_type. The name of an output field is unique for a model.  ### Optional Parameters - `description`: Description of the model  #### Request Examples A model with structured input and output type ``` {   \"name\": \"model-1\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   A model with plain input type ``` {   \"name\": \"model-1\",   \"description\": \"Model one\"   \"input_type\": \"plain\",   \"output_type\": \"structured\",   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   A model with plain input and output type ``` {   \"name\": \"model-1\",   \"input_type\": \"plain\",   \"output_type\": \"plain\" } ```  ### Response Structure  Details of the created model - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is created - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type - `output_fields`: The list of model output fields containing name and data_type - `description`: Description of the model - `creation_date`: The date when the model was created - `last_updated_date`: The date when the model was last updated - `number_of_versions`: Number of versions that this model has  #### Response Examples  ``` {   \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",   \"name\": \"model-1\",   \"project\": \"project-1\",   \"description\": \"\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ],   \"creation_date\": \"2020-06-18T08:32:14.876451Z\",   \"last_updated_date\": \"2020-06-18T08:32:14.876451Z\",   \"number_of_versions\": 0 } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.models_create_with_http_info(project_name, data, async_req=True)
@@ -6039,7 +6039,7 @@ class CoreApi(object):
     def models_get(self, project_name, model_name, **kwargs):  # noqa: E501
         """Get details of model  # noqa: E501
 
-         ### Description  Retrieve details of a single model in a project  ### Response Structure  Details of a model - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is defined - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type - `output_fields`: The list of model output fields containing name and data_type  #### Response Examples  ``` {   \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",   \"name\": \"model-1\",   \"project\": \"project-1\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   # noqa: E501
+         ### Description  Retrieve details of a single model in a project  ### Response Structure  Details of a model - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is defined - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type - `output_fields`: The list of model output fields containing name and data_type - `description`: Description of the model - `creation_date`: The date when the model was created - `last_updated_date`: The date when the model was last updated - `number_of_versions`: Number of versions that this model has  #### Response Examples  ``` {   \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",   \"name\": \"model-1\",   \"project\": \"project-1\",   \"description\": \"\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ],   \"creation_date\": \"2020-06-18T08:32:14.876451Z\",   \"last_updated_date\": \"2020-06-19T10:52:23.124784Z\",   \"number_of_versions\": 2 } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.models_get(project_name, model_name, async_req=True)
@@ -6065,7 +6065,7 @@ class CoreApi(object):
     def models_get_with_http_info(self, project_name, model_name, **kwargs):  # noqa: E501
         """Get details of model  # noqa: E501
 
-         ### Description  Retrieve details of a single model in a project  ### Response Structure  Details of a model - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is defined - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type - `output_fields`: The list of model output fields containing name and data_type  #### Response Examples  ``` {   \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",   \"name\": \"model-1\",   \"project\": \"project-1\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   # noqa: E501
+         ### Description  Retrieve details of a single model in a project  ### Response Structure  Details of a model - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is defined - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type - `output_fields`: The list of model output fields containing name and data_type - `description`: Description of the model - `creation_date`: The date when the model was created - `last_updated_date`: The date when the model was last updated - `number_of_versions`: Number of versions that this model has  #### Response Examples  ``` {   \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",   \"name\": \"model-1\",   \"project\": \"project-1\",   \"description\": \"\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ],   \"creation_date\": \"2020-06-18T08:32:14.876451Z\",   \"last_updated_date\": \"2020-06-19T10:52:23.124784Z\",   \"number_of_versions\": 2 } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.models_get_with_http_info(project_name, model_name, async_req=True)
@@ -6155,7 +6155,7 @@ class CoreApi(object):
     def models_list(self, project_name, **kwargs):  # noqa: E501
         """List models in project  # noqa: E501
 
-         ### Description  List all models in a project  ### Response Structure  A list of details of the models in the project - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is defined - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type. It is empty in case of plain input type models. - `output_fields`: The list of model output fields containing name and data_type. It is empty in case of plain output type models.  #### Response Examples  ``` [   {     \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",     \"name\": \"model-1\",     \"project\": \"project-1\",     \"input_type\": \"structured\",     \"output_type\": \"structured\",     \"input_fields\": [       {         \"name\": \"input-field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"input-field-2\",         \"data_type\": \"double\"       }     ],     \"output_fields\": [       {         \"name\": \"output-field\",         \"data_type\": \"double\"       }     ]   },   {     \"id\": \"5f4e942f-d5b8-4d62-99b2-870c15a82127\",     \"name\": \"model-2\",     \"project\": \"project-1\",     \"input_type\": \"structured\",     \"output_type\": \"plain\",     \"input_fields\": [       {         \"name\": \"input-field\",         \"data_type\": \"int\"       }     ],     \"output_fields\": []   },   {     \"id\": \"bd3fae9d-aeec-4cf3-8ef0-5f9224d41904\",     \"name\": \"model-2\",     \"project\": \"project-1\",     \"input_type\": \"plain\",     \"output_type\": \"plain\",     \"input_fields\": [],     \"output_fields\": []   } ] ```   # noqa: E501
+         ### Description  List all models in a project  ### Response Structure  A list of details of the models in the project - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is defined - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type. It is empty in case of plain input type models. - `output_fields`: The list of model output fields containing name and data_type. It is empty in case of plain output type models. - `description`: Description of the model - `creation_date`: The date when the model was created - `last_updated_date`: The date when the model was last updated - `number_of_versions`: Number of versions that this model has  #### Response Examples  ``` [   {     \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",     \"name\": \"model-1\",     \"project\": \"project-1\",     \"description\": \"Temperature model\",     \"input_type\": \"structured\",     \"output_type\": \"structured\",     \"input_fields\": [       {         \"name\": \"input-field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"input-field-2\",         \"data_type\": \"double\"       }     ],     \"output_fields\": [       {         \"name\": \"output-field\",         \"data_type\": \"double\"       }     ],     \"creation_date\": \"2020-05-12T16:23:15.456812Z\",     \"last_updated_date\": \"2020-06-22T18:04:76.123754Z\",     \"number_of_versions\": 1   },   {     \"id\": \"5f4e942f-d5b8-4d62-99b2-870c15a82127\",     \"name\": \"model-2\",     \"project\": \"project-1\",     \"description\": \"Model two\",     \"input_type\": \"structured\",     \"output_type\": \"plain\",     \"input_fields\": [       {         \"name\": \"input-field\",         \"data_type\": \"int\"       }     ],     \"output_fields\": [],     \"creation_date\": \"2020-03-24T09:43:51.791253Z\",     \"last_updated_date\": \"2020-05-19T11:52:21.163270Z\",     \"number_of_versions\": 2   },   {     \"id\": \"bd3fae9d-aeec-4cf3-8ef0-5f9224d41904\",     \"name\": \"model-3\",     \"description\": \"\",     \"project\": \"project-1\",     \"input_type\": \"plain\",     \"output_type\": \"plain\",     \"input_fields\": [],     \"output_fields\": [],     \"creation_date\": \"2020-06-18T08:32:14.876451Z\",     \"last_updated_date\": \"2020-06-19T10:52:23.124784Z\",     \"number_of_versions\": 1   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.models_list(project_name, async_req=True)
@@ -6180,7 +6180,7 @@ class CoreApi(object):
     def models_list_with_http_info(self, project_name, **kwargs):  # noqa: E501
         """List models in project  # noqa: E501
 
-         ### Description  List all models in a project  ### Response Structure  A list of details of the models in the project - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is defined - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type. It is empty in case of plain input type models. - `output_fields`: The list of model output fields containing name and data_type. It is empty in case of plain output type models.  #### Response Examples  ``` [   {     \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",     \"name\": \"model-1\",     \"project\": \"project-1\",     \"input_type\": \"structured\",     \"output_type\": \"structured\",     \"input_fields\": [       {         \"name\": \"input-field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"input-field-2\",         \"data_type\": \"double\"       }     ],     \"output_fields\": [       {         \"name\": \"output-field\",         \"data_type\": \"double\"       }     ]   },   {     \"id\": \"5f4e942f-d5b8-4d62-99b2-870c15a82127\",     \"name\": \"model-2\",     \"project\": \"project-1\",     \"input_type\": \"structured\",     \"output_type\": \"plain\",     \"input_fields\": [       {         \"name\": \"input-field\",         \"data_type\": \"int\"       }     ],     \"output_fields\": []   },   {     \"id\": \"bd3fae9d-aeec-4cf3-8ef0-5f9224d41904\",     \"name\": \"model-2\",     \"project\": \"project-1\",     \"input_type\": \"plain\",     \"output_type\": \"plain\",     \"input_fields\": [],     \"output_fields\": []   } ] ```   # noqa: E501
+         ### Description  List all models in a project  ### Response Structure  A list of details of the models in the project - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is defined - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type. It is empty in case of plain input type models. - `output_fields`: The list of model output fields containing name and data_type. It is empty in case of plain output type models. - `description`: Description of the model - `creation_date`: The date when the model was created - `last_updated_date`: The date when the model was last updated - `number_of_versions`: Number of versions that this model has  #### Response Examples  ``` [   {     \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",     \"name\": \"model-1\",     \"project\": \"project-1\",     \"description\": \"Temperature model\",     \"input_type\": \"structured\",     \"output_type\": \"structured\",     \"input_fields\": [       {         \"name\": \"input-field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"input-field-2\",         \"data_type\": \"double\"       }     ],     \"output_fields\": [       {         \"name\": \"output-field\",         \"data_type\": \"double\"       }     ],     \"creation_date\": \"2020-05-12T16:23:15.456812Z\",     \"last_updated_date\": \"2020-06-22T18:04:76.123754Z\",     \"number_of_versions\": 1   },   {     \"id\": \"5f4e942f-d5b8-4d62-99b2-870c15a82127\",     \"name\": \"model-2\",     \"project\": \"project-1\",     \"description\": \"Model two\",     \"input_type\": \"structured\",     \"output_type\": \"plain\",     \"input_fields\": [       {         \"name\": \"input-field\",         \"data_type\": \"int\"       }     ],     \"output_fields\": [],     \"creation_date\": \"2020-03-24T09:43:51.791253Z\",     \"last_updated_date\": \"2020-05-19T11:52:21.163270Z\",     \"number_of_versions\": 2   },   {     \"id\": \"bd3fae9d-aeec-4cf3-8ef0-5f9224d41904\",     \"name\": \"model-3\",     \"description\": \"\",     \"project\": \"project-1\",     \"input_type\": \"plain\",     \"output_type\": \"plain\",     \"input_fields\": [],     \"output_fields\": [],     \"creation_date\": \"2020-06-18T08:32:14.876451Z\",     \"last_updated_date\": \"2020-06-19T10:52:23.124784Z\",     \"number_of_versions\": 1   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.models_list_with_http_info(project_name, async_req=True)
@@ -6263,7 +6263,7 @@ class CoreApi(object):
     def models_update(self, project_name, model_name, data, **kwargs):  # noqa: E501
         """Update a model  # noqa: E501
 
-         ### Description  Update a model. It is only possible to update the name and description fields.  ### Optional Parameters  - `name`: New name for the model  #### Request Examples ``` {   \"name\": \"new-model-name\" } ```  ### Response Structure  Details of the updated model - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is defined - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type - `output_fields`: The list of model output fields containing name and data_type  #### Response Examples ``` {   \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",   \"name\": \"new-model-name\",   \"project\": \"project-1\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   # noqa: E501
+         ### Description  Update a model. It is only possible to update the name and description fields.  ### Optional Parameters  - `name`: New name for the model - `description`: New description for the model  #### Request Examples ``` {   \"name\": \"new-model-name\" } ```  ### Response Structure  Details of the updated model - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is defined - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type - `output_fields`: The list of model output fields containing name and data_type - `description`: Description of the model - `creation_date`: The date when the model was created - `last_updated_date`: The date when the model was last updated - `number_of_versions`: Number of versions that this model has  #### Response Examples ``` {   \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",   \"name\": \"new-model-name\",   \"project\": \"project-1\",   \"description\": \"New model description\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ],   \"creation_date\": \"2020-06-18T08:32:14.876451Z\",   \"last_updated_date\": \"2020-06-19T10:52:23.124784Z\",   \"number_of_versions\": 2 } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.models_update(project_name, model_name, data, async_req=True)
@@ -6290,7 +6290,7 @@ class CoreApi(object):
     def models_update_with_http_info(self, project_name, model_name, data, **kwargs):  # noqa: E501
         """Update a model  # noqa: E501
 
-         ### Description  Update a model. It is only possible to update the name and description fields.  ### Optional Parameters  - `name`: New name for the model  #### Request Examples ``` {   \"name\": \"new-model-name\" } ```  ### Response Structure  Details of the updated model - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is defined - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type - `output_fields`: The list of model output fields containing name and data_type  #### Response Examples ``` {   \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",   \"name\": \"new-model-name\",   \"project\": \"project-1\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ] } ```   # noqa: E501
+         ### Description  Update a model. It is only possible to update the name and description fields.  ### Optional Parameters  - `name`: New name for the model - `description`: New description for the model  #### Request Examples ``` {   \"name\": \"new-model-name\" } ```  ### Response Structure  Details of the updated model - `id`: Unique identifier for the model (UUID) - `name`: Name of the model - `project`: Project name in which the model is defined - `input_type`: Type of the input of the model - `output_type`: Type of the output of the model - `input_fields`: The list of model input fields containing name and data_type - `output_fields`: The list of model output fields containing name and data_type - `description`: Description of the model - `creation_date`: The date when the model was created - `last_updated_date`: The date when the model was last updated - `number_of_versions`: Number of versions that this model has  #### Response Examples ``` {   \"id\": \"903ccd12-81d1-46e1-9ac9-b9d70af118de\",   \"name\": \"new-model-name\",   \"project\": \"project-1\",   \"description\": \"New model description\",   \"input_type\": \"structured\",   \"output_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"input-field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"input-field-2\",       \"data_type\": \"double\"     }   ],   \"output_fields\": [     {       \"name\": \"output-field\",       \"data_type\": \"double\"     }   ],   \"creation_date\": \"2020-06-18T08:32:14.876451Z\",   \"last_updated_date\": \"2020-06-19T10:52:23.124784Z\",   \"number_of_versions\": 2 } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.models_update_with_http_info(project_name, model_name, data, async_req=True)
@@ -6717,6 +6717,334 @@ class CoreApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='list[OrganizationUserInviteList]',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def organization_subscriptions_list(self, organization_name, **kwargs):  # noqa: E501
+        """List subscriptions for an organizations  # noqa: E501
+
+         ### Description List the history of subscriptions of an organization. The user making the request must be admin of the organization.  ### Response Structure A list of details of the subscriptions that the organization has had - `id`: Unique identifier for the organization (UUID)   - `subscription`: Name of the subscription   - `start_date`: Date the subscription started    #### Response Examples ``` [   {     \"id\": \"56b26bcb-34b6-4c4d-a4aa-9d625e0aa9e2\",     \"subscription\": \"professional\",     \"start_date\": \"2020-07-08\"   },   {     \"id\": \"3a27e5f8-b247-4866-a08c-5df136b6034c\",     \"subscription\": \"starter\",     \"start_date\": \"2020-06-01\"   } ] ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organization_subscriptions_list(organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str organization_name: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: list[OrganizationSubscriptionList]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.organization_subscriptions_list_with_http_info(organization_name, **kwargs)  # noqa: E501
+
+    def organization_subscriptions_list_with_http_info(self, organization_name, **kwargs):  # noqa: E501
+        """List subscriptions for an organizations  # noqa: E501
+
+         ### Description List the history of subscriptions of an organization. The user making the request must be admin of the organization.  ### Response Structure A list of details of the subscriptions that the organization has had - `id`: Unique identifier for the organization (UUID)   - `subscription`: Name of the subscription   - `start_date`: Date the subscription started    #### Response Examples ``` [   {     \"id\": \"56b26bcb-34b6-4c4d-a4aa-9d625e0aa9e2\",     \"subscription\": \"professional\",     \"start_date\": \"2020-07-08\"   },   {     \"id\": \"3a27e5f8-b247-4866-a08c-5df136b6034c\",     \"subscription\": \"starter\",     \"start_date\": \"2020-06-01\"   } ] ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organization_subscriptions_list_with_http_info(organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str organization_name: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(list[OrganizationSubscriptionList], status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['organization_name']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method organization_subscriptions_list" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'organization_name' is set
+        if self.api_client.client_side_validation and ('organization_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['organization_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `organization_name` when calling `organization_subscriptions_list`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'organization_name' in local_var_params:
+            path_params['organization_name'] = local_var_params['organization_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/organizations/{organization_name}/subscriptions', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[OrganizationSubscriptionList]',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def organization_usage_details_get(self, organization_name, **kwargs):  # noqa: E501
+        """Get resource usage details  # noqa: E501
+
+         ### Description  Get resource usage for the organization. This returns a list of metrics that are used for billing, aggregated per day.  ### Optional Parameters  - `month`: date indicating the month to fetch usage data for, formatted `YYYY-MM`. If omitted defaults to the current month  ### Response Structure   - `metric`: The metric that was measured  - `object_type`: Type of object the metric was measured for (model version, pipeline or connector)  - `usage`: an array of objects each containing the following:      - `day`: Timestamp denoting the start of the day      - `value`: Aggregated metric value for the given unit over the given day  #### Response Examples ``` [   {     \"object_type\": \"model_version\",     \"metric\": \"gb_seconds\",     \"usage\": [       {         \"day\": \"2020-07-29T00:00:00Z\",         \"value\": 4200       },       {         \"day\": \"2020-07-28T00:00:00Z\",         \"value\": 840       },       {         \"day\": \"2020-07-30T00:00:00Z\",         \"value\": 960       }     ]   },   {     \"object_type\": \"pipeline\",     \"metric\": \"input_volume\",     \"usage\": [       {         \"day\": \"2020-07-28T00:00:00Z\",         \"value\": 1098       },       {         \"day\": \"2020-07-06T00:00:00Z\",         \"value\": 18       },       {         \"day\": \"2020-07-16T00:00:00Z\",         \"value\": 9       },       {         \"day\": \"2020-07-15T00:00:00Z\",         \"value\": 117       },       {         \"day\": \"2020-07-08T00:00:00Z\",         \"value\": 90       }     ]   } ]  ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organization_usage_details_get(organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str organization_name: (required)
+        :param str month:
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: list[UsagePerDay]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.organization_usage_details_get_with_http_info(organization_name, **kwargs)  # noqa: E501
+
+    def organization_usage_details_get_with_http_info(self, organization_name, **kwargs):  # noqa: E501
+        """Get resource usage details  # noqa: E501
+
+         ### Description  Get resource usage for the organization. This returns a list of metrics that are used for billing, aggregated per day.  ### Optional Parameters  - `month`: date indicating the month to fetch usage data for, formatted `YYYY-MM`. If omitted defaults to the current month  ### Response Structure   - `metric`: The metric that was measured  - `object_type`: Type of object the metric was measured for (model version, pipeline or connector)  - `usage`: an array of objects each containing the following:      - `day`: Timestamp denoting the start of the day      - `value`: Aggregated metric value for the given unit over the given day  #### Response Examples ``` [   {     \"object_type\": \"model_version\",     \"metric\": \"gb_seconds\",     \"usage\": [       {         \"day\": \"2020-07-29T00:00:00Z\",         \"value\": 4200       },       {         \"day\": \"2020-07-28T00:00:00Z\",         \"value\": 840       },       {         \"day\": \"2020-07-30T00:00:00Z\",         \"value\": 960       }     ]   },   {     \"object_type\": \"pipeline\",     \"metric\": \"input_volume\",     \"usage\": [       {         \"day\": \"2020-07-28T00:00:00Z\",         \"value\": 1098       },       {         \"day\": \"2020-07-06T00:00:00Z\",         \"value\": 18       },       {         \"day\": \"2020-07-16T00:00:00Z\",         \"value\": 9       },       {         \"day\": \"2020-07-15T00:00:00Z\",         \"value\": 117       },       {         \"day\": \"2020-07-08T00:00:00Z\",         \"value\": 90       }     ]   } ]  ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organization_usage_details_get_with_http_info(organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str organization_name: (required)
+        :param str month:
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(list[UsagePerDay], status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['organization_name', 'month']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method organization_usage_details_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'organization_name' is set
+        if self.api_client.client_side_validation and ('organization_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['organization_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `organization_name` when calling `organization_usage_details_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'organization_name' in local_var_params:
+            path_params['organization_name'] = local_var_params['organization_name']  # noqa: E501
+
+        query_params = []
+        if 'month' in local_var_params and local_var_params['month'] is not None:  # noqa: E501
+            query_params.append(('month', local_var_params['month']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/organizations/{organization_name}/usage/details', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[UsagePerDay]',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def organization_usage_get(self, organization_name, **kwargs):  # noqa: E501
+        """Get resource usage  # noqa: E501
+
+         ### Description  Get resource usage for the organization. This returns a list of metrics that are used for billing, aggregated per month.  ### Response Structure   - `metric`: The metric that was measured  - `object_type`: Type of object the metric was measured for (model version, pipeline or connector)  - `usage`: an array of objects each containing the following:      - `month`: Timestamp denoting the start of the month      - `value`: Aggregated metric value for the given unit over the given month  #### Response Examples ``` [   {     \"object_type\": \"pipeline\",     \"metric\": \"input_volume\",     \"usage\": [       {         \"month\": \"2019-08-01T00:00:00Z\",         \"value\": 1840       },       {         \"month\": \"2019-09-01T00:00:00Z\",         \"value\": 400       },       {         \"month\": \"2019-10-01T00:00:00Z\",         \"value\": 1204       },       {         \"month\": \"2019-11-01T00:00:00Z\",         \"value\": 1598       },       {         \"month\": \"2019-12-01T00:00:00Z\",         \"value\": 824       },       {         \"month\": \"2020-01-01T00:00:00Z\",         \"value\": 2036       },       {         \"month\": \"2020-02-01T00:00:00Z\",         \"value\": 1438       },       {         \"month\": \"2020-03-01T00:00:00Z\",         \"value\": 932       },       {         \"month\": \"2020-04-01T00:00:00Z\",         \"value\": 528       },       {         \"month\": \"2020-05-01T00:00:00Z\",         \"value\": 1484       },       {         \"month\": \"2020-06-01T00:00:00Z\",         \"value\": 1942       },       {         \"month\": \"2020-07-01T00:00:00Z\",         \"value\": 1332       }     ]   } ]  ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organization_usage_get(organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str organization_name: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: list[UsagePerMonth]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.organization_usage_get_with_http_info(organization_name, **kwargs)  # noqa: E501
+
+    def organization_usage_get_with_http_info(self, organization_name, **kwargs):  # noqa: E501
+        """Get resource usage  # noqa: E501
+
+         ### Description  Get resource usage for the organization. This returns a list of metrics that are used for billing, aggregated per month.  ### Response Structure   - `metric`: The metric that was measured  - `object_type`: Type of object the metric was measured for (model version, pipeline or connector)  - `usage`: an array of objects each containing the following:      - `month`: Timestamp denoting the start of the month      - `value`: Aggregated metric value for the given unit over the given month  #### Response Examples ``` [   {     \"object_type\": \"pipeline\",     \"metric\": \"input_volume\",     \"usage\": [       {         \"month\": \"2019-08-01T00:00:00Z\",         \"value\": 1840       },       {         \"month\": \"2019-09-01T00:00:00Z\",         \"value\": 400       },       {         \"month\": \"2019-10-01T00:00:00Z\",         \"value\": 1204       },       {         \"month\": \"2019-11-01T00:00:00Z\",         \"value\": 1598       },       {         \"month\": \"2019-12-01T00:00:00Z\",         \"value\": 824       },       {         \"month\": \"2020-01-01T00:00:00Z\",         \"value\": 2036       },       {         \"month\": \"2020-02-01T00:00:00Z\",         \"value\": 1438       },       {         \"month\": \"2020-03-01T00:00:00Z\",         \"value\": 932       },       {         \"month\": \"2020-04-01T00:00:00Z\",         \"value\": 528       },       {         \"month\": \"2020-05-01T00:00:00Z\",         \"value\": 1484       },       {         \"month\": \"2020-06-01T00:00:00Z\",         \"value\": 1942       },       {         \"month\": \"2020-07-01T00:00:00Z\",         \"value\": 1332       }     ]   } ]  ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organization_usage_get_with_http_info(organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str organization_name: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(list[UsagePerMonth], status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['organization_name']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method organization_usage_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'organization_name' is set
+        if self.api_client.client_side_validation and ('organization_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['organization_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `organization_name` when calling `organization_usage_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'organization_name' in local_var_params:
+            path_params['organization_name'] = local_var_params['organization_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/organizations/{organization_name}/usage', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[UsagePerMonth]',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -7311,7 +7639,7 @@ class CoreApi(object):
     def organizations_create(self, data, **kwargs):  # noqa: E501
         """Create organizations  # noqa: E501
 
-         ### Description  Create a new organization. Any authenticated user can create a new organization and this user will automatically become organization admin. Upon creating an organization, a **subscription** needs to be given.   - A **free** subscription grants permission to 1 user and allows for a maximum of 2 projects to be created.  - A **starter** subscription grants permission to 1 user and allows for a maximum of 10 projects to be created.  - A **professional** subscription grants permission to 10 users and allows for a maximum of 20 projects to be created.  It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to create an organization.  ### Required Parameters  - `name`: Name of the organization. The name is globally unique. It can only consist of lowercase letters, numbers and dashes (-), and must start with a lowercase letter.   - `subscription`: Name of the subscription: 'free', 'starter' or 'professional'. - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted   #### Request Examples  ``` {   \"name\": \"test-organization\",   \"subscription\": \"professional\",   \"subscription_agreed\": true } ```  ### Response Structure  Details of the created organization - `id`: Unique identifier for the organization (UUID)   - `name`: Name of the organization   - `creation_date`: Date and time the organization was created    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\" } ```   # noqa: E501
+         ### Description  Create a new organization. When a user creates an organization, s/he will automatically become an organization admin.  ### Required Parameters  - `name`: Name of the organization. The name is globally unique. It can only consist of lowercase letters, numbers and dashes (-), and must start with a lowercase letter.   - `subscription`: Name of the subscription for the organization - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted  ### Optional Parameters  - `subscription_end_date`: End date of the subscription. The subscription will be cancelled on this date. A 'free' subscription cannot have a custom end_date as this subscription is always valid for a year.  #### Request Examples  ``` {   \"name\": \"test-organization\",   \"subscription\": \"professional\",   \"subscription_agreed\": true } ```  ``` {   \"name\": \"test-organization\",   \"subscription\": \"professional\",   \"subscription_agreed\": true,   \"subscription_end_date\": \"2021-03-25\" } ```  ### Response Structure  Details of the created organization - `id`: Unique identifier for the organization (UUID)   - `name`: Name of the organization   - `creation_date`: Date and time the organization was created    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_create(data, async_req=True)
@@ -7336,7 +7664,7 @@ class CoreApi(object):
     def organizations_create_with_http_info(self, data, **kwargs):  # noqa: E501
         """Create organizations  # noqa: E501
 
-         ### Description  Create a new organization. Any authenticated user can create a new organization and this user will automatically become organization admin. Upon creating an organization, a **subscription** needs to be given.   - A **free** subscription grants permission to 1 user and allows for a maximum of 2 projects to be created.  - A **starter** subscription grants permission to 1 user and allows for a maximum of 10 projects to be created.  - A **professional** subscription grants permission to 10 users and allows for a maximum of 20 projects to be created.  It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to create an organization.  ### Required Parameters  - `name`: Name of the organization. The name is globally unique. It can only consist of lowercase letters, numbers and dashes (-), and must start with a lowercase letter.   - `subscription`: Name of the subscription: 'free', 'starter' or 'professional'. - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted   #### Request Examples  ``` {   \"name\": \"test-organization\",   \"subscription\": \"professional\",   \"subscription_agreed\": true } ```  ### Response Structure  Details of the created organization - `id`: Unique identifier for the organization (UUID)   - `name`: Name of the organization   - `creation_date`: Date and time the organization was created    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\" } ```   # noqa: E501
+         ### Description  Create a new organization. When a user creates an organization, s/he will automatically become an organization admin.  ### Required Parameters  - `name`: Name of the organization. The name is globally unique. It can only consist of lowercase letters, numbers and dashes (-), and must start with a lowercase letter.   - `subscription`: Name of the subscription for the organization - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted  ### Optional Parameters  - `subscription_end_date`: End date of the subscription. The subscription will be cancelled on this date. A 'free' subscription cannot have a custom end_date as this subscription is always valid for a year.  #### Request Examples  ``` {   \"name\": \"test-organization\",   \"subscription\": \"professional\",   \"subscription_agreed\": true } ```  ``` {   \"name\": \"test-organization\",   \"subscription\": \"professional\",   \"subscription_agreed\": true,   \"subscription_end_date\": \"2021-03-25\" } ```  ### Response Structure  Details of the created organization - `id`: Unique identifier for the organization (UUID)   - `name`: Name of the organization   - `creation_date`: Date and time the organization was created    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_create_with_http_info(data, async_req=True)
@@ -7423,7 +7751,7 @@ class CoreApi(object):
     def organizations_get(self, organization_name, **kwargs):  # noqa: E501
         """Get details of an organization  # noqa: E501
 
-         ### Description  Get the details of an organization. The user making the request must be admin of the organization.  ### Response Structure  Details of a organization - `id`: Unique identifier for the organization (UUID)   - `name`: Name of the organization   - `creation_date`: Time the organization was created   - `subscription`: Type of subscription   - `subscription_agreement_date`: Time the subscription agreement was accepted   - `subscription_agreement_user`: User who accepted the subscription agreement    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\",   \"subscription_agreement_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription_agreement_user\": \"test-user@test.com\" } ```   # noqa: E501
+         ### Description  Get the details of an organization  ### Response Structure  Details of the organization - `id`: Unique identifier for the organization (UUID)   - `name`: Name of the organization   - `creation_date`: Time the organization was created   - `subscription`: Name of the subscription    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"free\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_get(organization_name, async_req=True)
@@ -7448,7 +7776,7 @@ class CoreApi(object):
     def organizations_get_with_http_info(self, organization_name, **kwargs):  # noqa: E501
         """Get details of an organization  # noqa: E501
 
-         ### Description  Get the details of an organization. The user making the request must be admin of the organization.  ### Response Structure  Details of a organization - `id`: Unique identifier for the organization (UUID)   - `name`: Name of the organization   - `creation_date`: Time the organization was created   - `subscription`: Type of subscription   - `subscription_agreement_date`: Time the subscription agreement was accepted   - `subscription_agreement_user`: User who accepted the subscription agreement    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\",   \"subscription_agreement_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription_agreement_user\": \"test-user@test.com\" } ```   # noqa: E501
+         ### Description  Get the details of an organization  ### Response Structure  Details of the organization - `id`: Unique identifier for the organization (UUID)   - `name`: Name of the organization   - `creation_date`: Time the organization was created   - `subscription`: Name of the subscription    #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"free\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_get_with_http_info(organization_name, async_req=True)
@@ -7628,10 +7956,118 @@ class CoreApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def organizations_resource_usage(self, organization_name, **kwargs):  # noqa: E501
+        """List resource usage  # noqa: E501
+
+         ### Description  List the total number of resources used by this organization  ### Response Structure A list containing the number of - projects   - users   - models   - versions   - connectors   - pipelines   currently used by the organization.  #### Response Examples ``` {   \"projects\": 5,   \"users\": 3,   \"models\": 30,   \"versions\": 47,   \"connectors\": 1,   \"pipelines\": 2 } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organizations_resource_usage(organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str organization_name: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: ResourceUsage
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.organizations_resource_usage_with_http_info(organization_name, **kwargs)  # noqa: E501
+
+    def organizations_resource_usage_with_http_info(self, organization_name, **kwargs):  # noqa: E501
+        """List resource usage  # noqa: E501
+
+         ### Description  List the total number of resources used by this organization  ### Response Structure A list containing the number of - projects   - users   - models   - versions   - connectors   - pipelines   currently used by the organization.  #### Response Examples ``` {   \"projects\": 5,   \"users\": 3,   \"models\": 30,   \"versions\": 47,   \"connectors\": 1,   \"pipelines\": 2 } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.organizations_resource_usage_with_http_info(organization_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str organization_name: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(ResourceUsage, status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['organization_name']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method organizations_resource_usage" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'organization_name' is set
+        if self.api_client.client_side_validation and ('organization_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['organization_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `organization_name` when calling `organizations_resource_usage`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'organization_name' in local_var_params:
+            path_params['organization_name'] = local_var_params['organization_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/organizations/{organization_name}/resources', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ResourceUsage',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def organizations_update(self, organization_name, data, **kwargs):  # noqa: E501
         """Update details of an organization  # noqa: E501
 
-         ### Description  Update an organization. The user making the request must be admin of the organization.  It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to upgrade the subscription of an organization.  ### Optional Parameters  - `name`: New organization name - `subscription`: New subscription - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted upon upgrading the subscriptions  #### Request Examples ``` {   \"subscription\": \"professional\",   \"subscription_agreed\": true }  {   \"name\": \"new-organization-name\",   \"subscription\": \"professional\",   \"subscription_agreed\": true }  {   \"name\": \"new-organization-name\" }  ```  ### Response Structure  Details of a organization - `id`: Unique identifier for the organization (UUID)   - `name`: Name of the organization   - `creation_date`: Time the organization was created   - `subscription`: Type of subscription   - `subscription_agreement_date`: Time the subscription agreement was accepted   - `subscription_agreement_user`: User who accepted the subscription agreement    #### Response Examples ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\",   \"subscription_agreement_date\": \"2020-04-25T12:26:18.976481Z\",   \"subscription_agreement_user\": \"test-user-2@test.com\" } ```   # noqa: E501
+         ### Description  Update an organization. The user making the request must be admin of the organization. Users are able to update the name of the organization, but changes to the subscription can only be done by Dutch Analytics. To delete the end date of the current subscription, make a new subscription and omit the 'subscription_end_date' parameter from the request.  ### Optional Parameters  - `name`: New organization name - `subscription`: New subscription - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted upon upgrading the subscription - `subscription_end_date`: End date of the new subscription. The subscription will be cancelled on this date. If the subscription_end_date was previously set, but should be removed, simply omit the 'subscription_end_date' or give a null value for it. The required format is `YYYY-MM-DD`.  #### Request Examples   ``` {   \"name\": \"new-organization-name\" } ``` ``` {   \"subscription\": \"professional\",   \"subscription_agreed\": true } ``` ``` {   \"subscription_end_date\": \"2020-08-30\",   \"subscription_agreed\": true } ```  ### Response Structure  Details of the organization - `id`: Unique identifier for the organization (UUID)   - `name`: Name of the organization   - `creation_date`: Time the organization was created   - `subscription`: Name of the subscription    #### Response Examples  ``` ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"free\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_update(organization_name, data, async_req=True)
@@ -7657,7 +8093,7 @@ class CoreApi(object):
     def organizations_update_with_http_info(self, organization_name, data, **kwargs):  # noqa: E501
         """Update details of an organization  # noqa: E501
 
-         ### Description  Update an organization. The user making the request must be admin of the organization.  It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to upgrade the subscription of an organization.  ### Optional Parameters  - `name`: New organization name - `subscription`: New subscription - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted upon upgrading the subscriptions  #### Request Examples ``` {   \"subscription\": \"professional\",   \"subscription_agreed\": true }  {   \"name\": \"new-organization-name\",   \"subscription\": \"professional\",   \"subscription_agreed\": true }  {   \"name\": \"new-organization-name\" }  ```  ### Response Structure  Details of a organization - `id`: Unique identifier for the organization (UUID)   - `name`: Name of the organization   - `creation_date`: Time the organization was created   - `subscription`: Type of subscription   - `subscription_agreement_date`: Time the subscription agreement was accepted   - `subscription_agreement_user`: User who accepted the subscription agreement    #### Response Examples ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"professional\",   \"subscription_agreement_date\": \"2020-04-25T12:26:18.976481Z\",   \"subscription_agreement_user\": \"test-user-2@test.com\" } ```   # noqa: E501
+         ### Description  Update an organization. The user making the request must be admin of the organization. Users are able to update the name of the organization, but changes to the subscription can only be done by Dutch Analytics. To delete the end date of the current subscription, make a new subscription and omit the 'subscription_end_date' parameter from the request.  ### Optional Parameters  - `name`: New organization name - `subscription`: New subscription - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted upon upgrading the subscription - `subscription_end_date`: End date of the new subscription. The subscription will be cancelled on this date. If the subscription_end_date was previously set, but should be removed, simply omit the 'subscription_end_date' or give a null value for it. The required format is `YYYY-MM-DD`.  #### Request Examples   ``` {   \"name\": \"new-organization-name\" } ``` ``` {   \"subscription\": \"professional\",   \"subscription_agreed\": true } ``` ``` {   \"subscription_end_date\": \"2020-08-30\",   \"subscription_agreed\": true } ```  ### Response Structure  Details of the organization - `id`: Unique identifier for the organization (UUID)   - `name`: Name of the organization   - `creation_date`: Time the organization was created   - `subscription`: Name of the subscription    #### Response Examples  ``` ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"test-organization\",   \"creation_date\": \"2020-03-25T15:43:46.101877Z\",   \"subscription\": \"free\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.organizations_update_with_http_info(organization_name, data, async_req=True)
@@ -9227,7 +9663,7 @@ class CoreApi(object):
     def pipelines_create(self, project_name, data, **kwargs):  # noqa: E501
         """Create pipelines  # noqa: E501
 
-         ### Description  Create a pipeline in a project.   The input_fields represent the fields that the input data for pipeline requests should contain. When an object is attached to the pipeline, it means that the input data will be forwarded to these objects.  ### Required Parameters  - `name`: Name of the pipeline. It is unique within a project. - `input_type`: Type of the connector. It can be either structured or plain. - `input_fields`: A list of fields with name and data_type. In case of plain pipelines, the input_fields should be omitted or given as an empty list. For structured pipelines, they must be provided.  ### Optional Parameters - `description`: Description of the pipeline  #### Request Examples  A structured pipeline ``` {   \"name\": \"pipeline-1\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   A plain pipeline ``` {   \"name\": \"pipeline-2\",   \"input_type\": \"plain\",   \"description\": \"my description\" } ```  ### Response Structure  Details of the created pipeline - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `description`: Description of the pipeline - `project`: Project name in which the pipeline is created - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",   \"name\": \"pipeline-1\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"plain\",   \"input_fields\": [] } ```   # noqa: E501
+         ### Description  Create a pipeline in a project.   The input_fields represent the fields that the input data for pipeline requests should contain. When an object is attached to the pipeline, it means that the input data will be forwarded to these objects.  ### Required Parameters  - `name`: Name of the pipeline. It is unique within a project. - `input_type`: Type of the connector. It can be either structured or plain. - `input_fields`: A list of fields with name and data_type. In case of plain pipelines, the input_fields should be omitted or given as an empty list. For structured pipelines, they must be provided.  ### Optional Parameters - `description`: Description of the pipeline  #### Request Examples  A structured pipeline ``` {   \"name\": \"pipeline-1\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   A plain pipeline ``` {   \"name\": \"pipeline-2\",   \"input_type\": \"plain\",   \"description\": \"my description\" } ```  ### Response Structure  Details of the created pipeline - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `description`: Description of the pipeline - `project`: Project name in which the pipeline is created - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type - `creation_date`: The date when the pipeline was created - `last_updated_date`: The date when the pipeline was last updated  #### Response Examples  ``` {   \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",   \"name\": \"pipeline-1\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ],   \"creation_date\": \"2020-03-24T09:43:51.791253Z\",   \"last_updated_date\": \"2020-03-24T09:43:51.791253Z\" } ```   ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"plain\",   \"input_fields\": [],   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_updated_date\": \"2020-05-12T16:23:15.456812Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_create(project_name, data, async_req=True)
@@ -9253,7 +9689,7 @@ class CoreApi(object):
     def pipelines_create_with_http_info(self, project_name, data, **kwargs):  # noqa: E501
         """Create pipelines  # noqa: E501
 
-         ### Description  Create a pipeline in a project.   The input_fields represent the fields that the input data for pipeline requests should contain. When an object is attached to the pipeline, it means that the input data will be forwarded to these objects.  ### Required Parameters  - `name`: Name of the pipeline. It is unique within a project. - `input_type`: Type of the connector. It can be either structured or plain. - `input_fields`: A list of fields with name and data_type. In case of plain pipelines, the input_fields should be omitted or given as an empty list. For structured pipelines, they must be provided.  ### Optional Parameters - `description`: Description of the pipeline  #### Request Examples  A structured pipeline ``` {   \"name\": \"pipeline-1\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   A plain pipeline ``` {   \"name\": \"pipeline-2\",   \"input_type\": \"plain\",   \"description\": \"my description\" } ```  ### Response Structure  Details of the created pipeline - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `description`: Description of the pipeline - `project`: Project name in which the pipeline is created - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",   \"name\": \"pipeline-1\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"plain\",   \"input_fields\": [] } ```   # noqa: E501
+         ### Description  Create a pipeline in a project.   The input_fields represent the fields that the input data for pipeline requests should contain. When an object is attached to the pipeline, it means that the input data will be forwarded to these objects.  ### Required Parameters  - `name`: Name of the pipeline. It is unique within a project. - `input_type`: Type of the connector. It can be either structured or plain. - `input_fields`: A list of fields with name and data_type. In case of plain pipelines, the input_fields should be omitted or given as an empty list. For structured pipelines, they must be provided.  ### Optional Parameters - `description`: Description of the pipeline  #### Request Examples  A structured pipeline ``` {   \"name\": \"pipeline-1\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ] } ```   A plain pipeline ``` {   \"name\": \"pipeline-2\",   \"input_type\": \"plain\",   \"description\": \"my description\" } ```  ### Response Structure  Details of the created pipeline - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `description`: Description of the pipeline - `project`: Project name in which the pipeline is created - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type - `creation_date`: The date when the pipeline was created - `last_updated_date`: The date when the pipeline was last updated  #### Response Examples  ``` {   \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",   \"name\": \"pipeline-1\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"field-1\",       \"data_type\": \"int\"     },     {       \"name\": \"field-2\",       \"data_type\": \"double\"     }   ],   \"creation_date\": \"2020-03-24T09:43:51.791253Z\",   \"last_updated_date\": \"2020-03-24T09:43:51.791253Z\" } ```   ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"plain\",   \"input_fields\": [],   \"creation_date\": \"2020-05-12T16:23:15.456812Z\",   \"last_updated_date\": \"2020-05-12T16:23:15.456812Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_create_with_http_info(project_name, data, async_req=True)
@@ -9459,7 +9895,7 @@ class CoreApi(object):
     def pipelines_get(self, project_name, pipeline_name, **kwargs):  # noqa: E501
         """Get pipeline  # noqa: E501
 
-         ### Description  Get the details of a single pipeline  ### Response Structure  Details of the pipeline - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `description` Description of the pipeline - `project`: Project name in which the pipeline is defined - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"plain\",   \"input_fields\": [] } ```   # noqa: E501
+         ### Description  Get the details of a single pipeline  ### Response Structure  Details of the pipeline - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `description` Description of the pipeline - `project`: Project name in which the pipeline is defined - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type - `creation_date`: The date when the pipeline was created - `last_updated_date`: The date when the pipeline was last updated  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"plain\",   \"input_fields\": [],   \"creation_date\": \"2020-03-24T09:43:51.791253Z\",   \"last_updated_date\": \"2020-05-19T11:52:21.163270Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_get(project_name, pipeline_name, async_req=True)
@@ -9485,7 +9921,7 @@ class CoreApi(object):
     def pipelines_get_with_http_info(self, project_name, pipeline_name, **kwargs):  # noqa: E501
         """Get pipeline  # noqa: E501
 
-         ### Description  Get the details of a single pipeline  ### Response Structure  Details of the pipeline - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `description` Description of the pipeline - `project`: Project name in which the pipeline is defined - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"plain\",   \"input_fields\": [] } ```   # noqa: E501
+         ### Description  Get the details of a single pipeline  ### Response Structure  Details of the pipeline - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `description` Description of the pipeline - `project`: Project name in which the pipeline is defined - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type - `creation_date`: The date when the pipeline was created - `last_updated_date`: The date when the pipeline was last updated  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"pipeline-2\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"plain\",   \"input_fields\": [],   \"creation_date\": \"2020-03-24T09:43:51.791253Z\",   \"last_updated_date\": \"2020-05-19T11:52:21.163270Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_get_with_http_info(project_name, pipeline_name, async_req=True)
@@ -9575,7 +10011,7 @@ class CoreApi(object):
     def pipelines_list(self, project_name, **kwargs):  # noqa: E501
         """List pipelines  # noqa: E501
 
-         ### Description  List all pipelines in a project  ### Response Structure  A list of details of the pipelines in the project - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `project`: Project name in which the pipeline is defined - `description`: Description of the pipeline - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` [   {     \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",     \"name\": \"pipeline-1\",     \"project\": \"project-1\",     \"description\": \"my description\",     \"input_type\": \"structured\",     \"input_fields\": [       {         \"name\": \"field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"field-2\",         \"data_type\": \"double\"       }     ]   },   {     \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",     \"name\": \"pipeline-2\",     \"project\": \"project-1\",     \"description\": \"my description\",     \"input_type\": \"plain\",     \"input_fields\": []   } ] ```   # noqa: E501
+         ### Description  List all pipelines in a project  ### Response Structure  A list of details of the pipelines in the project - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `project`: Project name in which the pipeline is defined - `description`: Description of the pipeline - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type - `creation_date`: The date when the pipeline was created - `last_updated_date`: The date when the pipeline was last updated  #### Response Examples  ``` [   {     \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",     \"name\": \"pipeline-1\",     \"project\": \"project-1\",     \"description\": \"my description\",     \"input_type\": \"structured\",     \"input_fields\": [       {         \"name\": \"field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"field-2\",         \"data_type\": \"double\"       }     ],     \"creation_date\": \"2020-05-12T16:23:15.456812Z\",     \"last_updated_date\": \"2020-06-22T18:04:76.123754Z\"   },   {     \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",     \"name\": \"pipeline-2\",     \"project\": \"project-1\",     \"description\": \"my description\",     \"input_type\": \"plain\",     \"input_fields\": [],     \"creation_date\": \"2020-03-24T09:43:51.791253Z\",     \"last_updated_date\": \"2020-05-19T11:52:21.163270Z\"   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_list(project_name, async_req=True)
@@ -9600,7 +10036,7 @@ class CoreApi(object):
     def pipelines_list_with_http_info(self, project_name, **kwargs):  # noqa: E501
         """List pipelines  # noqa: E501
 
-         ### Description  List all pipelines in a project  ### Response Structure  A list of details of the pipelines in the project - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `project`: Project name in which the pipeline is defined - `description`: Description of the pipeline - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` [   {     \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",     \"name\": \"pipeline-1\",     \"project\": \"project-1\",     \"description\": \"my description\",     \"input_type\": \"structured\",     \"input_fields\": [       {         \"name\": \"field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"field-2\",         \"data_type\": \"double\"       }     ]   },   {     \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",     \"name\": \"pipeline-2\",     \"project\": \"project-1\",     \"description\": \"my description\",     \"input_type\": \"plain\",     \"input_fields\": []   } ] ```   # noqa: E501
+         ### Description  List all pipelines in a project  ### Response Structure  A list of details of the pipelines in the project - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `project`: Project name in which the pipeline is defined - `description`: Description of the pipeline - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type - `creation_date`: The date when the pipeline was created - `last_updated_date`: The date when the pipeline was last updated  #### Response Examples  ``` [   {     \"id\": \"6b0cea21-2657-4fa3-a331-de646e3cfdc4\",     \"name\": \"pipeline-1\",     \"project\": \"project-1\",     \"description\": \"my description\",     \"input_type\": \"structured\",     \"input_fields\": [       {         \"name\": \"field-1\",         \"data_type\": \"int\"       },       {         \"name\": \"field-2\",         \"data_type\": \"double\"       }     ],     \"creation_date\": \"2020-05-12T16:23:15.456812Z\",     \"last_updated_date\": \"2020-06-22T18:04:76.123754Z\"   },   {     \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",     \"name\": \"pipeline-2\",     \"project\": \"project-1\",     \"description\": \"my description\",     \"input_type\": \"plain\",     \"input_fields\": [],     \"creation_date\": \"2020-03-24T09:43:51.791253Z\",     \"last_updated_date\": \"2020-05-19T11:52:21.163270Z\"   } ] ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_list_with_http_info(project_name, async_req=True)
@@ -9819,7 +10255,7 @@ class CoreApi(object):
     def pipelines_update(self, project_name, pipeline_name, data, **kwargs):  # noqa: E501
         """Update pipeline  # noqa: E501
 
-              ### Description  Update a pipeline. All necessary fields are validated again.  ### Optional Parameters  - `name`: New name for the pipeline - `description`: New description for the pipeline - `input_type`: New type for the pipeline. It is possible to change the type from plain to structured and vice versa. - `input_fields`: New input fields for the pipeline.  If the type of pipeline is updated to plain, the input fields are deleted. In this case, input_fields should either be omitted or provided as en empty list. If the type of pipeline is updated to structured, the old fields are deleted, if there existed any. The new fields are created. If one or more old fields need to be kept, they must be provided again. If the pipeline is updated to have plain type,   #### Request Examples  ``` {   \"name\": \"new-pipeline-name\" } ```  ``` {   \"description\": \"New pipeline description\" } ```  ``` {   \"input_type\": \"plain\" } ```   ``` {   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```  ### Response Structure  Details of the updated pipeline - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `project`: Project name in which the pipeline is defined - `description`: Description for the pipeline - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"new-pipeline-name\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```   # noqa: E501
+              ### Description  Update a pipeline. All necessary fields are validated again.  ### Optional Parameters  - `name`: New name for the pipeline - `description`: New description for the pipeline - `input_type`: New type for the pipeline. It is possible to change the type from plain to structured and vice versa. - `input_fields`: New input fields for the pipeline.  If the type of pipeline is updated to plain, the input fields are deleted. In this case, input_fields should either be omitted or provided as en empty list. If the type of pipeline is updated to structured, the old fields are deleted, if there existed any. The new fields are created. If one or more old fields need to be kept, they must be provided again.  #### Request Examples  ``` {   \"name\": \"new-pipeline-name\" } ```  ``` {   \"description\": \"New pipeline description\" } ```  ``` {   \"input_type\": \"plain\" } ```   ``` {   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```  ### Response Structure  Details of the updated pipeline - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `project`: Project name in which the pipeline is defined - `description`: Description for the pipeline - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type - `creation_date`: The date when the pipeline was created - `last_updated_date`: The date when the pipeline was last updated  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"new-pipeline-name\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ],   \"creation_date\": \"2020-03-24T09:43:51.791253Z\",   \"last_updated_date\": \"2020-05-19T11:52:21.163270Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_update(project_name, pipeline_name, data, async_req=True)
@@ -9846,7 +10282,7 @@ class CoreApi(object):
     def pipelines_update_with_http_info(self, project_name, pipeline_name, data, **kwargs):  # noqa: E501
         """Update pipeline  # noqa: E501
 
-              ### Description  Update a pipeline. All necessary fields are validated again.  ### Optional Parameters  - `name`: New name for the pipeline - `description`: New description for the pipeline - `input_type`: New type for the pipeline. It is possible to change the type from plain to structured and vice versa. - `input_fields`: New input fields for the pipeline.  If the type of pipeline is updated to plain, the input fields are deleted. In this case, input_fields should either be omitted or provided as en empty list. If the type of pipeline is updated to structured, the old fields are deleted, if there existed any. The new fields are created. If one or more old fields need to be kept, they must be provided again. If the pipeline is updated to have plain type,   #### Request Examples  ``` {   \"name\": \"new-pipeline-name\" } ```  ``` {   \"description\": \"New pipeline description\" } ```  ``` {   \"input_type\": \"plain\" } ```   ``` {   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```  ### Response Structure  Details of the updated pipeline - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `project`: Project name in which the pipeline is defined - `description`: Description for the pipeline - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"new-pipeline-name\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```   # noqa: E501
+              ### Description  Update a pipeline. All necessary fields are validated again.  ### Optional Parameters  - `name`: New name for the pipeline - `description`: New description for the pipeline - `input_type`: New type for the pipeline. It is possible to change the type from plain to structured and vice versa. - `input_fields`: New input fields for the pipeline.  If the type of pipeline is updated to plain, the input fields are deleted. In this case, input_fields should either be omitted or provided as en empty list. If the type of pipeline is updated to structured, the old fields are deleted, if there existed any. The new fields are created. If one or more old fields need to be kept, they must be provided again.  #### Request Examples  ``` {   \"name\": \"new-pipeline-name\" } ```  ``` {   \"description\": \"New pipeline description\" } ```  ``` {   \"input_type\": \"plain\" } ```   ``` {   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ] } ```  ### Response Structure  Details of the updated pipeline - `id`: Unique identifier for the pipeline (UUID) - `name`: Name of the pipeline - `project`: Project name in which the pipeline is defined - `description`: Description for the pipeline - `input_type`: Type of the pipeline - `input_fields`: A list of pipeline fields with name and data_type - `creation_date`: The date when the pipeline was created - `last_updated_date`: The date when the pipeline was last updated  #### Response Examples  ``` {   \"id\": \"b6f60ebf-48ef-4084-9fbb-9ac0f934093e\",   \"name\": \"new-pipeline-name\",   \"project\": \"project-1\",   \"description\": \"my description\",   \"input_type\": \"structured\",   \"input_fields\": [     {       \"name\": \"new-field-1\",       \"data_type\": \"array_double\"     },     {       \"name\": \"new-field-2\",       \"data_type\": \"array_string\"     }   ],   \"creation_date\": \"2020-03-24T09:43:51.791253Z\",   \"last_updated_date\": \"2020-05-19T11:52:21.163270Z\" } ```   # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.pipelines_update_with_http_info(project_name, pipeline_name, data, async_req=True)
@@ -10521,6 +10957,114 @@ class CoreApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='EnvironmentVariableList',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def project_usage_get(self, project_name, **kwargs):  # noqa: E501
+        """Get resource usage  # noqa: E501
+
+         ### Description  Get resource usage for the project. This returns a list of metrics that are used for billing, aggregated per month.  ### Response Structure   - `metric`: The metric that was measured  - `object_type`: Type of object the metric was measured for (model version, pipeline or connector)  - `usage`: an array of objects each containing the following:      - `month`: Timestamp denoting the start of the month      - `value`: Aggregated metric value for the given unit over the given month  #### Response Examples ``` [   {     \"object_type\": \"pipeline\",     \"metric\": \"input_volume\",     \"usage\": [       {         \"month\": \"2019-08-01T00:00:00Z\",         \"value\": 1840       },       {         \"month\": \"2019-09-01T00:00:00Z\",         \"value\": 400       },       {         \"month\": \"2019-10-01T00:00:00Z\",         \"value\": 1204       },       {         \"month\": \"2019-11-01T00:00:00Z\",         \"value\": 1598       },       {         \"month\": \"2019-12-01T00:00:00Z\",         \"value\": 824       },       {         \"month\": \"2020-01-01T00:00:00Z\",         \"value\": 2036       },       {         \"month\": \"2020-02-01T00:00:00Z\",         \"value\": 1438       },       {         \"month\": \"2020-03-01T00:00:00Z\",         \"value\": 932       },       {         \"month\": \"2020-04-01T00:00:00Z\",         \"value\": 528       },       {         \"month\": \"2020-05-01T00:00:00Z\",         \"value\": 1484       },       {         \"month\": \"2020-06-01T00:00:00Z\",         \"value\": 1942       },       {         \"month\": \"2020-07-01T00:00:00Z\",         \"value\": 1332       }     ]   } ]  ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.project_usage_get(project_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: list[UsagePerMonth]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.project_usage_get_with_http_info(project_name, **kwargs)  # noqa: E501
+
+    def project_usage_get_with_http_info(self, project_name, **kwargs):  # noqa: E501
+        """Get resource usage  # noqa: E501
+
+         ### Description  Get resource usage for the project. This returns a list of metrics that are used for billing, aggregated per month.  ### Response Structure   - `metric`: The metric that was measured  - `object_type`: Type of object the metric was measured for (model version, pipeline or connector)  - `usage`: an array of objects each containing the following:      - `month`: Timestamp denoting the start of the month      - `value`: Aggregated metric value for the given unit over the given month  #### Response Examples ``` [   {     \"object_type\": \"pipeline\",     \"metric\": \"input_volume\",     \"usage\": [       {         \"month\": \"2019-08-01T00:00:00Z\",         \"value\": 1840       },       {         \"month\": \"2019-09-01T00:00:00Z\",         \"value\": 400       },       {         \"month\": \"2019-10-01T00:00:00Z\",         \"value\": 1204       },       {         \"month\": \"2019-11-01T00:00:00Z\",         \"value\": 1598       },       {         \"month\": \"2019-12-01T00:00:00Z\",         \"value\": 824       },       {         \"month\": \"2020-01-01T00:00:00Z\",         \"value\": 2036       },       {         \"month\": \"2020-02-01T00:00:00Z\",         \"value\": 1438       },       {         \"month\": \"2020-03-01T00:00:00Z\",         \"value\": 932       },       {         \"month\": \"2020-04-01T00:00:00Z\",         \"value\": 528       },       {         \"month\": \"2020-05-01T00:00:00Z\",         \"value\": 1484       },       {         \"month\": \"2020-06-01T00:00:00Z\",         \"value\": 1942       },       {         \"month\": \"2020-07-01T00:00:00Z\",         \"value\": 1332       }     ]   } ]  ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.project_usage_get_with_http_info(project_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str project_name: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(list[UsagePerMonth], status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['project_name']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method project_usage_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'project_name' is set
+        if self.api_client.client_side_validation and ('project_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['project_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `project_name` when calling `project_usage_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'project_name' in local_var_params:
+            path_params['project_name'] = local_var_params['project_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/projects/{project_name}/usage', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[UsagePerMonth]',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -13153,6 +13697,550 @@ class CoreApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='ServiceUserList',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def subscriptions_create(self, data, **kwargs):  # noqa: E501
+        """Create subscriptions  # noqa: E501
+
+         ### Description  Create a new subscription  ### Required Parameters  - `name`: Name of the subscription - `max_projects`: Maximum number of allowed projects to be created with this subscription - `max_users`: Maximum number of allowed users to be created with this subscription - `logs_retention_days`: Number of days for which the logs for each projects will be saved - `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running - `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription - `hidden`: A boolean indication whether the subscription is public or private  ### Optional Parameters - `agreement`: Link to subscription agreement document  - `terms_conditions`: Link to Xenia SaaS Terms & Conditions document   #### Request Examples  ``` {   \"name\": \"custom-subscription\",   \"max_projects\": 2,   \"max_users\": 3,   \"logs_retention_days\": 28,   \"gb_seconds\": 20000,   \"resources\": 20,   \"hidden\": True } ```  ### Response Structure  Details of the created subscription - `id`: Unique identifier for the subscription (UUID)  - `name`: Name of the subscription  - `max_projects`: Maximum number of allowed projects to be created with this subscription  - `max_users`: Maximum number of allowed users to be created with this subscription  - `agreement`: Link to subscription agreement document  - `terms_conditions`: Link to Xenia SaaS Terms & Conditions document  - `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running - `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription   #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"custom-subscription\",   \"max_projects\": 2,   \"max_users\": 3,   \"agreement\": \"\",   \"terms_conditions\": \"\",   \"gb_seconds\": 10000,   \"resources\": 15 } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.subscriptions_create(data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param SubscriptionCreate data: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: SubscriptionDetail
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.subscriptions_create_with_http_info(data, **kwargs)  # noqa: E501
+
+    def subscriptions_create_with_http_info(self, data, **kwargs):  # noqa: E501
+        """Create subscriptions  # noqa: E501
+
+         ### Description  Create a new subscription  ### Required Parameters  - `name`: Name of the subscription - `max_projects`: Maximum number of allowed projects to be created with this subscription - `max_users`: Maximum number of allowed users to be created with this subscription - `logs_retention_days`: Number of days for which the logs for each projects will be saved - `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running - `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription - `hidden`: A boolean indication whether the subscription is public or private  ### Optional Parameters - `agreement`: Link to subscription agreement document  - `terms_conditions`: Link to Xenia SaaS Terms & Conditions document   #### Request Examples  ``` {   \"name\": \"custom-subscription\",   \"max_projects\": 2,   \"max_users\": 3,   \"logs_retention_days\": 28,   \"gb_seconds\": 20000,   \"resources\": 20,   \"hidden\": True } ```  ### Response Structure  Details of the created subscription - `id`: Unique identifier for the subscription (UUID)  - `name`: Name of the subscription  - `max_projects`: Maximum number of allowed projects to be created with this subscription  - `max_users`: Maximum number of allowed users to be created with this subscription  - `agreement`: Link to subscription agreement document  - `terms_conditions`: Link to Xenia SaaS Terms & Conditions document  - `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running - `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription   #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"custom-subscription\",   \"max_projects\": 2,   \"max_users\": 3,   \"agreement\": \"\",   \"terms_conditions\": \"\",   \"gb_seconds\": 10000,   \"resources\": 15 } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.subscriptions_create_with_http_info(data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param SubscriptionCreate data: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(SubscriptionDetail, status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['data']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method subscriptions_create" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'data' is set
+        if self.api_client.client_side_validation and ('data' not in local_var_params or  # noqa: E501
+                                                        local_var_params['data'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `data` when calling `subscriptions_create`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'data' in local_var_params:
+            body_params = local_var_params['data']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/subscriptions', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='SubscriptionDetail',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def subscriptions_delete(self, subscription_name, **kwargs):  # noqa: E501
+        """Delete a subscription  # noqa: E501
+
+         ### Description  Delete a subscription. It's not possible to delete a subscription if it is used by any organization.   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.subscriptions_delete(subscription_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str subscription_name: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.subscriptions_delete_with_http_info(subscription_name, **kwargs)  # noqa: E501
+
+    def subscriptions_delete_with_http_info(self, subscription_name, **kwargs):  # noqa: E501
+        """Delete a subscription  # noqa: E501
+
+         ### Description  Delete a subscription. It's not possible to delete a subscription if it is used by any organization.   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.subscriptions_delete_with_http_info(subscription_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str subscription_name: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['subscription_name']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method subscriptions_delete" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'subscription_name' is set
+        if self.api_client.client_side_validation and ('subscription_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['subscription_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `subscription_name` when calling `subscriptions_delete`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'subscription_name' in local_var_params:
+            path_params['subscription_name'] = local_var_params['subscription_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/subscriptions/{subscription_name}', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def subscriptions_get(self, subscription_name, **kwargs):  # noqa: E501
+        """Get details of a subscription  # noqa: E501
+
+         ### Description  Get the details of a subscription  ### Response Structure  Details of the subscription - `id`: Unique identifier for the subscription (UUID)  - `name`: Name of the subscription  - `max_projects`: Maximum number of allowed projects to be created with this subscription  - `max_users`: Maximum number of allowed users to be created with this subscription  - `agreement`: Link to subscription agreement document  - `terms_conditions`: Link to Xenia SaaS Terms & Conditions document  - `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running - `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription   #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"custom-subscription\",   \"max_projects\": 2,   \"max_users\": 3,   \"agreement\": \"\",   \"terms_conditions\": \"\",   \"gb_seconds\": 10000,   \"resources\": 15 } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.subscriptions_get(subscription_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str subscription_name: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: SubscriptionDetail
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.subscriptions_get_with_http_info(subscription_name, **kwargs)  # noqa: E501
+
+    def subscriptions_get_with_http_info(self, subscription_name, **kwargs):  # noqa: E501
+        """Get details of a subscription  # noqa: E501
+
+         ### Description  Get the details of a subscription  ### Response Structure  Details of the subscription - `id`: Unique identifier for the subscription (UUID)  - `name`: Name of the subscription  - `max_projects`: Maximum number of allowed projects to be created with this subscription  - `max_users`: Maximum number of allowed users to be created with this subscription  - `agreement`: Link to subscription agreement document  - `terms_conditions`: Link to Xenia SaaS Terms & Conditions document  - `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running - `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription   #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"custom-subscription\",   \"max_projects\": 2,   \"max_users\": 3,   \"agreement\": \"\",   \"terms_conditions\": \"\",   \"gb_seconds\": 10000,   \"resources\": 15 } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.subscriptions_get_with_http_info(subscription_name, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str subscription_name: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(SubscriptionDetail, status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['subscription_name']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method subscriptions_get" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'subscription_name' is set
+        if self.api_client.client_side_validation and ('subscription_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['subscription_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `subscription_name` when calling `subscriptions_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'subscription_name' in local_var_params:
+            path_params['subscription_name'] = local_var_params['subscription_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/subscriptions/{subscription_name}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='SubscriptionDetail',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def subscriptions_list(self, **kwargs):  # noqa: E501
+        """List subscriptions  # noqa: E501
+
+         ### Description  List available subscriptions for organizations  ### Response Structure A list of details of the subscriptions - `id`: Unique identifier for the subscription (UUID)   - `name`: Name of the subscription    #### Response Examples  ``` [   {     \"id\": \"f35e94e2-820d-4ad2-a2c6-9e2668e1442b\",     \"name\": \"free\"   },   {     \"id\": \"888384be-b4b8-4728-918b-079c85879a5b\",     \"name\": \"starter\"   } ] ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.subscriptions_list(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: list[SubscriptionList]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.subscriptions_list_with_http_info(**kwargs)  # noqa: E501
+
+    def subscriptions_list_with_http_info(self, **kwargs):  # noqa: E501
+        """List subscriptions  # noqa: E501
+
+         ### Description  List available subscriptions for organizations  ### Response Structure A list of details of the subscriptions - `id`: Unique identifier for the subscription (UUID)   - `name`: Name of the subscription    #### Response Examples  ``` [   {     \"id\": \"f35e94e2-820d-4ad2-a2c6-9e2668e1442b\",     \"name\": \"free\"   },   {     \"id\": \"888384be-b4b8-4728-918b-079c85879a5b\",     \"name\": \"starter\"   } ] ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.subscriptions_list_with_http_info(async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(list[SubscriptionList], status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = []  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method subscriptions_list" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/subscriptions', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='list[SubscriptionList]',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def subscriptions_update(self, subscription_name, data, **kwargs):  # noqa: E501
+        """Update details of a subscription  # noqa: E501
+
+         ### Description  Update a subscription  ### Optional Parameters  - `name`: New subscription name - `max_projects`: Maximum number of allowed projects to be created with this subscription  - `max_users`: Maximum number of allowed users to be created with this subscription  - `agreement`: Link to subscription agreement document  - `terms_conditions`: Link to Xenia SaaS Terms & Conditions document  - `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running - `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription   #### Request Examples ``` {   \"max_projects\": 4,   \"max_users\": 5 } ```  ``` {   \"name\": \"new-subscription-name\" } ```  ### Response Structure  Details of the subscription - `id`: Unique identifier for the subscription (UUID)  - `name`: Name of the subscription  - `max_projects`: Maximum number of allowed projects to be created with this subscription  - `max_users`: Maximum number of allowed users to be created with this subscription  - `agreement`: Link to subscription agreement document  - `terms_conditions`: Link to Xenia SaaS Terms & Conditions document  - `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running - `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription   #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"new-subscription-name\",   \"max_projects\": 4,   \"max_users\": 5,   \"agreement\": \"\",   \"terms_conditions\": \"\",   \"gb_seconds\": 10000,   \"resources\": 20 } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.subscriptions_update(subscription_name, data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str subscription_name: (required)
+        :param SubscriptionUpdate data: (required)
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: SubscriptionDetail
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        return self.subscriptions_update_with_http_info(subscription_name, data, **kwargs)  # noqa: E501
+
+    def subscriptions_update_with_http_info(self, subscription_name, data, **kwargs):  # noqa: E501
+        """Update details of a subscription  # noqa: E501
+
+         ### Description  Update a subscription  ### Optional Parameters  - `name`: New subscription name - `max_projects`: Maximum number of allowed projects to be created with this subscription  - `max_users`: Maximum number of allowed users to be created with this subscription  - `agreement`: Link to subscription agreement document  - `terms_conditions`: Link to Xenia SaaS Terms & Conditions document  - `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running - `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription   #### Request Examples ``` {   \"max_projects\": 4,   \"max_users\": 5 } ```  ``` {   \"name\": \"new-subscription-name\" } ```  ### Response Structure  Details of the subscription - `id`: Unique identifier for the subscription (UUID)  - `name`: Name of the subscription  - `max_projects`: Maximum number of allowed projects to be created with this subscription  - `max_users`: Maximum number of allowed users to be created with this subscription  - `agreement`: Link to subscription agreement document  - `terms_conditions`: Link to Xenia SaaS Terms & Conditions document  - `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running - `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription   #### Response Examples  ``` {   \"id\": \"abe2e406-fae5-4bcf-a3bc-956d756e4ecb\",   \"name\": \"new-subscription-name\",   \"max_projects\": 4,   \"max_users\": 5,   \"agreement\": \"\",   \"terms_conditions\": \"\",   \"gb_seconds\": 10000,   \"resources\": 20 } ```   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.subscriptions_update_with_http_info(subscription_name, data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool: execute request asynchronously
+        :param str subscription_name: (required)
+        :param SubscriptionUpdate data: (required)
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return: tuple(SubscriptionDetail, status_code(int), headers(HTTPHeaderDict))
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['subscription_name', 'data']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method subscriptions_update" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'subscription_name' is set
+        if self.api_client.client_side_validation and ('subscription_name' not in local_var_params or  # noqa: E501
+                                                        local_var_params['subscription_name'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `subscription_name` when calling `subscriptions_update`")  # noqa: E501
+        # verify the required parameter 'data' is set
+        if self.api_client.client_side_validation and ('data' not in local_var_params or  # noqa: E501
+                                                        local_var_params['data'] is None):  # noqa: E501
+            raise ApiValueError("Missing the required parameter `data` when calling `subscriptions_update`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'subscription_name' in local_var_params:
+            path_params['subscription_name'] = local_var_params['subscription_name']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'data' in local_var_params:
+            body_params = local_var_params['data']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_key']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/subscriptions/{subscription_name}', 'PATCH',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='SubscriptionDetail',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501

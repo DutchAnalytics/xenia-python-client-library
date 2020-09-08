@@ -36,6 +36,7 @@ class ModelVersionList(object):
         'id': 'str',
         'model': 'str',
         'version': 'str',
+        'description': 'str',
         'language': 'str',
         'status': 'str',
         'error_message': 'str',
@@ -43,6 +44,8 @@ class ModelVersionList(object):
         'maximum_instances': 'int',
         'minimum_instances': 'int',
         'maximum_idle_time': 'int',
+        'creation_date': 'datetime',
+        'last_updated_date': 'datetime',
         'file_last_updated_date': 'datetime'
     }
 
@@ -50,6 +53,7 @@ class ModelVersionList(object):
         'id': 'id',
         'model': 'model',
         'version': 'version',
+        'description': 'description',
         'language': 'language',
         'status': 'status',
         'error_message': 'error_message',
@@ -57,10 +61,12 @@ class ModelVersionList(object):
         'maximum_instances': 'maximum_instances',
         'minimum_instances': 'minimum_instances',
         'maximum_idle_time': 'maximum_idle_time',
+        'creation_date': 'creation_date',
+        'last_updated_date': 'last_updated_date',
         'file_last_updated_date': 'file_last_updated_date'
     }
 
-    def __init__(self, id=None, model=None, version=None, language=None, status=None, error_message=None, memory_allocation=None, maximum_instances=None, minimum_instances=None, maximum_idle_time=None, file_last_updated_date=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, id=None, model=None, version=None, description=None, language=None, status=None, error_message=None, memory_allocation=None, maximum_instances=None, minimum_instances=None, maximum_idle_time=None, creation_date=None, last_updated_date=None, file_last_updated_date=None, local_vars_configuration=None):  # noqa: E501
         """ModelVersionList - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -69,6 +75,7 @@ class ModelVersionList(object):
         self._id = None
         self._model = None
         self._version = None
+        self._description = None
         self._language = None
         self._status = None
         self._error_message = None
@@ -76,6 +83,8 @@ class ModelVersionList(object):
         self._maximum_instances = None
         self._minimum_instances = None
         self._maximum_idle_time = None
+        self._creation_date = None
+        self._last_updated_date = None
         self._file_last_updated_date = None
         self.discriminator = None
 
@@ -83,6 +92,8 @@ class ModelVersionList(object):
             self.id = id
         self.model = model
         self.version = version
+        if description is not None:
+            self.description = description
         self.language = language
         self.status = status
         self.error_message = error_message
@@ -94,6 +105,10 @@ class ModelVersionList(object):
             self.minimum_instances = minimum_instances
         if maximum_idle_time is not None:
             self.maximum_idle_time = maximum_idle_time
+        if creation_date is not None:
+            self.creation_date = creation_date
+        if last_updated_date is not None:
+            self.last_updated_date = last_updated_date
         if file_last_updated_date is not None:
             self.file_last_updated_date = file_last_updated_date
 
@@ -172,6 +187,30 @@ class ModelVersionList(object):
             raise ValueError("Invalid value for `version`, length must be greater than or equal to `1`")  # noqa: E501
 
         self._version = version
+
+    @property
+    def description(self):
+        """Gets the description of this ModelVersionList.  # noqa: E501
+
+
+        :return: The description of this ModelVersionList.  # noqa: E501
+        :rtype: str
+        """
+        return self._description
+
+    @description.setter
+    def description(self, description):
+        """Sets the description of this ModelVersionList.
+
+
+        :param description: The description of this ModelVersionList.  # noqa: E501
+        :type: str
+        """
+        if (self.local_vars_configuration.client_side_validation and
+                description is not None and len(description) > 200):
+            raise ValueError("Invalid value for `description`, length must be less than or equal to `200`")  # noqa: E501
+
+        self._description = description
 
     @property
     def language(self):
@@ -356,6 +395,48 @@ class ModelVersionList(object):
             raise ValueError("Invalid value for `maximum_idle_time`, must be a value greater than or equal to `-2147483648`")  # noqa: E501
 
         self._maximum_idle_time = maximum_idle_time
+
+    @property
+    def creation_date(self):
+        """Gets the creation_date of this ModelVersionList.  # noqa: E501
+
+
+        :return: The creation_date of this ModelVersionList.  # noqa: E501
+        :rtype: datetime
+        """
+        return self._creation_date
+
+    @creation_date.setter
+    def creation_date(self, creation_date):
+        """Sets the creation_date of this ModelVersionList.
+
+
+        :param creation_date: The creation_date of this ModelVersionList.  # noqa: E501
+        :type: datetime
+        """
+
+        self._creation_date = creation_date
+
+    @property
+    def last_updated_date(self):
+        """Gets the last_updated_date of this ModelVersionList.  # noqa: E501
+
+
+        :return: The last_updated_date of this ModelVersionList.  # noqa: E501
+        :rtype: datetime
+        """
+        return self._last_updated_date
+
+    @last_updated_date.setter
+    def last_updated_date(self, last_updated_date):
+        """Sets the last_updated_date of this ModelVersionList.
+
+
+        :param last_updated_date: The last_updated_date of this ModelVersionList.  # noqa: E501
+        :type: datetime
+        """
+
+        self._last_updated_date = last_updated_date
 
     @property
     def file_last_updated_date(self):

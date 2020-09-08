@@ -35,16 +35,18 @@ class ConfigurationList(object):
     openapi_types = {
         'connector': 'str',
         'connector_type': 'str',
-        'connector_configuration': 'list[ConfigurationListConnectorConfiguration]'
+        'connector_configuration': 'list[dict(str, str)]',
+        'credentials_configuration': 'list[dict(str, str)]'
     }
 
     attribute_map = {
         'connector': 'connector',
         'connector_type': 'connector_type',
-        'connector_configuration': 'connector_configuration'
+        'connector_configuration': 'connector_configuration',
+        'credentials_configuration': 'credentials_configuration'
     }
 
-    def __init__(self, connector=None, connector_type=None, connector_configuration=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, connector=None, connector_type=None, connector_configuration=None, credentials_configuration=None, local_vars_configuration=None):  # noqa: E501
         """ConfigurationList - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -53,11 +55,13 @@ class ConfigurationList(object):
         self._connector = None
         self._connector_type = None
         self._connector_configuration = None
+        self._credentials_configuration = None
         self.discriminator = None
 
         self.connector = connector
         self.connector_type = connector_type
         self.connector_configuration = connector_configuration
+        self.credentials_configuration = credentials_configuration
 
     @property
     def connector(self):
@@ -79,6 +83,9 @@ class ConfigurationList(object):
         """
         if self.local_vars_configuration.client_side_validation and connector is None:  # noqa: E501
             raise ValueError("Invalid value for `connector`, must not be `None`")  # noqa: E501
+        if (self.local_vars_configuration.client_side_validation and
+                connector is not None and len(connector) < 1):
+            raise ValueError("Invalid value for `connector`, length must be greater than or equal to `1`")  # noqa: E501
 
         self._connector = connector
 
@@ -102,6 +109,9 @@ class ConfigurationList(object):
         """
         if self.local_vars_configuration.client_side_validation and connector_type is None:  # noqa: E501
             raise ValueError("Invalid value for `connector_type`, must not be `None`")  # noqa: E501
+        if (self.local_vars_configuration.client_side_validation and
+                connector_type is not None and len(connector_type) < 1):
+            raise ValueError("Invalid value for `connector_type`, length must be greater than or equal to `1`")  # noqa: E501
 
         self._connector_type = connector_type
 
@@ -111,7 +121,7 @@ class ConfigurationList(object):
 
 
         :return: The connector_configuration of this ConfigurationList.  # noqa: E501
-        :rtype: list[ConfigurationListConnectorConfiguration]
+        :rtype: list[dict(str, str)]
         """
         return self._connector_configuration
 
@@ -121,12 +131,35 @@ class ConfigurationList(object):
 
 
         :param connector_configuration: The connector_configuration of this ConfigurationList.  # noqa: E501
-        :type: list[ConfigurationListConnectorConfiguration]
+        :type: list[dict(str, str)]
         """
         if self.local_vars_configuration.client_side_validation and connector_configuration is None:  # noqa: E501
             raise ValueError("Invalid value for `connector_configuration`, must not be `None`")  # noqa: E501
 
         self._connector_configuration = connector_configuration
+
+    @property
+    def credentials_configuration(self):
+        """Gets the credentials_configuration of this ConfigurationList.  # noqa: E501
+
+
+        :return: The credentials_configuration of this ConfigurationList.  # noqa: E501
+        :rtype: list[dict(str, str)]
+        """
+        return self._credentials_configuration
+
+    @credentials_configuration.setter
+    def credentials_configuration(self, credentials_configuration):
+        """Sets the credentials_configuration of this ConfigurationList.
+
+
+        :param credentials_configuration: The credentials_configuration of this ConfigurationList.  # noqa: E501
+        :type: list[dict(str, str)]
+        """
+        if self.local_vars_configuration.client_side_validation and credentials_configuration is None:  # noqa: E501
+            raise ValueError("Invalid value for `credentials_configuration`, must not be `None`")  # noqa: E501
+
+        self._credentials_configuration = credentials_configuration
 
     def to_dict(self):
         """Returns the model properties as a dict"""

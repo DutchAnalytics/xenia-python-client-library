@@ -35,16 +35,18 @@ class OrganizationCreate(object):
     openapi_types = {
         'name': 'str',
         'subscription': 'str',
-        'subscription_agreed': 'bool'
+        'subscription_agreed': 'bool',
+        'subscription_end_date': 'date'
     }
 
     attribute_map = {
         'name': 'name',
         'subscription': 'subscription',
-        'subscription_agreed': 'subscription_agreed'
+        'subscription_agreed': 'subscription_agreed',
+        'subscription_end_date': 'subscription_end_date'
     }
 
-    def __init__(self, name=None, subscription=None, subscription_agreed=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, name=None, subscription=None, subscription_agreed=None, subscription_end_date=None, local_vars_configuration=None):  # noqa: E501
         """OrganizationCreate - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -53,11 +55,14 @@ class OrganizationCreate(object):
         self._name = None
         self._subscription = None
         self._subscription_agreed = None
+        self._subscription_end_date = None
         self.discriminator = None
 
         self.name = name
         self.subscription = subscription
         self.subscription_agreed = subscription_agreed
+        if subscription_end_date is not None:
+            self.subscription_end_date = subscription_end_date
 
     @property
     def name(self):
@@ -136,6 +141,27 @@ class OrganizationCreate(object):
             raise ValueError("Invalid value for `subscription_agreed`, must not be `None`")  # noqa: E501
 
         self._subscription_agreed = subscription_agreed
+
+    @property
+    def subscription_end_date(self):
+        """Gets the subscription_end_date of this OrganizationCreate.  # noqa: E501
+
+
+        :return: The subscription_end_date of this OrganizationCreate.  # noqa: E501
+        :rtype: date
+        """
+        return self._subscription_end_date
+
+    @subscription_end_date.setter
+    def subscription_end_date(self, subscription_end_date):
+        """Sets the subscription_end_date of this OrganizationCreate.
+
+
+        :param subscription_end_date: The subscription_end_date of this OrganizationCreate.  # noqa: E501
+        :type: date
+        """
+
+        self._subscription_end_date = subscription_end_date
 
     def to_dict(self):
         """Returns the model properties as a dict"""

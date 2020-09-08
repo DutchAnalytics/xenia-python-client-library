@@ -58,6 +58,9 @@ Method | HTTP request | Description
 [**organization_invites_delete**](CoreApi.md#organization_invites_delete) | **DELETE** /organizations/{organization_name}/invites/{invite_id} | Delete an organization invitation of a user
 [**organization_invites_get**](CoreApi.md#organization_invites_get) | **GET** /organizations/{organization_name}/invites/{invite_id} | Get details of an organization invitation of a user
 [**organization_invites_list**](CoreApi.md#organization_invites_list) | **GET** /organizations/{organization_name}/invites | List the users invited to an organization
+[**organization_subscriptions_list**](CoreApi.md#organization_subscriptions_list) | **GET** /organizations/{organization_name}/subscriptions | List subscriptions for an organizations
+[**organization_usage_details_get**](CoreApi.md#organization_usage_details_get) | **GET** /organizations/{organization_name}/usage/details | Get resource usage details
+[**organization_usage_get**](CoreApi.md#organization_usage_get) | **GET** /organizations/{organization_name}/usage | Get resource usage
 [**organization_users_create**](CoreApi.md#organization_users_create) | **POST** /organizations/{organization_name}/users | Add a user to an organization
 [**organization_users_delete**](CoreApi.md#organization_users_delete) | **DELETE** /organizations/{organization_name}/users/{user_id} | Delete a user from an organization
 [**organization_users_get**](CoreApi.md#organization_users_get) | **GET** /organizations/{organization_name}/users/{user_id} | Get details of a user in an organization
@@ -66,6 +69,7 @@ Method | HTTP request | Description
 [**organizations_create**](CoreApi.md#organizations_create) | **POST** /organizations | Create organizations
 [**organizations_get**](CoreApi.md#organizations_get) | **GET** /organizations/{organization_name} | Get details of an organization
 [**organizations_list**](CoreApi.md#organizations_list) | **GET** /organizations | List organizations
+[**organizations_resource_usage**](CoreApi.md#organizations_resource_usage) | **GET** /organizations/{organization_name}/resources | List resource usage
 [**organizations_update**](CoreApi.md#organizations_update) | **PATCH** /organizations/{organization_name} | Update details of an organization
 [**permissions_list**](CoreApi.md#permissions_list) | **GET** /permissions | List the available permissions
 [**pipeline_object_attachments_create**](CoreApi.md#pipeline_object_attachments_create) | **POST** /projects/{project_name}/pipelines/{pipeline_name}/attachments | Create object attachments
@@ -90,6 +94,7 @@ Method | HTTP request | Description
 [**project_environment_variables_get**](CoreApi.md#project_environment_variables_get) | **GET** /projects/{project_name}/environment-variables/{id} | Get project environment variable
 [**project_environment_variables_list**](CoreApi.md#project_environment_variables_list) | **GET** /projects/{project_name}/environment-variables | List project environment variables
 [**project_environment_variables_update**](CoreApi.md#project_environment_variables_update) | **PATCH** /projects/{project_name}/environment-variables/{id} | Update project environment variable
+[**project_usage_get**](CoreApi.md#project_usage_get) | **GET** /projects/{project_name}/usage | Get resource usage
 [**projects_create**](CoreApi.md#projects_create) | **POST** /projects | Create projects
 [**projects_delete**](CoreApi.md#projects_delete) | **DELETE** /projects/{project_name} | Delete a project
 [**projects_get**](CoreApi.md#projects_get) | **GET** /projects/{project_name} | Get details of a project
@@ -113,6 +118,11 @@ Method | HTTP request | Description
 [**service_users_list**](CoreApi.md#service_users_list) | **GET** /projects/{project_name}/service-users | List service users
 [**service_users_token**](CoreApi.md#service_users_token) | **PUT** /projects/{project_name}/service-users/{service_user_id}/token | Reset the token of a service user
 [**service_users_update**](CoreApi.md#service_users_update) | **PATCH** /projects/{project_name}/service-users/{service_user_id} | Update service user details
+[**subscriptions_create**](CoreApi.md#subscriptions_create) | **POST** /subscriptions | Create subscriptions
+[**subscriptions_delete**](CoreApi.md#subscriptions_delete) | **DELETE** /subscriptions/{subscription_name} | Delete a subscription
+[**subscriptions_get**](CoreApi.md#subscriptions_get) | **GET** /subscriptions/{subscription_name} | Get details of a subscription
+[**subscriptions_list**](CoreApi.md#subscriptions_list) | **GET** /subscriptions | List subscriptions
+[**subscriptions_update**](CoreApi.md#subscriptions_update) | **PATCH** /subscriptions/{subscription_name} | Update details of a subscription
 [**user_create**](CoreApi.md#user_create) | **POST** /user | Create a new user
 [**user_delete**](CoreApi.md#user_delete) | **DELETE** /user | Delete user
 [**user_get**](CoreApi.md#user_get) | **GET** /user | Get user details
@@ -1794,6 +1804,10 @@ Details of the created connector
 - `credentials`: Name of referenced credentials
 - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.
 - `input_fields`: A list of connector fields with name and data_type
+- `status`: The state of the connector. It is initialized as pending_verification.
+- `error_message`: The error message which explains why the connector has failed verification. It is empty if the connector is available.
+- `creation_date`: The date when the connector was created
+- `last_modified`: The date when the connector was last updated
 
 #### Response Examples
 ```
@@ -1802,6 +1816,8 @@ Details of the created connector
   "name": "postgresql-connector",
   "type": "postgresql",
   "input_type": "structured",
+  "status": "pending_verification",
+  "error_message": "",
   "project": "project-1",
   "credentials": "postgresql-credentials",
   "configuration": {
@@ -1818,7 +1834,9 @@ Details of the created connector
       "name": "field-2",
       "data_type": "double"
     }
-  ]
+  ],
+  "creation_date": "2020-05-12T16:23:15.456812Z",
+  "last_modified": "2020-05-12T16:23:15.456812Z"
 }
 ```
 
@@ -1966,6 +1984,10 @@ Details of the connector
 - `credentials`: Name of referenced credentials
 - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.
 - `input_fields`: A list of connector fields with name and data_type
+- `status`: The state of the connector. It can be pending_verification, failed_verification or available.
+- `error_message`: The error message which explains why the connector has failed verification. It is empty if the connector is available.
+- `creation_date`: The date when the connector was created
+- `last_modified`: The date when the connector was last updated
 
 #### Response Examples 
 ```
@@ -1974,12 +1996,16 @@ Details of the connector
   "name": "s3-connector",
   "type": "aws_s3",
   "input_type": "blob",
+  "status": "available",
+  "error_message": "",
   "project": "project-1",
   "credentials": "s3-credentials",
   "configuration": {
     "bucket": "bucket-name",
     "path_prefix": "blob"
-  }
+  },
+  "creation_date": "2020-05-12T16:23:15.456812Z",
+  "last_modified": "2020-06-22T18:04:76.123754Z"
 }
 ```
 
@@ -2062,6 +2088,10 @@ A list of details of the connectors in the project
 - `credentials`: Name of referenced credentials
 - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.
 - `input_fields`: A list of connector fields with name and data_type
+- `status`: The state of the connector. It can be pending_verification, failed_verification or available.
+- `error_message`: The error message which explains why the connector has failed verification. It is empty if the connector is available.
+- `creation_date`: The date when the connector was created
+- `last_modified`: The date when the connector was last updated
 
 #### Response Examples
 ```
@@ -2071,18 +2101,24 @@ A list of details of the connectors in the project
     "name": "s3-connector",
     "type": "aws_s3",
     "input_type": "blob",
+    "status": "available",
+    "error_message": "",
     "project": "project-1",
     "credentials": "s3-credentials",
     "configuration": {
       "bucket": "bucket-name",
       "path_prefix": "blob"
-    }
+    },
+    "creation_date": "2020-03-24T09:43:51.791253Z",
+    "last_modified": "2020-05-19T11:52:21.163270Z"
   },
   {
     "id": "e0342249-853c-4879-bd08-5cd1af572d7e",
     "name": "postgresql-connector",
     "type": "postgresql",
     "input_type": "structured",
+    "status": "available",
+    "error_message": "",
     "project": "project-1",
     "credentials": "postgresql-credentials",
     "configuration": {
@@ -2099,7 +2135,9 @@ A list of details of the connectors in the project
         "name": "field-2",
         "data_type": "double"
       }
-    ]
+    ],
+    "creation_date": "2020-05-12T16:23:15.456812Z",
+    "last_modified": "2020-06-22T18:04:76.123754Z"
   }
 ]
 ```
@@ -2224,6 +2262,10 @@ Details of the updated connector
 - `credentials`: Name of referenced credentials
 - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.
 - `input_fields`: A list of connector fields with name and data_type
+- `status`: The state of the connector. If the configuration parameters are updated, the connector is verified again.
+- `error_message`: The error message which explains why the connector has failed verification. It is empty if the connector is available.
+- `creation_date`: The date when the connector was created
+- `last_modified`: The date when the connector was last updated
 
 #### Response Examples
 ```	
@@ -2232,12 +2274,16 @@ Details of the updated connector
   "name": "new-s3-connector",
   "type": "aws_s3",
   "input_type": "blob",
+  "status": "available",
+  "error_message": "",
   "project": "project-1",
   "credentials": "s3-credentials",
   "configuration": {
     "bucket": "new-bucket-name",
     "path_prefix": "blob"
-  }
+  },
+  "creation_date": "2020-05-12T16:23:15.456812Z",
+  "last_modified": "2020-06-22T18:04:76.123754Z"
 }
 ```
 
@@ -2338,6 +2384,10 @@ Details of the created credentials
  - `type`: Type of the credentials
  - `reference_count`: The number of connectors using this credentials. It is initialised as 0 when it is created.
  - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.
+ - `status`: The state of the credentials. It is initialized as pending_verification.
+ - `error_message`: The error message which explains why the credentials has failed verification. It is empty if the credentials is available.
+ - `creation_date`: The date when the credentials was created
+ - `last_modified`: The date when the credentials was last updated
 
 #### Response Examples 
 ```
@@ -2346,12 +2396,16 @@ Details of the created credentials
   "name": "s3-credentials",
   "project": "project-1",
   "type": "aws_s3",
+  "status": "pending_verification",
+  "error_message": "",
   "reference_count": 0,
   "configuration": {
     "access_key": null,
     "secret_key": null,
     "region": "eu-central-1"
-  }
+  },
+  "creation_date": "2020-05-12T16:23:15.456812Z",
+  "last_modified": "2020-05-12T16:23:15.456812Z"
 }
 ```
 
@@ -2500,6 +2554,10 @@ Details of the credentials
 - `type`: Type of the credentials
 - `reference_count`: The number of connectors using the credentials
 - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.
+- `status`: The state of the credentials. It can be pending_verification, failed_verification or available.
+- `error_message`: The error message which explains why the credentials has failed verification. It is empty if the credentials is available.
+- `creation_date`: The date when the credentials was created
+- `last_modified`: The date when the credentials was last updated
 
 #### Response Examples 
 ```
@@ -2508,13 +2566,17 @@ Details of the credentials
   "name": "postgresql-credentials",
   "project": "project-1",
   "type": "postgresql",
+  "status": "available",
+  "error_message": "",
   "reference_count": 2,
   "configuration": {
     "username": "user",
     "password": null,
     "host": "host",
     "port": "1234"
-  }
+  },
+  "creation_date": "2020-05-12T16:23:15.456812Z",
+  "last_modified": "2020-06-22T18:04:76.123754Z"
 }
 ```
 
@@ -2595,6 +2657,10 @@ A list of details of the credentials in the project
 - `type`: Type of the credentials
 - `reference_count`: The number of connectors using the credentials
 - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.
+- `status`: The state of the credentials. It can be pending_verification, failed_verification or available.
+- `error_message`: The error message which explains why the credentials has failed verification. It is empty if the credentials is available.
+- `creation_date`: The date when the credentials was created
+- `last_modified`: The date when the credentials was last updated
 
 #### Response Examples 
 ```
@@ -2604,25 +2670,33 @@ A list of details of the credentials in the project
     "name": "s3-credentials",
     "project": "project-1",
     "type": "aws_s3",
+    "status": "available",
+    "error_message": "",
     "reference_count": 1,
     "configuration": {
       "access_key": null,
       "secret_key": null,
       "region": "eu-central-1"
-    }
+    },
+    "creation_date": "2020-03-24T09:43:51.791253Z",
+    "last_modified": "2020-05-19T11:52:21.163270Z"
   },
   {
     "id": "e07b3715-71c9-4a49-a8e5-179cf4778086",
     "name": "postgresql-credentials",
     "project": "project-1",
     "type": "postgresql",
+    "status": "available",
+    "error_message": "",
     "reference_count": 2,
     "configuration": {
       "username": "user",
       "password": null,
       "host": "host",
       "port": "1234"
-    }
+    },
+    "creation_date": "2020-05-12T16:23:15.456812Z",
+    "last_modified": "2020-06-22T18:04:76.123754Z"
   }
 ]
 ```
@@ -2724,6 +2798,10 @@ Details of the updated credentials
 - `type`: Type of the credentials
 - `reference_count`: The number of connectors using the credentials
 - `configuration`: The dictionary which contains the fields necessary for the given type with provided values. Values are not shown in response if the parameter has the protected field True.
+- `status`: The state of the credentials. If the configuration parameters are updated, the connector is verified again. If there is a connector referencing this credentials, it is also verified again with the updated configuration.
+- `error_message`: The error message which explains why the credentials has failed verification. It is empty if the credentials is available.
+- `creation_date`: The date when the credentials was created
+- `last_modified`: The date when the credentials was last updated
 
 #### Response Examples 
 ```
@@ -2732,13 +2810,17 @@ Details of the updated credentials
   "name": "postgresql-credentials",
   "project": "project-1",
   "type": "postgresql",
+  "status": "pending_verification",
+  "error_message": "",
   "reference_count": 2,
   "configuration": {
     "username": "new_user",
     "password": null,
     "host": "new_host",
     "port": "1234"
-  }
+  },
+  "creation_date": "2020-05-12T16:23:15.456812Z",
+  "last_modified": "2020-06-22T18:04:76.123754Z"
 }
 ```
 
@@ -4083,6 +4165,7 @@ Create a version for a model
 - `minimum_instances`: Lower bound of number of model versions running. The default value is 0. Set this value greater than 0 to always have a always running model version.
 - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped. The default value is 300, the minimum value is 10 and the maximum value is 3600. A high value means that the model version stays active longer. Sending requests to a running model version means that it will be already initialized and thus take a shorter timer. 
 
+- `description`: Description for the model version
 
 If the time that a request takes does not matter, keep the default values.
 
@@ -4116,12 +4199,17 @@ Details of the created version
 - `model`: Model name to which the version is associated
 - `version`: Version name
 - `language`: Language in which the model version is provided
-- `state`: The state of the version. It is set to *initialised* state on creation.
 - `memory_allocation`: Reserved memory for the version in MB  
 - `maximum_instances`: Upper bound of number of model versions running
 - `minimum_instances`: Lower bound of number of model versions running
 - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped
- 
+- `description`: Description of the model version
+- `status`: The state of the model version. It is set to *initialised* state on creation.
+- `error_message`: The error message which explains why the model version has failed building or deployment. It is empty if the model version is available.
+- `creation_date`: The date when the model version was created
+- `last_updated_date`: The date when the model version was last updated
+- `file_last_updated_date`: The date when a model file was last uploaded
+
 #### Response Examples 
 ```
 {
@@ -4129,11 +4217,16 @@ Details of the created version
   "model": "model-1",
   "version": "version-1",
   "language": "python3.5",
-  "state": "initialised",
+  "description": "",
+  "status": "initialised",
+  "error_message": "",
   "memory_allocation": 512,
   "maximum_instances": 5,
   "minimum_instances": 0,
   "maximum_idle_time": 10,
+  "creation_date": "2020-05-12T16:23:15.456812Z",
+  "last_updated_date": "2020-05-12T16:23:15.456812Z",
+  "file_last_updated_date": "2020-05-12T16:23:15.456812Z",
 }
 ```
 
@@ -4438,11 +4531,16 @@ Details of a version
 - `model`: Model name to which the version is associated
 - `version`: Version name
 - `language`: Language in which the model version is provided
-- `state`: The state of the version
 - `memory_allocation`: Reserved memory for the version in MB 
 - `maximum_instances`: Upper bound of number of model pods running in parallel
 - `minimum_instances`: Lower bound of number of model pods running in parallel
 - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped
+- `description`: Description of the model version
+- `status`: The state of the model version
+- `error_message`: The error message which explains why the model version has failed building or deployment. It is empty if the model version is available.
+- `creation_date`: The date when the model version was created
+- `last_updated_date`: The date when the model version was last updated
+- `file_last_updated_date`: The date when a model file was last uploaded
 
 #### Response Examples
 ```
@@ -4452,10 +4550,15 @@ Details of a version
   "version": "version-1",
   "memory_allocation": 512,
   "language": "python3.7",
-  "state": "active",
+  "description": "",
+  "status": "active",
+  "error_message": "",
   "maximum_instances": 4,
   "minimum_instances": 1,
   "maximum_idle_time": 10,
+  "creation_date": "2020-05-12T16:23:15.456812Z",
+  "last_updated_date": "2020-06-22T18:04:76.123754Z",
+  "file_last_updated_date": "2020-06-23T11:17:28.128652Z"
 }
 ```
 
@@ -4536,11 +4639,16 @@ A list of details of the versions
 - `model`: Model name to which the version is associated
 - `version`: Version name
 - `language`: Language in which the model version is provided
-- `state`: The state of the version
 - `memory_allocation`: Reserved memory usage for the version in MB
 - `maximum_instances`: Upper bound of number of model versions running
 - `minimum_instances`: Lower bound of number of model versions running
 - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped
+- `description`: Description of the model version
+- `status`: The state of the model version
+- `error_message`: The error message which explains why the model version has failed building or deployment. It is empty if the model version is available.
+- `creation_date`: The date when the model version was created
+- `last_updated_date`: The date when the model version was last updated
+- `file_last_updated_date`: The date when a model file was last uploaded
 
 #### Response Examples
 ```
@@ -4550,22 +4658,32 @@ A list of details of the versions
     "model": "model-1",
     "version": "version-1",
     "language": "python3.5",
-    "state": "active",
+    "description": "",
+    "status": "active",
+    "error_message": "",
     "memory_allocation": 512,
     "maximum_instances": 4,
     "minimum_instances": 1,
     "maximum_idle_time": 10,
+    "creation_date": "2020-06-18T08:32:14.876451Z",
+    "last_updated_date": "2020-06-19T10:52:23.124784Z",
+    "file_last_updated_date": "2020-06-19T10:52:23.124784Z"
   },
   {
     "id": "24f6b80a-08c3-4d52-ac1a-2ea7e70f16a6",
     "model": "model-1",
     "version": "version-2",
     "language": "python3.6",
-    "state": "initialised",
+    "description": "",
+    "status": "active",
+    "error_message": "",
     "memory_allocation": 256,
     "maximum_instances": 5,
     "minimum_instances": 0,
     "maximum_idle_time": 10,
+    "creation_date": "2020-05-12T16:23:15.456812Z",
+    "last_updated_date": "2020-06-22T18:04:76.123754Z",
+    "file_last_updated_date": "2020-06-23T11:17:28.128652Z"
   }
 ]
 ```
@@ -4646,6 +4764,7 @@ Update a model version of a model in a project. Updating the language field will
 - `maximum_instances`: New upper bound of number of model versions running
 - `minimum_instances`: New lower bound of number of model versions running
 - `maximum_idle_time`: New maximum time in seconds a model version stays idle before it is stopped
+- `description`: New description for the version
 
 #### Request Examples 
 ```
@@ -4668,11 +4787,16 @@ Details of the updated version
 - `model`: Model name to which the version is associated
 - `version`: Version name
 - `language`: Language in which the model version is provided
-- `state`: The state of the version
 - `memory_allocation`: Reserved memory for the version in MB
 - `maximum_instances`: Upper bound of number of model versions running
 - `minimum_instances`: Lower bound of number of model versions running
 - `maximum_idle_time`: Maximum time in seconds a model version stays idle before it is stopped
+- `description`: Description of the model version
+- `status`: The state of the model version
+- `error_message`: The error message which explains why the model version has failed building or deployment. It is empty if the model version is available.
+- `creation_date`: The date when the model version was created
+- `last_updated_date`: The date when the model version was last updated
+- `file_last_updated_date`: The date when a model file was last uploaded
 
 #### Response Examples 
 ```
@@ -4681,11 +4805,16 @@ Details of the updated version
   "model": "model-1",
   "version": "version-1",
   "language": "python3.5",
-  "state": "initialised",
+  "description": "",
+  "status": "active",
+  "error_message": "",
   "memory_allocation": 512,
   "maximum_instances": 4,
   "minimum_instances": 1,
   "maximum_idle_time": 10,
+  "creation_date": "2020-05-12T16:23:15.456812Z",
+  "last_updated_date": "2020-06-23T18:04:76.123754Z",
+  "file_last_updated_date": "2020-06-23T11:17:28.128652Z"
 }
 ```
 
@@ -4780,6 +4909,9 @@ Possible data types for the input and output fields are:
 - `input_fields`: The list of required model input fields. It must contain the fields: name and data_type. The name of an input field is unique for a model.
 - `output_fields`: The list of required model output fields. It must contain the fields: name and data_type. The name of an output field is unique for a model.
 
+### Optional Parameters
+- `description`: Description of the model
+
 #### Request Examples
 A model with structured input and output type
 ```
@@ -4810,6 +4942,7 @@ A model with plain input type
 ```
 {
   "name": "model-1",
+  "description": "Model one"
   "input_type": "plain",
   "output_type": "structured",
   "output_fields": [
@@ -4839,6 +4972,10 @@ Details of the created model
 - `output_type`: Type of the output of the model
 - `input_fields`: The list of model input fields containing name and data_type
 - `output_fields`: The list of model output fields containing name and data_type
+- `description`: Description of the model
+- `creation_date`: The date when the model was created
+- `last_updated_date`: The date when the model was last updated
+- `number_of_versions`: Number of versions that this model has
 
 #### Response Examples 
 ```
@@ -4846,6 +4983,7 @@ Details of the created model
   "id": "903ccd12-81d1-46e1-9ac9-b9d70af118de",
   "name": "model-1",
   "project": "project-1",
+  "description": "",
   "input_type": "structured",
   "output_type": "structured",
   "input_fields": [
@@ -4863,7 +5001,10 @@ Details of the created model
       "name": "output-field",
       "data_type": "double"
     }
-  ]
+  ],
+  "creation_date": "2020-06-18T08:32:14.876451Z",
+  "last_updated_date": "2020-06-18T08:32:14.876451Z",
+  "number_of_versions": 0
 }
 ```
 
@@ -5013,6 +5154,10 @@ Details of a model
 - `output_type`: Type of the output of the model
 - `input_fields`: The list of model input fields containing name and data_type
 - `output_fields`: The list of model output fields containing name and data_type
+- `description`: Description of the model
+- `creation_date`: The date when the model was created
+- `last_updated_date`: The date when the model was last updated
+- `number_of_versions`: Number of versions that this model has
 
 #### Response Examples 
 ```
@@ -5020,6 +5165,7 @@ Details of a model
   "id": "903ccd12-81d1-46e1-9ac9-b9d70af118de",
   "name": "model-1",
   "project": "project-1",
+  "description": "",
   "input_type": "structured",
   "output_type": "structured",
   "input_fields": [
@@ -5037,7 +5183,10 @@ Details of a model
       "name": "output-field",
       "data_type": "double"
     }
-  ]
+  ],
+  "creation_date": "2020-06-18T08:32:14.876451Z",
+  "last_updated_date": "2020-06-19T10:52:23.124784Z",
+  "number_of_versions": 2
 }
 ```
 
@@ -5119,6 +5268,10 @@ A list of details of the models in the project
 - `output_type`: Type of the output of the model
 - `input_fields`: The list of model input fields containing name and data_type. It is empty in case of plain input type models.
 - `output_fields`: The list of model output fields containing name and data_type. It is empty in case of plain output type models.
+- `description`: Description of the model
+- `creation_date`: The date when the model was created
+- `last_updated_date`: The date when the model was last updated
+- `number_of_versions`: Number of versions that this model has
 
 #### Response Examples 
 ```
@@ -5127,6 +5280,7 @@ A list of details of the models in the project
     "id": "903ccd12-81d1-46e1-9ac9-b9d70af118de",
     "name": "model-1",
     "project": "project-1",
+    "description": "Temperature model",
     "input_type": "structured",
     "output_type": "structured",
     "input_fields": [
@@ -5144,12 +5298,16 @@ A list of details of the models in the project
         "name": "output-field",
         "data_type": "double"
       }
-    ]
+    ],
+    "creation_date": "2020-05-12T16:23:15.456812Z",
+    "last_updated_date": "2020-06-22T18:04:76.123754Z",
+    "number_of_versions": 1
   },
   {
     "id": "5f4e942f-d5b8-4d62-99b2-870c15a82127",
     "name": "model-2",
     "project": "project-1",
+    "description": "Model two",
     "input_type": "structured",
     "output_type": "plain",
     "input_fields": [
@@ -5158,16 +5316,23 @@ A list of details of the models in the project
         "data_type": "int"
       }
     ],
-    "output_fields": []
+    "output_fields": [],
+    "creation_date": "2020-03-24T09:43:51.791253Z",
+    "last_updated_date": "2020-05-19T11:52:21.163270Z",
+    "number_of_versions": 2
   },
   {
     "id": "bd3fae9d-aeec-4cf3-8ef0-5f9224d41904",
-    "name": "model-2",
+    "name": "model-3",
+    "description": "",
     "project": "project-1",
     "input_type": "plain",
     "output_type": "plain",
     "input_fields": [],
-    "output_fields": []
+    "output_fields": [],
+    "creation_date": "2020-06-18T08:32:14.876451Z",
+    "last_updated_date": "2020-06-19T10:52:23.124784Z",
+    "number_of_versions": 1
   }
 ]
 ```
@@ -5241,6 +5406,7 @@ Update a model. It is only possible to update the name and description fields.
 
 ### Optional Parameters 
 - `name`: New name for the model
+- `description`: New description for the model
 
 #### Request Examples
 ```
@@ -5258,6 +5424,10 @@ Details of the updated model
 - `output_type`: Type of the output of the model
 - `input_fields`: The list of model input fields containing name and data_type
 - `output_fields`: The list of model output fields containing name and data_type
+- `description`: Description of the model
+- `creation_date`: The date when the model was created
+- `last_updated_date`: The date when the model was last updated
+- `number_of_versions`: Number of versions that this model has
 
 #### Response Examples
 ```
@@ -5265,6 +5435,7 @@ Details of the updated model
   "id": "903ccd12-81d1-46e1-9ac9-b9d70af118de",
   "name": "new-model-name",
   "project": "project-1",
+  "description": "New model description",
   "input_type": "structured",
   "output_type": "structured",
   "input_fields": [
@@ -5282,7 +5453,10 @@ Details of the updated model
       "name": "output-field",
       "data_type": "double"
     }
-  ]
+  ],
+  "creation_date": "2020-06-18T08:32:14.876451Z",
+  "last_updated_date": "2020-06-19T10:52:23.124784Z",
+  "number_of_versions": 2
 }
 ```
 
@@ -5585,6 +5759,363 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**list[OrganizationUserInviteList]**](OrganizationUserInviteList.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **organization_subscriptions_list**
+> list[OrganizationSubscriptionList] organization_subscriptions_list(organization_name)
+
+List subscriptions for an organizations
+
+
+### Description
+List the history of subscriptions of an organization. The user making the request must be admin of the organization.
+
+### Response Structure
+A list of details of the subscriptions that the organization has had
+- `id`: Unique identifier for the organization (UUID) 
+
+- `subscription`: Name of the subscription 
+
+- `start_date`: Date the subscription started 
+
+
+#### Response Examples
+```
+[
+  {
+    "id": "56b26bcb-34b6-4c4d-a4aa-9d625e0aa9e2",
+    "subscription": "professional",
+    "start_date": "2020-07-08"
+  },
+  {
+    "id": "3a27e5f8-b247-4866-a08c-5df136b6034c",
+    "subscription": "starter",
+    "start_date": "2020-06-01"
+  }
+]
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v2.1
+configuration.host = "https://api.dutchanalytics.net/v2.1"
+# Enter a context with an instance of the API client
+with xenia_python_client_library.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xenia_python_client_library.CoreApi(api_client)
+    organization_name = 'organization_name_example' # str | 
+
+    try:
+        # List subscriptions for an organizations
+        api_response = api_instance.organization_subscriptions_list(organization_name)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreApi->organization_subscriptions_list: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **organization_name** | **str**|  | 
+
+### Return type
+
+[**list[OrganizationSubscriptionList]**](OrganizationSubscriptionList.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **organization_usage_details_get**
+> list[UsagePerDay] organization_usage_details_get(organization_name, month=month)
+
+Get resource usage details
+
+
+### Description 
+Get resource usage for the organization. This returns a list of metrics that are used for billing, aggregated per day.
+
+### Optional Parameters 
+- `month`: date indicating the month to fetch usage data for, formatted `YYYY-MM`. If omitted defaults to the current month
+
+### Response Structure 
+ - `metric`: The metric that was measured
+ - `object_type`: Type of object the metric was measured for (model version, pipeline or connector)
+ - `usage`: an array of objects each containing the following:
+     - `day`: Timestamp denoting the start of the day
+     - `value`: Aggregated metric value for the given unit over the given day
+
+#### Response Examples
+```
+[
+  {
+    "object_type": "model_version",
+    "metric": "gb_seconds",
+    "usage": [
+      {
+        "day": "2020-07-29T00:00:00Z",
+        "value": 4200
+      },
+      {
+        "day": "2020-07-28T00:00:00Z",
+        "value": 840
+      },
+      {
+        "day": "2020-07-30T00:00:00Z",
+        "value": 960
+      }
+    ]
+  },
+  {
+    "object_type": "pipeline",
+    "metric": "input_volume",
+    "usage": [
+      {
+        "day": "2020-07-28T00:00:00Z",
+        "value": 1098
+      },
+      {
+        "day": "2020-07-06T00:00:00Z",
+        "value": 18
+      },
+      {
+        "day": "2020-07-16T00:00:00Z",
+        "value": 9
+      },
+      {
+        "day": "2020-07-15T00:00:00Z",
+        "value": 117
+      },
+      {
+        "day": "2020-07-08T00:00:00Z",
+        "value": 90
+      }
+    ]
+  }
+]
+
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v2.1
+configuration.host = "https://api.dutchanalytics.net/v2.1"
+# Enter a context with an instance of the API client
+with xenia_python_client_library.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xenia_python_client_library.CoreApi(api_client)
+    organization_name = 'organization_name_example' # str | 
+month = 'month_example' # str |  (optional)
+
+    try:
+        # Get resource usage details
+        api_response = api_instance.organization_usage_details_get(organization_name, month=month)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreApi->organization_usage_details_get: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **organization_name** | **str**|  | 
+ **month** | **str**|  | [optional] 
+
+### Return type
+
+[**list[UsagePerDay]**](UsagePerDay.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **organization_usage_get**
+> list[UsagePerMonth] organization_usage_get(organization_name)
+
+Get resource usage
+
+
+### Description 
+Get resource usage for the organization. This returns a list of metrics that are used for billing, aggregated per month.
+
+### Response Structure 
+ - `metric`: The metric that was measured
+ - `object_type`: Type of object the metric was measured for (model version, pipeline or connector)
+ - `usage`: an array of objects each containing the following:
+     - `month`: Timestamp denoting the start of the month
+     - `value`: Aggregated metric value for the given unit over the given month
+
+#### Response Examples
+```
+[
+  {
+    "object_type": "pipeline",
+    "metric": "input_volume",
+    "usage": [
+      {
+        "month": "2019-08-01T00:00:00Z",
+        "value": 1840
+      },
+      {
+        "month": "2019-09-01T00:00:00Z",
+        "value": 400
+      },
+      {
+        "month": "2019-10-01T00:00:00Z",
+        "value": 1204
+      },
+      {
+        "month": "2019-11-01T00:00:00Z",
+        "value": 1598
+      },
+      {
+        "month": "2019-12-01T00:00:00Z",
+        "value": 824
+      },
+      {
+        "month": "2020-01-01T00:00:00Z",
+        "value": 2036
+      },
+      {
+        "month": "2020-02-01T00:00:00Z",
+        "value": 1438
+      },
+      {
+        "month": "2020-03-01T00:00:00Z",
+        "value": 932
+      },
+      {
+        "month": "2020-04-01T00:00:00Z",
+        "value": 528
+      },
+      {
+        "month": "2020-05-01T00:00:00Z",
+        "value": 1484
+      },
+      {
+        "month": "2020-06-01T00:00:00Z",
+        "value": 1942
+      },
+      {
+        "month": "2020-07-01T00:00:00Z",
+        "value": 1332
+      }
+    ]
+  }
+]
+
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v2.1
+configuration.host = "https://api.dutchanalytics.net/v2.1"
+# Enter a context with an instance of the API client
+with xenia_python_client_library.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xenia_python_client_library.CoreApi(api_client)
+    organization_name = 'organization_name_example' # str | 
+
+    try:
+        # Get resource usage
+        api_response = api_instance.organization_usage_get(organization_name)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreApi->organization_usage_get: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **organization_name** | **str**|  | 
+
+### Return type
+
+[**list[UsagePerMonth]**](UsagePerMonth.md)
 
 ### Authorization
 
@@ -6088,27 +6619,32 @@ Create organizations
 
 
 ### Description 
-Create a new organization. Any authenticated user can create a new organization and this user will automatically become organization admin.
-Upon creating an organization, a **subscription** needs to be given. 
-
-- A **free** subscription grants permission to 1 user and allows for a maximum of 2 projects to be created. 
-- A **starter** subscription grants permission to 1 user and allows for a maximum of 10 projects to be created. 
-- A **professional** subscription grants permission to 10 users and allows for a maximum of 20 projects to be created.
-
-It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to create an organization.
+Create a new organization. When a user creates an organization, s/he will automatically become an organization admin.
 
 ### Required Parameters 
 - `name`: Name of the organization. The name is globally unique. It can only consist of lowercase letters, numbers and dashes (-), and must start with a lowercase letter. 
 
-- `subscription`: Name of the subscription: 'free', 'starter' or 'professional'.
+- `subscription`: Name of the subscription for the organization
 - `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted
- 
+
+### Optional Parameters 
+- `subscription_end_date`: End date of the subscription. The subscription will be cancelled on this date. A 'free' subscription cannot have a custom end_date as this subscription is always valid for a year.
+
 #### Request Examples 
 ```
 {
   "name": "test-organization",
   "subscription": "professional",
   "subscription_agreed": true
+}
+```
+
+```
+{
+  "name": "test-organization",
+  "subscription": "professional",
+  "subscription_agreed": true,
+  "subscription_end_date": "2021-03-25"
 }
 ```
 
@@ -6195,21 +6731,17 @@ Get details of an organization
 
 
 ### Description 
-Get the details of an organization. The user making the request must be admin of the organization.
+Get the details of an organization
 
 ### Response Structure 
-Details of a organization
+Details of the organization
 - `id`: Unique identifier for the organization (UUID) 
 
 - `name`: Name of the organization 
 
 - `creation_date`: Time the organization was created 
 
-- `subscription`: Type of subscription 
-
-- `subscription_agreement_date`: Time the subscription agreement was accepted 
-
-- `subscription_agreement_user`: User who accepted the subscription agreement 
+- `subscription`: Name of the subscription 
 
 
 #### Response Examples 
@@ -6218,9 +6750,7 @@ Details of a organization
   "id": "abe2e406-fae5-4bcf-a3bc-956d756e4ecb",
   "name": "test-organization",
   "creation_date": "2020-03-25T15:43:46.101877Z",
-  "subscription": "professional",
-  "subscription_agreement_date": "2020-03-25T15:43:46.101877Z",
-  "subscription_agreement_user": "test-user@test.com"
+  "subscription": "free"
 }
 ```
 
@@ -6365,6 +6895,101 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **organizations_resource_usage**
+> ResourceUsage organizations_resource_usage(organization_name)
+
+List resource usage
+
+
+### Description 
+List the total number of resources used by this organization
+
+### Response Structure
+A list containing the number of
+- projects 
+
+- users 
+
+- models 
+
+- versions 
+
+- connectors 
+
+- pipelines 
+
+currently used by the organization.
+
+#### Response Examples
+```
+{
+  "projects": 5,
+  "users": 3,
+  "models": 30,
+  "versions": 47,
+  "connectors": 1,
+  "pipelines": 2
+}
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v2.1
+configuration.host = "https://api.dutchanalytics.net/v2.1"
+# Enter a context with an instance of the API client
+with xenia_python_client_library.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xenia_python_client_library.CoreApi(api_client)
+    organization_name = 'organization_name_example' # str | 
+
+    try:
+        # List resource usage
+        api_response = api_instance.organizations_resource_usage(organization_name)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreApi->organizations_resource_usage: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **organization_name** | **str**|  | 
+
+### Return type
+
+[**ResourceUsage**](ResourceUsage.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **organizations_update**
 > OrganizationDetail organizations_update(organization_name, data)
 
@@ -6372,58 +6997,55 @@ Update details of an organization
 
 
 ### Description 
-Update an organization. The user making the request must be admin of the organization.
-
-It is **mandatory** to agree with the Xenia Free SaaS Services Agreement and the Xenia SaaS Terms & Conditions to be able to upgrade the subscription of an organization.
+Update an organization. The user making the request must be admin of the organization. Users are able to update the name of the organization, but changes to the subscription can only be done by Dutch Analytics.
+To delete the end date of the current subscription, make a new subscription and omit the 'subscription_end_date' parameter from the request.
 
 ### Optional Parameters 
 - `name`: New organization name
 - `subscription`: New subscription
-- `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted upon upgrading the subscriptions
+- `subscription_agreed`: A boolean field indicating whether the Services Agreement and Terms & Conditions are accepted upon upgrading the subscription
+- `subscription_end_date`: End date of the new subscription. The subscription will be cancelled on this date. If the subscription_end_date was previously set, but should be removed, simply omit the 'subscription_end_date' or give a null value for it. The required format is `YYYY-MM-DD`.
 
 #### Request Examples
+
+
 ```
-{
-  "subscription": "professional",
-  "subscription_agreed": true
-}
-
-{
-  "name": "new-organization-name",
-  "subscription": "professional",
-  "subscription_agreed": true
-}
-
 {
   "name": "new-organization-name"
 }
-
+```
+```
+{
+  "subscription": "professional",
+  "subscription_agreed": true
+}
+```
+```
+{
+  "subscription_end_date": "2020-08-30",
+  "subscription_agreed": true
+}
 ```
 
 ### Response Structure 
-Details of a organization
+Details of the organization
 - `id`: Unique identifier for the organization (UUID) 
 
 - `name`: Name of the organization 
 
 - `creation_date`: Time the organization was created 
 
-- `subscription`: Type of subscription 
-
-- `subscription_agreement_date`: Time the subscription agreement was accepted 
-
-- `subscription_agreement_user`: User who accepted the subscription agreement 
+- `subscription`: Name of the subscription 
 
 
-#### Response Examples
+#### Response Examples 
+```
 ```
 {
   "id": "abe2e406-fae5-4bcf-a3bc-956d756e4ecb",
   "name": "test-organization",
   "creation_date": "2020-03-25T15:43:46.101877Z",
-  "subscription": "professional",
-  "subscription_agreement_date": "2020-04-25T12:26:18.976481Z",
-  "subscription_agreement_user": "test-user-2@test.com"
+  "subscription": "free"
 }
 ```
 
@@ -7764,6 +8386,8 @@ Details of the created pipeline
 - `project`: Project name in which the pipeline is created
 - `input_type`: Type of the pipeline
 - `input_fields`: A list of pipeline fields with name and data_type
+- `creation_date`: The date when the pipeline was created
+- `last_updated_date`: The date when the pipeline was last updated
 
 #### Response Examples 
 ```
@@ -7782,7 +8406,9 @@ Details of the created pipeline
       "name": "field-2",
       "data_type": "double"
     }
-  ]
+  ],
+  "creation_date": "2020-03-24T09:43:51.791253Z",
+  "last_updated_date": "2020-03-24T09:43:51.791253Z"
 }
 ```
  
@@ -7793,7 +8419,9 @@ Details of the created pipeline
   "project": "project-1",
   "description": "my description",
   "input_type": "plain",
-  "input_fields": []
+  "input_fields": [],
+  "creation_date": "2020-05-12T16:23:15.456812Z",
+  "last_updated_date": "2020-05-12T16:23:15.456812Z"
 }
 ```
 
@@ -7942,6 +8570,8 @@ Details of the pipeline
 - `project`: Project name in which the pipeline is defined
 - `input_type`: Type of the pipeline
 - `input_fields`: A list of pipeline fields with name and data_type
+- `creation_date`: The date when the pipeline was created
+- `last_updated_date`: The date when the pipeline was last updated
 
 #### Response Examples 
 ```
@@ -7951,7 +8581,9 @@ Details of the pipeline
   "project": "project-1",
   "description": "my description",
   "input_type": "plain",
-  "input_fields": []
+  "input_fields": [],
+  "creation_date": "2020-03-24T09:43:51.791253Z",
+  "last_updated_date": "2020-05-19T11:52:21.163270Z"
 }
 ```
 
@@ -8032,6 +8664,8 @@ A list of details of the pipelines in the project
 - `description`: Description of the pipeline
 - `input_type`: Type of the pipeline
 - `input_fields`: A list of pipeline fields with name and data_type
+- `creation_date`: The date when the pipeline was created
+- `last_updated_date`: The date when the pipeline was last updated
 
 #### Response Examples 
 ```
@@ -8051,7 +8685,9 @@ A list of details of the pipelines in the project
         "name": "field-2",
         "data_type": "double"
       }
-    ]
+    ],
+    "creation_date": "2020-05-12T16:23:15.456812Z",
+    "last_updated_date": "2020-06-22T18:04:76.123754Z"
   },
   {
     "id": "b6f60ebf-48ef-4084-9fbb-9ac0f934093e",
@@ -8059,7 +8695,9 @@ A list of details of the pipelines in the project
     "project": "project-1",
     "description": "my description",
     "input_type": "plain",
-    "input_fields": []
+    "input_fields": [],
+    "creation_date": "2020-03-24T09:43:51.791253Z",
+    "last_updated_date": "2020-05-19T11:52:21.163270Z"
   }
 ]
 ```
@@ -8279,7 +8917,6 @@ Update a pipeline. All necessary fields are validated again.
 
 If the type of pipeline is updated to plain, the input fields are deleted. In this case, input_fields should either be omitted or provided as en empty list.
 If the type of pipeline is updated to structured, the old fields are deleted, if there existed any. The new fields are created. If one or more old fields need to be kept, they must be provided again.
-If the pipeline is updated to have plain type, 
 
 #### Request Examples 
 ```
@@ -8324,6 +8961,8 @@ Details of the updated pipeline
 - `description`: Description for the pipeline
 - `input_type`: Type of the pipeline
 - `input_fields`: A list of pipeline fields with name and data_type
+- `creation_date`: The date when the pipeline was created
+- `last_updated_date`: The date when the pipeline was last updated
 
 #### Response Examples 
 ```
@@ -8342,7 +8981,9 @@ Details of the updated pipeline
       "name": "new-field-2",
       "data_type": "array_string"
     }
-  ]
+  ],
+  "creation_date": "2020-03-24T09:43:51.791253Z",
+  "last_updated_date": "2020-05-19T11:52:21.163270Z"
 }
 ```
 
@@ -8866,6 +9507,141 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **project_usage_get**
+> list[UsagePerMonth] project_usage_get(project_name)
+
+Get resource usage
+
+
+### Description 
+Get resource usage for the project. This returns a list of metrics that are used for billing, aggregated per month.
+
+### Response Structure 
+ - `metric`: The metric that was measured
+ - `object_type`: Type of object the metric was measured for (model version, pipeline or connector)
+ - `usage`: an array of objects each containing the following:
+     - `month`: Timestamp denoting the start of the month
+     - `value`: Aggregated metric value for the given unit over the given month
+
+#### Response Examples
+```
+[
+  {
+    "object_type": "pipeline",
+    "metric": "input_volume",
+    "usage": [
+      {
+        "month": "2019-08-01T00:00:00Z",
+        "value": 1840
+      },
+      {
+        "month": "2019-09-01T00:00:00Z",
+        "value": 400
+      },
+      {
+        "month": "2019-10-01T00:00:00Z",
+        "value": 1204
+      },
+      {
+        "month": "2019-11-01T00:00:00Z",
+        "value": 1598
+      },
+      {
+        "month": "2019-12-01T00:00:00Z",
+        "value": 824
+      },
+      {
+        "month": "2020-01-01T00:00:00Z",
+        "value": 2036
+      },
+      {
+        "month": "2020-02-01T00:00:00Z",
+        "value": 1438
+      },
+      {
+        "month": "2020-03-01T00:00:00Z",
+        "value": 932
+      },
+      {
+        "month": "2020-04-01T00:00:00Z",
+        "value": 528
+      },
+      {
+        "month": "2020-05-01T00:00:00Z",
+        "value": 1484
+      },
+      {
+        "month": "2020-06-01T00:00:00Z",
+        "value": 1942
+      },
+      {
+        "month": "2020-07-01T00:00:00Z",
+        "value": 1332
+      }
+    ]
+  }
+]
+
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v2.1
+configuration.host = "https://api.dutchanalytics.net/v2.1"
+# Enter a context with an instance of the API client
+with xenia_python_client_library.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xenia_python_client_library.CoreApi(api_client)
+    project_name = 'project_name_example' # str | 
+
+    try:
+        # Get resource usage
+        api_response = api_instance.project_usage_get(project_name)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreApi->project_usage_get: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **project_name** | **str**|  | 
+
+### Return type
+
+[**list[UsagePerMonth]**](UsagePerMonth.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 ### HTTP response details
@@ -11096,6 +11872,483 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ServiceUserList**](ServiceUserList.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **subscriptions_create**
+> SubscriptionDetail subscriptions_create(data)
+
+Create subscriptions
+
+
+### Description 
+Create a new subscription
+
+### Required Parameters 
+- `name`: Name of the subscription
+- `max_projects`: Maximum number of allowed projects to be created with this subscription
+- `max_users`: Maximum number of allowed users to be created with this subscription
+- `logs_retention_days`: Number of days for which the logs for each projects will be saved
+- `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running
+- `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription
+- `hidden`: A boolean indication whether the subscription is public or private
+
+### Optional Parameters
+- `agreement`: Link to subscription agreement document 
+- `terms_conditions`: Link to Xenia SaaS Terms & Conditions document 
+
+#### Request Examples 
+```
+{
+  "name": "custom-subscription",
+  "max_projects": 2,
+  "max_users": 3,
+  "logs_retention_days": 28,
+  "gb_seconds": 20000,
+  "resources": 20,
+  "hidden": True
+}
+```
+
+### Response Structure 
+Details of the created subscription
+- `id`: Unique identifier for the subscription (UUID) 
+- `name`: Name of the subscription 
+- `max_projects`: Maximum number of allowed projects to be created with this subscription 
+- `max_users`: Maximum number of allowed users to be created with this subscription 
+- `agreement`: Link to subscription agreement document 
+- `terms_conditions`: Link to Xenia SaaS Terms & Conditions document 
+- `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running
+- `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription 
+
+#### Response Examples 
+```
+{
+  "id": "abe2e406-fae5-4bcf-a3bc-956d756e4ecb",
+  "name": "custom-subscription",
+  "max_projects": 2,
+  "max_users": 3,
+  "agreement": "",
+  "terms_conditions": "",
+  "gb_seconds": 10000,
+  "resources": 15
+}
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v2.1
+configuration.host = "https://api.dutchanalytics.net/v2.1"
+# Enter a context with an instance of the API client
+with xenia_python_client_library.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xenia_python_client_library.CoreApi(api_client)
+    data = xenia_python_client_library.SubscriptionCreate() # SubscriptionCreate | 
+
+    try:
+        # Create subscriptions
+        api_response = api_instance.subscriptions_create(data)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreApi->subscriptions_create: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data** | [**SubscriptionCreate**](SubscriptionCreate.md)|  | 
+
+### Return type
+
+[**SubscriptionDetail**](SubscriptionDetail.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **subscriptions_delete**
+> subscriptions_delete(subscription_name)
+
+Delete a subscription
+
+
+### Description 
+Delete a subscription. It's not possible to delete a subscription if it is used by any organization.
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v2.1
+configuration.host = "https://api.dutchanalytics.net/v2.1"
+# Enter a context with an instance of the API client
+with xenia_python_client_library.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xenia_python_client_library.CoreApi(api_client)
+    subscription_name = 'subscription_name_example' # str | 
+
+    try:
+        # Delete a subscription
+        api_instance.subscriptions_delete(subscription_name)
+    except ApiException as e:
+        print("Exception when calling CoreApi->subscriptions_delete: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subscription_name** | **str**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **subscriptions_get**
+> SubscriptionDetail subscriptions_get(subscription_name)
+
+Get details of a subscription
+
+
+### Description 
+Get the details of a subscription
+
+### Response Structure 
+Details of the subscription
+- `id`: Unique identifier for the subscription (UUID) 
+- `name`: Name of the subscription 
+- `max_projects`: Maximum number of allowed projects to be created with this subscription 
+- `max_users`: Maximum number of allowed users to be created with this subscription 
+- `agreement`: Link to subscription agreement document 
+- `terms_conditions`: Link to Xenia SaaS Terms & Conditions document 
+- `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running
+- `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription 
+
+#### Response Examples 
+```
+{
+  "id": "abe2e406-fae5-4bcf-a3bc-956d756e4ecb",
+  "name": "custom-subscription",
+  "max_projects": 2,
+  "max_users": 3,
+  "agreement": "",
+  "terms_conditions": "",
+  "gb_seconds": 10000,
+  "resources": 15
+}
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v2.1
+configuration.host = "https://api.dutchanalytics.net/v2.1"
+# Enter a context with an instance of the API client
+with xenia_python_client_library.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xenia_python_client_library.CoreApi(api_client)
+    subscription_name = 'subscription_name_example' # str | 
+
+    try:
+        # Get details of a subscription
+        api_response = api_instance.subscriptions_get(subscription_name)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreApi->subscriptions_get: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subscription_name** | **str**|  | 
+
+### Return type
+
+[**SubscriptionDetail**](SubscriptionDetail.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **subscriptions_list**
+> list[SubscriptionList] subscriptions_list()
+
+List subscriptions
+
+
+### Description 
+List available subscriptions for organizations
+
+### Response Structure
+A list of details of the subscriptions
+- `id`: Unique identifier for the subscription (UUID) 
+
+- `name`: Name of the subscription 
+
+
+#### Response Examples 
+```
+[
+  {
+    "id": "f35e94e2-820d-4ad2-a2c6-9e2668e1442b",
+    "name": "free"
+  },
+  {
+    "id": "888384be-b4b8-4728-918b-079c85879a5b",
+    "name": "starter"
+  }
+]
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v2.1
+configuration.host = "https://api.dutchanalytics.net/v2.1"
+# Enter a context with an instance of the API client
+with xenia_python_client_library.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xenia_python_client_library.CoreApi(api_client)
+    
+    try:
+        # List subscriptions
+        api_response = api_instance.subscriptions_list()
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreApi->subscriptions_list: %s\n" % e)
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**list[SubscriptionList]**](SubscriptionList.md)
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **subscriptions_update**
+> SubscriptionDetail subscriptions_update(subscription_name, data)
+
+Update details of a subscription
+
+
+### Description 
+Update a subscription
+
+### Optional Parameters 
+- `name`: New subscription name
+- `max_projects`: Maximum number of allowed projects to be created with this subscription 
+- `max_users`: Maximum number of allowed users to be created with this subscription 
+- `agreement`: Link to subscription agreement document 
+- `terms_conditions`: Link to Xenia SaaS Terms & Conditions document 
+- `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running
+- `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription 
+
+#### Request Examples
+```
+{
+  "max_projects": 4,
+  "max_users": 5
+}
+```
+
+```
+{
+  "name": "new-subscription-name"
+}
+```
+
+### Response Structure 
+Details of the subscription
+- `id`: Unique identifier for the subscription (UUID) 
+- `name`: Name of the subscription 
+- `max_projects`: Maximum number of allowed projects to be created with this subscription 
+- `max_users`: Maximum number of allowed users to be created with this subscription 
+- `agreement`: Link to subscription agreement document 
+- `terms_conditions`: Link to Xenia SaaS Terms & Conditions document 
+- `gb_seconds`: Maximum usage of GB seconds, calculated by multiplying the model memory sizes in GB by the number of seconds they are running
+- `resources`: Maximum number of allowed resources (connectors, pipelines and model versions) to be created with this subscription 
+
+#### Response Examples 
+```
+{
+  "id": "abe2e406-fae5-4bcf-a3bc-956d756e4ecb",
+  "name": "new-subscription-name",
+  "max_projects": 4,
+  "max_users": 5,
+  "agreement": "",
+  "terms_conditions": "",
+  "gb_seconds": 10000,
+  "resources": 20
+}
+```
+
+
+### Example
+
+* Api Key Authentication (api_key):
+```python
+from __future__ import print_function
+import time
+import xenia_python_client_library
+from xenia_python_client_library.rest import ApiException
+from pprint import pprint
+configuration = xenia_python_client_library.Configuration()
+# Configure API key authorization: api_key
+configuration.api_key['Authorization'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['Authorization'] = 'Bearer'
+
+# Defining host is optional and default to https://api.dutchanalytics.net/v2.1
+configuration.host = "https://api.dutchanalytics.net/v2.1"
+# Enter a context with an instance of the API client
+with xenia_python_client_library.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xenia_python_client_library.CoreApi(api_client)
+    subscription_name = 'subscription_name_example' # str | 
+data = xenia_python_client_library.SubscriptionUpdate() # SubscriptionUpdate | 
+
+    try:
+        # Update details of a subscription
+        api_response = api_instance.subscriptions_update(subscription_name, data)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling CoreApi->subscriptions_update: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **subscription_name** | **str**|  | 
+ **data** | [**SubscriptionUpdate**](SubscriptionUpdate.md)|  | 
+
+### Return type
+
+[**SubscriptionDetail**](SubscriptionDetail.md)
 
 ### Authorization
 

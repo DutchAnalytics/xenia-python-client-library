@@ -40,7 +40,10 @@ class ModelList(object):
         'input_type': 'str',
         'output_type': 'str',
         'input_fields': 'list[ModelInputFieldList]',
-        'output_fields': 'list[ModelOutputFieldList]'
+        'output_fields': 'list[ModelOutputFieldList]',
+        'creation_date': 'datetime',
+        'last_updated_date': 'datetime',
+        'number_of_versions': 'str'
     }
 
     attribute_map = {
@@ -51,10 +54,13 @@ class ModelList(object):
         'input_type': 'input_type',
         'output_type': 'output_type',
         'input_fields': 'input_fields',
-        'output_fields': 'output_fields'
+        'output_fields': 'output_fields',
+        'creation_date': 'creation_date',
+        'last_updated_date': 'last_updated_date',
+        'number_of_versions': 'number_of_versions'
     }
 
-    def __init__(self, id=None, name=None, project=None, description=None, input_type=None, output_type=None, input_fields=None, output_fields=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, id=None, name=None, project=None, description=None, input_type=None, output_type=None, input_fields=None, output_fields=None, creation_date=None, last_updated_date=None, number_of_versions=None, local_vars_configuration=None):  # noqa: E501
         """ModelList - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -68,6 +74,9 @@ class ModelList(object):
         self._output_type = None
         self._input_fields = None
         self._output_fields = None
+        self._creation_date = None
+        self._last_updated_date = None
+        self._number_of_versions = None
         self.discriminator = None
 
         if id is not None:
@@ -82,6 +91,12 @@ class ModelList(object):
             self.input_fields = input_fields
         if output_fields is not None:
             self.output_fields = output_fields
+        if creation_date is not None:
+            self.creation_date = creation_date
+        if last_updated_date is not None:
+            self.last_updated_date = last_updated_date
+        if number_of_versions is not None:
+            self.number_of_versions = number_of_versions
 
     @property
     def id(self):
@@ -276,6 +291,69 @@ class ModelList(object):
         """
 
         self._output_fields = output_fields
+
+    @property
+    def creation_date(self):
+        """Gets the creation_date of this ModelList.  # noqa: E501
+
+
+        :return: The creation_date of this ModelList.  # noqa: E501
+        :rtype: datetime
+        """
+        return self._creation_date
+
+    @creation_date.setter
+    def creation_date(self, creation_date):
+        """Sets the creation_date of this ModelList.
+
+
+        :param creation_date: The creation_date of this ModelList.  # noqa: E501
+        :type: datetime
+        """
+
+        self._creation_date = creation_date
+
+    @property
+    def last_updated_date(self):
+        """Gets the last_updated_date of this ModelList.  # noqa: E501
+
+
+        :return: The last_updated_date of this ModelList.  # noqa: E501
+        :rtype: datetime
+        """
+        return self._last_updated_date
+
+    @last_updated_date.setter
+    def last_updated_date(self, last_updated_date):
+        """Sets the last_updated_date of this ModelList.
+
+
+        :param last_updated_date: The last_updated_date of this ModelList.  # noqa: E501
+        :type: datetime
+        """
+
+        self._last_updated_date = last_updated_date
+
+    @property
+    def number_of_versions(self):
+        """Gets the number_of_versions of this ModelList.  # noqa: E501
+
+
+        :return: The number_of_versions of this ModelList.  # noqa: E501
+        :rtype: str
+        """
+        return self._number_of_versions
+
+    @number_of_versions.setter
+    def number_of_versions(self, number_of_versions):
+        """Sets the number_of_versions of this ModelList.
+
+
+        :param number_of_versions: The number_of_versions of this ModelList.  # noqa: E501
+        :type: str
+        """
+
+        self._number_of_versions = number_of_versions
 
     def to_dict(self):
         """Returns the model properties as a dict"""
