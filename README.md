@@ -1,3 +1,8 @@
+# ! DEPRECATED
+This repository contains an old version of the Python client library, which is no longer officially supported. Click [here](https://github.com/UbiOps/client-library-python) for the latest version.
+
+***
+
 # xenia-python-client-library
 Python Client Library to interact with the Xenia API.
 
